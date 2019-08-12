@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>co.edu.uniandes.csw</groupId>
-    <artifactId>sXXX_ZZZ</artifactId>
+    <artifactId>s1_mascotas</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>sXXX_ZZZ</name>
+    <name>s1_mascotas</name>
  
     <modules>
-        <module>sXXX_ZZZ-back</module>
-        <module>sXXX_ZZZ-api</module>
+        <module>s1_mascotas-back</module>
+        <module>s1_mascotas-api</module>
     </modules>
     
     <repositories>
