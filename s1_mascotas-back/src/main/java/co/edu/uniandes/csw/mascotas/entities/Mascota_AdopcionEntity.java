@@ -42,6 +42,10 @@ public class Mascota_AdopcionEntity extends BaseEntity implements Serializable{
     public String getEspecie() {
         return especie;
     }
+    
+    public Mascota_AdopcionEntity (){
+        
+    }
 
     /**
      * @param especie the especie to set
