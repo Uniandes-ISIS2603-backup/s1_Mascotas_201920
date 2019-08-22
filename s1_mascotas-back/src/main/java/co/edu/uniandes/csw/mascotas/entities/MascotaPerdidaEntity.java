@@ -18,12 +18,26 @@ import javax.persistence.TemporalType;
 @Entity
 public class MascotaPerdidaEntity extends BaseEntity implements Serializable
 {
-    
+    /**
+     * Raza de la mascota perdida
+     */
     private String raza;
+    /**
+     * La especie de la mascota perdida
+     */
     private String especie;
+    /**
+     * La descripción de la mascota perdida
+     */
     private String descripcion;
+    /**
+     * El lugar donde se perdió la mascota
+     */
     private String lugar;
     @Temporal(TemporalType.DATE)
+    /**
+     * La fecha en la que se perdió la mascota
+     */
     private Date fechaPerdida;
 
     /**
