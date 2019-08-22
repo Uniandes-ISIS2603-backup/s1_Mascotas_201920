@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.mascotas.test.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.Mascota_AdopcionEntity;
-import co.edu.uniandes.csw.mascotas.persistence.Mascota_AdopcionPersistance;
+//import co.edu.uniandes.csw.mascotas.persistence.Mascota_AdopcionPersistance;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,7 +28,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class Mascota_AdopcionPersistanceTest {
 
     @Inject
-    private Mascota_AdopcionPersistance mp;
+   // private Mascota_AdopcionPersistance mp;
     @PersistenceContext
     private EntityManager em;
 
@@ -48,11 +48,11 @@ public class Mascota_AdopcionPersistanceTest {
         
         Mascota_AdopcionEntity mascota = mp.create(newMascota_AdopcionEntity);
         
-        Assert.assertNotNull(mascota);
+       Assert.assertNotNull(mascota);
         
-        Mascota_AdopcionEntity entity = em.find(Mascota_AdopcionEntity.class, mascota.getId());
+      Mascota_AdopcionEntity entity = em.find(Mascota_AdopcionEntity.class, mascota.getId());
         
-        Assert.assertEquals(newMascota_AdopcionEntity, entity);
+       Assert.assertEquals(newMascota_AdopcionEntity, entity);
         
     }
 }
