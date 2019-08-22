@@ -10,7 +10,7 @@ import co.edu.uniandes.csw.mascotas.persistence.ProcesoAdopcionPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
