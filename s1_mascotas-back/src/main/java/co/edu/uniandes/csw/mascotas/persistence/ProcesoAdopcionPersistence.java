@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.mascotas.persistence;
 
-import co.edu.uniandes.csw.mascotas.entities.Proceso_AdopcionEntity;
+import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ejb.Stateless;
@@ -15,12 +15,12 @@ import javax.ejb.Stateless;
  * @author William Smith
  */
 @Stateless
-public class Proceso_AdopcionPersistence {
+public class ProcesoAdopcionPersistence {
     
     @PersistenceContext(unitName = "mascotasPU")
     protected EntityManager em;
     
-    public Proceso_AdopcionEntity create(Proceso_AdopcionEntity proceso){
+    public ProcesoAdopcionEntity create(ProcesoAdopcionEntity proceso){
         em.persist(proceso);
         
         return proceso;

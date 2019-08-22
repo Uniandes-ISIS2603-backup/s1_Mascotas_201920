@@ -12,7 +12,7 @@ import javax.persistence.Entity;
  * @author William Smith
  */
 @Entity
-public class Proceso_AdopcionEntity extends BaseEntity implements Serializable {
+public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
     
     private String estado;
 

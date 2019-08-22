@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.csw.mascotas.test.persistence;
 
-import co.edu.uniandes.csw.mascotas.entities.Proceso_AdopcionEntity;
-import co.edu.uniandes.csw.mascotas.persistence.Proceso_AdopcionPersistence;
+import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
+import co.edu.uniandes.csw.mascotas.persistence.ProcesoAdopcionPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,17 +25,17 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author William Smith
  */
 @RunWith(Arquillian.class)
-public class Proceso_AdopcionPersistenceTest {
+public class ProcesoAdopcionPersistenceTest {
     
     @Inject
-    private Proceso_AdopcionPersistence pp;
+    private ProcesoAdopcionPersistence pp;
     @PersistenceContext
     private EntityManager em;
 
     @Deployment
     public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class).addPackage(Proceso_AdopcionEntity.class.getPackage())
-                .addPackage(Proceso_AdopcionPersistence.class.getPackage())
+        return ShrinkWrap.create(JavaArchive.class).addPackage(ProcesoAdopcionEntity.class.getPackage())
+                .addPackage(ProcesoAdopcionPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -44,13 +44,13 @@ public class Proceso_AdopcionPersistenceTest {
     public void createTest() {
         
         PodamFactory factory = new PodamFactoryImpl();
-        Proceso_AdopcionEntity newProceso_AdopcionEntity = factory.manufacturePojo(Proceso_AdopcionEntity.class);
+        ProcesoAdopcionEntity newProceso_AdopcionEntity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
         
-        Proceso_AdopcionEntity proceso = pp.create(newProceso_AdopcionEntity);
-        
+        ProcesoAdopcionEntity proceso = pp.create(newProceso_AdopcionEntity);
+       
         Assert.assertNotNull(proceso);
         
-        Proceso_AdopcionEntity entity = em.find(Proceso_AdopcionEntity.class, proceso.getId());
+        ProcesoAdopcionEntity entity = em.find(ProcesoAdopcionEntity.class, proceso.getId());
         
         Assert.assertEquals(newProceso_AdopcionEntity, entity);
         
