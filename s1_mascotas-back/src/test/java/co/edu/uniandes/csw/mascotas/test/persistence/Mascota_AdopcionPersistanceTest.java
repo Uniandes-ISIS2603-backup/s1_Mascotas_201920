@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.test.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.Mascota_AdopcionEntity;
+import co.edu.uniandes.csw.mascotas.persistence.Mascota_AdopcionPersistance;
 //import co.edu.uniandes.csw.mascotas.persistence.Mascota_AdopcionPersistance;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -28,7 +29,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class Mascota_AdopcionPersistanceTest {
 
     @Inject
-   // private Mascota_AdopcionPersistance mp;
+    private Mascota_AdopcionPersistance mp;
     @PersistenceContext
     private EntityManager em;
 
