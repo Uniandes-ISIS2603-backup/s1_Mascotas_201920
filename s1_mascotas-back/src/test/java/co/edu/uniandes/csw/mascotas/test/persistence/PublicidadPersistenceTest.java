@@ -49,8 +49,7 @@ public class PublicidadPersistenceTest {
         PublicidadEntity resultado = pp.create(publicidad);
         Assert.assertNotNull(resultado);
 
-        PublicidadEntity entity
-                = em.find(PublicidadEntity.class, resultado.getId());
+        PublicidadEntity entity = em.find(PublicidadEntity.class, resultado.getId());
         Assert.assertEquals(publicidad.getMensaje(),
                 entity.getMensaje());
 
