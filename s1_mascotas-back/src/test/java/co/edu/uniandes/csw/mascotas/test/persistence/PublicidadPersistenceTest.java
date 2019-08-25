@@ -10,6 +10,9 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import co.edu.uniandes.csw.mascotas.persistence.PublicidadPersistence;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -52,6 +55,33 @@ public class PublicidadPersistenceTest {
         PublicidadEntity entity = em.find(PublicidadEntity.class, resultado.getId());
         Assert.assertEquals(publicidad.getMensaje(),
                 entity.getMensaje());
+
+    }
+    
+    @Test
+    public void findAllTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        
+        ArrayList< PublicidadEntity> resultados= new ArrayList();
+        
+        int j =(int) (Math.random() * ((100 - 1) + 1)) + 1;
+        for (int i = 0; i <= j; i++)
+        {
+            PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
+            PublicidadEntity resultado = pp.create(publicidad);
+            Assert.assertNotNull(resultado);
+            resultados.add(resultado);
+        }
+        
+        List<PublicidadEntity> r = pp.findAll();
+        Iterator iter= resultados.iterator();
+        
+        while (iter.hasNext()) 
+        {
+            PublicidadEntity next = (PublicidadEntity)iter.next();
+            Assert.assertTrue(r.contains(next));
+        }
+       
 
     }
 }
