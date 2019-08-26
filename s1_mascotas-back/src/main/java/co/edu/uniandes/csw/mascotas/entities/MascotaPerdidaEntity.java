@@ -5,11 +5,13 @@
  */
 package co.edu.uniandes.csw.mascotas.entities;
 
+import co.edu.uniandes.csw.mascotas.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -35,6 +37,7 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     private String lugar;
     @Temporal(TemporalType.DATE)
+    @PodamStrategyValue (DateStrategy.class)
     /**
      * La fecha en la que se perdió la mascota
      */
