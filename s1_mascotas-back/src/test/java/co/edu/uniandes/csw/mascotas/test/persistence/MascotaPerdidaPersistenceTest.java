@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mascotas.test.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -57,7 +58,54 @@ public class MascotaPerdidaPersistenceTest
        MascotaPerdidaEntity entity =
            em.find(MascotaPerdidaEntity.class,result.getId());
         
-       Assert.assertEquals(mascota,entity);
+      Assert.assertEquals(mascota,entity);
        
+    }
+    
+    @Test
+    public void testFind()
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+       MascotaPerdidaEntity mascota = factory.manufacturePojo(MascotaPerdidaEntity.class);
+       MascotaPerdidaEntity result = ma.create(mascota);
+       
+       Assert.assertNotNull(result);
+       
+       MascotaPerdidaEntity entity =
+           em.find(MascotaPerdidaEntity.class,result.getId());
+        
+       
+       Assert.assertEquals(ma.find(result.getId()),result);
+       
+    }
+    @Test
+    public void testFindAll()
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+       
+       
+       int n= (int)(Math.random()*50);
+       MascotaPerdidaEntity  mascotas [] = new MascotaPerdidaEntity[n];
+       for (int i=0;i<n;++i)
+       {
+           mascotas[i] = factory.manufacturePojo(MascotaPerdidaEntity.class);
+           ma.create(mascotas[i]);
+       }
+       
+       List <MascotaPerdidaEntity> result = ma.findAll();
+       Assert.assertEquals(result.size(),n);
+       for (MascotaPerdidaEntity a: result)
+       {
+           boolean ya=true;
+           for (int i=0;i<n && ya;++i)
+           {
+               if (mascotas[i].equals(a))
+                   ya=false;
+           }
+           if (ya)
+               Assert.assertTrue(false);
+           
+       }
+        
     }
 }
