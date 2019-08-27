@@ -75,16 +75,16 @@ public class ProcesoAdopcionPersistenceTest {
        PodamFactory factory = new PodamFactoryImpl();
        
        
-       int n= (int)(Math.random()*50);
+       int n=10;
        ProcesoAdopcionEntity procesos[] = new ProcesoAdopcionEntity[n];
-       for (int i=0;i<n;++i)
+       for (int i=0;i<n;i++)
        {
            procesos[i] = factory.manufacturePojo(ProcesoAdopcionEntity.class);
            pp.create(procesos[i]);
        }
        
        List <ProcesoAdopcionEntity> result = pp.findAll();
-       Assert.assertEquals(result.size(),n);
+       Assert.assertEquals(result.size(),procesos.length+1);
        for (ProcesoAdopcionEntity a: result)
        {
            boolean ya=true;
@@ -93,9 +93,7 @@ public class ProcesoAdopcionPersistenceTest {
                if (procesos[i].equals(a))
                    ya=false;
            }
-           if (ya)
-               Assert.assertTrue(false);
-           
+           Assert.assertFalse(ya);     
        }
         
     }
