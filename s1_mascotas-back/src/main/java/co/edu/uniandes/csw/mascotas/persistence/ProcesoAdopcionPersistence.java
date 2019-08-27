@@ -37,4 +37,6 @@ public class ProcesoAdopcionPersistence {
         return query.getResultList();
     }
     
+    
+    
 }

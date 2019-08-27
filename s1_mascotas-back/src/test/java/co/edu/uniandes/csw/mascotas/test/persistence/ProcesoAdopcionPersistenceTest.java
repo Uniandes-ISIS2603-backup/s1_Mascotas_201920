@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mascotas.test.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.persistence.ProcesoAdopcionPersistence;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -52,7 +53,50 @@ public class ProcesoAdopcionPersistenceTest {
         
         ProcesoAdopcionEntity entity = em.find(ProcesoAdopcionEntity.class, proceso.getId());
         
-        Assert.assertEquals(newProceso_AdopcionEntity, entity);
+        Assert.assertEquals(newProceso_AdopcionEntity, entity); 
+    }
+    
+    @Test
+    public void findTest()
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+       ProcesoAdopcionEntity proceso = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       ProcesoAdopcionEntity result = pp.create(proceso);
+       
+       Assert.assertNotNull(result);        
+       
+       Assert.assertEquals(pp.find(result.getId()),result);
+       
+    }
+    
+    @Test
+    public void findAllTest()
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+       
+       
+       int n= (int)(Math.random()*50);
+       ProcesoAdopcionEntity procesos[] = new ProcesoAdopcionEntity[n];
+       for (int i=0;i<n;++i)
+       {
+           procesos[i] = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+           pp.create(procesos[i]);
+       }
+       
+       List <ProcesoAdopcionEntity> result = pp.findAll();
+       Assert.assertEquals(result.size(),n);
+       for (ProcesoAdopcionEntity a: result)
+       {
+           boolean ya=true;
+           for (int i=0;i<n && ya;++i)
+           {
+               if (procesos[i].equals(a))
+                   ya=false;
+           }
+           if (ya)
+               Assert.assertTrue(false);
+           
+       }
         
     }
     
