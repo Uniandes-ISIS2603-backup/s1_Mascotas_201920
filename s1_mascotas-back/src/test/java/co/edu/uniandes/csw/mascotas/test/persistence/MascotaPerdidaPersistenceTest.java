@@ -108,4 +108,34 @@ public class MascotaPerdidaPersistenceTest
        }
         
     }
+    
+    @Test
+    public void deleteMascotaTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        MascotaPerdidaEntity entity = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        ma.create(entity);
+        ma.delete(entity.getId());
+
+        MascotaPerdidaEntity deleted = em.find(MascotaPerdidaEntity.class, entity.getId());
+
+        Assert.assertNull(deleted);
+    }
+
+    @Test
+    public void  updateMascotaTest() {
+        
+        
+        
+        PodamFactory factory = new PodamFactoryImpl();
+        MascotaPerdidaEntity entity = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        ma.create(entity);
+        newEntity.setId(entity.getId());
+
+        ma.update(newEntity);
+
+        MascotaPerdidaEntity resp = em.find(MascotaPerdidaEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity, resp);
+    }
 }
