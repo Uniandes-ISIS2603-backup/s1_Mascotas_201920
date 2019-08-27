@@ -30,13 +30,30 @@ public class Mascota_AdopcionPersistance {
     }
 
     public Mascota_AdopcionEntity find(Long mascotaID) {
-        
+
         return em.find(Mascota_AdopcionEntity.class, mascotaID);
     }
-    
-    public List<Mascota_AdopcionEntity> findAll(){
+
+    public List<Mascota_AdopcionEntity> findAll() {
         TypedQuery<Mascota_AdopcionEntity> query = em.createQuery("select u from Mascota_AdopcionEntity u", Mascota_AdopcionEntity.class);
         return query.getResultList();
     }
+
+    public Mascota_AdopcionEntity update(Mascota_AdopcionEntity mascota) {
+
+        Mascota_AdopcionEntity nueva = em.find(Mascota_AdopcionEntity.class, mascota.getId());
+        
+        em.merge(mascota);
+        
+
+        return em.find(Mascota_AdopcionEntity.class, mascota.getId());
+    }
+
+    public void delete(Long mascotaID) {
+
+        Mascota_AdopcionEntity mascota = em.find(Mascota_AdopcionEntity.class, mascotaID);
+
+        em.remove(mascota);
+    }
+
 }
-    //
