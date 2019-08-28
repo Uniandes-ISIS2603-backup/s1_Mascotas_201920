@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mascotas.test.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -56,4 +57,76 @@ public class MascotaEncontradaPersistenceTest {
         Assert.assertEquals(mascota.getDescripcion(), entity.getDescripcion());
     }
     
+    @Test
+    public void testFind()
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+       MascotaEncontradaEntity mascota = factory.manufacturePojo(MascotaEncontradaEntity.class);
+       MascotaEncontradaEntity result = mep.create(mascota);
+       
+       Assert.assertNotNull(result);     
+       
+       Assert.assertEquals(mep.find(result.getId()),result);
+       
+    }
+    @Test
+    public void testFindAll()
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+       
+        
+       int n= (int)(Math.random()*50);
+       MascotaEncontradaEntity  mascotas [] = new MascotaEncontradaEntity[n];
+       for (int i=0;i<n;++i)
+       {
+           mascotas[i] = factory.manufacturePojo(MascotaEncontradaEntity.class);
+           mep.create(mascotas[i]);
+       }
+       
+        List <MascotaEncontradaEntity> result = mep.findAll();
+       Assert.assertEquals(result.size(),n);
+       for (MascotaEncontradaEntity a: result)
+       {
+           boolean ya=true;
+           for (int i=0;i<n && ya;++i)
+           {
+               if (mascotas[i].equals(a))
+                   ya=false;
+           }
+           if (ya)
+               Assert.assertTrue(false);
+           
+       }
+        
+    }
+    
+    @Test
+    public void deleteMascotaTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        MascotaEncontradaEntity entity = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        mep.create(entity);
+        mep.delete(entity.getId());
+
+        MascotaEncontradaEntity deleted = em.find(MascotaEncontradaEntity.class, entity.getId());
+
+        Assert.assertNull(deleted);
+    }
+
+    @Test
+    public void  updateMascotaTest() {
+        
+        
+        
+        PodamFactory factory = new PodamFactoryImpl();
+        MascotaEncontradaEntity entity = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        MascotaEncontradaEntity newEntity = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        mep.create(entity);
+        newEntity.setId(entity.getId());
+
+        mep.update(newEntity);
+
+        MascotaEncontradaEntity resp = em.find(MascotaEncontradaEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity, resp);
+    }
 }
