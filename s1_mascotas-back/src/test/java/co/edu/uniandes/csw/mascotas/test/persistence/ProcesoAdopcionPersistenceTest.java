@@ -54,6 +54,8 @@ public class ProcesoAdopcionPersistenceTest {
         ProcesoAdopcionEntity entity = em.find(ProcesoAdopcionEntity.class, proceso.getId());
         
         Assert.assertEquals(newProceso_AdopcionEntity, entity); 
+        
+        pp.delete(proceso.getId());
     }
     
     @Test
@@ -66,6 +68,8 @@ public class ProcesoAdopcionPersistenceTest {
        Assert.assertNotNull(result);        
        
        Assert.assertEquals(pp.find(result.getId()),result);
+       
+       pp.delete(result.getId());
        
     }
     
@@ -84,7 +88,7 @@ public class ProcesoAdopcionPersistenceTest {
        }
        
        List <ProcesoAdopcionEntity> result = pp.findAll();
-       Assert.assertEquals(result.size(),procesos.length+1);
+       Assert.assertEquals(result.size(),procesos.length);
        for (ProcesoAdopcionEntity a: result)
        {
            boolean ya=true;
@@ -96,6 +100,38 @@ public class ProcesoAdopcionPersistenceTest {
            Assert.assertFalse(ya);     
        }
         
+    }
+    
+    @Test
+    public void  updateTest() {
+        
+        
+        
+        PodamFactory factory = new PodamFactoryImpl();
+        ProcesoAdopcionEntity entity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        ProcesoAdopcionEntity newEntity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        pp.create(entity);
+        newEntity.setId(entity.getId());
+
+        pp.update(newEntity);
+
+        ProcesoAdopcionEntity resp = em.find(ProcesoAdopcionEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity, resp);
+        
+        pp.delete(entity.getId());
+    }
+    
+    @Test
+    public void deleteTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        ProcesoAdopcionEntity entity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        pp.create(entity);
+        pp.delete(entity.getId());
+
+        ProcesoAdopcionEntity deleted = em.find(ProcesoAdopcionEntity.class, entity.getId());
+
+        Assert.assertNull(deleted);
     }
     
 }

@@ -37,6 +37,22 @@ public class ProcesoAdopcionPersistence {
         return query.getResultList();
     }
     
+    public ProcesoAdopcionEntity update(ProcesoAdopcionEntity proceso) {
+
+        ProcesoAdopcionEntity nuevo = em.find(ProcesoAdopcionEntity.class, proceso.getId());
+        
+        em.merge(proceso);
+        
+
+        return em.find(ProcesoAdopcionEntity.class, proceso.getId());
+    }
+    
+    public void delete(Long id) {
+
+        ProcesoAdopcionEntity proceso = em.find(ProcesoAdopcionEntity.class, id);
+
+        em.remove(proceso);
+    }
     
     
 }
