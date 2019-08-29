@@ -75,7 +75,7 @@ public class MascotaEncontradaPersistenceTest {
        PodamFactory factory = new PodamFactoryImpl();
        
         
-       int n= (int)(Math.random()*50);
+       int n= (int)(Math.random()*20);
        MascotaEncontradaEntity  mascotas [] = new MascotaEncontradaEntity[n];
        for (int i=0;i<n;++i)
        {
