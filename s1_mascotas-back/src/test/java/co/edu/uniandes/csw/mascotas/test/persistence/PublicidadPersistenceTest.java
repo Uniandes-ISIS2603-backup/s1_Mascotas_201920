@@ -44,7 +44,7 @@ public class PublicidadPersistenceTest {
 
     @PersistenceContext(unitName = "mascotasPU")
     protected EntityManager em;
-    
+
     @Test
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -57,44 +57,77 @@ public class PublicidadPersistenceTest {
                 entity.getMensaje());
 
     }
-    
+
+    @Test
+    public void findTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
+        PublicidadEntity resultado = pp.create(publicidad);
+        Assert.assertNotNull(resultado);
+        PublicidadEntity r = pp.find(resultado.getId());
+        Assert.assertNotNull(r);
+    }
+
     @Test
     public void findAllTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        
-        ArrayList< PublicidadEntity> resultados= new ArrayList();
-        
-        int j =(int) (Math.random() * ((100 - 1) + 1)) + 1;
-        for (int i = 0; i <= j; i++)
-        {
+
+        ArrayList< PublicidadEntity> resultados = new ArrayList();
+
+        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
+        for (int i = 0; i <= j; i++) {
             PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
             PublicidadEntity resultado = pp.create(publicidad);
             Assert.assertNotNull(resultado);
             resultados.add(resultado);
         }
-        
+
         List<PublicidadEntity> r = pp.findAll();
-        Iterator iter= resultados.iterator();
-        
-        while (iter.hasNext()) 
-        {
-            PublicidadEntity next = (PublicidadEntity)iter.next();
+        Iterator iter = resultados.iterator();
+
+        while (iter.hasNext()) {
+            PublicidadEntity next = (PublicidadEntity) iter.next();
             Assert.assertTrue(r.contains(next));
         }
     }
-    
+
     @Test
-    public void updateTest()
-    {
+    public void updateTest() {
+
         PodamFactory factory = new PodamFactoryImpl();
-        PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        PublicidadEntity resultado1 = pp.create(publicidad);
-        
-        PublicidadEntity prueva = factory.manufacturePojo(PublicidadEntity.class);
-        PublicidadEntity resultado2 = pp.create(prueva);
-     
-        resultado1.setId(resultado2.getId());
-        pp.update(resultado1);
-        Assert.assertEquals(resultado1.getId(), em.find(PublicidadEntity.class, resultado2.getId()).getId());
+        PublicidadEntity o = factory.manufacturePojo(PublicidadEntity.class);
+        PublicidadEntity m = factory.manufacturePojo(PublicidadEntity.class);
+
+        o = pp.create(o);
+
+        o.setCosto(m.getCosto());
+        o.setDiasPorSemana(m.getDiasPorSemana());
+        o.setFecchaFin(m.getFecchaFin());
+        o.setFechaInicio(m.getFechaInicio());
+        o.setMensaje(m.getMensaje());
+
+        pp.update(o);
+
+        PublicidadEntity a = pp.find(o.getId());
+
+        Assert.assertEquals(o.getId(), a.getId());
+        Assert.assertEquals(o.getCosto(), a.getCosto());
+        Assert.assertEquals(o.getDiasPorSemana(), a.getDiasPorSemana());
+        Assert.assertEquals(o.getMensaje(), a.getMensaje());
+        Assert.assertEquals(o.getFechaInicio(), a.getFechaInicio());
+        Assert.assertEquals(o.getFecchaFin(), a.getFecchaFin());
+
+    }
+
+    @Test
+    public void deleteTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        PublicidadEntity p = factory.manufacturePojo(PublicidadEntity.class);
+
+        p = pp.create(p);
+        pp.delete(p.getId());
+
+        Assert.assertNull(pp.find(p.getId()));
     }
 }

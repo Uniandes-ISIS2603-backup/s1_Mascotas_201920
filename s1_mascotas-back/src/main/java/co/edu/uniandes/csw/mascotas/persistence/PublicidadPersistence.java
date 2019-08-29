@@ -37,7 +37,6 @@ public class PublicidadPersistence {
     public PublicidadEntity update(PublicidadEntity o)
     {
         
-        //Query query = em.createQuery("UPDATE PublicidadEntity SET ");
         PublicidadEntity en= find(o.getId());
         em.merge(o);
         return find(o.getId());
@@ -49,7 +48,10 @@ public class PublicidadPersistence {
         return query.getResultList();
     }
     
-   
-
+    public void delete(Long id)
+    {
+        PublicidadEntity en= find(id);
+        em.remove(en);
+    }
    
 }

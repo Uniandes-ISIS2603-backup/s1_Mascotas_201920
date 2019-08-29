@@ -5,11 +5,13 @@
  */
 package co.edu.uniandes.csw.mascotas.entities;
 
+import co.edu.uniandes.csw.mascotas.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -23,16 +25,12 @@ public class PublicidadEntity extends BaseEntity implements Serializable
     private Integer diasPorSemana;
     private Integer costo;
     
-    @Temporal
-    (
-            TemporalType.DATE
-    )
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaInicio;
     
-    @Temporal
-    (
-            TemporalType.DATE
-    )
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fecchaFin;
     
     
