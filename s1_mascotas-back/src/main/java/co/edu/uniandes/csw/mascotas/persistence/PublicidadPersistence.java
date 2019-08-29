@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -32,11 +33,23 @@ public class PublicidadPersistence {
     public PublicidadEntity find(Long id) {
         return em.find(PublicidadEntity.class, id);
     }
+    
+    public PublicidadEntity update(PublicidadEntity o)
+    {
+        
+        //Query query = em.createQuery("UPDATE PublicidadEntity SET ");
+        PublicidadEntity en= find(o.getId());
+        em.merge(o);
+        return find(o.getId());
+    }
 
     public List<PublicidadEntity> findAll() {
 
         TypedQuery<PublicidadEntity> query= em.createQuery("select u from PublicidadEntity u", PublicidadEntity.class);
         return query.getResultList();
     }
+    
+   
 
+   
 }
