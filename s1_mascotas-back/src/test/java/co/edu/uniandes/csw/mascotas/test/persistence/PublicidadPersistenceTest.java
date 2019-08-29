@@ -88,12 +88,13 @@ public class PublicidadPersistenceTest {
     {
         PodamFactory factory = new PodamFactoryImpl();
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        PublicidadEntity resultado = pp.create(publicidad);
+        PublicidadEntity resultado1 = pp.create(publicidad);
         
-        //en.setCosto(o.getCosto());
-        //en.setDiasPorSemana(o.getDiasPorSemana());
-        //en.setFecchaFin(o.getFecchaFin());
-        //en.setFechaInicio(o.getFechaInicio());
-        //en.setMensaje(o.getMensaje());
+        PublicidadEntity prueva = factory.manufacturePojo(PublicidadEntity.class);
+        PublicidadEntity resultado2 = pp.create(prueva);
+     
+        resultado1.setId(resultado2.getId());
+        pp.update(resultado1);
+        Assert.assertEquals(resultado1.getId(), em.find(PublicidadEntity.class, resultado2.getId()).getId());
     }
 }
