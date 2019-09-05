@@ -46,7 +46,7 @@ public class MascotaAdopcionLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+ 
     @Test
     public void createMascotaAdopcion() throws BusinessLogicException{
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
