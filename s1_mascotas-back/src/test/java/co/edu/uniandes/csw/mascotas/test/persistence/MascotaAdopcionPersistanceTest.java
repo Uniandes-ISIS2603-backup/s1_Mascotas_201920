@@ -5,10 +5,10 @@
  */
 package co.edu.uniandes.csw.mascotas.test.persistence;
 
-import co.edu.uniandes.csw.mascotas.entities.Mascota_AdopcionEntity;
+import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import java.util.ArrayList;
 import java.util.List;
-import co.edu.uniandes.csw.mascotas.persistence.Mascota_AdopcionPersistance;
+import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,18 +28,18 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Tomás Langebaek
  */
 @RunWith(Arquillian.class)
-public class Mascota_AdopcionPersistanceTest {
+public class MascotaAdopcionPersistanceTest {
 
-    List<Mascota_AdopcionEntity> data = new ArrayList();
+    List<MascotaAdopcionEntity> data = new ArrayList();
     @Inject
-    private Mascota_AdopcionPersistance mascotaPersistance;
+    private MascotaAdopcionPersistance mascotaPersistance;
     @PersistenceContext
     private EntityManager em;
 
     @Deployment
     public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class).addPackage(Mascota_AdopcionEntity.class.getPackage())
-                .addPackage(Mascota_AdopcionPersistance.class.getPackage())
+        return ShrinkWrap.create(JavaArchive.class).addPackage(MascotaAdopcionEntity.class.getPackage())
+                .addPackage(MascotaAdopcionPersistance.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -49,7 +49,7 @@ public class Mascota_AdopcionPersistanceTest {
         System.out.println(mascotaPersistance.findAll().size());
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            Mascota_AdopcionEntity newMascota_AdopcionEntity = factory.manufacturePojo(Mascota_AdopcionEntity.class);
+            MascotaAdopcionEntity newMascota_AdopcionEntity = factory.manufacturePojo(MascotaAdopcionEntity.class);
             mascotaPersistance.create(newMascota_AdopcionEntity);
             data.add(newMascota_AdopcionEntity);
         }
@@ -58,14 +58,14 @@ public class Mascota_AdopcionPersistanceTest {
     @Test
     public void findAllMascotaTest() {
 
-        List<Mascota_AdopcionEntity> lista = new ArrayList();
+        List<MascotaAdopcionEntity> lista = new ArrayList();
         lista = mascotaPersistance.findAll();
         Assert.assertEquals(data.size(), lista.size());
         for (int i = 0; i < lista.size(); i++) {
-            Mascota_AdopcionEntity ent = lista.get(i);
+            MascotaAdopcionEntity ent = lista.get(i);
             boolean found = false;
             for (int j = 0; j < data.size(); j++) {
-                Mascota_AdopcionEntity entity = data.get(j);
+                MascotaAdopcionEntity entity = data.get(j);
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -78,13 +78,13 @@ public class Mascota_AdopcionPersistanceTest {
     public void createMascotaTest() {
 
         PodamFactory factory = new PodamFactoryImpl();
-        Mascota_AdopcionEntity newMascota_AdopcionEntity = factory.manufacturePojo(Mascota_AdopcionEntity.class);
+        MascotaAdopcionEntity newMascota_AdopcionEntity = factory.manufacturePojo(MascotaAdopcionEntity.class);
 
-        Mascota_AdopcionEntity mascota = mascotaPersistance.create(newMascota_AdopcionEntity);
+        MascotaAdopcionEntity mascota = mascotaPersistance.create(newMascota_AdopcionEntity);
 
         Assert.assertNotNull(mascota);
 
-        Mascota_AdopcionEntity entity = em.find(Mascota_AdopcionEntity.class, mascota.getId());
+        MascotaAdopcionEntity entity = em.find(MascotaAdopcionEntity.class, mascota.getId());
 
         Assert.assertEquals(newMascota_AdopcionEntity, entity);
 
@@ -93,9 +93,9 @@ public class Mascota_AdopcionPersistanceTest {
     @Test
     public void findMascotaTest() {
 
-        Mascota_AdopcionEntity entity = data.get(0);
+        MascotaAdopcionEntity entity = data.get(0);
 
-        Mascota_AdopcionEntity newEntity = mascotaPersistance.find(entity.getId());
+        MascotaAdopcionEntity newEntity = mascotaPersistance.find(entity.getId());
 
         Assert.assertNotNull(newEntity);
 
@@ -105,11 +105,11 @@ public class Mascota_AdopcionPersistanceTest {
     @Test
     public void deleteMascotaTest() {
 
-        Mascota_AdopcionEntity entity = data.get(0);
+        MascotaAdopcionEntity entity = data.get(0);
 
         mascotaPersistance.delete(entity.getId());
 
-        Mascota_AdopcionEntity deleted = em.find(Mascota_AdopcionEntity.class, entity.getId());
+        MascotaAdopcionEntity deleted = em.find(MascotaAdopcionEntity.class, entity.getId());
 
         Assert.assertNull(deleted);
     }
@@ -117,16 +117,16 @@ public class Mascota_AdopcionPersistanceTest {
     @Test
     public void updateMascotaTest() {
         
-        Mascota_AdopcionEntity entity = data.get(0);
+        MascotaAdopcionEntity entity = data.get(0);
         
         PodamFactory factory = new PodamFactoryImpl();
-        Mascota_AdopcionEntity newEntity = factory.manufacturePojo(Mascota_AdopcionEntity.class);
+        MascotaAdopcionEntity newEntity = factory.manufacturePojo(MascotaAdopcionEntity.class);
 
         newEntity.setId(entity.getId());
 
         mascotaPersistance.update(newEntity);
 
-        Mascota_AdopcionEntity resp = em.find(Mascota_AdopcionEntity.class, entity.getId());
+        MascotaAdopcionEntity resp = em.find(MascotaAdopcionEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity, resp);
     }

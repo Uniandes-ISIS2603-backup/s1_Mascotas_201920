@@ -13,7 +13,7 @@ import javax.persistence.Entity;
  * @author Tomás Langebaek
  */
 @Entity
-public class Mascota_AdopcionEntity extends BaseEntity implements Serializable{
+public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
     
     /**
      * La especie del animal en adopcion.
@@ -43,9 +43,6 @@ public class Mascota_AdopcionEntity extends BaseEntity implements Serializable{
         return especie;
     }
     
-    public Mascota_AdopcionEntity (){
-        
-    }
 
     /**
      * @param especie the especie to set
