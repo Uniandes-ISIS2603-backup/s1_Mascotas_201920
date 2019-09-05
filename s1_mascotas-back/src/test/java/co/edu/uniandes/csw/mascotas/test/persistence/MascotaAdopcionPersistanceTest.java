@@ -95,6 +95,8 @@ public class MascotaAdopcionPersistanceTest {
         Assert.assertEquals(newMascota_AdopcionEntity.getEspecie(), entity.getEspecie());
         
         Assert.assertEquals(newMascota_AdopcionEntity.getDescripcion(), entity.getDescripcion());
+        
+        Assert.assertEquals(newMascota_AdopcionEntity.getRaza(), entity.getRaza());
         //
     }
 
