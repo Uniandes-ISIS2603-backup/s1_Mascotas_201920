@@ -31,7 +31,7 @@ public class MascotaPerdidaPersistenceTest
     @Inject
     private MascotaPerdidaPersistence mascotaPrueba;
     
-     @PersistenceContext
+    @PersistenceContext
     private EntityManager em;
     
     @Deployment
