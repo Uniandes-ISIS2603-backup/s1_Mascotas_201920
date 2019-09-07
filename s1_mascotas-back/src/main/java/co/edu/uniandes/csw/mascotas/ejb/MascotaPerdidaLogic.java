@@ -21,14 +21,25 @@ public class MascotaPerdidaLogic
 {
     @Inject 
     private MascotaPerdidaPersistence pers;
+    private enum especies {
+        Perro,
+        Gato
+    }
     
     public MascotaPerdidaEntity createMascotaPerdida ( MascotaPerdidaEntity masc) throws BusinessLogicException
     {
         if (masc.getEspecie()==null)
             throw new BusinessLogicException ("La mascota no tiene especie."); 
-        if (!masc.getEspecie().equals("Gato")&&  !masc.getEspecie().equals("Perro"))
+       // if (!masc.getEspecie().equals("Gato")&&  !masc.getEspecie().equals("Perro"))
+         //   throw new BusinessLogicException ("La mascota no es un gato, ni un perro."); 
+        boolean flag= false;
+        for (especies value : especies.values()) {
+            if (value.name().equals(masc.getEspecie())) {
+                flag = true;
+            }
+        }
+        if (!flag)
             throw new BusinessLogicException ("La mascota no es un gato, ni un perro."); 
-        
         if (masc.getRaza()==null)
             throw new BusinessLogicException ("La mascota no tiene raza.");
         if (masc.getRaza().equals(""))
