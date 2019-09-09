@@ -88,7 +88,7 @@ public class MascotaAdopcionLogicTest {
     @Test (expected = BusinessLogicException.class)
     public void createMascotaAdopcionRazaNull() throws BusinessLogicException{
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
-        entidad.setLugar(null);
+        entidad.setRaza(null);
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
  
     }
