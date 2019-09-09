@@ -31,7 +31,7 @@ public class MascotaPerdidaPersistenceTest
     @Inject
     private MascotaPerdidaPersistence mascotaPrueba;
     
-     @PersistenceContext
+    @PersistenceContext
     private EntityManager em;
     
     @Deployment
@@ -74,8 +74,13 @@ public class MascotaPerdidaPersistenceTest
        MascotaPerdidaEntity entity =
            em.find(MascotaPerdidaEntity.class,result.getId());
         
-       
-       Assert.assertEquals(ma.find(result.getId()),result);
+       MascotaPerdidaEntity other =  ma.find(result.getId());
+       Assert.assertEquals(other,result);
+       Assert.assertEquals(other.getDescripcion(),result.getDescripcion());
+       Assert.assertEquals(other.getEspecie(),result.getEspecie());
+       Assert.assertEquals(other.getFechaPerdida(),result.getFechaPerdida());
+       Assert.assertEquals(other.getLugar(),result.getLugar());
+       Assert.assertEquals(other.getRaza(),result.getRaza());
        
     }
     @Test

@@ -22,12 +22,21 @@ public class MascotaAdopcionPersistance {
     @PersistenceContext(unitName = "mascotasPU")
     protected EntityManager em;
 
+    /**
+     * Crea la entidad
+     * @param mascota entidad de MascotaAdopcion
+     * @return La mascota creada
+     */
     public MascotaAdopcionEntity create(MascotaAdopcionEntity mascota) {
 
         em.persist(mascota);
         return mascota;
     }
-
+    /**
+     * Busca una mascota
+     * @param mascotaID el ID de la mascota a buscar
+     * @return la mascota encontrada
+     */
     public MascotaAdopcionEntity find(Long mascotaID) {
 
         return em.find(MascotaAdopcionEntity.class, mascotaID);

@@ -46,15 +46,26 @@ public class MascotaAdopcionLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+ 
     @Test
     public void createMascotaAdopcion() throws BusinessLogicException{
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        
+         if (((Math.random()*10)%2)==1)
+            entidad.setEspecie("Gato");
+        else
+            entidad.setEspecie("Perro");
+         
+         
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
         Assert.assertNotNull(resultado);
         
         MascotaAdopcionEntity entidad2 = em.find(MascotaAdopcionEntity.class, resultado.getId());
-        Assert.assertEquals(entidad.getLugar(), resultado.getLugar());
+        Assert.assertEquals(entidad2.getLugar(), resultado.getLugar());
+        Assert.assertEquals(entidad2.getRaza(), resultado.getRaza());
+        Assert.assertEquals(entidad2.getEspecie(), resultado.getEspecie());
+        Assert.assertEquals(entidad2.getDescripcion(), resultado.getDescripcion());
+        
         
     }
     
@@ -66,4 +77,58 @@ public class MascotaAdopcionLogicTest {
  
     }
     
+    @Test (expected = BusinessLogicException.class)
+    public void createMascotaAdopcionLugarCadenaVacia() throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad.setLugar("");
+        MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
+ 
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void createMascotaAdopcionRazaNull() throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad.setLugar(null);
+        MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
+ 
+    }
+    @Test (expected = BusinessLogicException.class)
+    public void createMascotaAdopcionRazaCadenaVacia() throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad.setRaza("");
+        MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
+ 
+    }
+    
+     @Test (expected = BusinessLogicException.class)
+    public void createMascotaAdopcionEspecieNull() throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad.setEspecie(null);
+        MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
+ 
+    }
+    
+     @Test (expected = BusinessLogicException.class)
+    public void createMascotaAdopcionDescripcionNull() throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad.setDescripcion(null);
+        MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
+ 
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void createMascotaAdopcionDescripcionCadenaVacia() throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad.setDescripcion("");
+        MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
+ 
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void createMascotaAdopcionEspecioNotAnimal() throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad.setEspecie("thiIsNotAnAnimal");
+        MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
+ 
+    }
 }

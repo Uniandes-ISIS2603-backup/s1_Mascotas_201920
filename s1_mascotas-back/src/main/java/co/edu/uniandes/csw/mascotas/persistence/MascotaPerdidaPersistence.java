@@ -60,8 +60,6 @@ public class MascotaPerdidaPersistence {
      * @return una mascota con los cambios aplicados.
      */
     public MascotaPerdidaEntity update(MascotaPerdidaEntity mascota) {
-
-        MascotaPerdidaEntity nueva = em.find(MascotaPerdidaEntity.class, mascota.getId());
         
         em.merge(mascota);
         
