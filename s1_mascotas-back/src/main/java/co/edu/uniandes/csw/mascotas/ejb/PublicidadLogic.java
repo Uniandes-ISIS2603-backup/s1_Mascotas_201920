@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mascotas.ejb;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.PublicidadPersistence;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -26,29 +27,69 @@ public class PublicidadLogic
     {
         if(pe.getCosto()==null )
         {
-            throw new BusinessLogicException("");
+            throw new BusinessLogicException("El costo de la publicidad esta vacio");
         }
         if(pe.getDiasPorSemana()== null)
         {
-            throw new BusinessLogicException("");
+            throw new BusinessLogicException("Los dias por semanade la publicidad esta vacio");
         }
          if(pe.getFecchaFin()==null)
         {
-            throw new BusinessLogicException("");
+            throw new BusinessLogicException("La fecha final de la publicidad esta vacia");
         }
          if(pe.getFechaInicio()==null)
         {
-            throw new BusinessLogicException("");
+            throw new BusinessLogicException("La fecha inicial de la publicidad esta vacia");
         }
          if(pe.getMensaje()==null)
         {
-            throw new BusinessLogicException("");
+            throw new BusinessLogicException("El mensaje de la publicidad esta vacio");
         }
-        
         
         pe= pp.create(pe);
         return pe;
     }
     
+    public PublicidadEntity updatePublicidad(PublicidadEntity pe) throws BusinessLogicException
+    {
+        if(pe.getCosto()==null )
+        {
+            throw new BusinessLogicException("El costo de la publicidad esta vacio");
+        }
+        if(pe.getDiasPorSemana()== null)
+        {
+            throw new BusinessLogicException("Los dias por semanade la publicidad esta vacio");
+        }
+         if(pe.getFecchaFin()==null)
+        {
+            throw new BusinessLogicException("La fecha final de la publicidad esta vacia");
+        }
+         if(pe.getFechaInicio()==null)
+        {
+            throw new BusinessLogicException("La fecha inicial de la publicidad esta vacia");
+        }
+         if(pe.getMensaje()==null)
+        {
+            throw new BusinessLogicException("El mensaje de la publicidad esta vacio");
+        }
+        
+        pe= pp.update(pe);
+        return pe;
+    }
+    
+    public PublicidadEntity findPublicidad(Long id) throws BusinessLogicException
+    {
+        return pp.find(id);
+    }
+    
+    public List<PublicidadEntity> findAllPublicidad() throws BusinessLogicException
+    {
+        return pp.findAll();
+    }
+    
+    public void deletePublicidad(Long id) throws BusinessLogicException
+    {
+        pp.delete(id);
+    }
     
 }
