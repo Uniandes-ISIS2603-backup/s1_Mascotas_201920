@@ -55,6 +55,11 @@ public class MascotaEncontradaPersistenceTest {
         MascotaEncontradaEntity entity = em.find(MascotaEncontradaEntity.class, result.getId());
         
         Assert.assertEquals(mascota.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(mascota.getEspecie(), entity.getEspecie());
+        Assert.assertEquals(mascota.getFechaEncontrada(), entity.getFechaEncontrada());
+        Assert.assertEquals(mascota.getLugar(), entity.getLugar());
+        Assert.assertEquals(mascota.getRaza(), entity.getRaza());
+        
     }
     
     @Test

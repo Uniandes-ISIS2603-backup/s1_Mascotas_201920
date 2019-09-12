@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.edu.uniandes.csw.mascotas.ejb;
+
+import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
+import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+/**
+ *
+ * @author ja.avelino
+ */
+@Stateless
+public class MascotaEncontradaLogic {
+    
+    @Inject
+    private MascotaEncontradaPersistence persistence;
+    
+    private enum especies {
+        Perro,
+        Gato
+    }
+    
+    public MascotaEncontradaEntity createMascotaEncontrada(MascotaEncontradaEntity pMascota) throws BusinessLogicException
+    {
+        if(pMascota.getDescripcion()==null)
+        {
+            throw new BusinessLogicException("La descripcion de la mascota no existe.");
+        }
+        if(pMascota.getEspecie()==null)
+        {
+            throw new BusinessLogicException ("La especie de la mascota no existe."); 
+        }
+        boolean flag= false;
+        for (especies value : especies.values()) {
+            if (value.name().equals(pMascota.getEspecie())) {
+                flag = true;
+            }
+        }
+        if (!flag)
+            throw new BusinessLogicException ("La mascota no es un gato, ni un perro.");
+        if (pMascota.getRaza().equals("")||pMascota.getRaza()==null)
+            throw new BusinessLogicException ("La raza de la mascota no existe.");
+        if (pMascota.getLugar()==null||pMascota.getLugar().equals(""))
+            throw new BusinessLogicException ("El lugar de la mascota encontrada no existe.");
+        if (pMascota.getFechaEncontrada()==null)
+            throw new BusinessLogicException ("La fecha de encuentro de la mascota encontrada no existe.");
+        
+        pMascota = persistence.create(pMascota);
+        return pMascota;
+    }
+    
+}
