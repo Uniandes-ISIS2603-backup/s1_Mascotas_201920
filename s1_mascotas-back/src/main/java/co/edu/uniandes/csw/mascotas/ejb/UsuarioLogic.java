@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.ejb;
 
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
+import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -20,7 +21,8 @@ public class UsuarioLogic
     private UsuarioPersistence persistence;
 }
 
-public UsuarioEntity createUsuario(UsuarioEntity usuario)
+@RunWith(Arquillian.class)
+public UsuarioEntity createUsuario(UsuarioEntity usuario) throws BusinessLogicException
 {
     usuario = persistence.create(usuario);
     return usuario;
