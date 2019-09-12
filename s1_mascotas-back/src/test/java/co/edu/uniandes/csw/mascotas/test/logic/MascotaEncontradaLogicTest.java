@@ -71,15 +71,16 @@ public class MascotaEncontradaLogicTest {
     }
     
     @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionLugarNull() throws BusinessLogicException{
+    public void createMascotaEncontradaLugarNull() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad.setEspecie("Gato");
         entidad.setLugar(null);
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
  
     }
     
     @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionLugarCadenaVacia() throws BusinessLogicException{
+    public void createMascotaEncontradaLugarCadenaVacia() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
         entidad.setLugar("");
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
@@ -87,22 +88,24 @@ public class MascotaEncontradaLogicTest {
     }
     
     @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionRazaNull() throws BusinessLogicException{
+    public void createMascotaEncontradaRazaNull() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad.setEspecie("Gato");
         entidad.setRaza(null);
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
  
     }
     @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionRazaCadenaVacia() throws BusinessLogicException{
+    public void createMascotaEncontradaRazaCadenaVacia() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad.setEspecie("Gato");
         entidad.setRaza("");
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
  
     }
     
      @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionEspecieNull() throws BusinessLogicException{
+    public void createMascotaEncontradaEspecieNull() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
         entidad.setEspecie(null);
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
@@ -110,15 +113,16 @@ public class MascotaEncontradaLogicTest {
     }
     
      @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionDescripcionNull() throws BusinessLogicException{
+    public void createMascotaEncontradaDescripcionNull() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad.setEspecie("Gato");
         entidad.setDescripcion(null);
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
  
     }
     
     @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionDescripcionCadenaVacia() throws BusinessLogicException{
+    public void createMascotaEncontradaDescripcionCadenaVacia() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
         entidad.setDescripcion("");
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
@@ -126,7 +130,7 @@ public class MascotaEncontradaLogicTest {
     }
     
     @Test (expected = BusinessLogicException.class)
-    public void createMascotaAdopcionEspecioNotAnimal() throws BusinessLogicException{
+    public void createMascotaEncontradaEspecioNotAnimal() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
         entidad.setEspecie("Loro");
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
