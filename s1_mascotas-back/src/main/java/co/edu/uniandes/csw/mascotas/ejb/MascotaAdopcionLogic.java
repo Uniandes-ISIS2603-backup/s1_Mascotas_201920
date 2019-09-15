@@ -63,6 +63,43 @@ public class MascotaAdopcionLogic {
     mascota = persistence.create(mascota);
     return mascota;
 }
+    public MascotaAdopcionEntity updateMascotaAdopcion(MascotaAdopcionEntity mascota) throws BusinessLogicException
+    {
+        if(mascota.getLugar()==null){
+        throw new BusinessLogicException("El lugar de la mascota está vacío");
+    }
+    if (mascota.getLugar().equals("")){
+            throw new BusinessLogicException ("La mascota no tiene lugar valido.");
+    }
+    if(mascota.getRaza()==null){
+        throw new BusinessLogicException("La raza esta vacia");
+    }
+     if (mascota.getRaza().equals("")){
+            throw new BusinessLogicException ("La mascota no tiene raza valida.");
+    }
+     if(mascota.getEspecie()==null){
+        throw new BusinessLogicException("La especie esta vacia");
+    }
+     if(mascota.getDescripcion()==null){
+        throw new BusinessLogicException("La descripcion esta vacia");
+    }
+      if (mascota.getDescripcion().equals("")){
+            throw new BusinessLogicException ("La mascota no tiene descripcion valida.");
+    }
+     boolean flag = false;
+     for (MascotaAdopcionLogic.especies valor : MascotaAdopcionLogic.especies.values()) {
+            if (valor.name().equals(mascota.getEspecie())) {
+                flag = true;
+            }
+        }
+        if (!flag){
+            throw new BusinessLogicException ("La mascota no es un gato, ni un perro."); 
+        }
+        
+        
+        return persistence.update(mascota);
+  
+    }
 
 }
 
