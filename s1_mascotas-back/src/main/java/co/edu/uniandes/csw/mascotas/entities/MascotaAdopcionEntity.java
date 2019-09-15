@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.mascotas.entities;
 
+import co.edu.uniandes.csw.mascotas.podam.EspecieEstrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -16,9 +18,10 @@ import javax.persistence.Entity;
 public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
     
     /**
-     * La especie del animal en adopcion.
+     * El número del enum especie del animal en adopcion.
      */
-    private String especie;
+    @PodamStrategyValue (EspecieEstrategy.class)
+    private Integer especie;
     /**
      * La raza del animal en adopcion
      */
@@ -39,7 +42,7 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
     /**
      * @return the especie
      */
-    public String getEspecie() {
+    public Integer getEspecie() {
         return especie;
     }
     
@@ -47,7 +50,7 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
     /**
      * @param especie the especie to set
      */
-    public void setEspecie(String especie) {
+    public void setEspecie(Integer especie) {
         this.especie = especie;
     }
 

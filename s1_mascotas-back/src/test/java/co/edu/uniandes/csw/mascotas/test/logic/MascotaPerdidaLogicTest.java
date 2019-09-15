@@ -9,7 +9,13 @@ import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -29,6 +35,9 @@ public class MascotaPerdidaLogicTest {
     
     private PodamFactory fac = new PodamFactoryImpl();
     
+    @PersistenceContext(unitName = "mascotasPU")
+    protected EntityManager em;
+    
     @Inject
     private MascotaPerdidaLogic mascotaLogic;
     
@@ -46,11 +55,11 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdida ( ) throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        if (((Math.random()*10)%2)==1)
-            newEntity.setEspecie("Gato");
-        else
-            newEntity.setEspecie("Perro");
+
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
+        
+        MascotaPerdidaEntity entity = em.find(MascotaPerdidaEntity.class, result.getId());
+  
         Assert.assertNotNull(result);
         
     }
@@ -59,10 +68,7 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdidaRazaNull () throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        if (((Math.random()*10)%2)==1)
-            newEntity.setEspecie("Gato");
-        else
-            newEntity.setEspecie("Perro");
+        
         newEntity.setRaza(null);
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
     }
@@ -71,10 +77,7 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdidaRazaCadenaVacia () throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        if (((Math.random()*10)%2)==1)
-            newEntity.setEspecie("Gato");
-        else
-            newEntity.setEspecie("Perro");
+        
         newEntity.setRaza("");
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
     }
@@ -83,10 +86,15 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdidaEspecieDifetenteGatoPerro () throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        while (newEntity.getEspecie().equals("Perro") || newEntity.getEspecie().equals("Gato"))
+        
+        newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        Integer i = new Integer ( (int) (Math.random()*TipoEspecies.values().length *50) );
+        while ( i>=0 && i<TipoEspecies.values().length)
         {
-             newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+            i = new Integer ( (int) (Math.random()*TipoEspecies.values().length *50) );
         }
+        
+        newEntity.setEspecie(i);
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
     }
     
@@ -102,10 +110,7 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdidaLugarNull () throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        if (((Math.random()*10)%2)==1)
-            newEntity.setEspecie("Gato");
-        else
-            newEntity.setEspecie("Perro");
+        
         newEntity.setLugar(null);
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
     }
@@ -114,10 +119,7 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdidaLugarCadenaVacia () throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        if (((Math.random()*10)%2)==1)
-            newEntity.setEspecie("Gato");
-        else
-            newEntity.setEspecie("Perro");
+       
         newEntity.setLugar("");
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
     }
@@ -126,10 +128,7 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdidaDescripcionNull () throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        if (((Math.random()*10)%2)==1)
-            newEntity.setEspecie("Gato");
-        else
-            newEntity.setEspecie("Perro");
+       
         newEntity.setDescripcion(null);
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
     }
@@ -138,12 +137,183 @@ public class MascotaPerdidaLogicTest {
     public void createMascotaPerdidaDescripcionCadenaVacia () throws BusinessLogicException
     {
         MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
-        if (((Math.random()*10)%2)==1)
-            newEntity.setEspecie("Gato");
-        else
-            newEntity.setEspecie("Perro");
+       
         newEntity.setDescripcion("");
         MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
+    }
+    
+    @Test 
+    public void updateMascotaPerdida ( ) throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        
+        mascotaLogic.createMascotaPerdida(entity);
+        newEntity.setId(entity.getId());
+         
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+        
+  
+         Assert.assertEquals(newEntity, result);
+        
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaRazaNull () throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        
+        mascotaLogic.createMascotaPerdida(entity);
+        
+        newEntity.setRaza(null);
+        newEntity.setId(entity.getId());
+         
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaRazaCadenaVacia () throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        newEntity.setId(entity.getId());
+        
+        mascotaLogic.createMascotaPerdida(entity);
+        
+        newEntity.setRaza("");
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaEspecieDifetenteGatoPerro () throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        newEntity.setId(entity.getId());
+        
+        mascotaLogic.createMascotaPerdida(entity);
+        
+        newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        Integer i = new Integer ( (int) (Math.random()*TipoEspecies.values().length *50) );
+        while ( i>=0 && i<TipoEspecies.values().length)
+        {
+            i = new Integer ( (int) (Math.random()*TipoEspecies.values().length *50) );
+        }
+        
+        newEntity.setEspecie(i);
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaEspecieNull () throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        newEntity.setId(entity.getId());
+        
+        mascotaLogic.createMascotaPerdida(entity);
+        
+        newEntity.setEspecie(null);
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaLugarNull () throws BusinessLogicException
+    {
+      MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        newEntity.setId(entity.getId());
+        
+        mascotaLogic.createMascotaPerdida(entity);
+        
+        newEntity.setLugar(null);
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaLugarCadenaVacia () throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        newEntity.setId(entity.getId());
+        
+        mascotaLogic.createMascotaPerdida(entity);
+       
+        newEntity.setLugar("");
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaDescripcionNull () throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        newEntity.setId(entity.getId());
+        
+        mascotaLogic.createMascotaPerdida(entity);
+       
+        newEntity.setDescripcion(null);
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateMascotaPerdidaDescripcionCadenaVacia () throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        newEntity.setId(entity.getId());
+        
+        mascotaLogic.createMascotaPerdida(entity);
+       
+        newEntity.setDescripcion("");
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+    }
+    
+     @Test
+    public void deleteTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+        MascotaPerdidaEntity p = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        mascotaLogic.createMascotaPerdida(p);
+        mascotaLogic.deleteMascotaPerdida(p.getId());
+
+        Assert.assertNull(em.find(MascotaPerdidaEntity.class,p.getId()));
+    }
+    
+    @Test
+    public void findAllTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        ArrayList< MascotaPerdidaEntity> resultados = new ArrayList();
+
+        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
+        for (int i = 0; i <= j; i++) {
+            MascotaPerdidaEntity mascota = factory.manufacturePojo(MascotaPerdidaEntity.class);
+            mascotaLogic.createMascotaPerdida(mascota);
+            Assert.assertNotNull(mascota);
+            resultados.add(mascota);
+        }
+
+        List<MascotaPerdidaEntity> r = mascotaLogic.findAllMascotaPerdida();
+        Iterator iter = resultados.iterator();
+
+        while (iter.hasNext()) {
+            MascotaPerdidaEntity next = (MascotaPerdidaEntity) iter.next();
+            Assert.assertTrue(r.contains(next));
+        }
+    }
+    
+    @Test
+    public void findTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        MascotaPerdidaEntity mascota = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        mascotaLogic.createMascotaPerdida(mascota);
+        Assert.assertNotNull(mascota);
+        MascotaPerdidaEntity r = mascotaLogic.findMascotaPerdida(mascota.getId());
+        Assert.assertNotNull(r);
     }
    
 }

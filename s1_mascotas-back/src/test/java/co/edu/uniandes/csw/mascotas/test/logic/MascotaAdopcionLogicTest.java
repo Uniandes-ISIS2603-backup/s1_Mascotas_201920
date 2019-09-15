@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
+import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -51,12 +52,6 @@ public class MascotaAdopcionLogicTest {
     public void createMascotaAdopcion() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
 
-        if (((Math.random() * 10) % 2) == 1) {
-            entidad.setEspecie("Gato");
-        } else {
-            entidad.setEspecie("Perro");
-        }
-
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
         Assert.assertNotNull(resultado);
 
@@ -71,11 +66,7 @@ public class MascotaAdopcionLogicTest {
     @Test
     public void updateMascotaAdopcion() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
-        if (((Math.random() * 10) % 2) == 1) {
-            entidad.setEspecie("Gato");
-        } else {
-            entidad.setEspecie("Perro");
-        }
+        
         mascotaLogic.createMascotaAdopcion(entidad);
         MascotaAdopcionEntity entidad2 = factory.manufacturePojo(MascotaAdopcionEntity.class);
         entidad2.setId(entidad.getId());
@@ -151,7 +142,14 @@ public class MascotaAdopcionLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionEspecioNotAnimal() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
-        entidad.setEspecie("thiIsNotAnAnimal");
+        
+        Integer i = new Integer ( (int) (Math.random()*TipoEspecies.values().length *50) );
+        while ( i>=0 && i<TipoEspecies.values().length)
+        {
+            i = new Integer ( (int) (Math.random()*TipoEspecies.values().length *50) );
+        }
+        entidad.setEspecie(i);
+        
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
