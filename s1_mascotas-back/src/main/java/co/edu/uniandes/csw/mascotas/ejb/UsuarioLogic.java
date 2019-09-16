@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mascotas.ejb;
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
 import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -82,77 +83,16 @@ public class UsuarioLogic
             throw new BusinessLogicException("El correo del usuario esta vacio");
         }
         
-        //Nombre
-        if(usuario.getNombre() == null)
-        {
-            throw new BusinessLogicException("El nombre del usuario esta vacio");
-        }
-    
-        //Correo
-        if(usuario.getCorreo() == null)
-        {
-            throw new BusinessLogicException("El correo del usuario esta vacio");
-        }
-        
-        //Nombre
-        if(usuario.getNombre() == null)
-        {
-            throw new BusinessLogicException("El nombre del usuario esta vacio");
-        }
-    
-        //Correo
-        if(usuario.getCorreo() == null)
-        {
-            throw new BusinessLogicException("El correo del usuario esta vacio");
-        }
-        
-        //Nombre
-        if(usuario.getNombre() == null)
-        {
-            throw new BusinessLogicException("El nombre del usuario esta vacio");
-        }
-    
-        //Correo
-        if(usuario.getCorreo() == null)
-        {
-            throw new BusinessLogicException("El correo del usuario esta vacio");
-        }
-        
-        //Nombre
-        if(usuario.getNombre() == null)
-        {
-            throw new BusinessLogicException("El nombre del usuario esta vacio");
-        }
-    
-        //Correo
-        if(usuario.getCorreo() == null)
-        {
-            throw new BusinessLogicException("El correo del usuario esta vacio");
-        }
-        
         String[] mitadesCorreo = usuario.getCorreo().split("@");
-        if(mitadesCorreo.length < 2)
+        if(mitadesCorreo.length != 2)
         {
-            throw new BusinessLogicException("El correo no tiene arroba (@)");
-        }
-        else if(mitadesCorreo.length > 2)
-        {
-            throw new BusinessLogicException("El correo tiene más de una arroba (@)");
-        }
-        
-        if(mitadesCorreo[0].equals("") || mitadesCorreo[1].equals(""))
-        {
-            throw new BusinessLogicException("El correo debe tener texto del lado izquiero y derecho de la arroba (@)");
+            throw new BusinessLogicException("El correo debe tener una sola arroba (@) y texto a ambos lados de la arroba");
         }
         
         String[] mitadesCorreoPunto = mitadesCorreo[1].split(".");
-        if(mitadesCorreoPunto.length < 2)
+        if(mitadesCorreoPunto.length != 2)
         {
-            throw new BusinessLogicException("El correo no tiene punto (.)");
-        }
-        else if(mitadesCorreoPunto.length > 2)
-        {
-            throw new BusinessLogicException("El correo tiene demasiados puntos (.)");
+            throw new BusinessLogicException("El correo debe tener un punto (.) y texto a ambos lados del punto.");
         }
         
         if(mitadesCorreoPunto[0].equals("") || mitadesCorreoPunto[1].equals(""))
@@ -174,5 +114,20 @@ public class UsuarioLogic
         
         usuario = persistence.update(usuario);
         return usuario;
+    }
+    
+    public void deleteUsuario(Long usuarioID)
+    {
+        persistence.delete(usuarioID);
+    }
+    
+    public UsuarioEntity findUsuario(Long usuarioID)
+    {
+        return persistence.find(usuarioID);
+    }
+    
+    public Collection<UsuarioEntity> findAllUsuario(Long usuarioID)
+    {
+        return persistence.findAll();
     }
 }

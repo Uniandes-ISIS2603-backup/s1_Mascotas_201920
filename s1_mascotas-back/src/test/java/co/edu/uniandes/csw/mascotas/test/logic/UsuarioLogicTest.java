@@ -41,11 +41,16 @@ public class UsuarioLogicTest {
     @Inject
     private UsuarioLogic usuarioLogic;
     
+    /**
+     * Tests para el metodo create()
+     */
+    
     @Test (expected = BusinessLogicException.class)
     public void createUsuarioNombreNull() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
         newUsuario.setNombre(null);
+        newUsuario.setCorreo("tobia1999@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
     }
     
@@ -54,6 +59,7 @@ public class UsuarioLogicTest {
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
         newUsuario.setCiudad(null);
+        newUsuario.setCorreo("tobia1999@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
     }
     
@@ -118,6 +124,133 @@ public class UsuarioLogicTest {
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
         newUsuario.setCelular(null);
+        newUsuario.setCorreo("tobia1999@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
+    }
+    
+    /**
+     * Tests para el metodo update()
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioNombreNull() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999@gmail.com");
+        usuarioForUpdate.setNombre(null);
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCelularNull() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999@gmail.com");
+        usuarioForUpdate.setCelular(null);
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCiudadNull() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999@gmail.com");
+        usuarioForUpdate.setCiudad(null);
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCorreoNull() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo(null);
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCorreoParteDerechaVacia() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999@");
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCorreoParteIzquierdaVacia() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("@gmail.com");
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCorreoPuntoDerechaVacia() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999@gmail.");
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCorreoPuntoIzquierdaVacia() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999@.com");
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCorreoSinArroba() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999gmail.com");
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioCorreoSinPunto() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999@gmailcom");
+        usuarioLogic.updateUsuario(usuarioForUpdate);
     }
 }
