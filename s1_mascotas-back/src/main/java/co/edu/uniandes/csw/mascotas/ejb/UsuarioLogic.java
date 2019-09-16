@@ -30,7 +30,7 @@ public class UsuarioLogic
         }
     
         //Correo
-        if(usuario.getCorreo() == null)
+       if(usuario.getCorreo() == null)
         {
             throw new BusinessLogicException("El correo del usuario esta vacio");
         }
@@ -38,18 +38,13 @@ public class UsuarioLogic
         String[] mitadesCorreo = usuario.getCorreo().split("@");
         if(mitadesCorreo.length != 2)
         {
-            throw new BusinessLogicException("El correo no tiene arroba (@)");
+            throw new BusinessLogicException("El correo debe tener una sola arroba (@) y texto a ambos lados de la arroba");
         }
         
-        if(mitadesCorreo[0].equals("") || mitadesCorreo[1].equals(""))
+        String[] mitadesCorreoPunto = mitadesCorreo[1].split(".");
+        if(mitadesCorreoPunto.length != 2)
         {
-            throw new BusinessLogicException("El correo debe tener texto del lado izquiero y derecho de la arroba (@)");
-        }
-        
-        String[] mitadesCorreoPunto = usuario.getCorreo().split(".");
-        if(mitadesCorreo.length != 2)
-        {
-            throw new BusinessLogicException("El correo no tiene punto (.)");
+            throw new BusinessLogicException("El correo debe tener un punto (.) y texto a ambos lados del punto.");
         }
         
         if(mitadesCorreoPunto[0].equals("") || mitadesCorreoPunto[1].equals(""))
@@ -87,10 +82,62 @@ public class UsuarioLogic
             throw new BusinessLogicException("El correo del usuario esta vacio");
         }
         
+        //Nombre
+        if(usuario.getNombre() == null)
+        {
+            throw new BusinessLogicException("El nombre del usuario esta vacio");
+        }
+    
+        //Correo
+        if(usuario.getCorreo() == null)
+        {
+            throw new BusinessLogicException("El correo del usuario esta vacio");
+        }
+        
+        //Nombre
+        if(usuario.getNombre() == null)
+        {
+            throw new BusinessLogicException("El nombre del usuario esta vacio");
+        }
+    
+        //Correo
+        if(usuario.getCorreo() == null)
+        {
+            throw new BusinessLogicException("El correo del usuario esta vacio");
+        }
+        
+        //Nombre
+        if(usuario.getNombre() == null)
+        {
+            throw new BusinessLogicException("El nombre del usuario esta vacio");
+        }
+    
+        //Correo
+        if(usuario.getCorreo() == null)
+        {
+            throw new BusinessLogicException("El correo del usuario esta vacio");
+        }
+        
+        //Nombre
+        if(usuario.getNombre() == null)
+        {
+            throw new BusinessLogicException("El nombre del usuario esta vacio");
+        }
+    
+        //Correo
+        if(usuario.getCorreo() == null)
+        {
+            throw new BusinessLogicException("El correo del usuario esta vacio");
+        }
+        
         String[] mitadesCorreo = usuario.getCorreo().split("@");
-        if(mitadesCorreo.length != 2)
+        if(mitadesCorreo.length < 2)
         {
             throw new BusinessLogicException("El correo no tiene arroba (@)");
+        }
+        else if(mitadesCorreo.length > 2)
+        {
+            throw new BusinessLogicException("El correo tiene más de una arroba (@)");
         }
         
         if(mitadesCorreo[0].equals("") || mitadesCorreo[1].equals(""))
@@ -98,10 +145,14 @@ public class UsuarioLogic
             throw new BusinessLogicException("El correo debe tener texto del lado izquiero y derecho de la arroba (@)");
         }
         
-        String[] mitadesCorreoPunto = usuario.getCorreo().split(".");
-        if(mitadesCorreo.length != 2)
+        String[] mitadesCorreoPunto = mitadesCorreo[1].split(".");
+        if(mitadesCorreoPunto.length < 2)
         {
             throw new BusinessLogicException("El correo no tiene punto (.)");
+        }
+        else if(mitadesCorreoPunto.length > 2)
+        {
+            throw new BusinessLogicException("El correo tiene demasiados puntos (.)");
         }
         
         if(mitadesCorreoPunto[0].equals("") || mitadesCorreoPunto[1].equals(""))

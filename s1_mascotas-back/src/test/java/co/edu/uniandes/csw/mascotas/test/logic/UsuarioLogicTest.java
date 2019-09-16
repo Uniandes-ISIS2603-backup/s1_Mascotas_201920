@@ -25,6 +25,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class UsuarioLogicTest {
+    
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -119,7 +120,4 @@ public class UsuarioLogicTest {
         newUsuario.setCelular(null);
         usuarioLogic.createUsuario(newUsuario);
     }
-    
-    
-    
 }
