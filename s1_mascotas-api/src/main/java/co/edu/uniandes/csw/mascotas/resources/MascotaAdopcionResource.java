@@ -23,8 +23,8 @@ import javax.ws.rs.Produces;
  * @author Estudiante
  */
 @Path("mascotasadopcion")
-@Produces("application/jason")
-@Consumes("Application/jason")
+@Produces("application/json")
+@Consumes("application/json")
 @RequestScoped
 public class MascotaAdopcionResource {
     
