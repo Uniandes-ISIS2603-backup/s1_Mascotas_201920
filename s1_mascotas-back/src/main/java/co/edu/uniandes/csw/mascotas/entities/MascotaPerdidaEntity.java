@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.entities;
 
 import co.edu.uniandes.csw.mascotas.podam.DateStrategy;
+import co.edu.uniandes.csw.mascotas.podam.EspecieEstrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -27,7 +28,9 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     /**
      * La especie de la mascota perdida
      */
-    private String especie;
+    
+    @PodamStrategyValue (EspecieEstrategy.class)
+    private Integer especie;
     /**
      * La descripción de la mascota perdida
      */
@@ -60,14 +63,14 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     /**
      * @return the especie
      */
-    public String getEspecie() {
+    public Integer getEspecie() {
         return especie;
     }
 
     /**
      * @param especie the especie to set
      */
-    public void setEspecie(String especie) {
+    public void setEspecie(Integer especie) {
         this.especie = especie;
     }
 

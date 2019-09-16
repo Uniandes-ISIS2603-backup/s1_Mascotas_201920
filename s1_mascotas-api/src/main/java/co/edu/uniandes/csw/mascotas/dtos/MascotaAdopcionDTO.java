@@ -3,24 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.mascotas.entities;
+package co.edu.uniandes.csw.mascotas.dtos;
 
-import co.edu.uniandes.csw.mascotas.podam.EspecieEstrategy;
 import java.io.Serializable;
-import javax.persistence.Entity;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
- * @author Tomás Langebaek
+ * @author Estudiante
  */
-@Entity
-public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
+public class MascotaAdopcionDTO implements Serializable{
     
-    /**
-     * El número del enum especie del animal en adopcion.
-     */
-    @PodamStrategyValue (EspecieEstrategy.class)
+    public MascotaAdopcionDTO(){
+    
+}
+  
     private Integer especie;
     /**
      * La raza del animal en adopcion
@@ -45,7 +41,6 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
     public Integer getEspecie() {
         return especie;
     }
-    
 
     /**
      * @param especie the especie to set
@@ -109,4 +104,5 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
     public void setHistoria(String historia) {
         this.historia = historia;
     }
+    
 }

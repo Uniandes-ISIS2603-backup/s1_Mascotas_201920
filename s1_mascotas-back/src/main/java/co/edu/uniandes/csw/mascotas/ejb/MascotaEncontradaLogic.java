@@ -44,7 +44,7 @@ public class MascotaEncontradaLogic {
         }
         if (!flag)
             throw new BusinessLogicException ("La mascota no es un gato, ni un perro.");
-        if (pMascota.getRaza().equals("")||pMascota.getRaza()==null)
+        if (pMascota.getRaza()==null || pMascota.getRaza().equals(""))
             throw new BusinessLogicException ("La raza de la mascota no existe.");
         if (pMascota.getLugar()==null||pMascota.getLugar().equals(""))
             throw new BusinessLogicException ("El lugar de la mascota encontrada no existe.");
