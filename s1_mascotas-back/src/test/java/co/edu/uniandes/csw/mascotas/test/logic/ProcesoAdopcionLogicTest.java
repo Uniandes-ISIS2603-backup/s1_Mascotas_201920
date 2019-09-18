@@ -52,6 +52,8 @@ public class ProcesoAdopcionLogicTest {
     @Test
     public void createProcesoTest() throws BusinessLogicException{
        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setCalificacion(3);
+       newEntity.setEstado("Cancelado");
        ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
        assertNotNull(result);
        
@@ -62,8 +64,125 @@ public class ProcesoAdopcionLogicTest {
     @Test (expected = BusinessLogicException.class)
     public void createProcesoEstadoNullTest() throws BusinessLogicException{
         ProcesoAdopcionEntity newEntity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        newEntity.setCalificacion(3);
         newEntity.setEstado(null);
         ProcesoAdopcionEntity result = procesoLogic.createProcesoAdopcion(newEntity);
+    }
+    
+     @Test (expected = BusinessLogicException.class)
+    public void createProcesoEstadoInvalidoTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        newEntity.setCalificacion(3);
+        newEntity.setEstado("Invalido");
+        ProcesoAdopcionEntity result = procesoLogic.createProcesoAdopcion(newEntity);
+    }
+    
+     @Test (expected = BusinessLogicException.class)
+    public void createProcesoComentarioNullTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        newEntity.setCalificacion(3);
+        newEntity.setEstado("Cancelado");
+        newEntity.setComentario(null);
+        ProcesoAdopcionEntity result = procesoLogic.createProcesoAdopcion(newEntity);
+    }
+     @Test (expected = BusinessLogicException.class)
+    public void createProcesoCalificacionCeroTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        newEntity.setEstado("Cancelado");
+        newEntity.setCalificacion(0);
+        ProcesoAdopcionEntity result = procesoLogic.createProcesoAdopcion(newEntity);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void createProcesoCalificacionSeisTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        newEntity.setEstado("Cancelado");
+        newEntity.setCalificacion(6);
+        ProcesoAdopcionEntity result = procesoLogic.createProcesoAdopcion(newEntity);
+    }
+    
+    @Test
+    public void updateProcesoTest() throws BusinessLogicException{
+       ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setCalificacion(3);
+       newEntity.setEstado("Cancelado");
+       newEntity.setComentario("uno");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setCalificacion(3);
+       entityToUpdate.setEstado("Cancelado");
+       entityToUpdate.setComentario("dos");
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
+       
+       ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, newEntity.getId());
+       assertNotNull(entity);
+       assertEquals(entity.getComentario(), "dos");
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateProcesoEstadoNullTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setCalificacion(3);
+       newEntity.setEstado("Cancelado");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setCalificacion(3);
+       entityToUpdate.setEstado(null);
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
+    }
+    
+     @Test (expected = BusinessLogicException.class)
+    public void updateProcesoEstadoInvalidoTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setCalificacion(3);
+       newEntity.setEstado("Cancelado");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setCalificacion(3);
+       entityToUpdate.setEstado("Invalido");
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
+    }
+    
+     @Test (expected = BusinessLogicException.class)
+    public void cupdateProcesoComentarioNullTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setCalificacion(3);
+       newEntity.setEstado("Cancelado");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setCalificacion(3);
+       entityToUpdate.setEstado("Cancelado");
+       entityToUpdate.setComentario(null);
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
+    }
+     @Test (expected = BusinessLogicException.class)
+    public void updateProcesoCalificacionCeroTest() throws BusinessLogicException{
+       ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setCalificacion(3);
+       newEntity.setEstado("Cancelado");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setCalificacion(0);
+       entityToUpdate.setEstado("Cancelado");
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateProcesoCalificacionSeisTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setCalificacion(3);
+       newEntity.setEstado("Cancelado");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setCalificacion(6);
+       entityToUpdate.setEstado("Cancelado");
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
     }
     
     
