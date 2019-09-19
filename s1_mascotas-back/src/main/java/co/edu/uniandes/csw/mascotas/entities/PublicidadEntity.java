@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
- * @author german rozo
+ * @author German Rozo
  */
 
 @Entity
