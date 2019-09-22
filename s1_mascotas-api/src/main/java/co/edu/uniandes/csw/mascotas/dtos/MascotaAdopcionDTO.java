@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Estudiante
+ * @author Tomás Langebaek
  */
 public class MascotaAdopcionDTO implements Serializable{
     

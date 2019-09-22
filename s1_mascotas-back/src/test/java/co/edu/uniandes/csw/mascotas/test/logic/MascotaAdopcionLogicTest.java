@@ -10,6 +10,9 @@ import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
 import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,7 +28,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Estudiante
+ * @author Tomás Langebaek
  */
 @RunWith(Arquillian.class)
 public class MascotaAdopcionLogicTest {
@@ -37,6 +40,7 @@ public class MascotaAdopcionLogicTest {
 
     @PersistenceContext
     private EntityManager em;
+    
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -47,6 +51,7 @@ public class MascotaAdopcionLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
+    
 
     @Test
     public void createMascotaAdopcion() throws BusinessLogicException {
@@ -62,27 +67,7 @@ public class MascotaAdopcionLogicTest {
         Assert.assertEquals(entidad2.getDescripcion(), resultado.getDescripcion());
 
     }
-
-    @Test
-    public void updateMascotaAdopcion() throws BusinessLogicException {
-        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
-        
-        mascotaLogic.createMascotaAdopcion(entidad);
-        MascotaAdopcionEntity entidad2 = factory.manufacturePojo(MascotaAdopcionEntity.class);
-        entidad2.setId(entidad.getId());
-        
-        entidad2.setEspecie(entidad.getEspecie());
-        
-        mascotaLogic.updateMascotaAdopcion(entidad2);
-        MascotaAdopcionEntity entidad3 = em.find(MascotaAdopcionEntity.class, entidad2.getId());
-
-        Assert.assertEquals(entidad2.getLugar(), entidad3.getLugar());
-        Assert.assertEquals(entidad2.getRaza(), entidad3.getRaza());
-        Assert.assertEquals(entidad2.getEspecie(), entidad3.getEspecie());
-        Assert.assertEquals(entidad2.getDescripcion(), entidad3.getDescripcion());
-
-    }
-
+    
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionLugarNull() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -153,4 +138,79 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
+
+    @Test
+    public void updateMascotaAdopcion() throws BusinessLogicException {
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        
+        mascotaLogic.createMascotaAdopcion(entidad);
+        MascotaAdopcionEntity entidad2 = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entidad2.setId(entidad.getId());
+        
+        entidad2.setEspecie(entidad.getEspecie());
+        
+        mascotaLogic.updateMascotaAdopcion(entidad2);
+        MascotaAdopcionEntity entidad3 = em.find(MascotaAdopcionEntity.class, entidad2.getId());
+
+        Assert.assertEquals(entidad2.getLugar(), entidad3.getLugar());
+        Assert.assertEquals(entidad2.getRaza(), entidad3.getRaza());
+        Assert.assertEquals(entidad2.getEspecie(), entidad3.getEspecie());
+        Assert.assertEquals(entidad2.getDescripcion(), entidad3.getDescripcion());
+
+    }
+    
+   @Test
+    public void findAllTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        ArrayList< MascotaAdopcionEntity> resultados = new ArrayList();
+
+        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
+        for (int i = 0; i <= j; i++) {
+            MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+            mascotaLogic.createMascotaAdopcion(mascota);
+            Assert.assertNotNull(mascota);
+            resultados.add(mascota);
+        }
+
+        List<MascotaAdopcionEntity> r = mascotaLogic.getMascotasAdopcion();
+        Iterator iter = resultados.iterator();
+
+        while (iter.hasNext()) {
+            MascotaAdopcionEntity next = (MascotaAdopcionEntity) iter.next();
+            Assert.assertTrue(r.contains(next));
+        }
+    }
+    
+    @Test
+    public void getMascotaAdopcionTest() throws BusinessLogicException {
+        
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+
+        MascotaAdopcionEntity entity = mascotaLogic.createMascotaAdopcion(entidad);
+        
+        MascotaAdopcionEntity resultEntity = mascotaLogic.getMascotaAdopcion(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getLugar(), resultEntity.getLugar());
+        Assert.assertEquals(entity.getRaza(), resultEntity.getRaza());
+        Assert.assertEquals(entity.getEspecie(), resultEntity.getEspecie());
+        Assert.assertEquals(entity.getDescripcion(), resultEntity.getDescripcion());
+    }
+    
+    @Test
+    public void deleteMascotaAdopcionTest() throws BusinessLogicException {
+        
+        MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
+
+        MascotaAdopcionEntity entity = mascotaLogic.createMascotaAdopcion(entidad);
+        
+        mascotaLogic.deleteMascotaAdopcion(entity.getId());
+        MascotaAdopcionEntity deleted = em.find(MascotaAdopcionEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
+
+    
 }
