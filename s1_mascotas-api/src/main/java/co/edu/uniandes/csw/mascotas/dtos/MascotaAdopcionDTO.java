@@ -5,18 +5,15 @@
  */
 package co.edu.uniandes.csw.mascotas.dtos;
 
+import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import java.io.Serializable;
 
 /**
  *
  * @author Tomás Langebaek
  */
-public class MascotaAdopcionDTO implements Serializable{
-    
-    public MascotaAdopcionDTO(){
-    
-}
-  
+public class MascotaAdopcionDTO implements Serializable {
+
     private Integer especie;
     /**
      * La raza del animal en adopcion
@@ -34,6 +31,47 @@ public class MascotaAdopcionDTO implements Serializable{
      * La historia de vida del animal en adopcion
      */
     private String historia;
+
+    private Long id;
+
+    public MascotaAdopcionDTO() {
+
+    }
+
+    public MascotaAdopcionDTO(MascotaAdopcionEntity entidad) {
+        
+        setDescripcion(entidad.getDescripcion());
+        
+        setEspecie((entidad.getEspecie()));
+        
+        setHistoria(entidad.getHistoria());
+        
+        setId(entidad .getId());
+        
+        setRaza(entidad.getRaza());
+        
+        setLugar(entidad.getLugar());
+    }
+
+    public MascotaAdopcionEntity toEntity() {
+
+        MascotaAdopcionEntity entidad = new MascotaAdopcionEntity();
+
+        entidad.setId(this.getId());
+
+        entidad.setDescripcion((this.getDescripcion()));
+
+        entidad.setEspecie(this.getEspecie());
+
+        entidad.setHistoria(this.getHistoria());
+
+        entidad.setLugar(this.getLugar());
+
+        entidad.setRaza(this.getRaza());
+        
+        return entidad;
+
+    }
 
     /**
      * @return the especie
@@ -104,5 +142,19 @@ public class MascotaAdopcionDTO implements Serializable{
     public void setHistoria(String historia) {
         this.historia = historia;
     }
-    
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
