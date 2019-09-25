@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mascotas.dtos;
 
+import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import java.io.Serializable;
 
 /**
@@ -18,8 +19,46 @@ public class ProcesoAdopcionDTO implements Serializable{
     private String comentario;
     private int calificacion;
     
+//    private UsuarioDTO usuario;
+    private MascotaAdopcionDTO mascotaAdopcion;
+    
     public ProcesoAdopcionDTO(){
         
+    }
+    public ProcesoAdopcionDTO(ProcesoAdopcionEntity procesoAdopcionEntity) {
+        if (procesoAdopcionEntity != null) {
+            this.id = procesoAdopcionEntity.getId();
+            this.estado = procesoAdopcionEntity.getEstado();
+            this.comentario=procesoAdopcionEntity.getComentario();
+            this.calificacion=procesoAdopcionEntity.getCalificacion();
+            if(procesoAdopcionEntity.getMascotaAdopcion()!=null){
+                this.mascotaAdopcion=new MascotaAdopcionDTO(procesoAdopcionEntity.getMascotaAdopcion());
+            }
+            else{
+                this.mascotaAdopcion=null;
+            }
+//            if(procesoAdopcionEntity.getUsuario()!=null){
+//                this.usuario=new UsuarioDTO(procesoAdopcionEntity.getUsuario());
+//            }
+//            else{
+//                this.usuario=null;
+//            }
+        }
+    }
+    
+    public ProcesoAdopcionEntity toEntity() {
+        ProcesoAdopcionEntity procesoAdopcionEntity = new ProcesoAdopcionEntity();
+        procesoAdopcionEntity.setId(this.id);
+        procesoAdopcionEntity.setEstado(this.estado);
+        procesoAdopcionEntity.setComentario(this.comentario);
+        procesoAdopcionEntity.setCalificacion(this.calificacion);
+        if(this.getMascotaAdopcion()!=null){
+            procesoAdopcionEntity.setMascotaAdopcion(this.getMascotaAdopcion().toEntity());
+        }
+//        if(this.usuario!=null){
+//            procesoAdopcionEntity.setUsuario(this.usuario.toEntity());
+//        }
+        return procesoAdopcionEntity;
     }
 
     /**
@@ -77,5 +116,33 @@ public class ProcesoAdopcionDTO implements Serializable{
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
+
+    /**
+     * @return the mascotaAdopcion
+     */
+    public MascotaAdopcionDTO getMascotaAdopcion() {
+        return mascotaAdopcion;
+    }
+
+    /**
+     * @param mascotaAdopcion the mascotaAdopcion to set
+     */
+    public void setMascotaAdopcion(MascotaAdopcionDTO mascotaAdopcion) {
+        this.mascotaAdopcion = mascotaAdopcion;
+    }
+    
+//    /**
+//     * @return the usuario
+//     */
+//    public UsuarioDTO getUsuario() {
+//        return usuario;
+//    }
+//
+//    /**
+//     * @param usuario the usuario to set
+//     */
+//    public void setUsuario(UsuarioDTO usuario) {
+//        this.usuario = usuario;
+//    }
     
 }
