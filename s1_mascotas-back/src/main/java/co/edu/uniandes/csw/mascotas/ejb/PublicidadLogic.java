@@ -41,11 +41,18 @@ public class PublicidadLogic
         {
             throw new BusinessLogicException("La fecha inicial de la publicidad esta vacia");
         }
-         if(pe.getMensaje()==null)
+        if(pe.getMensaje()==null)
         {
             throw new BusinessLogicException("El mensaje de la publicidad esta vacio");
         }
-        
+        if(!pe.getFecchaFin().after(pe.getFechaInicio()))
+        {
+            throw new BusinessLogicException("La fecha inicial es posterior a la final");
+        }
+        if(pe.getDiasPorSemana()<=0)
+        {
+            throw new BusinessLogicException("Los dias por semana tienen que ser mayores a 0");
+        }
         pe= pp.create(pe);
         return pe;
     }
