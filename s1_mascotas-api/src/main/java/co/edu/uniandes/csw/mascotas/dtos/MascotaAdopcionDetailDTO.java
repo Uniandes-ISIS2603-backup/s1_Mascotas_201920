@@ -29,7 +29,7 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
             if (mascotaEntity.getProcesos() != null) {
                 procesosAdopcion = new ArrayList<>();
                 for (ProcesoAdopcionEntity entityProceso : mascotaEntity.getProcesos()) {
-              //     procesos.add(new ProcesoAdopcionDTO(entityProceso));
+                   procesos.add(new ProcesoAdopcionDTO(entityProceso));
                 }
             }
         }
