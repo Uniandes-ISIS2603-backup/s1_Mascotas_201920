@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.mascotas.ejb;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
-import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;

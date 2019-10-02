@@ -33,6 +33,8 @@ public class MascotaAdopcionDTO implements Serializable {
     private String historia;
 
     private Long id;
+    
+ //   private UsuarioDTO usuario;
 
     public MascotaAdopcionDTO() {
 
@@ -51,6 +53,8 @@ public class MascotaAdopcionDTO implements Serializable {
         setRaza(entidad.getRaza());
         
         setLugar(entidad.getLugar());
+        
+        
     }
 
     public MascotaAdopcionEntity toEntity() {

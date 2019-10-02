@@ -28,8 +28,8 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
         if (mascotaEntity != null) {
             if (mascotaEntity.getProcesos() != null) {
                 procesosAdopcion = new ArrayList<>();
-                for (ProcesoAdopcionEntity entityProceso : mascotaEntity.getProcesos()) {
-              //     procesos.add(new ProcesoAdopcionDTO(entityProceso));
+                for (ProcesoAdopcionEntity procesoEntity : mascotaEntity.getProcesos()) {
+                   procesosAdopcion.add(new ProcesoAdopcionDTO(procesoEntity));
                 }
             }
         }
@@ -46,7 +46,7 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
         if (procesosAdopcion != null) {
             List<ProcesoAdopcionEntity> procesosEntity = new ArrayList<>();
             for (ProcesoAdopcionDTO dtoProceso : procesosAdopcion) {
-         //       procesosEntity.add(dtoProceso.toEntity());
+                procesosEntity.add(dtoProceso.toEntity());
             }
             mascotaEntity.setProcesos(procesosEntity);
         }

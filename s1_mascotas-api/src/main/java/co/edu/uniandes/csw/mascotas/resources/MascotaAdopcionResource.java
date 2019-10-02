@@ -50,10 +50,10 @@ public class MascotaAdopcionResource {
     
     @GET
     @Path("{mascotasId: \\d+}")
-    public MascotaAdopcionDetailDTO getMascotaAdopcion(@PathParam("mascotasId") Long editorialsId) throws BusinessLogicException{
-        MascotaAdopcionEntity entidad = mascotaLogic.getMascotaAdopcion(editorialsId);
+    public MascotaAdopcionDetailDTO getMascotaAdopcion(@PathParam("mascotasId") Long mascotasId) throws BusinessLogicException{
+        MascotaAdopcionEntity entidad = mascotaLogic.getMascotaAdopcion(mascotasId);
         if(entidad == null){
-            throw new WebApplicationException("El recurso /mascotasadopcion/"+editorialsId+" no existe", 404);
+            throw new WebApplicationException("El recurso /mascotasadopcion/"+mascotasId+" no existe", 404);
         }
         return new MascotaAdopcionDetailDTO(entidad);
     }
