@@ -6,9 +6,15 @@
 package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.ProcesoAdopcionLogic;
+import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
+import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
+import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
+import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
 import co.edu.uniandes.csw.mascotas.persistence.ProcesoAdopcionPersistence;
+import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +24,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -44,6 +51,10 @@ public class ProcesoAdopcionLogicTest {
                 .addPackage(ProcesoAdopcionEntity.class.getPackage())
                 .addPackage(ProcesoAdopcionPersistence.class.getPackage())
                 .addPackage(ProcesoAdopcionLogic.class.getPackage())
+                .addPackage(UsuarioEntity.class.getPackage())
+                .addPackage(MascotaAdopcionEntity.class.getPackage())
+                .addPackage(UsuarioPersistence.class.getPackage())
+                .addPackage(MascotaAdopcionPersistance.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
                 
@@ -59,6 +70,8 @@ public class ProcesoAdopcionLogicTest {
        
        ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, result.getId());
        assertEquals(entity.getEstado(), result.getEstado());
+       assertEquals(entity.getCalificacion(), result.getCalificacion());
+       assertEquals(entity.getComentario(), result.getComentario());
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -147,7 +160,7 @@ public class ProcesoAdopcionLogicTest {
     }
     
      @Test (expected = BusinessLogicException.class)
-    public void cupdateProcesoComentarioNullTest() throws BusinessLogicException{
+    public void updateProcesoComentarioNullTest() throws BusinessLogicException{
         ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
        newEntity.setCalificacion(3);
        newEntity.setEstado("Cancelado");
@@ -183,6 +196,31 @@ public class ProcesoAdopcionLogicTest {
        entityToUpdate.setCalificacion(6);
        entityToUpdate.setEstado("Cancelado");
        procesoLogic.updateProcesoAdopcion(entityToUpdate);
+    }
+    
+    @Test
+    public void findProcesoAdopcionTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity entity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        entity.setCalificacion(3);
+        entity.setEstado("Cancelado");
+        procesoLogic.createProcesoAdopcion(entity);
+        ProcesoAdopcionEntity resultEntity=procesoLogic.findProcesoAdopcion(entity.getId());
+        assertNotNull(resultEntity);
+        assertEquals(entity.getId(),resultEntity.getId());
+        assertEquals(entity.getEstado(),resultEntity.getEstado());
+        assertEquals(entity.getComentario(),resultEntity.getComentario());
+        assertEquals(entity.getCalificacion(),resultEntity.getCalificacion());
+    }
+    
+    @Test
+    public void deleteProcesoAdopcionTest() throws BusinessLogicException{
+        ProcesoAdopcionEntity entity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+        entity.setCalificacion(3);
+        entity.setEstado("Cancelado");
+        entity=procesoLogic.createProcesoAdopcion(entity);
+        procesoLogic.deleteProcesoAdopcion(entity.getId());
+        ProcesoAdopcionEntity deleted=em.find(ProcesoAdopcionEntity.class,entity.getId());
+        assertNull(deleted);
     }
     
     

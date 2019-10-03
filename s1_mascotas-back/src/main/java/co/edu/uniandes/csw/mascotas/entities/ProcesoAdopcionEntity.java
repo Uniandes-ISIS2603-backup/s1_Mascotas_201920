@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.mascotas.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -19,6 +21,14 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
     private String comentario;
     
     private int calificacion;
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
+    
+    @PodamExclude
+    @ManyToOne
+    private MascotaAdopcionEntity mascotaAdopcion;
 
     /**
      * @return the estado
@@ -60,6 +70,34 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
      */
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * @return the mascotaAdopcion
+     */
+    public MascotaAdopcionEntity getMascotaAdopcion() {
+        return mascotaAdopcion;
+    }
+
+    /**
+     * @param mascotaAdopcion the mascotaAdopcion to set
+     */
+    public void setMascotaAdopcion(MascotaAdopcionEntity mascotaAdopcion) {
+        this.mascotaAdopcion = mascotaAdopcion;
     }
     
 }

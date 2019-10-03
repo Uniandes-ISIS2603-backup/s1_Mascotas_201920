@@ -16,10 +16,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -33,6 +35,9 @@ public class PublicidadPersistenceTest {
     @Inject
     PublicidadPersistence pp;
 
+    @Inject
+    UserTransaction utx;
+    
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -42,9 +47,59 @@ public class PublicidadPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
-    @PersistenceContext(unitName = "mascotasPU")
+    @PersistenceContext
     protected EntityManager em;
 
+    private List<PublicidadEntity> data = new ArrayList<>();
+    
+    
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    private void clearData() {
+        em.createQuery("delete from PublicidadEntity").executeUpdate();
+    }
+    
+    @Test
+    public void findAllTest() {
+        
+        PodamFactory factory = new PodamFactoryImpl();
+
+        ArrayList< PublicidadEntity> resultados = new ArrayList();
+
+        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
+        
+        for (int i = 0; i < j; i++) {
+            PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
+            PublicidadEntity resultado = pp.create(publicidad);
+            Assert.assertNotNull(resultado);
+            resultados.add(resultado);
+        }
+
+        List<PublicidadEntity> r = pp.findAll();
+        Assert.assertEquals(j, r.size());
+        Iterator iter = resultados.iterator();
+
+        while (iter.hasNext()) {
+            PublicidadEntity next = (PublicidadEntity) iter.next();
+            Assert.assertTrue(r.contains(next));
+        }
+    }
+    
     @Test
     public void createTest() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -69,28 +124,7 @@ public class PublicidadPersistenceTest {
         Assert.assertNotNull(r);
     }
 
-    @Test
-    public void findAllTest() {
-        PodamFactory factory = new PodamFactoryImpl();
-
-        ArrayList< PublicidadEntity> resultados = new ArrayList();
-
-        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
-        for (int i = 0; i <= j; i++) {
-            PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-            PublicidadEntity resultado = pp.create(publicidad);
-            Assert.assertNotNull(resultado);
-            resultados.add(resultado);
-        }
-
-        List<PublicidadEntity> r = pp.findAll();
-        Iterator iter = resultados.iterator();
-
-        while (iter.hasNext()) {
-            PublicidadEntity next = (PublicidadEntity) iter.next();
-            Assert.assertTrue(r.contains(next));
-        }
-    }
+    
 
     @Test
     public void updateTest() {
