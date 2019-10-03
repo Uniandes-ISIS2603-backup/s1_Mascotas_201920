@@ -20,7 +20,7 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
     private List<ProcesoAdopcionDTO> procesosAdopcion;
 
     public MascotaAdopcionDetailDTO() {
-        super();
+        
     }
     
      public MascotaAdopcionDetailDTO(MascotaAdopcionEntity mascotaEntity) {
