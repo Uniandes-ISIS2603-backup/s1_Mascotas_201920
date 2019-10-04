@@ -33,28 +33,31 @@ public class MascotaAdopcionDTO implements Serializable {
     private String historia;
 
     private Long id;
-    
- //   private UsuarioDTO usuario;
+
+    private UsuarioDTO usuario;
 
     public MascotaAdopcionDTO() {
 
     }
 
     public MascotaAdopcionDTO(MascotaAdopcionEntity entidad) {
-        
+
         setDescripcion(entidad.getDescripcion());
-        
+
         setEspecie((entidad.getEspecie()));
-        
+
         setHistoria(entidad.getHistoria());
-        
-        setId(entidad .getId());
-        
+
+        setId(entidad.getId());
+
         setRaza(entidad.getRaza());
-        
+
         setLugar(entidad.getLugar());
-        
-        
+
+        if (entidad.getUsuario() != null) {
+            this.usuario = new UsuarioDTO(entidad.getUsuario());
+        }
+
     }
 
     public MascotaAdopcionEntity toEntity() {
@@ -72,7 +75,11 @@ public class MascotaAdopcionDTO implements Serializable {
         entidad.setLugar(this.getLugar());
 
         entidad.setRaza(this.getRaza());
-        
+
+         if (usuario != null) {
+            entidad.setUsuario(usuario.toEntity());
+        }
+
         return entidad;
 
     }
@@ -159,6 +166,20 @@ public class MascotaAdopcionDTO implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
     }
 
 }

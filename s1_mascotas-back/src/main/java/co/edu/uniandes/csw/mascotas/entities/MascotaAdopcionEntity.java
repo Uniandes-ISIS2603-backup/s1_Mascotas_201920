@@ -20,12 +20,12 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  * @author Tomás Langebaek
  */
 @Entity
-public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
-    
+public class MascotaAdopcionEntity extends BaseEntity implements Serializable {
+
     /**
      * El número del enum especie del animal en adopcion.
      */
-    @PodamStrategyValue (EspecieEstrategy.class)
+    @PodamStrategyValue(EspecieEstrategy.class)
     private Integer especie;
     /**
      * La raza del animal en adopcion
@@ -43,15 +43,18 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
      * La historia de vida del animal en adopcion
      */
     private String historia;
-    
+
     @PodamExclude
     @OneToMany(mappedBy = "mascotaAdopcion")
     private List<ProcesoAdopcionEntity> procesos = new ArrayList<>();
-    
+
     @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
-    
+
+    @PodamExclude
+    @OneToMany(mappedBy = "mascotaAdopcion")
+    private List<MultimediaEntity> fotos = new ArrayList<>();
 
     /**
      * @return the especie
@@ -59,7 +62,6 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
     public Integer getEspecie() {
         return especie;
     }
-    
 
     /**
      * @param especie the especie to set
@@ -150,5 +152,19 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
      */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return the fotos
+     */
+    public List<MultimediaEntity> getFotos() {
+        return fotos;
+    }
+
+    /**
+     * @param fotos the fotos to set
+     */
+    public void setFotos(List<MultimediaEntity> fotos) {
+        this.fotos = fotos;
     }
 }
