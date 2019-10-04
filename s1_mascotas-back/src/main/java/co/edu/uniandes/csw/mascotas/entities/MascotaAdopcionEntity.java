@@ -44,13 +44,13 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
      */
     private String historia;
     
-//    @PodamExclude
-//    @OneToMany(mappedBy = "mascotaAdopcion")
-//    private List<ProcesoAdopcionEntity> procesos = new ArrayList<>();
-//    
-//    @PodamExclude
-//    @ManyToOne
-//    private UsuarioEntity usuario;
+    @PodamExclude
+    @OneToMany(mappedBy = "mascotaAdopcion")
+    private List<ProcesoAdopcionEntity> procesos = new ArrayList<>();
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
     
 
     /**
@@ -124,31 +124,31 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable{
         this.historia = historia;
     }
 
-//    /**
-//     * @return the procesos
-//     */
-//    public List<ProcesoAdopcionEntity> getProcesos() {
-//        return procesos;
-//    }
-//
-//    /**
-//     * @param procesos the procesos to set
-//     */
-//    public void setProcesos(List<ProcesoAdopcionEntity> procesos) {
-//        this.procesos = procesos;
-//    }
-//
-//    /**
-//     * @return the usuario
-//     */
-//    public UsuarioEntity getUsuario() {
-//        return usuario;
-//    }
-//
-//    /**
-//     * @param usuario the usuario to set
-//     */
-//    public void setUsuario(UsuarioEntity usuario) {
-//        this.usuario = usuario;
-//    }
+    /**
+     * @return the procesos
+     */
+    public List<ProcesoAdopcionEntity> getProcesos() {
+        return procesos;
+    }
+
+    /**
+     * @param procesos the procesos to set
+     */
+    public void setProcesos(List<ProcesoAdopcionEntity> procesos) {
+        this.procesos = procesos;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
 }
