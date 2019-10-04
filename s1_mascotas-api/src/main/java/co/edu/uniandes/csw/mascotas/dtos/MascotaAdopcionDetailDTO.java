@@ -18,9 +18,11 @@ import java.util.List;
 public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Serializable {
 
     private List<ProcesoAdopcionDTO> procesosAdopcion;
+    
+  // private List<MultimediaDTO> fotos;
 
     public MascotaAdopcionDetailDTO() {
-        super();
+        
     }
     
      public MascotaAdopcionDetailDTO(MascotaAdopcionEntity mascotaEntity) {
@@ -28,10 +30,17 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
         if (mascotaEntity != null) {
             if (mascotaEntity.getProcesos() != null) {
                 procesosAdopcion = new ArrayList<>();
-                for (ProcesoAdopcionEntity entityProceso : mascotaEntity.getProcesos()) {
-                   procesos.add(new ProcesoAdopcionDTO(entityProceso));
+                
+                for (ProcesoAdopcionEntity procesoEntity : mascotaEntity.getProcesos()) {
+                   procesosAdopcion.add(new ProcesoAdopcionDTO(procesoEntity));
                 }
             }
+           // if (mascotaEntity.getFotos() != null) {
+           //     fotos = new ArrayList<>();
+           //     for (MultimediaEntity fotoEntity : mascotaEntity.getFotos()) {
+           //        fotos.add(new MultimediaDTO(fotoEntity));
+           //     }
+           // }
         }
     }
 
@@ -46,10 +55,17 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
         if (procesosAdopcion != null) {
             List<ProcesoAdopcionEntity> procesosEntity = new ArrayList<>();
             for (ProcesoAdopcionDTO dtoProceso : procesosAdopcion) {
-         //       procesosEntity.add(dtoProceso.toEntity());
+                procesosEntity.add(dtoProceso.toEntity());
             }
             mascotaEntity.setProcesos(procesosEntity);
         }
+ //        if (getFotos() != null) {
+ //           List<MultimediaEntity> multimediaEntity = new ArrayList<>();
+ //           for (MultimediaDTO dtoFoto : getFotos()) {
+  //              multimediaEntity.add(dtoFoto.toEntity());
+   //         }
+    //        mascotaEntity.setFotos(multimediaEntity);
+    //    }
         return mascotaEntity;
     }
 
@@ -68,4 +84,18 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
     public void setProcesosAdopcion(List<ProcesoAdopcionDTO> procesosAdopcion) {
         this.procesosAdopcion = procesosAdopcion;
     }
+
+    /**
+     * @return the fotos
+     */
+   // public List<MultimediaDTO> getFotos() {
+   //     return fotos;
+   // }
+
+    /**
+     * @param fotos the fotos to set
+     */
+   // public void setFotos(List<MultimediaDTO> fotos) {
+   //     this.fotos = fotos;
+   // }
 }

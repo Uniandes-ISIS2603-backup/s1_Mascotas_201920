@@ -46,6 +46,7 @@ public class MascotaAdopcionPersistanceTest {
 
     @Before
     public void insertData() {
+        System.out.println(mascotaPersistance.findAll().size());
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             MascotaAdopcionEntity newMascota_AdopcionEntity = factory.manufacturePojo(MascotaAdopcionEntity.class);

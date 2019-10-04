@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.mascotas.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,6 +43,27 @@ public class UsuarioPersistence
     public UsuarioEntity find(Long usuarioID)
     {
         return em.find(UsuarioEntity.class, usuarioID);
+    }
+    
+    /**
+     * 
+     * @param usuarioID
+     * @return 
+     */
+    public LinkedList<UsuarioEntity> findByEmail(String email)
+    {
+        LinkedList<UsuarioEntity> listaFinal = new LinkedList<UsuarioEntity>();
+        List<UsuarioEntity> lista = findAll();
+        
+        Iterator<UsuarioEntity> it = lista.iterator();
+        while(it.hasNext())
+        {
+            UsuarioEntity usuarioIter = it.next();
+            if(usuarioIter.getCorreo().equals(email))
+                listaFinal.add(usuarioIter);
+        }
+        
+        return listaFinal;
     }
     
     /**
