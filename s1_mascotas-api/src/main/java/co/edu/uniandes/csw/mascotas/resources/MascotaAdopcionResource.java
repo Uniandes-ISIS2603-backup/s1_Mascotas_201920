@@ -10,7 +10,8 @@ import co.edu.uniandes.csw.mascotas.dtos.MascotaAdopcionDetailDTO;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -32,40 +33,66 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class MascotaAdopcionResource {
-    
-     private static final Logger LOGGER = Logger.getLogger(MascotaAdopcionResource.class.getName());
 
     @Inject
     private MascotaAdopcionLogic mascotaLogic;
-    
+
     @POST
-    public MascotaAdopcionDTO createMascotaAdopcion (MascotaAdopcionDTO mascotaDto) throws BusinessLogicException{
-        
+    public MascotaAdopcionDTO createMascotaAdopcion(MascotaAdopcionDTO mascotaDto) throws BusinessLogicException {
+
         MascotaAdopcionEntity mascotaEntity = mascotaDto.toEntity();
-        
+
         mascotaEntity = mascotaLogic.createMascotaAdopcion(mascotaEntity);
-                
+
         return new MascotaAdopcionDTO(mascotaEntity);
     }
-    
+
     @GET
-    @Path("{mascotasId: \\d+}")
-    public MascotaAdopcionDetailDTO getMascotaAdopcion(@PathParam("mascotasId") Long editorialsId) throws BusinessLogicException{
-        MascotaAdopcionEntity entidad = mascotaLogic.getMascotaAdopcion(editorialsId);
-        if(entidad == null){
-            throw new WebApplicationException("El recurso /mascotasadopcion/"+editorialsId+" no existe", 404);
+    @Path("{mascotasid: \\d+}")
+    public MascotaAdopcionDetailDTO getMascotaAdopcion(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
+        MascotaAdopcionEntity entidad = mascotaLogic.getMascotaAdopcion(mascotasId);
+        if (entidad == null) {
+            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe", 404);
         }
         return new MascotaAdopcionDetailDTO(entidad);
     }
+
+    @GET
+    public List<MascotaAdopcionDetailDTO> getMacotasAdopcion() throws BusinessLogicException {
+
+        List<MascotaAdopcionDetailDTO> listaMascotas = listEntity2DTO(mascotaLogic.getMascotasAdopcion());
+
+        return listaMascotas;
+    }
     
+ 
     @PUT
-    public MascotaAdopcionDTO updateMascotaAdopcion (MascotaAdopcionDTO mascotaDto){
-        return mascotaDto;
+     @Path("{mascotasid: \\d+}")
+    public MascotaAdopcionDTO updateMascotaAdopcion(@PathParam("mascotasid") Long mascotasId, MascotaAdopcionDTO mascota) throws BusinessLogicException {
+        mascota.setId(mascotasId);
+        if (mascotaLogic.getMascotaAdopcion(mascotasId) == null) {
+            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+        }
+        MascotaAdopcionDetailDTO detailDTO = new MascotaAdopcionDetailDTO(mascotaLogic.updateMascotaAdopcion(mascota.toEntity()));
+        return detailDTO;
     }
     
+
     @DELETE
-    public MascotaAdopcionDTO deleteMascotaAdopcion (MascotaAdopcionDTO mascotaDto){
-        return mascotaDto;
+    @Path("{mascotasid: \\d+}")
+    public void deleteMascotaAdopcion(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
+         if (mascotaLogic.getMascotaAdopcion(mascotasId) == null) {
+            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+        }
+        mascotaLogic.deleteMascotaAdopcion(mascotasId);
     }
-    
+
+    private List<MascotaAdopcionDetailDTO> listEntity2DTO(List<MascotaAdopcionEntity> entityList) {
+        List<MascotaAdopcionDetailDTO> list = new ArrayList<>();
+        for (MascotaAdopcionEntity entity : entityList) {
+            list.add(new MascotaAdopcionDetailDTO(entity));
+        }
+        return list;
+    }
+
 }
