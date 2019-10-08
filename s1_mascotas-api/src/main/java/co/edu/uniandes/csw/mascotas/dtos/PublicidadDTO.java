@@ -11,17 +11,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
-/**
- {
-	"mensaje":"s",
-    "diasPorSemana":7,
-    "costo":123.3,
-	"fechaInicio": "23091935",
-    "fechaFin": "23091935"
-}
- **/
-
 /**
  *
  * @author German Rozo
