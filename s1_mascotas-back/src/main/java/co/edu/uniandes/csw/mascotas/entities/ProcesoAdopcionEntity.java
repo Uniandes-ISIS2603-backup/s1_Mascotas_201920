@@ -29,7 +29,9 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne
     private MascotaAdopcionEntity mascotaAdopcion;
-
+    
+   
+    
     /**
      * @return the estado
      */

@@ -38,8 +38,8 @@ public class MascotaPerdidaPersistenceTest
     public static JavaArchive createDeployment()
     {
       return ShrinkWrap.create(JavaArchive.class)
-              .addClass(MascotaPerdidaEntity.class)
-              .addClass(MascotaPerdidaPersistence.class)
+              .addPackage(MascotaPerdidaEntity.class.getPackage())
+              .addPackage(MascotaPerdidaPersistence.class.getPackage())
               .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
               .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
