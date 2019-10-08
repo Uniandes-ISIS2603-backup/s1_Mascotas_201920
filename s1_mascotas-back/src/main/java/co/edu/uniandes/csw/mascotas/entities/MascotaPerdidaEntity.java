@@ -52,6 +52,15 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToMany(mappedBy = "mascotaPerdida")
     private List<MultimediaEntity> fotos = new ArrayList<>();
+
+    public List<MultimediaEntity> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<MultimediaEntity> fotos) {
+        this.fotos = fotos;
+    }
+    
     /**
      * @return the raza
      */

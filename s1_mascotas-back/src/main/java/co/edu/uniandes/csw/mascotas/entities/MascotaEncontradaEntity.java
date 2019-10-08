@@ -54,6 +54,15 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     @PodamStrategyValue (DateStrategy.class)
     private Date fechaEncontrada;
 
+    public List<MultimediaEntity> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<MultimediaEntity> fotos) {
+        this.fotos = fotos;
+    }
+
+    
     /**
      * @return the especie
      */
