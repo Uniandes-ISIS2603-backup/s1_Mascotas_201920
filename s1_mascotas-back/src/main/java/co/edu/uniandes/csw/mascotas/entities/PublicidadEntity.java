@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.entities;
 
 import co.edu.uniandes.csw.mascotas.podam.DateStrategy;
+import co.edu.uniandes.csw.mascotas.podam.PositiveIntegerStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -22,7 +23,11 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 public class PublicidadEntity extends BaseEntity implements Serializable
 {
     private String mensaje;
+    
+    @PodamStrategyValue(PositiveIntegerStrategy.class)
     private Integer diasPorSemana;
+    
+    @PodamStrategyValue(PositiveIntegerStrategy.class)
     private Integer costo;
     
     @Temporal(TemporalType.DATE)
