@@ -52,7 +52,7 @@ public class PublicidadResource
     {
         PublicidadEntity authorEntity = logic.findPublicidad(publicidadId);
         if (authorEntity == null) {
-            throw new WebApplicationException("El recurso /publicidad/" + publicidadId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /publicidades/" + publicidadId + " no existe.", 404);
         }
         PublicidadDTO detailDTO = new PublicidadDTO(authorEntity);
         return detailDTO;
@@ -75,7 +75,7 @@ public class PublicidadResource
    public void deletePublicidad(@PathParam("publicidadId") Long publicidadId) throws BusinessLogicException
    {
       if (logic.findPublicidad(publicidadId) == null) {
-            throw new WebApplicationException("El recurso /publicidad/" + publicidadId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /publicidades/" + publicidadId + " no existe.", 404);
         }
         logic.deletePublicidad(publicidadId);
    }
