@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -38,12 +39,16 @@ public class MascotaPerdidaResource {
     
     @POST
     public MascotaPerdidaDTO createMascotaPerdida (MascotaPerdidaDTO mascotaDto) throws BusinessLogicException{
+         LOGGER.log(Level.INFO, "MascotaEncontradaResource createMascotaPerdida: input(0)", mascotaDto);
         
         MascotaPerdidaEntity mascotaEntity = mascotaDto.toEntity();
         
         mascotaEntity = mascotaLogic.createMascotaPerdida(mascotaEntity);
-                
-        return new MascotaPerdidaDTO(mascotaEntity);
+        
+        MascotaPerdidaDTO nuevaMascota = new MascotaPerdidaDTO(mascotaEntity);
+        
+        LOGGER.log(Level.INFO, "MascotaEncontradaResource createMascotaEncontrada: output(0)", nuevaMascota);
+        return nuevaMascota;
     }
     
 //    @GET
