@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mascotas.podam;
 
+import java.util.Random;
 import uk.co.jemos.podam.common.AttributeStrategy;
 
 /**
@@ -13,10 +14,13 @@ import uk.co.jemos.podam.common.AttributeStrategy;
  */
 public class PositiveIntegerStrategy implements AttributeStrategy<Integer>
 {
-
+    Random random = new Random();
     @Override
     public Integer getValue() {
-        return new Integer((int)((Math.random()*10)%2)); 
+       Integer i = new Integer(random.nextInt()); 
+       while(i.equals(0))
+           i = new Integer(random.nextInt());
+       
+       return (i>0)? i: -i;
     }
-    
 }
