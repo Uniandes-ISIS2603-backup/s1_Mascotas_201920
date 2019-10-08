@@ -29,7 +29,31 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne
     private MascotaAdopcionEntity mascotaAdopcion;
+    
+    @PodamExclude
+    @ManyToOne
+    private MascotaEncontradaEntity mascotaEncontrada;
+    
+    @PodamExclude
+    @ManyToOne
+    private MascotaPerdidaEntity mascotaPerdida;
 
+    public MascotaEncontradaEntity getMascotaEncontrada() {
+        return mascotaEncontrada;
+    }
+
+    public void setMascotaEncontrada(MascotaEncontradaEntity mascotaEncontrada) {
+        this.mascotaEncontrada = mascotaEncontrada;
+    }
+
+    public MascotaPerdidaEntity getMascotaPerdida() {
+        return mascotaPerdida;
+    }
+
+    public void setMascotaPerdida(MascotaPerdidaEntity mascotaPerdida) {
+        this.mascotaPerdida = mascotaPerdida;
+    }
+    
     /**
      * @return the estado
      */

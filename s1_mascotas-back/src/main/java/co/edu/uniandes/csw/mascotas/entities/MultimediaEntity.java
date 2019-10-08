@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.mascotas.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -20,7 +22,9 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     private String nombre;
     
     private String tipo;
-
+    @PodamExclude
+    @ManyToOne
+    private MascotaAdopcionEntity mascotaAdopcion;
     /**
      * @return the url
      */
