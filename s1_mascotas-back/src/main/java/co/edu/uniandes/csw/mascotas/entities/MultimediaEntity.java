@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.mascotas.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -20,6 +22,10 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     private String nombre;
     
     private String tipo;
+    
+    @PodamExclude
+    @ManyToOne
+    private MascotaAdopcionEntity mascotaAdopcion;
 
     /**
      * @return the url
@@ -61,6 +67,20 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the mascota
+     */
+    public MascotaAdopcionEntity getMascota() {
+        return mascotaAdopcion;
+    }
+
+    /**
+     * @param mascota the mascota to set
+     */
+    public void setMascota(MascotaAdopcionEntity mascota) {
+        this.mascotaAdopcion = mascota;
     }
     
 }
