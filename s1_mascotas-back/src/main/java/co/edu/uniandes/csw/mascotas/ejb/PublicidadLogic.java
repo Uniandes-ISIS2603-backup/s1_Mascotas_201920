@@ -45,6 +45,8 @@ public class PublicidadLogic
         {
             throw new BusinessLogicException("El mensaje de la publicidad esta vacio");
         }
+        if(pe.getCosto()<=0)
+            throw new BusinessLogicException("El costo de la publicidad es menor o igual a 0");
         /**if(!pe.getFecchaFin().after(pe.getFechaInicio()))
         {
             throw new BusinessLogicException("La fecha inicial es posterior a la final");
