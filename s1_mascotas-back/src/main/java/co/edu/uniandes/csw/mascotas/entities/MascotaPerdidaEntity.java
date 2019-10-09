@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -28,6 +29,8 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     /**
      * Recompenza
      */
+    @PodamExclude
+    @OneToOne
     private RecompensaEntity recompenza;
     /**
      * Raza de la mascota perdida

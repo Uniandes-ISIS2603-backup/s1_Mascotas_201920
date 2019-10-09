@@ -127,7 +127,7 @@ public class MascotaPerdidaLogic
         List<MascotaPerdidaEntity> mascotas = pers.findAll();
 
         for (int i = 0; i < mascotas.size(); i++) {
-            //check(mascotas.get(i));
+            check(mascotas.get(i));
         }
 
         return mascotas;

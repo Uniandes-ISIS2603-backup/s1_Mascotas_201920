@@ -7,11 +7,34 @@
 	"item": [
 		{
 			"name": "crea mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c46a1be0-3618-472b-9262-8f501e835823",
+						"exec": [
+							"",
+							"tests [\"No genera error en el Get, responseCode received = \" + responseCode.code] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas"
+					]
 				}
 			},
 			"response": []
