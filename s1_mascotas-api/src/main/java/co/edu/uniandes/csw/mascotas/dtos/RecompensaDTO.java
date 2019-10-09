@@ -18,7 +18,7 @@ public class RecompensaDTO implements Serializable{
     private int monto;
     private Boolean pagado;
     
-//    private MascotaPerdidaDTO mascotaPerdida;
+    private MascotaPerdidaDTO mascotaPerdida;
     
     public RecompensaDTO(){
         
@@ -29,12 +29,12 @@ public class RecompensaDTO implements Serializable{
             this.id=recompensaEntity.getId();
             this.monto=recompensaEntity.getMonto();
             this.pagado=recompensaEntity.getPagado();
-//            if(recompensaEntity.getMascotaPerdida()!=null){
-//                this.mascotaPerdida=new MascotaPerdidaDTO(recompensaEntity.getMascotaPerdida());
-//            }
-//            else{
-//                this.mascotaPerdida=null;
-//            }
+            if(recompensaEntity.getMascotaPerdida()!=null){
+                this.mascotaPerdida=new MascotaPerdidaDTO(recompensaEntity.getMascotaPerdida());
+            }
+            else{
+                this.mascotaPerdida=null;
+            }
         }
     }
     
@@ -43,9 +43,9 @@ public class RecompensaDTO implements Serializable{
         recompensaEntity.setId(this.getId());
         recompensaEntity.setMonto(this.getMonto());
         recompensaEntity.setPagado(this.getPagado());
-//        if(this.getMascotaPerdida()!=null){
-//            recompensaEntity.setMascotaAdopcion(this.mascotaAdopcion().toEntity());
-//        }
+        if(this.getMascotaPerdida()!=null){
+            recompensaEntity.setMascotaPerdida(this.mascotaPerdida.toEntity());
+        }
         return recompensaEntity;
     }
 
@@ -89,6 +89,20 @@ public class RecompensaDTO implements Serializable{
      */
     public void setPagado(Boolean pagado) {
         this.pagado = pagado;
+    }
+
+    /**
+     * @return the mascotaPerdida
+     */
+    public MascotaPerdidaDTO getMascotaPerdida() {
+        return mascotaPerdida;
+    }
+
+    /**
+     * @param mascotaPerdida the mascotaPerdida to set
+     */
+    public void setMascotaPerdida(MascotaPerdidaDTO mascotaPerdida) {
+        this.mascotaPerdida = mascotaPerdida;
     }
     
 }
