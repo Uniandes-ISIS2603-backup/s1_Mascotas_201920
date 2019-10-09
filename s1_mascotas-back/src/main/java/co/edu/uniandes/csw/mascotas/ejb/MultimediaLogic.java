@@ -66,7 +66,7 @@ public class MultimediaLogic {
 
         List<MultimediaEntity> multimedia = persistence.findAll();
 
-        for (int i = 0; i > multimedia.size(); i++) {
+        for (int i = 0; i < multimedia.size(); i++) {
             check(multimedia.get(i));
         }
 

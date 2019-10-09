@@ -14,19 +14,31 @@ import java.util.Date;
  * @author lily 
  */
 public class MascotaPerdidaDTO implements Serializable{
+    
+    /**
+     * Recompenza
+     */
+    private RecompensaDTO recompenza;
+    /**
+     * Id de la mascota
+     */
+    private Long id;
+    
     /**
      * Raza de la mascota perdida
      */
     private String raza;
+    
     /**
      * La especie de la mascota perdida
      */
-    
     private Integer especie;
+    
     /**
      * La descripción de la mascota perdida
      */
     private String descripcion;
+    
     /**
      * El lugar donde se perdió la mascota
      */
@@ -53,6 +65,8 @@ public class MascotaPerdidaDTO implements Serializable{
         setRaza(entidad.getRaza());
         
         setLugar(entidad.getLugar());
+        
+        setRecompenza(new RecompensaDTO (entidad.getRecompenza()));
     }
 
     public MascotaPerdidaEntity toEntity() {
@@ -69,10 +83,35 @@ public class MascotaPerdidaDTO implements Serializable{
 
         entidad.setRaza(this.getRaza());
         
+        entidad.setRecompenza(this.getRecompenza().toEntity());
+        
         return entidad;
 
     }
 
+    public RecompensaDTO getRecompenza() {
+        return recompenza;
+    }
+
+    public void setRecompenza(RecompensaDTO recompenza) {
+        this.recompenza = recompenza;
+    }
+    
+    /**
+     * 
+     * @return ID
+     */
+    public Long getId() {
+        return id;
+    }
+    /**
+     * 
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
 
     /**
      * @return the raza

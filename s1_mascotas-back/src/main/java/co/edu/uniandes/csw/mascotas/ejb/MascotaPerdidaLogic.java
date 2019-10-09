@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mascotas.ejb;
 
 
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
+import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
 import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
@@ -32,35 +33,7 @@ public class MascotaPerdidaLogic
      */
     public MascotaPerdidaEntity createMascotaPerdida ( MascotaPerdidaEntity masc) throws BusinessLogicException
     {
-        //Reglas de negocio de especie
-        if (masc.getEspecie()==null)
-            throw new BusinessLogicException ("La mascota no tiene especie."); 
-        boolean flag= false;
-        for (int i=0; i< TipoEspecies.values().length;i++) {
-            if (Integer.compare(masc.getEspecie(), i) == 0) {
-                flag = true;
-            }
-        }
-        if (!flag)
-            throw new BusinessLogicException ("La mascota no es un gato, ni un perro."); 
-        
-        //Reglas de negocio de raza
-        if (masc.getRaza()==null)
-            throw new BusinessLogicException ("La mascota no tiene raza.");
-        if (masc.getRaza().equals(""))
-            throw new BusinessLogicException ("La mascota no tiene raza.");
-        
-        //Reglas de negocio de la descripción
-        if (masc.getDescripcion()==null)
-            throw new BusinessLogicException ("La mascota no tiene descripción.");
-        if (masc.getDescripcion().equals(""))
-            throw new BusinessLogicException ("La mascota no tiene descripción.");
-        
-        //Reglas de negocio de lugar
-        if (masc.getLugar()==null)
-            throw new BusinessLogicException ("La mascota no tiene lugar.");
-        if (masc.getLugar().equals(""))
-            throw new BusinessLogicException ("La mascota no tiene lugar.");
+        check(masc);
         
         
         masc = pers.create(masc);
@@ -73,6 +46,20 @@ public class MascotaPerdidaLogic
      * @throws BusinessLogicException Si no cumple alguna regla de negocio 
      */
     public MascotaPerdidaEntity updateMascotaPerdida(MascotaPerdidaEntity masc) throws BusinessLogicException
+    {
+        
+        check (masc);
+        
+        masc= pers.update(masc);
+        return masc;
+    }
+    
+    /**
+     * Revisa todas las reglas de negocio de una mascota.
+     * @param masc mascota que se va a verificar
+     * @throws BusinessLogicException Si no cumple alguna regla de negocio 
+     */
+    public void check (MascotaPerdidaEntity masc) throws BusinessLogicException
     {
         
        //Reglas de negocio de especie
@@ -105,8 +92,6 @@ public class MascotaPerdidaLogic
         if (masc.getLugar().equals(""))
             throw new BusinessLogicException ("La mascota no tiene lugar.");
         
-        masc= pers.update(masc);
-        return masc;
     }
     /**
      * 
@@ -135,6 +120,25 @@ public class MascotaPerdidaLogic
     public void deleteMascotaPerdida(Long id) throws BusinessLogicException
     {
         pers.delete(id);
+    }
+    
+    public List<MascotaPerdidaEntity> getMascotasPerdida() throws BusinessLogicException {
+
+        List<MascotaPerdidaEntity> mascotas = pers.findAll();
+
+        for (int i = 0; i < mascotas.size(); i++) {
+            //check(mascotas.get(i));
+        }
+
+        return mascotas;
+    }
+
+    public MascotaPerdidaEntity getMascotaPerdida(Long mascotaID) throws BusinessLogicException {
+
+        MascotaPerdidaEntity mascota = pers.find(mascotaID);
+        check(mascota);
+
+        return mascota;
     }
 }   
 

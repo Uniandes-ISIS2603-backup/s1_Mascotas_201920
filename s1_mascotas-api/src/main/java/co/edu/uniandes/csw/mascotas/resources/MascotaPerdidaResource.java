@@ -6,9 +6,12 @@
 package co.edu.uniandes.csw.mascotas.resources;
 
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
+import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -51,18 +54,51 @@ public class MascotaPerdidaResource {
         return nuevaMascota;
     }
     
-//    @GET
-//    public MascotaPerdidaDTO getMascotaPerdida(@PathParam("mascotasId") Long editorialsId) throws BusinessLogicException{
-//        
-//    }
-//    
-//    @PUT
-//    public MascotaPerdidaDTO updateMascotaPerdida (MascotaPerdidaDTO mascotaDto){
-//        return mascotaDto;
-//    }
-//    
-//    @DELETE
-//    public MascotaPerdidaDTO deleteMascotaPerdida (MascotaPerdidaDTO mascotaDto){
-//        return mascotaDto;
-//    }
+    @GET
+    @Path("{mascotasid: \\d+}")
+    public MascotaPerdidaDetailDTO getMascotaPerdida(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
+        MascotaPerdidaEntity entidad = mascotaLogic.getMascotaPerdida(mascotasId);
+        if (entidad == null) {
+            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe", 404);
+        }
+        return new MascotaPerdidaDetailDTO(entidad);
+    }
+
+    @GET
+    public List<MascotaPerdidaDetailDTO> getMacotasPerdida() throws BusinessLogicException {
+        
+       List<MascotaPerdidaDetailDTO> listaMascotas = listEntity2DTO(mascotaLogic.getMascotasPerdida());
+        
+        return listaMascotas;
+    }
+    
+ 
+    @PUT
+     @Path("{mascotasid: \\d+}")
+    public MascotaPerdidaDTO updateMascotaPerdida(@PathParam("mascotasid") Long mascotasId, MascotaPerdidaDTO mascota) throws BusinessLogicException {
+        mascota.setId(mascotasId);
+        if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
+            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+        }
+        MascotaPerdidaDetailDTO detailDTO = new MascotaPerdidaDetailDTO(mascotaLogic.updateMascotaPerdida(mascota.toEntity()));
+        return detailDTO;
+    }
+    
+
+    @DELETE
+    @Path("{mascotasid: \\d+}")
+    public void deleteMascotaPerdida(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
+         if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
+            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+        }
+        mascotaLogic.deleteMascotaPerdida(mascotasId);
+    }
+
+    private List<MascotaPerdidaDetailDTO> listEntity2DTO(List<MascotaPerdidaEntity> entityList) {
+        List<MascotaPerdidaDetailDTO> list = new ArrayList<>();
+        for (MascotaPerdidaEntity entity : entityList) {
+            list.add(new MascotaPerdidaDetailDTO(entity));
+        }
+        return list;
+    }
 }

@@ -77,7 +77,7 @@ public class MascotaAdopcionLogic {
 
         List<MascotaAdopcionEntity> mascotas = persistence.findAll();
 
-        for (int i = 0; i > mascotas.size(); i++) {
+        for (int i = 0; i < mascotas.size(); i++) {
             check(mascotas.get(i));
         }
 
