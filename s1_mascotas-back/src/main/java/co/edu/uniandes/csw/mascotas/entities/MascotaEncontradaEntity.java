@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,6 +47,10 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @OneToMany(mappedBy = "mascotaEncontrada")
     private List<MultimediaEntity> fotos = new ArrayList<>();
+    
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
     
     /**
      * Variable que modela la fecha cuando se encontro la mascota
@@ -131,6 +136,20 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
      */
     public void setFechaEncontrada(Date fechaEncontrada) {
         this.fechaEncontrada = fechaEncontrada;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
     }
     
 }

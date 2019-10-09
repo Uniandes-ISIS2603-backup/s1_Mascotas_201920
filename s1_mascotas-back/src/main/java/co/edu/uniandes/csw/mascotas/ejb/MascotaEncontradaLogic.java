@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mascotas.ejb;
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -53,6 +54,50 @@ public class MascotaEncontradaLogic {
         
         pMascota = persistence.create(pMascota);
         return pMascota;
+    }
+    
+    public MascotaEncontradaEntity updateMascotaEncontrada(MascotaEncontradaEntity pMascota) throws BusinessLogicException
+    {
+        if(pMascota.getDescripcion()==null)
+        {
+            throw new BusinessLogicException("La descripcion de la mascota no existe.");
+        }
+        if(pMascota.getEspecie()==null)
+        {
+            throw new BusinessLogicException ("La especie de la mascota no existe."); 
+        }
+        boolean flag= false;
+        for (especies value : especies.values()) {
+            if (value.name().equals(pMascota.getEspecie())) {
+                flag = true;
+            }
+        }
+        if (!flag)
+            throw new BusinessLogicException ("La mascota no es un gato, ni un perro.");
+        if (pMascota.getRaza()==null || pMascota.getRaza().equals(""))
+            throw new BusinessLogicException ("La raza de la mascota no existe.");
+        if (pMascota.getLugar()==null||pMascota.getLugar().equals(""))
+            throw new BusinessLogicException ("El lugar de la mascota encontrada no existe.");
+        if (pMascota.getFechaEncontrada()==null)
+            throw new BusinessLogicException ("La fecha de encuentro de la mascota encontrada no existe.");
+        
+        pMascota = persistence.update(pMascota);
+        return pMascota;
+    }
+    
+    public MascotaEncontradaEntity findMascotaEncontrada(Long id)
+    {
+        return persistence.find(id);
+    }
+    
+    public List<MascotaEncontradaEntity> findAllMascotaEncontrada()
+    {
+        return persistence.findAll();
+    }
+    
+    public void deleteMascotaEncontrada(Long id) throws BusinessLogicException
+    {
+        persistence.delete(id);
     }
     
 }

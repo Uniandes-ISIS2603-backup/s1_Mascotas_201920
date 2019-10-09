@@ -25,6 +25,8 @@ public class MascotaEncontradaDTO implements Serializable{
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaEncontrada;
     
+    private UsuarioDTO usuario;
+    
     public MascotaEncontradaDTO()
     {
         
@@ -40,6 +42,11 @@ public class MascotaEncontradaDTO implements Serializable{
             this.id = entity.getId();
             this.raza = entity.getRaza();
             this.lugar = entity.getLugar();
+            if (entity.getUsuario() != null) {
+                this.usuario = new UsuarioDTO(entity.getUsuario());
+            } else {
+                this.usuario = null;
+            }
         }
     }
     
@@ -52,6 +59,8 @@ public class MascotaEncontradaDTO implements Serializable{
         mee.setId(id);
         mee.setLugar(lugar);
         mee.setRaza(raza);
+        if(this.usuario != null)
+            mee.setUsuario(usuario.toEntity());
         return mee;
     }
 
