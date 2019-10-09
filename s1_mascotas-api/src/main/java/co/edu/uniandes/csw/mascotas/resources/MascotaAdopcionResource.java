@@ -43,8 +43,10 @@ public class MascotaAdopcionResource {
         MascotaAdopcionEntity mascotaEntity = mascotaDto.toEntity();
 
         mascotaEntity = mascotaLogic.createMascotaAdopcion(mascotaEntity);
+        
+        MascotaAdopcionDTO nuevaMascota = new MascotaAdopcionDTO(mascotaEntity);
 
-        return new MascotaAdopcionDTO(mascotaEntity);
+        return nuevaMascota;
     }
 
     @GET
@@ -54,7 +56,8 @@ public class MascotaAdopcionResource {
         if (entidad == null) {
             throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe", 404);
         }
-        return new MascotaAdopcionDetailDTO(entidad);
+         MascotaAdopcionDetailDTO detailDTO = new MascotaAdopcionDetailDTO(entidad);
+        return detailDTO;
     }
 
     @GET

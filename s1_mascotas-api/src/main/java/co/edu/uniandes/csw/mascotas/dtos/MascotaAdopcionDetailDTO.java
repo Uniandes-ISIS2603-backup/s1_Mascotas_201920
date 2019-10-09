@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.dtos;
 
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
+import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
 
     private List<ProcesoAdopcionDTO> procesosAdopcion;
     
-  // private List<MultimediaDTO> fotos;
+   private List<MultimediaDTO> fotos;
 
     public MascotaAdopcionDetailDTO() {
         
@@ -35,12 +36,12 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
                    procesosAdopcion.add(new ProcesoAdopcionDTO(procesoEntity));
                 }
             }
-           // if (mascotaEntity.getFotos() != null) {
-           //     fotos = new ArrayList<>();
-           //     for (MultimediaEntity fotoEntity : mascotaEntity.getFotos()) {
-           //        fotos.add(new MultimediaDTO(fotoEntity));
-           //     }
-           // }
+            if (mascotaEntity.getFotos() != null) {
+                fotos = new ArrayList<>();
+                for (MultimediaEntity fotoEntity : mascotaEntity.getFotos()) {
+                   fotos.add(new MultimediaDTO(fotoEntity));
+                }
+            }
         }
     }
 
@@ -59,13 +60,13 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
             }
             mascotaEntity.setProcesos(procesosEntity);
         }
- //        if (getFotos() != null) {
- //           List<MultimediaEntity> multimediaEntity = new ArrayList<>();
- //           for (MultimediaDTO dtoFoto : getFotos()) {
-  //              multimediaEntity.add(dtoFoto.toEntity());
-   //         }
-    //        mascotaEntity.setFotos(multimediaEntity);
-    //    }
+         if (getFotos() != null) {
+            List<MultimediaEntity> multimediaEntity = new ArrayList<>();
+            for (MultimediaDTO dtoFoto : getFotos()) {
+                multimediaEntity.add(dtoFoto.toEntity());
+            }
+            mascotaEntity.setFotos(multimediaEntity);
+        }
         return mascotaEntity;
     }
 
@@ -88,14 +89,14 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
     /**
      * @return the fotos
      */
-   // public List<MultimediaDTO> getFotos() {
-   //     return fotos;
-   // }
+    public List<MultimediaDTO> getFotos() {
+        return fotos;
+    }
 
     /**
      * @param fotos the fotos to set
      */
-   // public void setFotos(List<MultimediaDTO> fotos) {
-   //     this.fotos = fotos;
-   // }
+    public void setFotos(List<MultimediaDTO> fotos) {
+        this.fotos = fotos;
+    }
 }
