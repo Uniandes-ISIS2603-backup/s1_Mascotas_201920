@@ -21,7 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
- *
+ * Clase que representa una mascota perdida en la persistencia y permite su serialización
  * @author Lily Duque
  */
 @Entity
@@ -186,20 +186,28 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     
     /**
      * 
-     * @return 
+     * @return videos
      */
     public List<MultimediaEntity> getVideos() {
         return videos;
     }
-
+    /**
+     * 
+     * @param videos para agregar 
+     */
     public void setVideos(List<MultimediaEntity> videos) {
         this.videos = videos;
     }
-
+    /**
+     * @return el usuario propietario de la mascota
+     */
     public UsuarioEntity getUsuario() {
         return usuario;
     }
-
+    /**
+     * 
+     * @param usuario Modifica el usuario dueño de la mascota
+     */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
