@@ -19,7 +19,7 @@ public class ProcesoAdopcionDTO implements Serializable{
     private String comentario;
     private int calificacion;
     
-//    private UsuarioDTO usuario;
+    private UsuarioDTO usuario;
     private MascotaAdopcionDTO mascotaAdopcion;
     
     public ProcesoAdopcionDTO(){
@@ -37,12 +37,12 @@ public class ProcesoAdopcionDTO implements Serializable{
             else{
                 this.mascotaAdopcion=null;
             }
-//            if(procesoAdopcionEntity.getUsuario()!=null){
-//                this.usuario=new UsuarioDTO(procesoAdopcionEntity.getUsuario());
-//            }
-//            else{
-//                this.usuario=null;
-//            }
+            if(procesoAdopcionEntity.getUsuario()!=null){
+                this.usuario=new UsuarioDTO(procesoAdopcionEntity.getUsuario());
+            }
+            else{
+                this.usuario=null;
+            }
         }
     }
     
@@ -55,9 +55,9 @@ public class ProcesoAdopcionDTO implements Serializable{
         if(this.getMascotaAdopcion()!=null){
             procesoAdopcionEntity.setMascotaAdopcion(this.getMascotaAdopcion().toEntity());
         }
-//        if(this.usuario!=null){
-//            procesoAdopcionEntity.setUsuario(this.usuario.toEntity());
-//        }
+        if(this.usuario!=null){
+            procesoAdopcionEntity.setUsuario(this.usuario.toEntity());
+        }
         return procesoAdopcionEntity;
     }
 
