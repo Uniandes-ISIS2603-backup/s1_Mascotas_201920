@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mascotas.ejb;
-import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MultimediaPersistence;
@@ -22,6 +21,11 @@ public class MultimediaLogic {
     
     @Inject
     private MultimediaPersistence persistence;
+    /**
+     * Método para revisar la lógica de los atributos de la entidad MultimediaEntity
+     * @param multimedia es la entidad a checkear
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
     
      public void check(MultimediaEntity multimedia) throws BusinessLogicException {
 
@@ -45,7 +49,12 @@ public class MultimediaLogic {
         }
 
     }
-
+     /**
+      * Verifica las reglas de negocio al crear una multimedia
+      * @param multimedia es la multimedia a revisar
+      * @return La entidad revisada
+      * @throws BusinessLogicException  si se incumplen reglas de negocio
+      */
     public MultimediaEntity createMultimedia(MultimediaEntity multimedia) throws BusinessLogicException {
 
         check(multimedia);
@@ -53,7 +62,12 @@ public class MultimediaLogic {
         multimedia = persistence.create(multimedia);
         return multimedia;
     }
-
+      /**
+      * Verifica las reglas de negocio al actualizar una multimedia
+      * @param multimedia es la multimedia a revisar
+      * @return La entidad revisada
+      * @throws BusinessLogicException  si se incumplen reglas de negocio
+      */
     public MultimediaEntity updateMultimedia(MultimediaEntity multimedia) throws BusinessLogicException {
 
         check(multimedia);
@@ -61,7 +75,11 @@ public class MultimediaLogic {
         return persistence.update(multimedia);
 
     }
-
+      /**
+      * Verifica las reglas de negocio al buscar todas las multimedia
+      * @return Las entidades revisadas
+      * @throws BusinessLogicException  si se incumplen reglas de negocio
+      */
     public List<MultimediaEntity> getMultimedias() throws BusinessLogicException {
 
         List<MultimediaEntity> multimedia = persistence.findAll();
@@ -72,7 +90,12 @@ public class MultimediaLogic {
 
         return multimedia;
     }
-
+      /**
+      * Verifica las reglas de negocio buscar una multimedia
+      * @param multimediaID es el id de la multimedia a buscar
+      * @return La entidad revisada, al traerla
+      * @throws BusinessLogicException  si se incumplen reglas de negocio
+      */
     public MultimediaEntity getMultimedia(Long multimediaID) throws BusinessLogicException {
 
         MultimediaEntity multimedia = persistence.find(multimediaID);
@@ -80,7 +103,11 @@ public class MultimediaLogic {
 
         return multimedia;
     }
-
+      /**
+      * Verifica las reglas de negocio alborraruna multimedia
+      * @param multimediaID es el id de la multimedia a borrar
+      * @throws BusinessLogicException  si se incumplen reglas de negocio
+      */
     public void deleteMultimedia(Long multimediaID) throws BusinessLogicException {
 
         MultimediaEntity mascota = persistence.find(multimediaID);
