@@ -21,6 +21,8 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
     private List<ProcesoAdopcionDTO> procesosAdopcion;
     
    private List<MultimediaDTO> fotos;
+   
+    private List<MultimediaDTO> videos;
 
     public MascotaAdopcionDetailDTO() {
         
@@ -40,6 +42,12 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
                 fotos = new ArrayList<>();
                 for (MultimediaEntity fotoEntity : mascotaEntity.getFotos()) {
                    fotos.add(new MultimediaDTO(fotoEntity));
+                }
+            }
+            if (mascotaEntity.getVideos() != null) {
+                fotos = new ArrayList<>();
+                for (MultimediaEntity videoEntity : mascotaEntity.getVideos()) {
+                   fotos.add(new MultimediaDTO(videoEntity));
                 }
             }
         }
@@ -66,6 +74,13 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
                 multimediaEntity.add(dtoFoto.toEntity());
             }
             mascotaEntity.setFotos(multimediaEntity);
+        }
+         if (getVideos() != null) {
+            List<MultimediaEntity> multimediaEntity = new ArrayList<>();
+            for (MultimediaDTO detVideo : getVideos()) {
+                multimediaEntity.add(detVideo.toEntity());
+            }
+            mascotaEntity.setVideos(multimediaEntity);
         }
         return mascotaEntity;
     }
@@ -98,5 +113,19 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
      */
     public void setFotos(List<MultimediaDTO> fotos) {
         this.fotos = fotos;
+    }
+
+    /**
+     * @return the videos
+     */
+    public List<MultimediaDTO> getVideos() {
+        return videos;
+    }
+
+    /**
+     * @param videos the videos to set
+     */
+    public void setVideos(List<MultimediaDTO> videos) {
+        this.videos = videos;
     }
 }

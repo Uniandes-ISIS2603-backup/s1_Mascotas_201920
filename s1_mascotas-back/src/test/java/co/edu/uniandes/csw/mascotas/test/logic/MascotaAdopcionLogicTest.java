@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
+import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
 import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
@@ -65,6 +66,8 @@ public class MascotaAdopcionLogicTest {
         Assert.assertEquals(entidad2.getRaza(), resultado.getRaza());
         Assert.assertEquals(entidad2.getEspecie(), resultado.getEspecie());
         Assert.assertEquals(entidad2.getDescripcion(), resultado.getDescripcion());
+   
+        
 
     }
     
@@ -156,6 +159,7 @@ public class MascotaAdopcionLogicTest {
         Assert.assertEquals(entidad2.getRaza(), entidad3.getRaza());
         Assert.assertEquals(entidad2.getEspecie(), entidad3.getEspecie());
         Assert.assertEquals(entidad2.getDescripcion(), entidad3.getDescripcion());
+    
 
     }
     
@@ -197,6 +201,7 @@ public class MascotaAdopcionLogicTest {
         Assert.assertEquals(entity.getRaza(), resultEntity.getRaza());
         Assert.assertEquals(entity.getEspecie(), resultEntity.getEspecie());
         Assert.assertEquals(entity.getDescripcion(), resultEntity.getDescripcion());
+     
     }
     
     @Test
