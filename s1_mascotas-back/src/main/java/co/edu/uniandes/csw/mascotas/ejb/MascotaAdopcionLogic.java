@@ -21,7 +21,11 @@ public class MascotaAdopcionLogic {
 
     @Inject
     private MascotaAdopcionPersistance persistence;
-
+    /**
+     * Método para revisar los parámetros necesarios
+     * @param mascota
+     * @throws BusinessLogicException 
+     */
     public void check(MascotaAdopcionEntity mascota) throws BusinessLogicException {
 
         if (mascota.getLugar() == null) {
@@ -57,6 +61,12 @@ public class MascotaAdopcionLogic {
 
     }
 
+    /**
+     * 
+     * @param mascota
+     * @return La entidad revisada en el create
+     * @throws BusinessLogicException cuando se incumple una regla de negocio.
+     */
     public MascotaAdopcionEntity createMascotaAdopcion(MascotaAdopcionEntity mascota) throws BusinessLogicException {
 
         check(mascota);
@@ -64,7 +74,12 @@ public class MascotaAdopcionLogic {
         mascota = persistence.create(mascota);
         return mascota;
     }
-
+     /**
+     * 
+     * @param mascota
+     * @return La entidad revisada en el update
+     * @throws BusinessLogicException cuando se incumple una regla de negocio.
+     */
     public MascotaAdopcionEntity updateMascotaAdopcion(MascotaAdopcionEntity mascota) throws BusinessLogicException {
 
         check(mascota);
@@ -72,7 +87,11 @@ public class MascotaAdopcionLogic {
         return persistence.update(mascota);
 
     }
-
+     /**
+     * 
+     * @return Las entidades revisadas en el get all
+     * @throws BusinessLogicException cuando se incumple una regla de negocio.
+     */
     public List<MascotaAdopcionEntity> getMascotasAdopcion() throws BusinessLogicException {
 
         List<MascotaAdopcionEntity> mascotas = persistence.findAll();
@@ -83,7 +102,12 @@ public class MascotaAdopcionLogic {
 
         return mascotas;
     }
-
+     /**
+     * 
+     * @param mascotaID es el ID de la mascota a buscar
+     * @return La entidad revisada en el get.
+     * @throws BusinessLogicException cuando se incumple una regla de negocio.
+     */
     public MascotaAdopcionEntity getMascotaAdopcion(Long mascotaID) throws BusinessLogicException {
 
         MascotaAdopcionEntity mascota = persistence.find(mascotaID);
@@ -91,7 +115,11 @@ public class MascotaAdopcionLogic {
 
         return mascota;
     }
-
+     /**
+     * 
+     * @param mascotaID es el ID de la mascota a borrar
+     * @throws BusinessLogicException cuando se incumple una regla de negocio.
+     */
     public void deleteMascotaAdopcion(Long mascotaID) throws BusinessLogicException {
 
         MascotaAdopcionEntity mascota = persistence.find(mascotaID);

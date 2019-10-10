@@ -43,21 +43,29 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable {
      * La historia de vida del animal en adopcion
      */
     private String historia;
-
+    /**
+     * Los procesos de adopcion del animal
+     */
     @PodamExclude
     @OneToMany(mappedBy = "mascotaAdopcion")
     private List<ProcesoAdopcionEntity> procesos = new ArrayList<>();
-
+    /**
+     * El uruario asociado a la mascota
+     */
     @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
-
+    /**
+     * Las fotos de la mascota
+     */
     @PodamExclude
     @OneToMany(mappedBy = "mascotaAdopcion")
     private List<MultimediaEntity> fotos = new ArrayList<>();
-
+    /**
+     * Los videos de la mascota
+     */
     @PodamExclude
-    @ManyToOne
+    @OneToMany(mappedBy = "mascotaAdopcion")
     private List<MultimediaEntity> videos = new ArrayList<>();
 
     /**

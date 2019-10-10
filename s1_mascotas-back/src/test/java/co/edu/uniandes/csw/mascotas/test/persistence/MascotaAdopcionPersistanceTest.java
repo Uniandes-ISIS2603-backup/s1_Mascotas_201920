@@ -29,7 +29,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class MascotaAdopcionPersistanceTest {
-
+    /**
+     * Arreglo datos a testear
+     */
     List<MascotaAdopcionEntity> data = new ArrayList();
     @Inject
     private MascotaAdopcionPersistance mascotaPersistance;
@@ -43,7 +45,9 @@ public class MascotaAdopcionPersistanceTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-
+    /**
+     * Método para poblar los datos
+     */
     @Before
     public void insertData() {
         System.out.println(mascotaPersistance.findAll().size());
@@ -54,7 +58,9 @@ public class MascotaAdopcionPersistanceTest {
             data.add(newMascota_AdopcionEntity);
         }
     }
-
+    /**
+     * Test buscar todas la mascotas
+     */
     @Test
     public void findAllMascotaTest() {
 
@@ -73,7 +79,9 @@ public class MascotaAdopcionPersistanceTest {
             Assert.assertTrue(found);
         }
     }
-
+    /**
+     * Test crear una nueva mascota
+     */
     @Test
     public void createMascotaTest() {
 
@@ -99,7 +107,9 @@ public class MascotaAdopcionPersistanceTest {
         Assert.assertEquals(newMascota_AdopcionEntity.getRaza(), entity.getRaza());
         //
     }
-
+    /**
+     * Test buscar una mascota específica
+     */
     @Test
     public void findMascotaTest() {
 
@@ -111,7 +121,9 @@ public class MascotaAdopcionPersistanceTest {
 
         Assert.assertEquals(entity.getLugar(), newEntity.getLugar());
     }
-
+    /**
+     * Test borra una mascota 
+     */
     @Test
     public void deleteMascotaTest() {
 
@@ -123,7 +135,9 @@ public class MascotaAdopcionPersistanceTest {
 
         Assert.assertNull(deleted);
     }
-
+    /**
+     * Test actualizar una mascota
+     */
     @Test
     public void updateMascotaTest() {
         

@@ -41,19 +41,29 @@ public class MascotaAdopcionPersistance {
 
         return em.find(MascotaAdopcionEntity.class, mascotaID);
     }
-
+    /**
+     * Busca todas las macotas
+     * @return las mactotas
+     */
     public List<MascotaAdopcionEntity> findAll() {
         TypedQuery<MascotaAdopcionEntity> query = em.createQuery("select u from MascotaAdopcionEntity u", MascotaAdopcionEntity.class);
         return query.getResultList();
     }
-
+    /**
+     * Actualiza la mascota
+     * @param mascota Mascota a actualizar
+     * @return La mascota actualizada
+     */
     public MascotaAdopcionEntity update(MascotaAdopcionEntity mascota) {
         
         em.merge(mascota);
         
         return em.find(MascotaAdopcionEntity.class, mascota.getId());
     }
-
+    /**
+     * Borra la mascota
+     * @param mascotaID es el ID de la mascota a borrar
+     */
     public void delete(Long mascotaID) {
 
         MascotaAdopcionEntity mascota = em.find(MascotaAdopcionEntity.class, mascotaID);
