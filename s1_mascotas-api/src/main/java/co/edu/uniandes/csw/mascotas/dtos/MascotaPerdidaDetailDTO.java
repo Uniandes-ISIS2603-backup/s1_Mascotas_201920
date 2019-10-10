@@ -32,9 +32,9 @@ public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Seria
                 }
             }
             if (mascotaEntity.getVideos() != null) {
-                fotos = new ArrayList<>();
+                videos = new ArrayList<>();
                 for (MultimediaEntity videoEntity : mascotaEntity.getVideos()) {
-                   fotos.add(new MultimediaDTO(videoEntity));
+                   videos.add(new MultimediaDTO(videoEntity));
                 }
             }
         }
@@ -56,6 +56,14 @@ public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Seria
             }
             mascotaEntity.setFotos(multimediaEntity);
         }
+         
+         if (getVideos() != null) {
+            List<MultimediaEntity> multimediaEntity = new ArrayList<>();
+            for (MultimediaDTO detVideo : getVideos()) {
+                multimediaEntity.add(detVideo.toEntity());
+            }
+            mascotaEntity.setVideos(multimediaEntity);
+        }
         return mascotaEntity;
     }
     /**
@@ -71,4 +79,22 @@ public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Seria
     public void setFotos(List<MultimediaDTO> fotos) {
         this.fotos = fotos;
     }
+    
+    /**
+     * 
+     * @return los videos
+     */
+    public List<MultimediaDTO> getVideos() {
+        return videos;
+    }
+    
+    /**
+     * 
+     * @param videos Una lista de arreglos
+     */
+    public void setVideos(List<MultimediaDTO> videos) {
+        this.videos = videos;
+    }
+    
+    
 }

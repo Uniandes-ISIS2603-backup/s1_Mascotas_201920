@@ -50,6 +50,9 @@ public class MascotaPerdidaDTO implements Serializable{
     private Date fechaPerdida;
     
     
+    private UsuarioDTO usuario;
+    
+    
     public MascotaPerdidaDTO() {
 
     }
@@ -67,10 +70,16 @@ public class MascotaPerdidaDTO implements Serializable{
         setLugar(entidad.getLugar());
         
         if (entidad.getRecompensa() != null) {
-                setRecompensa(new RecompensaDTO (entidad.getRecompensa()));
-            } else {
-                setRecompensa(null);
-            }
+            setRecompensa(new RecompensaDTO (entidad.getRecompensa()));
+        } else {
+            setRecompensa(null);
+        }
+        
+        if (entidad.getUsuario() != null) {
+            setUsuario(new UsuarioDTO (entidad.getUsuario()));
+        } else {
+            setUsuario(null);
+        }
         setId(entidad.getId());
         
     }
@@ -91,6 +100,9 @@ public class MascotaPerdidaDTO implements Serializable{
         
         if (this.recompensa != null)
             entidad.setRecompensa(this.getRecompensa().toEntity());
+        
+        if (this.usuario != null)
+            entidad.setUsuario(this.getUsuario().toEntity());
         
         entidad.setId(this.getId());
         
@@ -191,5 +203,14 @@ public class MascotaPerdidaDTO implements Serializable{
     public void setFechaPerdida(Date fechaPerdida) {
         this.fechaPerdida = fechaPerdida;
     }
+
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+    
     
 }

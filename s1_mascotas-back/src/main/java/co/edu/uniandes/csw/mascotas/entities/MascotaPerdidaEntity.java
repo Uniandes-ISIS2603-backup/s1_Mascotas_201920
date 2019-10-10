@@ -28,7 +28,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 public class MascotaPerdidaEntity extends BaseEntity implements Serializable
 {
      /**
-     * El uruario asociado a la mascota
+     * El usuario asociado a la mascota
      */
     @PodamExclude
     @ManyToOne
@@ -61,11 +61,12 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     private String lugar;
     
-    @Temporal(TemporalType.DATE)
-    @PodamStrategyValue (DateStrategy.class)
+    
     /**
      * La fecha en la que se perdió la mascota
      */
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue (DateStrategy.class)
     private Date fechaPerdida;
     
     /**
@@ -82,20 +83,33 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     @OneToMany(mappedBy = "mascotaPerdida2")
     private List<MultimediaEntity> videos = new ArrayList<>();
     
-    
+    /**
+     * 
+     * @return recompensa
+     */
     public RecompensaEntity getRecompensa() {
         return recompensa;
     }
 
-    public void setRecompensa(RecompensaEntity recompenza) {
-        this.recompensa = recompenza;
+    /**
+     * 
+     * @param recompensa a cambiar 
+     */
+    public void setRecompensa(RecompensaEntity recompensa) {
+        this.recompensa = recompensa;
     }
     
-    
+    /**
+     * 
+     * @return Las fotos
+     */
     public List<MultimediaEntity> getFotos() {
         return fotos;
     }
-
+    /**
+     * 
+     * @param fotos Modifica las fotos
+     */
     public void setFotos(List<MultimediaEntity> fotos) {
         this.fotos = fotos;
     }
@@ -169,7 +183,11 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
-
+    
+    /**
+     * 
+     * @return 
+     */
     public List<MultimediaEntity> getVideos() {
         return videos;
     }
