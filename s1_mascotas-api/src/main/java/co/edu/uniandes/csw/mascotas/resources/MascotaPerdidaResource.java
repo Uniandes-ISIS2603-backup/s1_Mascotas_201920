@@ -60,6 +60,7 @@ public class MascotaPerdidaResource {
     @GET
     @Path("{mascotasid: \\d+}")
     public MascotaPerdidaDetailDTO getMascotaPerdida(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
+        
         MascotaPerdidaEntity entidad = mascotaLogic.getMascotaPerdida(mascotasId);
         if (entidad == null) {
             throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe", 404);
@@ -69,7 +70,7 @@ public class MascotaPerdidaResource {
 
     @GET
     public List<MascotaPerdidaDetailDTO> getMacotasPerdida() throws BusinessLogicException {
-        
+       //crearMascota (); 
        List<MascotaPerdidaDetailDTO> listaMascotas = listEntity2DTO(mascotaLogic.getMascotasPerdida());
         
         return listaMascotas;
@@ -96,12 +97,8 @@ public class MascotaPerdidaResource {
         }
         mascotaLogic.deleteMascotaPerdida(mascotasId);
     }
-
-    private List<MascotaPerdidaDetailDTO> listEntity2DTO(List<MascotaPerdidaEntity> entityList) {
-        List<MascotaPerdidaDetailDTO> list = new ArrayList<>();
-        for (MascotaPerdidaEntity entity : entityList) {
-            list.add(new MascotaPerdidaDetailDTO(entity));
-        }
+    private void crearMascota () throws BusinessLogicException
+    {
         MascotaPerdidaEntity yo = new MascotaPerdidaEntity();
         yo.setEspecie(0);
          Calendar c = Calendar.getInstance();
@@ -118,7 +115,20 @@ public class MascotaPerdidaResource {
         c.set(Calendar.SECOND, c.getActualMinimum(Calendar.SECOND));
         c.set(Calendar.MILLISECOND, c.getActualMinimum(Calendar.MILLISECOND));
         yo.setFechaPerdida(c.getTime());
-        list.add(new MascotaPerdidaDetailDTO(yo));
+        yo.setDescripcion("BUENAS");
+        yo.setRaza("BUENAS");
+        yo.setLugar("BUENAS");
+        yo.setRecompensa(null);
+        //yo.setId(new Long(0));
+        mascotaLogic.createMascotaPerdida(yo);
+    }
+    private List<MascotaPerdidaDetailDTO> listEntity2DTO(List<MascotaPerdidaEntity> entityList) {
+        List<MascotaPerdidaDetailDTO> list = new ArrayList<>();
+        for (MascotaPerdidaEntity entity : entityList) {
+            list.add(new MascotaPerdidaDetailDTO(entity));
+        }
+        
+        
         return list;
     }
 }

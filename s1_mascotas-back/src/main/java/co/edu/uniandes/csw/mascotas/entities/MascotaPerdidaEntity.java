@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -26,12 +27,19 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class MascotaPerdidaEntity extends BaseEntity implements Serializable
 {
+     /**
+     * El uruario asociado a la mascota
+     */
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
+    
     /**
-     * Recompenza
+     * Recompensa
      */
     @PodamExclude
     @OneToOne
-    private RecompensaEntity recompenza;
+    private RecompensaEntity recompensa;
     /**
      * Raza de la mascota perdida
      */
@@ -66,13 +74,21 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToMany(mappedBy = "mascotaPerdida")
     private List<MultimediaEntity> fotos = new ArrayList<>();
-
-    public RecompensaEntity getRecompenza() {
-        return recompenza;
+    
+    /**
+     * Videos que tiene la mascota
+     */
+    @PodamExclude
+    @OneToMany(mappedBy = "mascotaPerdida2")
+    private List<MultimediaEntity> videos = new ArrayList<>();
+    
+    
+    public RecompensaEntity getRecompensa() {
+        return recompensa;
     }
 
-    public void setRecompenza(RecompensaEntity recompenza) {
-        this.recompenza = recompenza;
+    public void setRecompensa(RecompensaEntity recompenza) {
+        this.recompensa = recompenza;
     }
     
     
@@ -153,5 +169,22 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
+
+    public List<MultimediaEntity> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<MultimediaEntity> videos) {
+        this.videos = videos;
+    }
+
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+    
     
 }

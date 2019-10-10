@@ -30,9 +30,14 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     @ManyToOne
     private MascotaEncontradaEntity mascotaEncontrada;
     
+    
     @PodamExclude
     @ManyToOne
     private MascotaPerdidaEntity mascotaPerdida;
+    
+    @PodamExclude
+    @ManyToOne
+    private MascotaPerdidaEntity mascotaPerdida2;
     
     @PodamExclude
     @ManyToOne

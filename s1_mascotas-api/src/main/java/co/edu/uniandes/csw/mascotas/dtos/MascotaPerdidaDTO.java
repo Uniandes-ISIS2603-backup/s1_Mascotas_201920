@@ -16,9 +16,9 @@ import java.util.Date;
 public class MascotaPerdidaDTO implements Serializable{
     
     /**
-     * Recompenza
+     * Recompensa
      */
-    private RecompensaDTO recompenza;
+    private RecompensaDTO recompensa;
     /**
      * Id de la mascota
      */
@@ -66,7 +66,13 @@ public class MascotaPerdidaDTO implements Serializable{
         
         setLugar(entidad.getLugar());
         
-        setRecompenza(new RecompensaDTO (entidad.getRecompenza()));
+        if (entidad.getRecompensa() != null) {
+                setRecompensa(new RecompensaDTO (entidad.getRecompensa()));
+            } else {
+                setRecompensa(null);
+            }
+        setId(entidad.getId());
+        
     }
 
     public MascotaPerdidaEntity toEntity() {
@@ -83,18 +89,21 @@ public class MascotaPerdidaDTO implements Serializable{
 
         entidad.setRaza(this.getRaza());
         
-        entidad.setRecompenza(this.getRecompenza().toEntity());
+        if (this.recompensa != null)
+            entidad.setRecompensa(this.getRecompensa().toEntity());
+        
+        entidad.setId(this.getId());
         
         return entidad;
 
     }
 
-    public RecompensaDTO getRecompenza() {
-        return recompenza;
+    public RecompensaDTO getRecompensa() {
+        return recompensa;
     }
 
-    public void setRecompenza(RecompensaDTO recompenza) {
-        this.recompenza = recompenza;
+    public void setRecompensa(RecompensaDTO recompensa) {
+        this.recompensa = recompensa;
     }
     
     /**

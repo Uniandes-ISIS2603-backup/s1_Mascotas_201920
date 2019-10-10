@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Serializable{
        private List<MultimediaDTO> fotos;
+       private List<MultimediaDTO> videos;
          public MascotaPerdidaDetailDTO() {
         
     }
@@ -28,6 +29,12 @@ public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Seria
                 fotos = new ArrayList<>();
                 for (MultimediaEntity fotoEntity : mascotaEntity.getFotos()) {
                    fotos.add(new MultimediaDTO(fotoEntity));
+                }
+            }
+            if (mascotaEntity.getVideos() != null) {
+                fotos = new ArrayList<>();
+                for (MultimediaEntity videoEntity : mascotaEntity.getVideos()) {
+                   fotos.add(new MultimediaDTO(videoEntity));
                 }
             }
         }
