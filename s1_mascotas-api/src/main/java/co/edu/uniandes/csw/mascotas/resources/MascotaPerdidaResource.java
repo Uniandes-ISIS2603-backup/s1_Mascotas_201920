@@ -45,7 +45,7 @@ public class MascotaPerdidaResource {
     
     @POST
     public MascotaPerdidaDTO createMascotaPerdida (MascotaPerdidaDTO mascotaDto) throws BusinessLogicException{
-         LOGGER.log(Level.INFO, "MascotaEncontradaResource createMascotaPerdida: input(0)", mascotaDto);
+         LOGGER.log(Level.INFO, "MascotaPerdidaResource createMascotaPerdida: input(0)", mascotaDto);
         
         MascotaPerdidaEntity mascotaEntity = mascotaDto.toEntity();
         
@@ -53,7 +53,7 @@ public class MascotaPerdidaResource {
         
         MascotaPerdidaDTO nuevaMascota = new MascotaPerdidaDTO(mascotaEntity);
         
-        LOGGER.log(Level.INFO, "MascotaEncontradaResource createMascotaEncontrada: output(0)", nuevaMascota);
+        LOGGER.log(Level.INFO, "MascotaPerdidaResource createMascotaPerdida: output(0)", nuevaMascota);
         return nuevaMascota;
     }
     
@@ -63,7 +63,7 @@ public class MascotaPerdidaResource {
         
         MascotaPerdidaEntity entidad = mascotaLogic.getMascotaPerdida(mascotasId);
         if (entidad == null) {
-            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe", 404);
+            throw new WebApplicationException("El recurso /mascotasperdidas/" + mascotasId + " no existe", 404);
         }
         return new MascotaPerdidaDetailDTO(entidad);
     }
@@ -82,7 +82,7 @@ public class MascotaPerdidaResource {
     public MascotaPerdidaDTO updateMascotaPerdida(@PathParam("mascotasid") Long mascotasId, MascotaPerdidaDTO mascota) throws BusinessLogicException {
         mascota.setId(mascotasId);
         if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
-            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /mascotasperdidas/" + mascotasId + " no existe.", 404);
         }
         MascotaPerdidaDetailDTO detailDTO = new MascotaPerdidaDetailDTO(mascotaLogic.updateMascotaPerdida(mascota.toEntity()));
         return detailDTO;
@@ -93,7 +93,7 @@ public class MascotaPerdidaResource {
     @Path("{mascotasid: \\d+}")
     public void deleteMascotaPerdida(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
          if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
-            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /mascotasperdidas/" + mascotasId + " no existe.", 404);
         }
         mascotaLogic.deleteMascotaPerdida(mascotasId);
     }

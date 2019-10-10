@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
-import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
 import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
@@ -53,7 +52,10 @@ public class MascotaAdopcionLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
-
+    /**
+     * Test para crear una mascota
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createMascotaAdopcion() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -70,7 +72,10 @@ public class MascotaAdopcionLogicTest {
         
 
     }
-    
+    /**
+     * Test en el que se espera error al crear una macota con lugar nulo
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionLugarNull() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -78,7 +83,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+      /**
+     * Test en el que se espera error al crear una macota con lugar vacio
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionLugarCadenaVacia() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -86,7 +94,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+      /**
+     * Test en el que se espera error al crear una macota con raza nula
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionRazaNull() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -94,7 +105,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+      /**
+     * Test en el que se espera error al crear una macota con raza vacia
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionRazaCadenaVacia() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -102,7 +116,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+      /**
+     * Test en el que se espera error al crear una macota con especie nula
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionEspecieNull() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -110,7 +127,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+      /**
+     * Test en el que se espera error al crear una macota con descripcion nula
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionDescripcionNull() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -118,7 +138,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+      /**
+     * Test en el que se espera error al crear una macota con descripcion vacia
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionDescripcionCadenaVacia() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -126,7 +149,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+      /**
+     * Test en el que se espera error al crear una macota que no esta en nungina de las especies especificadas
+     * @throws BusinessLogicException si la logica funciona
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionEspecioNotAnimal() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -141,7 +167,10 @@ public class MascotaAdopcionLogicTest {
         MascotaAdopcionEntity resultado = mascotaLogic.createMascotaAdopcion(entidad);
 
     }
-
+    /**
+     * Test en el que se prueba que la logica se cumpla al actualizar una mascota
+     * @throws BusinessLogicException 
+     */
     @Test
     public void updateMascotaAdopcion() throws BusinessLogicException {
         MascotaAdopcionEntity entidad = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -163,6 +192,10 @@ public class MascotaAdopcionLogicTest {
 
     }
     
+    /**
+     * Test en el que se verifica que la logica se cumpla al traer todas las mascotas
+     * @throws BusinessLogicException 
+     */
    @Test
     public void findAllTest() throws BusinessLogicException
     {
@@ -186,7 +219,9 @@ public class MascotaAdopcionLogicTest {
             Assert.assertTrue(r.contains(next));
         }
     }
-    
+    /**
+     * Test en el que se verifia que la logica se cumpla al traer una sola mascota
+     */
     @Test
     public void getMascotaAdopcionTest() throws BusinessLogicException {
         
@@ -203,7 +238,10 @@ public class MascotaAdopcionLogicTest {
         Assert.assertEquals(entity.getDescripcion(), resultEntity.getDescripcion());
      
     }
-    
+    /**
+     * Test en el que se prueba el borrado de una mascota. Se verifica que se cumpla la logica en ete caso
+     * @throws BusinessLogicException 
+     */
     @Test
     public void deleteMascotaAdopcionTest() throws BusinessLogicException {
         

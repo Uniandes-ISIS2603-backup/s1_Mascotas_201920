@@ -173,8 +173,6 @@ public class MascotaEncontradaResource {
         meLogic.deleteMascotaEncontrada(mId);
         LOGGER.info("MascotaEncontradaResource deleteMascota: output: void");
     }
-    
-    //Cuando este listo MultimediaResource descomentar
 
 //    /**
 //     * Conexión con el servicio de multimedia para una mascota. {@link MultimediaResource}

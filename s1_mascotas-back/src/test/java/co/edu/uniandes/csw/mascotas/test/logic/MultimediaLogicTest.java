@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mascotas.test.logic;
-
-import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.ejb.MultimediaLogic;
 import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
@@ -51,7 +49,10 @@ public class MultimediaLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+    /**
+     * Test para revisar las reglas de negocio al crear una multimedia.
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createMultimediaTest() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
@@ -66,7 +67,10 @@ public class MultimediaLogicTest {
        
 
     }
-    
+    /**
+     * Test en el que se espera una excepcion al crear una entidad con nombre nulo
+     * @throws BusinessLogicException si el test sale bien
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionLugarNull() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
@@ -74,7 +78,10 @@ public class MultimediaLogicTest {
         MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
 
     }
-
+     /**
+     * Test en el que se espera una excepcion al crear una entidad con nombre vacio
+     * @throws BusinessLogicException si el test sale bien
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionLugarCadenaVacia() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
@@ -82,7 +89,10 @@ public class MultimediaLogicTest {
         MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
 
     }
-
+     /**
+     * Test en el que se espera una excepcion al crear una entidad tipo nulo
+     * @throws BusinessLogicException si el test sale bien
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionRazaNull() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
@@ -90,7 +100,10 @@ public class MultimediaLogicTest {
         MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
 
     }
-
+     /**
+     * Test en el que se espera una excepcion al crear una entidad tipo nulo
+     * @throws BusinessLogicException si el test sale bien
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionRazaCadenaVacia() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
@@ -98,7 +111,10 @@ public class MultimediaLogicTest {
         MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
 
     }
-
+     /**
+     * Test en el que se espera una excepcion al crear una entidad con url nula
+     * @throws BusinessLogicException si el test sale bien
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionEspecieNull() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
@@ -106,16 +122,22 @@ public class MultimediaLogicTest {
         MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
 
     }
-
+     /**
+     * Test en el que se espera una excepcion al crear una entidad con url vacia
+     * @throws BusinessLogicException si el test sale bien
+     */
     @Test(expected = BusinessLogicException.class)
     public void createMascotaAdopcionDescripcionNull() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
-        entidad.setUrl(null);
+        entidad.setUrl("");
         MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
 
     }
 
-
+    /**
+     * Test en el que se verifican las reglas de la logia para el caso de actualizar
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
     @Test
     public void updateMascotaAdopcion() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
@@ -135,7 +157,10 @@ public class MultimediaLogicTest {
         
 
     }
-    
+     /**
+     * Test en el que se verifican las reglas de la logia para el caso de traer todas las multimedias
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
    @Test
     public void findAllTest() throws BusinessLogicException
     {
@@ -159,7 +184,10 @@ public class MultimediaLogicTest {
             Assert.assertTrue(r.contains(next));
         }
     }
-    
+     /**
+     * Test en el que se verifican las reglas de la logia para el caso de busar una multimedia
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
     @Test
     public void getMascotaAdopcionTest() throws BusinessLogicException {
         
@@ -174,7 +202,10 @@ public class MultimediaLogicTest {
         Assert.assertEquals(entity.getTipo(), resultEntity.getTipo());
         Assert.assertEquals(entity.getUrl(), resultEntity.getUrl());
     }
-    
+     /**
+     * Test en el que se verifican las reglas de la logia para el caso de borrar una multimedia
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
     @Test
     public void deleteMascotaAdopcionTest() throws BusinessLogicException {
         

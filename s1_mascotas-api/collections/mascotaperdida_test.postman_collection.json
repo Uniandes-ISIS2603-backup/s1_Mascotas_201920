@@ -2,19 +2,68 @@
 	"info": {
 		"_postman_id": "f50b1b52-8447-4586-a5ef-ec8ad1c5e959",
 		"name": "mascotaperdida_test",
+		"description": "# Introduction\nWhat does your API do?\n\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "crea mascota perdida",
+			"name": "Crear mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81ce81ab-0b2d-416f-92cf-64933f460e2a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"descripcion\": \"BUEAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": []\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas"
+					]
+				},
+				"description": "Crea una nueva mascota perdida. El recurso tiene descripcion, especie, fechaPerdida, lugar, raza, recompenza, monto y\r\nfotos . El Id es inicializado por la BD y se debe ver en la respuesta. \r\n\r\nPara la prueba, se guarda el id en una variable que ser� utilizada en otras peticiones de la colecci�n.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Dar mascotas perdidas",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "c46a1be0-3618-472b-9262-8f501e835823",
 						"exec": [
-							"",
-							"tests [\"No genera error en el Get, responseCode received = \" + responseCode.code] = responseCode.code === 200;"
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all \"+responseCode.code] = responseCode.code === 200;",
+							"tests[\"mascotas perdidas count\"] = data.length >= 0;"
 						],
 						"type": "text/javascript"
 					}
@@ -35,7 +84,211 @@
 						"api",
 						"mascotasperdidas"
 					]
+				},
+				"description": "Consulta todas las mascotas perdidas de la aplicaci�n. \r\nLa petici�n no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de mascotas perdidas en la respuesta tenga mas de uno.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Dar mascota perdida id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
 				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_b}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"{{new_id_b}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una mascota que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3ed6d26-4726-4068-b897-8137e07eb560",
+						"exec": [
+							"tests[\"No actualiza con id que no existe \"+responseCode.code] = responseCode.code === 404;",
+							"                                ",
+							"//tests[\"Mensaje correcto de error \"+responseBody] = responseBody.has(\"El recurso /mascotasperdidas/-1 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"descripcion\": \"BCANAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": [],\r\n        \"recompensa\":{\r\n        \t\"id\": 123,\r\n        \t\"monto\": 75,\r\n        \t\"pagado\": false\r\n        \t\r\n        }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"-1"
+					]
+				},
+				"description": "Actualiza un mascota perdida que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasperdidas/0 no existe.\".\r\n\r\n**C�digo HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dde77c8-a1b8-4c70-99fe-8b3454fe688b",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"descripcion\": \"BCANAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": [],\r\n        \"recompensa\":{\r\n        \t\"id\": 123,\r\n        \t\"monto\": 75,\r\n        \t\"pagado\": false\r\n        \t\r\n        }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_b}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"{{new_id_b}}"
+					]
+				},
+				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "667e35a0-2cbd-4162-8469-8f2487bbab37",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_b}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"{{new_id_b}}"
+					]
+				},
+				"description": "Borra una mascota perdida. Se env�a el id del la mascota perdida creada anteriormente.\n\n**C�digo HTTP esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar mascota perdida que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d15af7e-7d0d-4864-bf10-5ea6188cc0a2",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"//tests[\"Mensaje correcto de error \"+responseBody] = responseBody.has(\"El recurso /mascotasperdidas/-1 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"-1"
+					]
+				},
+				"description": "Borra una mascota perdida que no existe en la aplicaci�n.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasperdidas/-1 no existe.\".\r\n\r\n**C�digo http esperado: 404**"
 			},
 			"response": []
 		}
