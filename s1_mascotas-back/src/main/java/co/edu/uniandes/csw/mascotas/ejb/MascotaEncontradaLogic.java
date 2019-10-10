@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mascotas.ejb;
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
+import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -22,14 +23,9 @@ public class MascotaEncontradaLogic {
     @Inject
     private MascotaEncontradaPersistence persistence;
     
-    private enum especies {
-        Perro,
-        Gato
-    }
-    
     public MascotaEncontradaEntity createMascotaEncontrada(MascotaEncontradaEntity pMascota) throws BusinessLogicException
     {
-        if(pMascota.getDescripcion()==null)
+        if(pMascota.getDescripcion()==null || pMascota.getDescripcion().equals(""))
         {
             throw new BusinessLogicException("La descripcion de la mascota no existe.");
         }
@@ -38,13 +34,13 @@ public class MascotaEncontradaLogic {
             throw new BusinessLogicException ("La especie de la mascota no existe."); 
         }
         boolean flag= false;
-        for (especies value : especies.values()) {
-            if (value.name().equals(pMascota.getEspecie())) {
+        for (TipoEspecies value : TipoEspecies.values()) {
+            if (value.ordinal() == pMascota.getEspecie().intValue()) {
                 flag = true;
             }
         }
         if (!flag)
-            throw new BusinessLogicException ("La mascota no es un gato, ni un perro.");
+            throw new BusinessLogicException ("La mascota no es una especie correcta.");
         if (pMascota.getRaza()==null || pMascota.getRaza().equals(""))
             throw new BusinessLogicException ("La raza de la mascota no existe.");
         if (pMascota.getLugar()==null||pMascota.getLugar().equals(""))
@@ -67,8 +63,8 @@ public class MascotaEncontradaLogic {
             throw new BusinessLogicException ("La especie de la mascota no existe."); 
         }
         boolean flag= false;
-        for (especies value : especies.values()) {
-            if (value.name().equals(pMascota.getEspecie())) {
+        for (TipoEspecies value : TipoEspecies.values()) {
+            if (value.ordinal() == pMascota.getEspecie().intValue()) {
                 flag = true;
             }
         }
