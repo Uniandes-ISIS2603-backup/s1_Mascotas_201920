@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
  * @author Lily
  */
 @RunWith(Arquillian.class)
-public class MascotaperdidaIT {
+public class MascotaPerdidaIT {
      private static final String COLLECTION = "mascotaperdida_test.postman_collection";
 
     @Deployment(testable = true)
