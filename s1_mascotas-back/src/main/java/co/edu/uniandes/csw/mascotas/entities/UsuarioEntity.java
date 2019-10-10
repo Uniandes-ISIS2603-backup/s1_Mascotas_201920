@@ -6,7 +6,11 @@
 package co.edu.uniandes.csw.mascotas.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -35,6 +39,22 @@ public class UsuarioEntity extends BaseEntity implements Serializable
      */
     private Integer celular;
 
+    @PodamExclude
+    @OneToMany(mappedBy = "usuario")
+    private List<MascotaEncontradaEntity> mascotasEncontradas = new ArrayList<MascotaEncontradaEntity>();
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "usuario")
+    private List<MascotaPerdidaEntity> mascotasPerdidas = new ArrayList<MascotaPerdidaEntity>();
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "usuario")
+    private List<MascotaAdopcionEntity> mascotasAdopcion = new ArrayList<MascotaAdopcionEntity>();
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "usuario")
+    private List<ProcesoAdopcionEntity> procesosAdopcion = new ArrayList<ProcesoAdopcionEntity>();
+    
     /**
      * @return the nombre
      */
@@ -90,4 +110,61 @@ public class UsuarioEntity extends BaseEntity implements Serializable
     public void setCelular(Integer celular) {
         this.celular = celular;
     }
+
+    /**
+     * @return the mascotasEncontradas
+     */
+    public List<MascotaEncontradaEntity> getMascotasEncontradas() {
+        return mascotasEncontradas;
+    }
+
+    /**
+     * @param mascotasEncontradas the mascotasEncontradas to set
+     */
+    public void setMascotasEncontradas(List<MascotaEncontradaEntity> mascotasEncontradas) {
+        this.mascotasEncontradas = mascotasEncontradas;
+    }
+
+    /**
+     * @return the mascotasPerdidas
+     */
+    public List<MascotaPerdidaEntity> getMascotasPerdidas() {
+        return mascotasPerdidas;
+    }
+
+    /**
+     * @param mascotasPerdidas the mascotasPerdidas to set
+     */
+    public void setMascotasPerdidas(List<MascotaPerdidaEntity> mascotasPerdidas) {
+        this.mascotasPerdidas = mascotasPerdidas;
+    }
+
+    /**
+     * @return the mascotasAdopcion
+     */
+    public List<MascotaAdopcionEntity> getMascotasAdopcion() {
+        return mascotasAdopcion;
+    }
+
+    /**
+     * @param mascotasAdopcion the mascotasAdopcion to set
+     */
+    public void setMascotasAdopcion(List<MascotaAdopcionEntity> mascotasAdopcion) {
+        this.mascotasAdopcion = mascotasAdopcion;
+    }
+
+    /**
+     * @return the procesosAdopcion
+     */
+    public List<ProcesoAdopcionEntity> getProcesosAdopcion() {
+        return procesosAdopcion;
+    }
+
+    /**
+     * @param procesosAdopcion the procesosAdopcion to set
+     */
+    public void setProcesosAdopcion(List<ProcesoAdopcionEntity> procesosAdopcion) {
+        this.procesosAdopcion = procesosAdopcion;
+    }
+    
 }
