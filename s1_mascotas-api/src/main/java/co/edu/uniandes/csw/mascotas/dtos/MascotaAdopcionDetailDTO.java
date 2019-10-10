@@ -45,9 +45,9 @@ public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Seri
                 }
             }
             if (mascotaEntity.getVideos() != null) {
-                fotos = new ArrayList<>();
+                videos = new ArrayList<>();
                 for (MultimediaEntity videoEntity : mascotaEntity.getVideos()) {
-                   fotos.add(new MultimediaDTO(videoEntity));
+                   videos.add(new MultimediaDTO(videoEntity));
                 }
             }
         }
