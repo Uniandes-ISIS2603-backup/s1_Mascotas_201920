@@ -45,6 +45,14 @@ public class UsuarioLogicTest {
      * Tests para el metodo create()
      */
     
+    @Test
+    public void createUsuarioTodoBien() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+    }
+    
     @Test (expected = BusinessLogicException.class)
     public void createUsuarioNombreNull() throws BusinessLogicException
     {

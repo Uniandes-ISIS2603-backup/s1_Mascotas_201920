@@ -55,13 +55,13 @@ public class UsuarioLogic
     public void checkUsuario(UsuarioEntity usuario) throws BusinessLogicException
     {
         //Nombre
-        if(usuario.getNombre() == null)
+        if(usuario.getNombre() == null || usuario.getNombre().equals(""))
         {
             throw new BusinessLogicException("El nombre del usuario esta vacio");
         }
         
         //Correo
-        if(usuario.getCorreo() == null)
+        if(usuario.getCorreo() == null || usuario.getCorreo().equals(""))
         {
             throw new BusinessLogicException("El correo del usuario esta vacio");
         }
@@ -69,13 +69,13 @@ public class UsuarioLogic
         String[] mitadesCorreo = usuario.getCorreo().split("@");
         if(mitadesCorreo.length != 2)
         {
-            throw new BusinessLogicException("El correo debe tener una sola arroba (@) y texto a ambos lados de la arroba");
+            throw new BusinessLogicException("El correo debe tener una sola arroba (@) y texto a ambos lados de la arroba (length = " + mitadesCorreo.length +")");
         }
         
-        String[] mitadesCorreoPunto = mitadesCorreo[1].split(".");
+        String[] mitadesCorreoPunto = mitadesCorreo[1].split("\\.");
         if(mitadesCorreoPunto.length != 2)
         {
-            throw new BusinessLogicException("El correo debe tener un punto (.) y texto a ambos lados del punto.");
+            throw new BusinessLogicException("El correo debe tener un punto (.) y texto a ambos lados del punto. (length = " + mitadesCorreoPunto.length +")");
         }
         
         if(mitadesCorreoPunto[0].equals("") || mitadesCorreoPunto[1].equals(""))
@@ -84,13 +84,13 @@ public class UsuarioLogic
         }
         
         //Ciudad
-        if(usuario.getCiudad() == null)
+        if(usuario.getCiudad() == null || usuario.getCiudad().equals(""))
         {
             throw new BusinessLogicException("La ciudad del usuario esta vacia");
         }
         
         //Celular
-        if(usuario.getCelular() == null)
+        if(usuario.getCelular() == null || usuario.getCelular().equals(""))
         {
             throw new BusinessLogicException("El celular del usuario esta vacio");
         }
@@ -106,7 +106,7 @@ public class UsuarioLogic
         return persistence.find(usuarioID);
     }
     
-    public Collection<UsuarioEntity> findAllUsuario(Long usuarioID)
+    public Collection<UsuarioEntity> findAllUsuario()
     {
         return persistence.findAll();
     }

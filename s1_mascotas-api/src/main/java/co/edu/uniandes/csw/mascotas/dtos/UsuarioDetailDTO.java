@@ -28,6 +28,8 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     
     private List<ProcesoAdopcionDTO> procesosAdopcion = new ArrayList<ProcesoAdopcionDTO>();
     
+    private UsuarioEntity usuario;
+    
     public UsuarioDetailDTO()
     {
         
@@ -36,6 +38,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     public UsuarioDetailDTO(UsuarioEntity usuario)
     {
         if (usuario != null) {
+            this.usuario = usuario;
             /**
              * Mascotas en adopcion
              */
