@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class MascotaEncontradaDTO implements Serializable{
     
     private Long id;
-    private String especie;
+    private Integer especie;
     private String raza;
     private String lugar;
     private String descripcion;
@@ -81,14 +81,14 @@ public class MascotaEncontradaDTO implements Serializable{
     /**
      * @return the especie
      */
-    public String getEspecie() {
+    public Integer getEspecie() {
         return especie;
     }
 
     /**
      * @param especie the especie to set
      */
-    public void setEspecie(String especie) {
+    public void setEspecie(Integer especie) {
         this.especie = especie;
     }
 
