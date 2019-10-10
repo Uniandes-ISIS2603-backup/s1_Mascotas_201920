@@ -8,10 +8,14 @@ package co.edu.uniandes.csw.mascotas.entities;
 import co.edu.uniandes.csw.mascotas.podam.DateStrategy;
 import co.edu.uniandes.csw.mascotas.podam.PositiveIntegerStrategy;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -38,6 +42,17 @@ public class PublicidadEntity extends BaseEntity implements Serializable
     @PodamStrategyValue(DateStrategy.class)
     private Date fecchaFin;
     
+    @PodamExclude
+    @OneToMany(mappedBy = "publicidad")
+    private List<co.edu.uniandes.csw.mascotas.entities.MultimediaEntity> multimedia = new ArrayList<>();
+
+    public List<co.edu.uniandes.csw.mascotas.entities.MultimediaEntity> getMultimedia() {
+        return multimedia;
+    }
+
+    public void setMultimedia(List<co.edu.uniandes.csw.mascotas.entities.MultimediaEntity> multimedia) {
+        this.multimedia = multimedia;
+    }
     
     public String getMensaje() {
         return mensaje;

@@ -33,7 +33,7 @@ import org.junit.Assert;
 public class PublicidadLogicTest {
 
    
-    @PersistenceContext(unitName = "mascotasPU")
+    @PersistenceContext()
     protected EntityManager em;
 
     private PodamFactory factory = new PodamFactoryImpl();

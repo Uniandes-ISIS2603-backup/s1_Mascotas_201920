@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "ea0cba50-03c6-4da3-b57d-a5b410db08b0",
+		"name": "PublicidadResourceTest",
+		"description": "Publicidad Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una publicidad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a09eb381-d4c8-4c1b-9abf-c5106099f79c",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p\", data.id);",
+							"tests[\"no genera error en el test\"] = responseCode.code === 200; "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"costo\": 123,\r\n    \"diasPorSemana\": 7,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"publicidades",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una publicidad erronea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a09eb381-d4c8-4c1b-9abf-c5106099f79c",
+						"exec": [
+							"tests[\"no crea una publicidad con costo 0\"] = responseCode.code === 412; ",
+							"tests[\"mensaje correcto de error\"] = responseBody.has(\"El costo de la publicidad debe ser mayor a 0\"); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"costo\": 0,\r\n    \"diasPorSemana\": 7,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"publicidades",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una publicidad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f3ea930-6d9d-41b8-a8b5-68cbf4c12318",
+						"exec": [
+							"tests[\"no genera error en el test\"] = responseCode.code === 200; "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/5",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"publicidades",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7181ffef-20ae-4901-b534-7558c37ea4b5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "92a08d62-4285-44c1-83e7-788cb4942cd8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

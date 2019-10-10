@@ -22,6 +22,11 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     private String nombre;
     
     private String tipo;
+    
+    @PodamExclude
+    @ManyToOne
+    private PublicidadEntity publicidad;
+    
     @PodamExclude
     @ManyToOne
     private MascotaAdopcionEntity mascotaAdopcion;
@@ -43,6 +48,14 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     @ManyToOne
     private MascotaAdopcionEntity mascotaAdopcion2;
 
+    public PublicidadEntity getPublicidad() {
+        return publicidad;
+    }
+
+    public void setPublicidad(PublicidadEntity publicidad) {
+        this.publicidad = publicidad;
+    }
+    
     public MascotaEncontradaEntity getMascotaEncontrada() {
         return mascotaEncontrada;
     }
