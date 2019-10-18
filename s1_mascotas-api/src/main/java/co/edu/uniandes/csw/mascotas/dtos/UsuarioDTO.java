@@ -32,7 +32,7 @@ public class UsuarioDTO implements Serializable{
     /**
      * Celular del usuario
      */
-    private Integer celular;
+    private Long celular;
     
     /**
      * ID del usuario
@@ -109,14 +109,14 @@ public class UsuarioDTO implements Serializable{
     /**
      * @return the celular
      */
-    public Integer getCelular() {
+    public Long getCelular() {
         return celular;
     }
 
     /**
      * @param celular the celular to set
      */
-    public void setCelular(Integer celular) {
+    public void setCelular(Long celular) {
         this.celular = celular;
     }
     

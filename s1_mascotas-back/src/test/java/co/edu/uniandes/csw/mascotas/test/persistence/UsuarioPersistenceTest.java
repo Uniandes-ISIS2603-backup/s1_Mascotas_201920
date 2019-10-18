@@ -132,7 +132,7 @@ public class UsuarioPersistenceTest
     {
         UsuarioEntity usuarioLista = usuarios.get(0);
         usuarioLista.setCorreo("tr.gasparoni@uniandes.edu.co");
-        usuarioLista.setCelular(5743868);
+        usuarioLista.setCelular(57438999L);
         usuarioLista.setCiudad("Barranquilla");
         
         usuarioPrueba.update(usuarioLista);

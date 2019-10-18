@@ -37,7 +37,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable
     /**
      * Celular del usuario
      */
-    private Integer celular;
+    private Long celular;
 
     @PodamExclude
     @OneToMany(mappedBy = "usuario")
@@ -100,14 +100,14 @@ public class UsuarioEntity extends BaseEntity implements Serializable
     /**
      * @return the celular
      */
-    public Integer getCelular() {
+    public Long getCelular() {
         return celular;
     }
 
     /**
      * @param celular the celular to set
      */
-    public void setCelular(Integer celular) {
+    public void setCelular(Long celular) {
         this.celular = celular;
     }
 
