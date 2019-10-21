@@ -37,8 +37,8 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     
     public UsuarioDetailDTO(UsuarioEntity usuario)
     {
+        super(usuario);
         if (usuario != null) {
-            this.usuario = usuario;
             /**
              * Mascotas en adopcion
              */

@@ -46,6 +46,7 @@ public class UsuarioDTO implements Serializable{
     
     public UsuarioDTO(UsuarioEntity usuario)
     {
+        setId(usuario.getId());
         setCelular(usuario.getCelular());
         setCiudad(usuario.getCiudad());
         setCorreo(usuario.getCorreo());
@@ -56,6 +57,7 @@ public class UsuarioDTO implements Serializable{
     {
         UsuarioEntity entity = new UsuarioEntity();
         
+        entity.setId(id);
         entity.setCorreo(correo);
         entity.setCelular(celular);
         entity.setCiudad(ciudad);
