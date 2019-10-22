@@ -120,7 +120,7 @@ public class MascotaEncontradaResource {
             throw new WebApplicationException("El recurso /mascotasencontradas/" + mascotaId + " no existe.", 404);
         }
         MascotaEncontradaDetailDTO mDetailDTO = new MascotaEncontradaDetailDTO(mascotaEncontradaEntity);
-        LOGGER.log(Level.INFO, "BookResource getBook: output: {0}", mDetailDTO);
+        LOGGER.log(Level.INFO, "MascotaEncontradaResource getMascota: output: {0}", mDetailDTO);
         return mDetailDTO;
     }
 

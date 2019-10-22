@@ -9,3 +9,7 @@
  */
 
 delete from MascotaEncontradaEntity;
+
+delete from UsuarioEntity;
+
+select * from MascotaEncontradaEntity;

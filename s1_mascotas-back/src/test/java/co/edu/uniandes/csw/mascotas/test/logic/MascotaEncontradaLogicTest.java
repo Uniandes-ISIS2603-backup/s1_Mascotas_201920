@@ -6,9 +6,12 @@
 package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.MascotaEncontradaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
+import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +24,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -47,6 +51,8 @@ public class MascotaEncontradaLogicTest {
     
     @Inject
     private MascotaEncontradaLogic mel;
+    @Inject
+    private UsuarioLogic ul;
     
     @PersistenceContext
     private EntityManager em;
@@ -64,6 +70,7 @@ public class MascotaEncontradaLogicTest {
         Assert.assertEquals(entidadPrueba.getEspecie(), resultado.getEspecie());
         Assert.assertEquals(entidadPrueba.getDescripcion(), resultado.getDescripcion());
         Assert.assertEquals(entidadPrueba.getFechaEncontrada(), resultado.getFechaEncontrada());
+        Assert.assertEquals(entidadPrueba.getUsuario(), resultado.getUsuario());
         
         
     }
@@ -195,7 +202,7 @@ public class MascotaEncontradaLogicTest {
     public void deleteMascotaEncontradaTest() throws BusinessLogicException {
         
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
-
+        
         MascotaEncontradaEntity entity = mel.createMascotaEncontrada(entidad);
         
         mel.deleteMascotaEncontrada(entity.getId());

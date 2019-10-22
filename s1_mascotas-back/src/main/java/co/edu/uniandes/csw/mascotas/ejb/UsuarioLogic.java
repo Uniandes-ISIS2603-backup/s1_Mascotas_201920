@@ -67,7 +67,7 @@ public class UsuarioLogic
         }
         
         String[] mitadesCorreo = usuario.getCorreo().split("@");
-        if(mitadesCorreo.length != 2)
+        if(mitadesCorreo.length != 2 || mitadesCorreo[0].equals("") || mitadesCorreo[1].equals(""))
         {
             throw new BusinessLogicException("El correo debe tener una sola arroba (@) y texto a ambos lados de la arroba (length = " + mitadesCorreo.length +")");
         }

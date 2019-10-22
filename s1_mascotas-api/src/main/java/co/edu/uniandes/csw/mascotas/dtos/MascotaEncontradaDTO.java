@@ -59,8 +59,8 @@ public class MascotaEncontradaDTO implements Serializable{
         mee.setId(id);
         mee.setLugar(lugar);
         mee.setRaza(raza);
-        if(this.usuario != null)
-            mee.setUsuario(usuario.toEntity());
+        if(this.getUsuario() != null)
+            mee.setUsuario(getUsuario().toEntity());
         return mee;
     }
 
@@ -146,5 +146,19 @@ public class MascotaEncontradaDTO implements Serializable{
      */
     public void setFechaEncontrada(Date fechaEncontrada) {
         this.fechaEncontrada = fechaEncontrada;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
     }
 }
