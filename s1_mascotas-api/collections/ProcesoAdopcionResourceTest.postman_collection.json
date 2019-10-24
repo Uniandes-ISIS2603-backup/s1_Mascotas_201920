@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "ee5e05db-f80b-48c7-b53d-a68b9225167d",
+		"name": "ProcesoAdopcionResourceTest",
+		"description": "Proceso Adopcion Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Procesos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Proceso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9302491-a7f7-4630-b2f9-ccb2eb5eb72d",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Terminado\",\n\t\"comentario\": \"hola gente\",\n\t\"calificacion\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Proceso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
+						"exec": [
+							"",
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/{{new_id_p}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"{{new_id_p}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Proceso con Calificacion >5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
+						"exec": [
+							"tests[\"No crea con calificacion mayor a 5\"] = responseCode.code === 412;",
+							"tests[\"mensaje correcto de error\"] = responseBody.has(\"La calificacion del proceso tiene un valor que no se encuentra entre 1 y 5\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Cancelado\",\n\t\"comentario\": \"hola mundo\",\n\t\"calificacion\": 6\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Proceso con Calificacion<1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
+						"exec": [
+							"tests[\"No crea con calificacion menor a 5\"] = responseCode.code === 412;",
+							"tests[\"mensaje correcto de error\"] = responseBody.has(\"La calificacion del proceso tiene un valor que no se encuentra entre 1 y 5\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Cancelado\",\n\t\"comentario\": \"hola mundo\",\n\t\"calificacion\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Proceso con Estado Invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
+						"exec": [
+							"tests[\"No crea con estado invalido\"] = responseCode.code === 412;",
+							"tests[\"mensaje correcto de error\"] = responseBody.has(\"El estado del proceso no es un estado valido\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Invalido\",\n\t\"comentario\": \"hola mundo\",\n\t\"calificacion\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Proceso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9302491-a7f7-4630-b2f9-ccb2eb5eb72d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Cancelado\",\n\t\"comentario\": \"Chao gente\",\n\t\"calificacion\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/{{new_id_p}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"{{new_id_p}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Proceso con Calificacion Invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d29d87b-3afe-4688-aacb-13102b082888",
+						"exec": [
+							"tests[\"No actualiza proceso con calificacion invalida\"] = responseCode.code === 412;",
+							"tests[\"mensaje correcto de error\"] = responseBody.has(\"La calificacion del proceso tiene un valor que no se encuentra entre 1 y 5\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Cancelado\",\n\t\"comentario\": \"Chao gente\",\n\t\"calificacion\": 8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/{{new_id_p}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"{{new_id_p}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Proceso con Estado Invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4398c352-8d9d-4572-97c6-697e0346c43f",
+						"exec": [
+							"tests[\"No actualiza proceso con estado invalida\"] = responseCode.code === 412;",
+							"tests[\"mensaje correcto de error\"] = responseBody.has(\"El estado del proceso no es un estado valido\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Invalido\",\n\t\"comentario\": \"Chao gente\",\n\t\"calificacion\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/{{new_id_p}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"{{new_id_p}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Proceso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4398c352-8d9d-4572-97c6-697e0346c43f",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/{{new_id_p}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"{{new_id_p}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -77,7 +77,7 @@ public class RecompensaResource {
     
      @DELETE
      @Path("{recompensasId: \\d+}")
-    public void deleteRecompensa(@PathParam("recomensasId") Long recompensaID) throws BusinessLogicException{
+    public void deleteRecompensa(@PathParam("recompensasId") Long recompensaID) throws BusinessLogicException{
         if(recompensaLogic.findRecompensa(recompensaID)==null){
             throw new WebApplicationException("El recurso /recompensas/" + recompensaID + " no existe.", 404);
         }
