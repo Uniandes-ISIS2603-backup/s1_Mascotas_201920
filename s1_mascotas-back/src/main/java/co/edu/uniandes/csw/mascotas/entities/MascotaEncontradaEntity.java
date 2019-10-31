@@ -50,6 +50,9 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     @OneToMany(mappedBy = "mascotaEncontrada")
     private List<MultimediaEntity> fotos = new ArrayList<>();
     
+    @OneToMany(mappedBy = "mascotaEncontrada")
+    private List<MultimediaEntity> videos = new ArrayList<>();
+    
     @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
@@ -67,6 +70,20 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
 
     public void setFotos(List<MultimediaEntity> fotos) {
         this.fotos = fotos;
+    }
+
+    /**
+     * @return the videos
+     */
+    public List<MultimediaEntity> getVideos() {
+        return videos;
+    }
+
+    /**
+     * @param videos the videos to set
+     */
+    public void setVideos(List<MultimediaEntity> videos) {
+        this.videos = videos;
     }
 
     
