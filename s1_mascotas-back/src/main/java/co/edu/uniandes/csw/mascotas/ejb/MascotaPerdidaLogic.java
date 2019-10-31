@@ -15,7 +15,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
- *
+ *Logica de mascota perdida
  * @author Lily
  */
 @Stateless 
@@ -97,7 +97,7 @@ public class MascotaPerdidaLogic
      * @param id de mascota perdida
      * @return MAscota perdida
      */
-    public MascotaPerdidaEntity findMascotaPerdida(Long id) 
+    public MascotaPerdidaEntity getMascotaPerdida(Long id) 
     {
         return pers.find(id);
     }
@@ -105,7 +105,7 @@ public class MascotaPerdidaLogic
      * Encuentra las mascotas perdidas
      * @return mascotas perdidas
      */
-    public List<MascotaPerdidaEntity> findAllMascotaPerdida() 
+    public List<MascotaPerdidaEntity> getMascotasPerdida() 
     {
         return pers.findAll();
     }

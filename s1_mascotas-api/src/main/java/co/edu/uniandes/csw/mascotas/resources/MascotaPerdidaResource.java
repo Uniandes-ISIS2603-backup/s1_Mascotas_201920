@@ -97,31 +97,7 @@ public class MascotaPerdidaResource {
         }
         mascotaLogic.deleteMascotaPerdida(mascotasId);
     }
-    private void crearMascota () throws BusinessLogicException
-    {
-        MascotaPerdidaEntity yo = new MascotaPerdidaEntity();
-        yo.setEspecie(0);
-         Calendar c = Calendar.getInstance();
-        int max_year = 9999;
-        Random r = new Random();
-        c.set(Calendar.YEAR, r.nextInt(
-                max_year - c.getActualMinimum(Calendar.YEAR) + 1)
-                + c.getActualMinimum(Calendar.YEAR));
-        c.set(Calendar.DAY_OF_YEAR, r.nextInt(
-                c.getActualMaximum(Calendar.DAY_OF_YEAR) - c.getActualMinimum(Calendar.DAY_OF_YEAR) + 1)
-                + c.getActualMinimum(Calendar.DAY_OF_YEAR));
-        c.set(Calendar.HOUR_OF_DAY, c.getActualMinimum(Calendar.HOUR_OF_DAY));
-        c.set(Calendar.MINUTE, c.getActualMinimum(Calendar.MINUTE));
-        c.set(Calendar.SECOND, c.getActualMinimum(Calendar.SECOND));
-        c.set(Calendar.MILLISECOND, c.getActualMinimum(Calendar.MILLISECOND));
-        yo.setFechaPerdida(c.getTime());
-        yo.setDescripcion("BUENAS");
-        yo.setRaza("BUENAS");
-        yo.setLugar("BUENAS");
-        yo.setRecompensa(null);
-        //yo.setId(new Long(0));
-        mascotaLogic.createMascotaPerdida(yo);
-    }
+    
     private List<MascotaPerdidaDetailDTO> listEntity2DTO(List<MascotaPerdidaEntity> entityList) {
         List<MascotaPerdidaDetailDTO> list = new ArrayList<>();
         for (MascotaPerdidaEntity entity : entityList) {
