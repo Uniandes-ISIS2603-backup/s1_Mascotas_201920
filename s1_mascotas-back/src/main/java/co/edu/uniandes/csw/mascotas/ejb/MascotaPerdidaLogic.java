@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.mascotas.ejb;
 
 
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
-import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
 import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
@@ -94,21 +93,19 @@ public class MascotaPerdidaLogic
         
     }
     /**
-     * 
-     * @param id
-     * @return
-     * @throws BusinessLogicException 
+     * Encuentra mascota perdida por id
+     * @param id de mascota perdida
+     * @return MAscota perdida
      */
-    public MascotaPerdidaEntity findMascotaPerdida(Long id) throws BusinessLogicException
+    public MascotaPerdidaEntity findMascotaPerdida(Long id) 
     {
         return pers.find(id);
     }
     /**
-     * 
-     * @return
-     * @throws BusinessLogicException 
+     * Encuentra las mascotas perdidas
+     * @return mascotas perdidas
      */
-    public List<MascotaPerdidaEntity> findAllMascotaPerdida() throws BusinessLogicException
+    public List<MascotaPerdidaEntity> findAllMascotaPerdida() 
     {
         return pers.findAll();
     }
@@ -117,28 +114,11 @@ public class MascotaPerdidaLogic
      * @param id id de la mascota que se va a eliminar
      * @throws BusinessLogicException Si no cumple alguna regla de negocio 
      */
-    public void deleteMascotaPerdida(Long id) throws BusinessLogicException
+    public void deleteMascotaPerdida(Long id) 
     {
         pers.delete(id);
     }
     
-    public List<MascotaPerdidaEntity> getMascotasPerdida() throws BusinessLogicException {
-
-        List<MascotaPerdidaEntity> mascotas = pers.findAll();
-
-        for (int i = 0; i < mascotas.size(); i++) {
-            check(mascotas.get(i));
-        }
-
-        return mascotas;
-    }
-
-    public MascotaPerdidaEntity getMascotaPerdida(Long mascotaID) throws BusinessLogicException {
-
-        MascotaPerdidaEntity mascota = pers.find(mascotaID);
-        check(mascota);
-
-        return mascota;
-    }
+    
 }   
 
