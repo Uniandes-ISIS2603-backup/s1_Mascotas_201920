@@ -295,7 +295,7 @@ public class MascotaPerdidaLogicTest {
             resultados.add(mascota);
         }
 
-        List<MascotaPerdidaEntity> r = mascotaLogic.findAllMascotaPerdida();
+        List<MascotaPerdidaEntity> r = mascotaLogic.getMascotasPerdida();
         Iterator iter = resultados.iterator();
 
         while (iter.hasNext()) {
@@ -312,7 +312,7 @@ public class MascotaPerdidaLogicTest {
         MascotaPerdidaEntity mascota = factory.manufacturePojo(MascotaPerdidaEntity.class);
         mascotaLogic.createMascotaPerdida(mascota);
         Assert.assertNotNull(mascota);
-        MascotaPerdidaEntity r = mascotaLogic.findMascotaPerdida(mascota.getId());
+        MascotaPerdidaEntity r = mascotaLogic.getMascotaPerdida(mascota.getId());
         Assert.assertNotNull(r);
     }
    
