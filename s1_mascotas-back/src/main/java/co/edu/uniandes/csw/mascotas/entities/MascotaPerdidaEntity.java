@@ -211,6 +211,11 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((MascotaPerdidaEntity) obj).getId().equals(getId());
+    }
     
     
 }
