@@ -140,5 +140,19 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     public void setMascotaAdopcion2(MascotaAdopcionEntity mascotaAdopcion2) {
         this.mascotaAdopcion2 = mascotaAdopcion2;
     }
+
+    /**
+     * @return the mascotaPerdida2
+     */
+    public MascotaPerdidaEntity getMascotaPerdida2() {
+        return mascotaPerdida2;
+    }
+
+    /**
+     * @param mascotaPerdida2 the mascotaPerdida2 to set
+     */
+    public void setMascotaPerdida2(MascotaPerdidaEntity mascotaPerdida2) {
+        this.mascotaPerdida2 = mascotaPerdida2;
+    }
     
 }

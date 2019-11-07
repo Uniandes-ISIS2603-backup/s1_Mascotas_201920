@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author Estudiante
+ * @author Tomás Langebaek
  */
 public class MascotaAdopcionDetailDTO extends MascotaAdopcionDTO implements Serializable {
 
