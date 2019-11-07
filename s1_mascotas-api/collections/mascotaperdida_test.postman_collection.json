@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"majhfgjkjhjkjhkhkhjfgjpppppkljklhlkhklkljiiiiiiklk@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
+					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"pa@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -361,13 +361,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/usuarios/{{new_id_ume}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_ume}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{puerto}}",
 					"path": [
+						"s1_mascotas-api",
+						"api",
 						"usuarios",
 						"{{new_id_ume}}"
 					]
