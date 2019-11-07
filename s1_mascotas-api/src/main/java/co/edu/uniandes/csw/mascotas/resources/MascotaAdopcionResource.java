@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mascotas.resources;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaAdopcionDTO;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaAdopcionDetailDTO;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionUsuarioLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class MascotaAdopcionResource {
 
     @Inject
     private MascotaAdopcionLogic mascotaLogic;
+    
+    @Inject
+    private MascotaAdopcionUsuarioLogic mascotaUsuarioLogic;
 
     @POST
     public MascotaAdopcionDTO createMascotaAdopcion(MascotaAdopcionDTO mascotaDto) throws BusinessLogicException {
@@ -87,6 +91,7 @@ public class MascotaAdopcionResource {
          if (mascotaLogic.getMascotaAdopcion(mascotasId) == null) {
             throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
         }
+         mascotaUsuarioLogic.removeUsuario(mascotasId);
         mascotaLogic.deleteMascotaAdopcion(mascotasId);
     }
 
