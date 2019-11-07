@@ -13,6 +13,8 @@ import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -34,19 +36,23 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class UsuarioResource {
+    private static final Logger LOGGER = Logger.getLogger(UsuarioResource.class.getName());
     
     @Inject
     private UsuarioLogic usuarioLogic;
     
     @POST
     public UsuarioDTO createUsuario(UsuarioDTO usuarioDto) throws BusinessLogicException {
-
+        LOGGER.log(Level.INFO, "UsuarioResource createUsuario: input(0)", usuarioDto);
+        
         UsuarioEntity usuarioEntity = usuarioDto.toEntity();
 
         usuarioEntity = usuarioLogic.createUsuario(usuarioEntity);
         
         UsuarioDTO nuevoUsuario = new UsuarioDTO(usuarioEntity);
 
+        LOGGER.log(Level.INFO, "UsuarioResource createUsuario: output(0)", nuevoUsuario);
+        
         return nuevoUsuario;
     }
     
