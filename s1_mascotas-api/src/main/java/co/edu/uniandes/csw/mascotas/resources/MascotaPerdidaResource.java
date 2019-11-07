@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.mascotas.resources;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaUsuarioLogic;
+import co.edu.uniandes.csw.mascotas.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -39,6 +41,12 @@ public class MascotaPerdidaResource {
 
     @Inject
     private MascotaPerdidaLogic mascotaLogic;
+    
+     //@Inject
+    //private MascotaPerdidaUsuarioLogic meUsuarioLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+     
+      // @Inject
+    //private UsuarioLogic usuarioLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
     
     @POST
     public MascotaPerdidaDTO createMascotaPerdida (MascotaPerdidaDTO mascotaDto) throws BusinessLogicException{
@@ -92,6 +100,7 @@ public class MascotaPerdidaResource {
          if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
             throw new WebApplicationException("El recurso /mascotasperdidas/" + mascotasId + " no existe.", 404);
         }
+       //  meUsuarioLogic.removeUsuario(mascotasId);
         mascotaLogic.deleteMascotaPerdida(mascotasId);
     }
     

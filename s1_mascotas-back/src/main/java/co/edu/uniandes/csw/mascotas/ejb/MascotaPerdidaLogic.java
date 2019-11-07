@@ -35,6 +35,7 @@ public class MascotaPerdidaLogic
         check(masc);
         
         
+        
         masc = pers.create(masc);
         return masc;
     }
