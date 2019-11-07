@@ -46,11 +46,11 @@ public class UsuarioDTO implements Serializable{
     
     public UsuarioDTO(UsuarioEntity usuario)
     {
-        setId(usuario.getId());
-        setCelular(usuario.getCelular());
-        setCiudad(usuario.getCiudad());
-        setCorreo(usuario.getCorreo());
-        setNombre(usuario.getNombre());
+        id = usuario.getId();
+        celular = usuario.getCelular();
+        ciudad = usuario.getCiudad();
+        correo = usuario.getCorreo();
+        nombre = usuario.getNombre();
     }
     
     public UsuarioEntity toEntity()

@@ -20,24 +20,39 @@ import java.util.List;
  */
 public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
 
-    private List<MascotaEncontradaDTO> mascotasEncontradas = new ArrayList<MascotaEncontradaDTO>();
+    private List<MascotaEncontradaDTO> mascotasEncontradas;
     
-    private List<MascotaPerdidaDTO> mascotasPerdidas = new ArrayList<MascotaPerdidaDTO>();
+    private List<MascotaPerdidaDTO> mascotasPerdidas;
     
-    private List<MascotaAdopcionDTO> mascotasAdopcion = new ArrayList<MascotaAdopcionDTO>();
+    private List<MascotaAdopcionDTO> mascotasAdopcion;
     
-    private List<ProcesoAdopcionDTO> procesosAdopcion = new ArrayList<ProcesoAdopcionDTO>();
+    private List<ProcesoAdopcionDTO> procesosAdopcion;
     
     //private UsuarioEntity usuario;
     
     public UsuarioDetailDTO()
     {
-        
+        mascotasEncontradas = new ArrayList<>();
+    
+        mascotasPerdidas = new ArrayList<>();
+
+        mascotasAdopcion = new ArrayList<>();
+
+        procesosAdopcion = new ArrayList<>();
     }
     
     public UsuarioDetailDTO(UsuarioEntity usuario)
     {
         super(usuario);
+        
+        mascotasEncontradas = new ArrayList<>();
+    
+        mascotasPerdidas = new ArrayList<>();
+
+        mascotasAdopcion = new ArrayList<>();
+
+        procesosAdopcion = new ArrayList<>();
+        
         if (usuario != null) {
             /**
              * Mascotas en adopcion
