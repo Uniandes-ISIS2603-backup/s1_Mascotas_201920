@@ -155,6 +155,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
             {
                 mascotasEntity.add(dtoMascota.toEntity());
             }
+            usuarioEntity.setMascotasAdopcion(mascotasEntity);
         }
         if(mascotasEncontradas != null)
         {
@@ -163,6 +164,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
             {
                 mascotasEntity.add(dtoMascota.toEntity());
             }
+            usuarioEntity.setMascotasEncontradas(mascotasEntity);
         }
         if(mascotasPerdidas != null)
         {
@@ -171,6 +173,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
             {
                 mascotasEntity.add(dtoMascota.toEntity());
             }
+            usuarioEntity.setMascotasPerdidas(mascotasEntity);
         }
         if(procesosAdopcion != null)
         {
@@ -179,6 +182,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
             {
                 procesosEntity.add(dtoProceso.toEntity());
             }
+            usuarioEntity.setProcesosAdopcion(procesosEntity);
         }
         
         return usuarioEntity;
