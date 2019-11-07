@@ -2,10 +2,61 @@
 	"info": {
 		"_postman_id": "f50b1b52-8447-4586-a5ef-ec8ad1c5e959",
 		"name": "mascotaperdida_test",
-		"description": "# Introduction\nWhat does your API do?\n\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"description": "Colecci�n de pruebas sobre el recurso MAscota perdida",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Crear un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e69bb94-fc90-4dd1-89b0-d0ab3e5293a7",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_ume\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"j@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Crear mascota perdida",
 			"event": [
@@ -34,7 +85,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n        \"descripcion\": \"BUEAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": []\r\n    }"
+					"raw": " {\n        \"descripcion\": \"BUEAS\",\n        \"especie\": 0,\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\n        \"lugar\": \"BUENAS\",\n        \"raza\": \"BUENAS\",\n        \"celular\": 321458,\n        \"fotos\": [],\n        \"videos\": []\n    }"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas",
@@ -292,5 +343,28 @@
 			},
 			"response": []
 		}
-	]
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3adfe79d-3691-40a9-9e7e-08d0fff6c6db",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "135eaff7-537e-4c90-8880-5999ba563530",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
 }
