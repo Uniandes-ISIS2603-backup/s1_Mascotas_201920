@@ -35,7 +35,6 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     @ManyToOne
     private MascotaEncontradaEntity mascotaEncontrada;
     
-    
     @PodamExclude
     @ManyToOne
     private MascotaPerdidaEntity mascotaPerdida;
@@ -47,6 +46,10 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToOne
     private MascotaAdopcionEntity mascotaAdopcion2;
+    
+    @PodamExclude
+    @ManyToOne
+    private MascotaEncontradaEntity mascotaEncontrada2;
 
     public PublicidadEntity getPublicidad() {
         return publicidad;
@@ -153,6 +156,20 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
      */
     public void setMascotaPerdida2(MascotaPerdidaEntity mascotaPerdida2) {
         this.mascotaPerdida2 = mascotaPerdida2;
+    }
+
+    /**
+     * @return the mascotaEncontrada2
+     */
+    public MascotaEncontradaEntity getMascotaEncontrada2() {
+        return mascotaEncontrada2;
+    }
+
+    /**
+     * @param mascotaEncontrada2 the mascotaEncontrada2 to set
+     */
+    public void setMascotaEncontrada2(MascotaEncontradaEntity mascotaEncontrada2) {
+        this.mascotaEncontrada2 = mascotaEncontrada2;
     }
     
 }

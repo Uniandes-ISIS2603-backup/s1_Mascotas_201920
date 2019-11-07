@@ -50,7 +50,8 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     @OneToMany(mappedBy = "mascotaEncontrada")
     private List<MultimediaEntity> fotos = new ArrayList<>();
     
-    @OneToMany(mappedBy = "mascotaEncontrada")
+    @PodamExclude
+    @OneToMany(mappedBy = "mascotaEncontrada2")
     private List<MultimediaEntity> videos = new ArrayList<>();
     
     @PodamExclude
