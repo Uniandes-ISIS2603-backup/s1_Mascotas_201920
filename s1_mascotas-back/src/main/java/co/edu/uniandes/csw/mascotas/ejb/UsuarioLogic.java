@@ -90,7 +90,7 @@ public class UsuarioLogic
         }
         
         //Celular
-        if(usuario.getCelular() == null || usuario.getCelular().equals(""))
+        if(usuario.getCelular() == null)
         {
             throw new BusinessLogicException("El celular del usuario esta vacio");
         }
