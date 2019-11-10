@@ -18,7 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class RecompensaEntity extends BaseEntity implements Serializable {
     
-    private int monto;
+    private Integer monto;
     private Boolean pagado;
     
     @PodamExclude
@@ -28,7 +28,7 @@ public class RecompensaEntity extends BaseEntity implements Serializable {
     /**
      * @return the monto
      */
-    public int getMonto() {
+    public Integer getMonto() {
         return monto;
     }
 

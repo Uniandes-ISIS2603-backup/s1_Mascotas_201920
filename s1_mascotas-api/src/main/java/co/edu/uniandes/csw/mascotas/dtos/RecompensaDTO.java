@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class RecompensaDTO implements Serializable{
     
     private Long id;
-    private int monto;
+    private Integer monto;
     private Boolean pagado;
     
     private MascotaPerdidaDTO mascotaPerdida;
@@ -66,7 +66,7 @@ public class RecompensaDTO implements Serializable{
     /**
      * @return the monto
      */
-    public int getMonto() {
+    public Integer getMonto() {
         return monto;
     }
 
