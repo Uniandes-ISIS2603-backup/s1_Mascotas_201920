@@ -67,7 +67,7 @@
 						"id": "a09eb381-d4c8-4c1b-9abf-c5106099f79c",
 						"exec": [
 							"tests[\"no crea una publicidad con costo 0\"] = responseCode.code === 412; ",
-							"tests[\"mensaje correcto de error\"] = responseBody.has(\"El costo de la publicidad es menor o igual a 0\"); "
+							"tests[\"mensaje correcto de error\"] = responseBody.has(\"El costo de la publicidad debe ser mayor a 0\"); "
 						],
 						"type": "text/javascript"
 					}
@@ -110,47 +110,12 @@
 			"response": []
 		},
 		{
-			"name": "Obtener una publicidad que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "3f3ea930-6d9d-41b8-a8b5-68cbf4c12318",
-						"exec": [
-							"tests[\"No se deberia obtener una publicidad con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /publicidades/0 no existe.\"); "
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"publicidades",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Obtener una publicidad",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "123d16b2-74ec-440f-b97f-fd20711690e5",
+						"id": "3f3ea930-6d9d-41b8-a8b5-68cbf4c12318",
 						"exec": [
 							"tests[\"no genera error en el test\"] = responseCode.code === 200; "
 						],
@@ -162,7 +127,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/{{new_id_p}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/5",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -172,179 +137,7 @@
 						"s1_mascotas-api",
 						"api",
 						"publicidades",
-						"{{new_id_p}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar una publicidad",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "e443ed8d-36c5-44ea-a1d9-4933771423ee",
-						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"No genera error en el Put\"] = responseCode.code === 200"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"costo\": 321,\r\n    \"diasPorSemana\": 1,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/{{new_id_p}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"publicidades",
-						"{{new_id_p}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar una publicidad que no existe ",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "7ba4e053-963e-4293-817d-9ae0ccb32672",
-						"exec": [
-							"tests[\"No se deberia actualizar una publicidad con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /publicidades/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"costo\": 321,\r\n    \"diasPorSemana\": 1,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"publicidades",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar una publicidad",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "36f14e4f-0bf0-4740-8f9e-13848426f9ae",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/{{new_id_p}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"publicidades",
-						"{{new_id_p}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar una publicidad que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "96b65064-5020-4fa9-b6f4-3bc4ed8f2c10",
-						"exec": [
-							"tests[\"No se deberia borrar una publicidad con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /publicidades/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/publicidades/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"publicidades",
-						"0"
+						"5"
 					]
 				}
 			},

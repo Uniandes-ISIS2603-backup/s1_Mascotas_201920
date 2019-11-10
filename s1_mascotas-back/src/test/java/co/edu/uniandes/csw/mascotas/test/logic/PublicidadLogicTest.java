@@ -55,9 +55,6 @@ public class PublicidadLogicTest {
     public void createTest() throws BusinessLogicException {
         
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
         Assert.assertNotNull(resultado);
         
@@ -75,9 +72,6 @@ public class PublicidadLogicTest {
     public void createCostoNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setCosto(null);
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
@@ -86,9 +80,6 @@ public class PublicidadLogicTest {
     public void createDiasPorSemanaNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setDiasPorSemana(null);
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
@@ -97,9 +88,6 @@ public class PublicidadLogicTest {
     public void createFechaFinNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setFecchaFin(null);
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
@@ -108,9 +96,6 @@ public class PublicidadLogicTest {
     public void createFechaInicioNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setFechaInicio(null);
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
@@ -119,9 +104,6 @@ public class PublicidadLogicTest {
     public void createMensajeNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setMensaje(null);
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
@@ -130,14 +112,9 @@ public class PublicidadLogicTest {
     public void updateTest() throws BusinessLogicException {
         
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         pl.createPublicidad(publicidad);
         PublicidadEntity prueva = factory.manufacturePojo(PublicidadEntity.class);
-        dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        prueva.setDiasPorSemana(dias);
+                
         publicidad.setCosto(prueva.getCosto());
         publicidad.setDiasPorSemana(prueva.getDiasPorSemana());
         publicidad.setFecchaFin(prueva.getFecchaFin());
@@ -159,9 +136,6 @@ public class PublicidadLogicTest {
     public void updateCostoNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setCosto(null);
         PublicidadEntity resultado = pl.updatePublicidad(publicidad);
     }
@@ -170,9 +144,6 @@ public class PublicidadLogicTest {
     public void updateDiasPorSemanaNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setDiasPorSemana(null);
         PublicidadEntity resultado = pl.updatePublicidad(publicidad);
     }
@@ -189,9 +160,6 @@ public class PublicidadLogicTest {
     public void updateFechaInicioNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setFechaInicio(null);
         PublicidadEntity resultado = pl.updatePublicidad(publicidad);
     }
@@ -200,9 +168,6 @@ public class PublicidadLogicTest {
     public void updateMensajeNull() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         publicidad.setMensaje(null);
         PublicidadEntity resultado = pl.updatePublicidad(publicidad);
     }
@@ -212,9 +177,6 @@ public class PublicidadLogicTest {
     {
         PodamFactory factory = new PodamFactoryImpl();
         PublicidadEntity p = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        p.setDiasPorSemana(dias);
         pl.createPublicidad(p);
         pl.deletePublicidad(p.getId());
 
@@ -231,15 +193,12 @@ public class PublicidadLogicTest {
         int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
         for (int i = 0; i <= j; i++) {
             PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-            int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
             pl.createPublicidad(publicidad);
             Assert.assertNotNull(publicidad);
             resultados.add(publicidad);
         }
 
-        List<PublicidadEntity> r = pl.findAll();
+        List<PublicidadEntity> r = pl.findAllPublicidad();
         Iterator iter = resultados.iterator();
 
         while (iter.hasNext()) {
@@ -254,9 +213,6 @@ public class PublicidadLogicTest {
         PodamFactory factory = new PodamFactoryImpl();
 
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        int dias= (int)(Math.random() * ((1000 - 0) + 1));
-        dias = (dias%2 == 0)? 1:3;
-        publicidad.setDiasPorSemana(dias);
         pl.createPublicidad(publicidad);
         Assert.assertNotNull(publicidad);
         PublicidadEntity r = pl.findPublicidad(publicidad.getId());
