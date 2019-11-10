@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mascotas.test.logic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.ejb.MultimediaLogic;
+import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MultimediaPersistence;
@@ -35,6 +37,9 @@ public class MultimediaLogicTest {
 
     @Inject
     private MultimediaLogic multimedaLogic;
+    
+    @Inject
+    private MascotaAdopcionLogic mAdopcionLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -56,8 +61,9 @@ public class MultimediaLogicTest {
     @Test
     public void createMultimediaTest() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
-
-        MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity resultado = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
         Assert.assertNotNull(resultado);
 
         MultimediaEntity entidad2 = em.find(MultimediaEntity.class, resultado.getId());
@@ -72,10 +78,12 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si el test sale bien
      */
     @Test(expected = BusinessLogicException.class)
-    public void createMascotaAdopcionLugarNull() throws BusinessLogicException {
+    public void createMultimediaNombreNull() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
         entidad.setNombre(null);
-        MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
 
     }
      /**
@@ -83,21 +91,25 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si el test sale bien
      */
     @Test(expected = BusinessLogicException.class)
-    public void createMascotaAdopcionLugarCadenaVacia() throws BusinessLogicException {
+    public void createMultimediaNombreCadenaVacia() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
         entidad.setNombre("");
-        MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
-
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
+        
     }
      /**
      * Test en el que se espera una excepcion al crear una entidad tipo nulo
      * @throws BusinessLogicException si el test sale bien
      */
     @Test(expected = BusinessLogicException.class)
-    public void createMascotaAdopcionRazaNull() throws BusinessLogicException {
+    public void createMultimediaTipoNull() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
         entidad.setTipo(null);
-        MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
 
     }
      /**
@@ -105,10 +117,12 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si el test sale bien
      */
     @Test(expected = BusinessLogicException.class)
-    public void createMascotaAdopcionRazaCadenaVacia() throws BusinessLogicException {
+    public void createMultimediaTipoCadenaVacia() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
         entidad.setTipo("");
-        MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
 
     }
      /**
@@ -116,10 +130,12 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si el test sale bien
      */
     @Test(expected = BusinessLogicException.class)
-    public void createMascotaAdopcionEspecieNull() throws BusinessLogicException {
+    public void createMultimediaUrlNull() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
         entidad.setUrl(null);
-        MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
 
     }
      /**
@@ -127,10 +143,12 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si el test sale bien
      */
     @Test(expected = BusinessLogicException.class)
-    public void createMascotaAdopcionDescripcionNull() throws BusinessLogicException {
+    public void createMultimediaUrlCadenaVacia() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
         entidad.setUrl("");
-        MultimediaEntity resultado = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
 
     }
 
@@ -139,10 +157,12 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si se incumple una regla de negocio
      */
     @Test
-    public void updateMascotaAdopcion() throws BusinessLogicException {
+    public void updateMultimedia() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
         
-        multimedaLogic.createMultimedia(entidad);
         MultimediaEntity entidad2 = factory.manufacturePojo(MultimediaEntity.class);
         entidad2.setId(entidad.getId());
         
@@ -168,15 +188,18 @@ public class MultimediaLogicTest {
 
         ArrayList< MultimediaEntity> resultados = new ArrayList();
 
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        
         int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
         for (int i = 0; i <= j; i++) {
-            MultimediaEntity mascota = factory.manufacturePojo(MultimediaEntity.class);
-            multimedaLogic.createMultimedia(mascota);
-            Assert.assertNotNull(mascota);
-            resultados.add(mascota);
+            MultimediaEntity multi = factory.manufacturePojo(MultimediaEntity.class);
+            multimedaLogic.createMultimedia(mascota.getId(), null, null, null, multi);
+            Assert.assertNotNull(multi);
+            resultados.add(multi);
         }
 
-        List<MultimediaEntity> r = multimedaLogic.getMultimedias();
+        List<MultimediaEntity> r = multimedaLogic.getMultimedias(mascota.getId(), null, null, null);
         Iterator iter = resultados.iterator();
 
         while (iter.hasNext()) {
@@ -189,11 +212,12 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si se incumple una regla de negocio
      */
     @Test
-    public void getMascotaAdopcionTest() throws BusinessLogicException {
+    public void getMultimediaTest() throws BusinessLogicException {
         
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
-
-        MultimediaEntity entity = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
         
         MultimediaEntity resultEntity = multimedaLogic.getMultimedia(entity.getId());
         Assert.assertNotNull(resultEntity);
@@ -207,11 +231,12 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si se incumple una regla de negocio
      */
     @Test
-    public void deleteMascotaAdopcionTest() throws BusinessLogicException {
+    public void deleteMultimediaTest() throws BusinessLogicException {
         
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
-
-        MultimediaEntity entity = multimedaLogic.createMultimedia(entidad);
+        MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
+        MultimediaEntity entity = multimedaLogic.createMultimedia(mascota.getId(), null, null, null, entidad);
         
         multimedaLogic.deleteMultimedia(entity.getId());
         MultimediaEntity deleted = em.find(MultimediaEntity.class, entity.getId());

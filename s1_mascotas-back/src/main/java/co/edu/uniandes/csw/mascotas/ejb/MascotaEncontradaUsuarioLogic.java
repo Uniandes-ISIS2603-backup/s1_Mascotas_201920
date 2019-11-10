@@ -75,8 +75,13 @@ public class MascotaEncontradaUsuarioLogic {
     public void removeUsuario(Long mascotaId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el usuario de la mascota con id = {0}", mascotaId);
         MascotaEncontradaEntity mascotaEntity = mascotaPersistence.find(mascotaId);
-        UsuarioEntity usuarioEntity = usuarioPersistence.find(mascotaEntity.getUsuario().getId());
-        mascotaEntity.setUsuario(null);
+        /**if(mascotaEntity != null)
+        {
+            UsuarioEntity usuarioEntity;
+            if(mascotaEntity.getUsuario() != null)
+                usuarioEntity = usuarioPersistence.find(mascotaEntity.getUsuario().getId());
+            mascotaEntity.setUsuario(null);
+        }**/
         //usuarioEntity.getMascotasEncontradas().remove(mascotaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario de la mascota con id = {0}", mascotaEntity.getId());
     }

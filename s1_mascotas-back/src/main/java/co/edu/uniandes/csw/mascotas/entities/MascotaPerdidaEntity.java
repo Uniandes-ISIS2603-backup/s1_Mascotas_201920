@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -69,19 +70,9 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     @PodamStrategyValue (DateStrategy.class)
     private Date fechaPerdida;
     
-    /**
-     * Fotos que tiene la mascota
-     */
     @PodamExclude
-    @OneToMany(mappedBy = "mascotaPerdida")
-    private List<MultimediaEntity> fotos = new ArrayList<>();
-    
-    /**
-     * Videos que tiene la mascota
-     */
-    @PodamExclude
-    @OneToMany(mappedBy = "mascotaPerdida2")
-    private List<MultimediaEntity> videos = new ArrayList<>();
+    @OneToMany(mappedBy = "mascotaPerdida", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<MultimediaEntity> multimedia = new ArrayList<>();
     
     /**
      * 
@@ -97,21 +88,6 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     public void setRecompensa(RecompensaEntity recompensa) {
         this.recompensa = recompensa;
-    }
-    
-    /**
-     * 
-     * @return Las fotos
-     */
-    public List<MultimediaEntity> getFotos() {
-        return fotos;
-    }
-    /**
-     * 
-     * @param fotos Modifica las fotos
-     */
-    public void setFotos(List<MultimediaEntity> fotos) {
-        this.fotos = fotos;
     }
     
     /**
@@ -185,20 +161,6 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     }
     
     /**
-     * 
-     * @return videos
-     */
-    public List<MultimediaEntity> getVideos() {
-        return videos;
-    }
-    /**
-     * 
-     * @param videos para agregar 
-     */
-    public void setVideos(List<MultimediaEntity> videos) {
-        this.videos = videos;
-    }
-    /**
      * @return el usuario propietario de la mascota
      */
     public UsuarioEntity getUsuario() {
@@ -210,6 +172,20 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return the multimedia
+     */
+    public List<MultimediaEntity> getMultimedia() {
+        return multimedia;
+    }
+
+    /**
+     * @param multimedia the multimedia to set
+     */
+    public void setMultimedia(List<MultimediaEntity> multimedia) {
+        this.multimedia = multimedia;
     }
 
 

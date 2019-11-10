@@ -68,8 +68,6 @@ public class MascotaAdopcionLogicTest {
         Assert.assertEquals(entidad2.getRaza(), resultado.getRaza());
         Assert.assertEquals(entidad2.getEspecie(), resultado.getEspecie());
         Assert.assertEquals(entidad2.getDescripcion(), resultado.getDescripcion());
-        Assert.assertEquals(entidad2.getFotos(), resultado.getFotos());
-        Assert.assertEquals(entidad2.getVideos(), resultado.getVideos());
         Assert.assertEquals(entidad2.getUsuario(), resultado.getUsuario());
 
     }

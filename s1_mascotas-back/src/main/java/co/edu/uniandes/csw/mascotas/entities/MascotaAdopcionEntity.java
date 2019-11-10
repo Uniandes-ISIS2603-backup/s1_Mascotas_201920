@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.mascotas.podam.EspecieEstrategy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -59,14 +60,8 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable {
      * Las fotos de la mascota
      */
     @PodamExclude
-    @OneToMany(mappedBy = "mascotaAdopcion")
-    private List<MultimediaEntity> fotos = new ArrayList<>();
-    /**
-     * Los videos de la mascota
-     */
-    @PodamExclude
-    @OneToMany(mappedBy = "mascotaAdopcion")
-    private List<MultimediaEntity> videos = new ArrayList<>();
+    @OneToMany(mappedBy = "mascotaAdopcion", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<MultimediaEntity> multimedia = new ArrayList<>();
 
     /**
      * @return the especie
@@ -167,31 +162,16 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the fotos
+     * @return the multimedia
      */
-    public List<MultimediaEntity> getFotos() {
-        return fotos;
+    public List<MultimediaEntity> getMultimedia() {
+        return multimedia;
     }
 
     /**
-     * @param fotos the fotos to set
+     * @param multimedia the multimedia to set
      */
-    public void setFotos(List<MultimediaEntity> fotos) {
-        this.fotos = fotos;
+    public void setMultimedia(List<MultimediaEntity> multimedia) {
+        this.multimedia = multimedia;
     }
-
-    /**
-     * @return the videos
-     */
-    public List<MultimediaEntity> getVideos() {
-        return videos;
-    }
-
-    /**
-     * @param videos the videos to set
-     */
-    public void setVideos(List<MultimediaEntity> videos) {
-        this.videos = videos;
-    }
-
 }

@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -24,32 +25,20 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     private String tipo;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(optional = true, cascade = CascadeType.PERSIST)
     private PublicidadEntity publicidad;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(optional = true,cascade = CascadeType.PERSIST)
     private MascotaAdopcionEntity mascotaAdopcion;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(optional = true,cascade = CascadeType.PERSIST)
     private MascotaEncontradaEntity mascotaEncontrada;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(optional = true,cascade = CascadeType.PERSIST)
     private MascotaPerdidaEntity mascotaPerdida;
-    
-    @PodamExclude
-    @ManyToOne
-    private MascotaPerdidaEntity mascotaPerdida2;
-    
-    @PodamExclude
-    @ManyToOne
-    private MascotaAdopcionEntity mascotaAdopcion2;
-    
-    @PodamExclude
-    @ManyToOne
-    private MascotaEncontradaEntity mascotaEncontrada2;
 
     public PublicidadEntity getPublicidad() {
         return publicidad;
@@ -129,47 +118,4 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     public void setMascota(MascotaAdopcionEntity mascota) {
         this.mascotaAdopcion = mascota;
     }
-
-    /**
-     * @return the mascotaAdopcion2
-     */
-    public MascotaAdopcionEntity getMascotaAdopcion2() {
-        return mascotaAdopcion2;
-    }
-
-    /**
-     * @param mascotaAdopcion2 the mascotaAdopcion2 to set
-     */
-    public void setMascotaAdopcion2(MascotaAdopcionEntity mascotaAdopcion2) {
-        this.mascotaAdopcion2 = mascotaAdopcion2;
-    }
-
-    /**
-     * @return the mascotaPerdida2
-     */
-    public MascotaPerdidaEntity getMascotaPerdida2() {
-        return mascotaPerdida2;
-    }
-
-    /**
-     * @param mascotaPerdida2 the mascotaPerdida2 to set
-     */
-    public void setMascotaPerdida2(MascotaPerdidaEntity mascotaPerdida2) {
-        this.mascotaPerdida2 = mascotaPerdida2;
-    }
-
-    /**
-     * @return the mascotaEncontrada2
-     */
-    public MascotaEncontradaEntity getMascotaEncontrada2() {
-        return mascotaEncontrada2;
-    }
-
-    /**
-     * @param mascotaEncontrada2 the mascotaEncontrada2 to set
-     */
-    public void setMascotaEncontrada2(MascotaEncontradaEntity mascotaEncontrada2) {
-        this.mascotaEncontrada2 = mascotaEncontrada2;
-    }
-    
 }

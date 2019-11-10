@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -47,12 +48,8 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
      */
     private String descripcion;
     @PodamExclude
-    @OneToMany(mappedBy = "mascotaEncontrada")
-    private List<MultimediaEntity> fotos = new ArrayList<>();
-    
-    @PodamExclude
-    @OneToMany(mappedBy = "mascotaEncontrada2")
-    private List<MultimediaEntity> videos = new ArrayList<>();
+    @OneToMany(mappedBy = "mascotaEncontrada", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<MultimediaEntity> multimedia = new ArrayList<>();
     
     @PodamExclude
     @ManyToOne
@@ -64,29 +61,6 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue (DateStrategy.class)
     private Date fechaEncontrada;
-
-    public List<MultimediaEntity> getFotos() {
-        return fotos;
-    }
-
-    public void setFotos(List<MultimediaEntity> fotos) {
-        this.fotos = fotos;
-    }
-
-    /**
-     * @return the videos
-     */
-    public List<MultimediaEntity> getVideos() {
-        return videos;
-    }
-
-    /**
-     * @param videos the videos to set
-     */
-    public void setVideos(List<MultimediaEntity> videos) {
-        this.videos = videos;
-    }
-
     
     /**
      * @return the especie
@@ -170,6 +144,20 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
      */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return the multimedia
+     */
+    public List<MultimediaEntity> getMultimedia() {
+        return multimedia;
+    }
+
+    /**
+     * @param multimedia the multimedia to set
+     */
+    public void setMultimedia(List<MultimediaEntity> multimedia) {
+        this.multimedia = multimedia;
     }
     
 }

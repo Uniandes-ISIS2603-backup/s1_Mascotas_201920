@@ -68,7 +68,6 @@ public class MascotaEncontradaLogicTest {
         Assert.assertEquals(entidadPrueba.getDescripcion(), resultado.getDescripcion());
         Assert.assertEquals(entidadPrueba.getFechaEncontrada(), resultado.getFechaEncontrada());
         Assert.assertEquals(entidadPrueba.getUsuario(), resultado.getUsuario());
-        Assert.assertEquals(resultado.getFotos(), entidadPrueba.getFotos());
         Assert.assertEquals(resultado.getUsuario(), entidadPrueba.getUsuario());
         
         

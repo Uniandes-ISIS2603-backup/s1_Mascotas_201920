@@ -174,26 +174,26 @@ public class MascotaEncontradaResource {
         LOGGER.info("MascotaEncontradaResource deleteMascota: output: void");
     }
 
-//    /**
-//     * Conexión con el servicio de multimedia para una mascota. {@link MultimediaResource}
-//     *
-//     * Este método conecta la ruta de /mascotasencontradas con las rutas de /multimedia que
-//     * dependen de la mascota, es una redirección al servicio que maneja el segmento
-//     * de la URL que se encarga de la multimedia.
-//     *
-//     * @param mId El ID de la mascota con respecto al cual se accede al
-//     * servicio.
-//     * @return El servicio de multimedia para esa mascota en paricular.\
-//     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-//     * Error de lógica que se genera cuando no se encuentra la mascota.
-//     */
-//    @Path("{mId: \\d+}/multimedia")
-//    public Class<MultimediaResource> getMultimediaResource(@PathParam("mId") Long mId) {
-//        if (meLogic.findMascotaEncontrada(mId) == null) {
-//            throw new WebApplicationException("El recurso /mascotasencontradas/" + mId + "/multimedia no existe.", 404);
-//        }
-//        return MultimediaResource.class;
-//    }
+    /**
+     * Conexión con el servicio de multimedia para una mascota. {@link MultimediaResource}
+     *
+     * Este método conecta la ruta de /mascotasencontradas con las rutas de /multimedia que
+     * dependen de la mascota, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de la multimedia.
+     *
+     * @param mId El ID de la mascota con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de multimedia para esa mascota en paricular.\
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la mascota.
+     */
+    @Path("{encontradaId: \\d+}/multimedia")
+    public Class<MultimediaResource> getMultimediaResource(@PathParam("encontradaId") Long mId) {
+        if (meLogic.findMascotaEncontrada(mId) == null) {
+            throw new WebApplicationException("El recurso /mascotasencontradas/" + mId + "/multimedia no existe.", 404);
+        }
+        return MultimediaResource.class;
+    }
 
     /**
      * Convierte una lista de entidades a DTO.

@@ -16,8 +16,7 @@ import java.util.List;
  * @author Lily Duque
  */
 public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Serializable{
-       private List<MultimediaDTO> fotos;
-       private List<MultimediaDTO> videos;
+       private List<MultimediaDTO> multimedia;
          public MascotaPerdidaDetailDTO() {
         
     }
@@ -25,16 +24,10 @@ public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Seria
      public MascotaPerdidaDetailDTO(MascotaPerdidaEntity mascotaEntity) {
         super(mascotaEntity);
        
-            if (mascotaEntity.getFotos() != null) {
-                fotos = new ArrayList<>();
-                for (MultimediaEntity fotoEntity : mascotaEntity.getFotos()) {
-                   fotos.add(new MultimediaDTO(fotoEntity));
-                }
-            }
-            if (mascotaEntity.getVideos() != null) {
-                videos = new ArrayList<>();
-                for (MultimediaEntity videoEntity : mascotaEntity.getVideos()) {
-                   videos.add(new MultimediaDTO(videoEntity));
+            if (mascotaEntity.getMultimedia() != null) {
+                multimedia = new ArrayList<>();
+                for (MultimediaEntity multimediaEntity : mascotaEntity.getMultimedia()) {
+                   multimedia.add(new MultimediaDTO(multimediaEntity));
                 }
             }
         }
@@ -49,52 +42,27 @@ public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Seria
     public MascotaPerdidaEntity toEntity() {
         MascotaPerdidaEntity mascotaEntity = super.toEntity();
        
-         if (getFotos() != null) {
+         if (getMultimedia() != null) {
             List<MultimediaEntity> multimediaEntity = new ArrayList<>();
-            for (MultimediaDTO dtoFoto : getFotos()) {
-                multimediaEntity.add(dtoFoto.toEntity());
+            for (MultimediaDTO dtoMultimedia : getMultimedia()) {
+                multimediaEntity.add(dtoMultimedia.toEntity());
             }
-            mascotaEntity.setFotos(multimediaEntity);
-        }
-         
-         if (getVideos() != null) {
-            List<MultimediaEntity> multimediaEntity = new ArrayList<>();
-            for (MultimediaDTO detVideo : getVideos()) {
-                multimediaEntity.add(detVideo.toEntity());
-            }
-            mascotaEntity.setVideos(multimediaEntity);
+            mascotaEntity.setMultimedia(multimediaEntity);
         }
         return mascotaEntity;
     }
+
     /**
-     * @return the fotos
+     * @return the multimedia
      */
-    public List<MultimediaDTO> getFotos() {
-        return fotos;
+    public List<MultimediaDTO> getMultimedia() {
+        return multimedia;
     }
 
     /**
-     * @param fotos the fotos to set
+     * @param multimedia the multimedia to set
      */
-    public void setFotos(List<MultimediaDTO> fotos) {
-        this.fotos = fotos;
+    public void setMultimedia(List<MultimediaDTO> multimedia) {
+        this.multimedia = multimedia;
     }
-    
-    /**
-     * 
-     * @return los videos
-     */
-    public List<MultimediaDTO> getVideos() {
-        return videos;
-    }
-    
-    /**
-     * 
-     * @param videos Una lista de arreglos
-     */
-    public void setVideos(List<MultimediaDTO> videos) {
-        this.videos = videos;
-    }
-    
-    
 }
