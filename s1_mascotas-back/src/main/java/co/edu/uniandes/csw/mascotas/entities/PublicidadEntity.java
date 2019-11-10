@@ -26,22 +26,40 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class PublicidadEntity extends BaseEntity implements Serializable
 {
+    /**
+     * El contenido de la publicidad 
+     */
     private String mensaje;
     
-    @PodamStrategyValue(PositiveIntegerStrategy.class)
+    /**
+     * El numero de dias en los cuales la publicacion es mostrada al publico
+     */
+    @PodamExclude
     private Integer diasPorSemana;
     
+    /**
+     * Costo total de la publicidad
+     */
     @PodamStrategyValue(PositiveIntegerStrategy.class)
     private Integer costo;
     
+    /**
+     * Fecha en la cual inicia la publicacion
+     */
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaInicio;
     
+    /**
+     * Fecha en la cual la publicidad deja de aparecer en la aplicacion
+     */
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecchaFin;
     
+    /**
+     * Imagenes publicitarias
+     */
     @PodamExclude
     @OneToMany(mappedBy = "publicidad")
     private List<co.edu.uniandes.csw.mascotas.entities.MultimediaEntity> multimedia = new ArrayList<>();
