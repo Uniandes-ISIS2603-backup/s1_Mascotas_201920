@@ -6,11 +6,12 @@
 package co.edu.uniandes.csw.mascotas.resources;
 
 import co.edu.uniandes.csw.mascotas.dtos.PublicidadDTO;
+import co.edu.uniandes.csw.mascotas.dtos.PublicidadDetailDTO;
 import co.edu.uniandes.csw.mascotas.ejb.PublicidadLogic;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
-import java.util.Date;
-import java.util.logging.Level;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -23,8 +24,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+
 /**
- *
+ * Recurso de publicidad
  * @author German Rozo
  */
 @Path("publicidades")
@@ -48,14 +50,33 @@ public class PublicidadResource
    
     @GET
     @Path("{publicidadId: \\d+}")
-    public PublicidadDTO getPublicidad(@PathParam("publicidadId") Long publicidadId) throws BusinessLogicException
+    public PublicidadDetailDTO getPublicidad(@PathParam("publicidadId") Long publicidadId) throws BusinessLogicException
     {
         PublicidadEntity authorEntity = logic.findPublicidad(publicidadId);
         if (authorEntity == null) {
             throw new WebApplicationException("El recurso /publicidades/" + publicidadId + " no existe.", 404);
         }
-        PublicidadDTO detailDTO = new PublicidadDTO(authorEntity);
+        PublicidadDetailDTO detailDTO = new PublicidadDetailDTO(authorEntity);
         return detailDTO;
+    }
+    
+    
+    /**
+     * Retorna una lista de DTOs con todas la publicidades existentes 
+     * @return 
+     */
+    @GET
+    public List<PublicidadDetailDTO> getPublicidades()
+    {
+        List<PublicidadDetailDTO> DTOs= new ArrayList();
+        
+        List<PublicidadEntity> publicidadEntity = logic.findAll();
+        for (PublicidadEntity pe : publicidadEntity) 
+        {
+            DTOs.add(new PublicidadDetailDTO(pe));
+        }
+        
+        return DTOs;
     }
    
    @PUT
@@ -74,9 +95,9 @@ public class PublicidadResource
    @Path("{publicidadId: \\d+}")
    public void deletePublicidad(@PathParam("publicidadId") Long publicidadId) throws BusinessLogicException
    {
-      if (logic.findPublicidad(publicidadId) == null) {
+        if (logic.findPublicidad(publicidadId) == null)
             throw new WebApplicationException("El recurso /publicidades/" + publicidadId + " no existe.", 404);
-        }
+      
         logic.deletePublicidad(publicidadId);
    }
 }
