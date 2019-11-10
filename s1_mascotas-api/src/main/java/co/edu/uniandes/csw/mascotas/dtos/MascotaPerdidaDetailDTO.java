@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * MascotaPerdidaDetailDTO
  * @author Lily Duque
  */
 public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Serializable{

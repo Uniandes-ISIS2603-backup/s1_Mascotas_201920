@@ -8,13 +8,12 @@ package co.edu.uniandes.csw.mascotas.resources;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaUsuarioLogic;
+import co.edu.uniandes.csw.mascotas.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.mascotas.podam.DateStrategy;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -42,6 +41,12 @@ public class MascotaPerdidaResource {
 
     @Inject
     private MascotaPerdidaLogic mascotaLogic;
+    
+     //@Inject
+    //private MascotaPerdidaUsuarioLogic meUsuarioLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+     
+      // @Inject
+    //private UsuarioLogic usuarioLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
     
     @POST
     public MascotaPerdidaDTO createMascotaPerdida (MascotaPerdidaDTO mascotaDto) throws BusinessLogicException{
@@ -95,33 +100,10 @@ public class MascotaPerdidaResource {
          if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
             throw new WebApplicationException("El recurso /mascotasperdidas/" + mascotasId + " no existe.", 404);
         }
+       //  meUsuarioLogic.removeUsuario(mascotasId);
         mascotaLogic.deleteMascotaPerdida(mascotasId);
     }
-    private void crearMascota () throws BusinessLogicException
-    {
-        MascotaPerdidaEntity yo = new MascotaPerdidaEntity();
-        yo.setEspecie(0);
-         Calendar c = Calendar.getInstance();
-        int max_year = 9999;
-        Random r = new Random();
-        c.set(Calendar.YEAR, r.nextInt(
-                max_year - c.getActualMinimum(Calendar.YEAR) + 1)
-                + c.getActualMinimum(Calendar.YEAR));
-        c.set(Calendar.DAY_OF_YEAR, r.nextInt(
-                c.getActualMaximum(Calendar.DAY_OF_YEAR) - c.getActualMinimum(Calendar.DAY_OF_YEAR) + 1)
-                + c.getActualMinimum(Calendar.DAY_OF_YEAR));
-        c.set(Calendar.HOUR_OF_DAY, c.getActualMinimum(Calendar.HOUR_OF_DAY));
-        c.set(Calendar.MINUTE, c.getActualMinimum(Calendar.MINUTE));
-        c.set(Calendar.SECOND, c.getActualMinimum(Calendar.SECOND));
-        c.set(Calendar.MILLISECOND, c.getActualMinimum(Calendar.MILLISECOND));
-        yo.setFechaPerdida(c.getTime());
-        yo.setDescripcion("BUENAS");
-        yo.setRaza("BUENAS");
-        yo.setLugar("BUENAS");
-        yo.setRecompensa(null);
-        //yo.setId(new Long(0));
-        mascotaLogic.createMascotaPerdida(yo);
-    }
+    
     private List<MascotaPerdidaDetailDTO> listEntity2DTO(List<MascotaPerdidaEntity> entityList) {
         List<MascotaPerdidaDetailDTO> list = new ArrayList<>();
         for (MascotaPerdidaEntity entity : entityList) {

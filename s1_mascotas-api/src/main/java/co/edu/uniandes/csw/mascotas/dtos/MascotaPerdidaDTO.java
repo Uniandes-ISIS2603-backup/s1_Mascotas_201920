@@ -10,7 +10,47 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * MascotaPerdidaDTO. Los DTO contienen
+ * las representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
  *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ * {
+        "descripcion": string,
+        "especie": int,
+        "fechaPerdida": date,
+        "id": int,
+        "lugar": string,
+        "raza": string,
+        *usuario": ,
+        "recompensa"
+    }
+ *   {
+ *      "id": number,
+ *      "name": string,
+ *      "isbn": string,
+ *      "image: string,
+ *      "description": string,
+ *      "publishingdate": date,
+ *      "editorial": {@link EditorialDTO}
+ *   }
+ * </pre> Por ejemplo una editorial se representa asi:<br>
+ *
+ * <pre>
+ *
+ *  {
+        "descripcion": "BUENAS",
+        "especie": 0,
+        "fechaPerdida": "2668-11-05T05:00:00Z[UTC]",
+        "id": 1,
+        "lugar": "BUENAS",
+        "raza": "BUENAS",
+        *usuario": ,
+        "recompensa"
+    }
+ *
+ * </pre>
  * @author lily 
  */
 public class MascotaPerdidaDTO implements Serializable{
@@ -49,14 +89,21 @@ public class MascotaPerdidaDTO implements Serializable{
      */
     private Date fechaPerdida;
     
-    
+    /**
+     * Usuario dueño de la mascota
+     */
     private UsuarioDTO usuario;
     
-    
+    /**
+     * Constructor vacio
+     */
     public MascotaPerdidaDTO() {
 
     }
-
+    /**
+     * Constructor mascotas perdidas
+     * @param entidad mascota 
+     */
     public MascotaPerdidaDTO(MascotaPerdidaEntity entidad) {
         
         setDescripcion(entidad.getDescripcion());
@@ -83,7 +130,10 @@ public class MascotaPerdidaDTO implements Serializable{
         setId(entidad.getId());
         
     }
-
+    /**
+     * MascotaPerdidaDTO a entity 
+     * @return MascotaPerdidaEntity
+     */
     public MascotaPerdidaEntity toEntity() {
 
         MascotaPerdidaEntity entidad = new MascotaPerdidaEntity();
@@ -109,11 +159,17 @@ public class MascotaPerdidaDTO implements Serializable{
         return entidad;
 
     }
-
+    /**
+     * 
+     * @return recompensa 
+     */
     public RecompensaDTO getRecompensa() {
         return recompensa;
     }
-
+    /**
+     * 
+     * @param recompensa La recompensa a cambiar 
+     */
     public void setRecompensa(RecompensaDTO recompensa) {
         this.recompensa = recompensa;
     }
@@ -203,10 +259,17 @@ public class MascotaPerdidaDTO implements Serializable{
     public void setFechaPerdida(Date fechaPerdida) {
         this.fechaPerdida = fechaPerdida;
     }
-
+    /**
+     * 
+     * @return usuario
+     */
     public UsuarioDTO getUsuario() {
         return usuario;
     }
+    /**
+     * 
+     * @param usuario el usuario a cambiar
+     */
 
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;

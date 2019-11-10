@@ -32,7 +32,7 @@ public class UsuarioDTO implements Serializable{
     /**
      * Celular del usuario
      */
-    private Integer celular;
+    private Long celular;
     
     /**
      * ID del usuario
@@ -46,16 +46,18 @@ public class UsuarioDTO implements Serializable{
     
     public UsuarioDTO(UsuarioEntity usuario)
     {
-        setCelular(usuario.getCelular());
-        setCiudad(usuario.getCiudad());
-        setCorreo(usuario.getCorreo());
-        setNombre(usuario.getNombre());
+        id = usuario.getId();
+        celular = usuario.getCelular();
+        ciudad = usuario.getCiudad();
+        correo = usuario.getCorreo();
+        nombre = usuario.getNombre();
     }
     
     public UsuarioEntity toEntity()
     {
         UsuarioEntity entity = new UsuarioEntity();
         
+        entity.setId(id);
         entity.setCorreo(correo);
         entity.setCelular(celular);
         entity.setCiudad(ciudad);
@@ -109,14 +111,14 @@ public class UsuarioDTO implements Serializable{
     /**
      * @return the celular
      */
-    public Integer getCelular() {
+    public Long getCelular() {
         return celular;
     }
 
     /**
      * @param celular the celular to set
      */
-    public void setCelular(Integer celular) {
+    public void setCelular(Long celular) {
         this.celular = celular;
     }
     

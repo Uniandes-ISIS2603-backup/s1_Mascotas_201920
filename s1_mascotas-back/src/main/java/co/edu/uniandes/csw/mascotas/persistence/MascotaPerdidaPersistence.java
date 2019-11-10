@@ -13,7 +13,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ * Clase que maneja la persistencia para Book. 
+ * Se conecta a través del Entity Manager de javax.persistance con la base de datos SQL.
  * @author Lily
  */
 @Stateless

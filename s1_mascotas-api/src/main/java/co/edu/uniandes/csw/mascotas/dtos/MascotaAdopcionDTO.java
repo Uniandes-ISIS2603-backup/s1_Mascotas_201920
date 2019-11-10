@@ -41,6 +41,8 @@ public class MascotaAdopcionDTO implements Serializable {
     }
 
     public MascotaAdopcionDTO(MascotaAdopcionEntity entidad) {
+        
+        if( entidad != null){
 
         setDescripcion(entidad.getDescripcion());
 
@@ -56,6 +58,7 @@ public class MascotaAdopcionDTO implements Serializable {
 
         if (entidad.getUsuario() != null) {
             this.usuario = new UsuarioDTO(entidad.getUsuario());
+        }
         }
 
     }

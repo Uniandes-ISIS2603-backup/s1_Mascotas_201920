@@ -49,7 +49,7 @@ public class UsuarioLogicTest {
     public void createUsuarioTodoBien() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia19991@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
     }
     
@@ -58,7 +58,7 @@ public class UsuarioLogicTest {
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
         newUsuario.setNombre(null);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia21999@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
     }
     
@@ -67,7 +67,7 @@ public class UsuarioLogicTest {
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
         newUsuario.setCiudad(null);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia31999@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
     }
     
@@ -83,7 +83,7 @@ public class UsuarioLogicTest {
     public void createUsuarioCorreoSinArroba() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999gmail.com");
+        newUsuario.setCorreo("tobia19949gmail.com");
         usuarioLogic.createUsuario(newUsuario);
     }
     
@@ -132,7 +132,7 @@ public class UsuarioLogicTest {
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
         newUsuario.setCelular(null);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia199912@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
     }
     
@@ -143,11 +143,11 @@ public class UsuarioLogicTest {
     public void updateUsuarioNombreNull() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia199912@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
-        usuarioForUpdate.setCorreo("tobia1999@gmail.com");
+        usuarioForUpdate.setCorreo("tobia199912@gmail.com");
         usuarioForUpdate.setNombre(null);
         usuarioLogic.updateUsuario(usuarioForUpdate);
     }
@@ -156,11 +156,11 @@ public class UsuarioLogicTest {
     public void updateUsuarioCelularNull() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia19991221@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
-        usuarioForUpdate.setCorreo("tobia1999@gmail.com");
+        usuarioForUpdate.setCorreo("tobia19991221@gmail.com");
         usuarioForUpdate.setCelular(null);
         usuarioLogic.updateUsuario(usuarioForUpdate);
     }
@@ -169,11 +169,11 @@ public class UsuarioLogicTest {
     public void updateUsuarioCiudadNull() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia1999123@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
-        usuarioForUpdate.setCorreo("tobia1999@gmail.com");
+        usuarioForUpdate.setCorreo("tobia1999123@gmail.com");
         usuarioForUpdate.setCiudad(null);
         usuarioLogic.updateUsuario(usuarioForUpdate);
     }
@@ -182,7 +182,7 @@ public class UsuarioLogicTest {
     public void updateUsuarioCorreoNull() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia1999123321@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
@@ -194,7 +194,7 @@ public class UsuarioLogicTest {
     public void updateUsuarioCorreoParteDerechaVacia() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia199912231@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
@@ -206,7 +206,7 @@ public class UsuarioLogicTest {
     public void updateUsuarioCorreoParteIzquierdaVacia() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia1999212121@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
@@ -218,7 +218,7 @@ public class UsuarioLogicTest {
     public void updateUsuarioCorreoPuntoDerechaVacia() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia1999121212@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
@@ -230,7 +230,7 @@ public class UsuarioLogicTest {
     public void updateUsuarioCorreoPuntoIzquierdaVacia() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia19991232123212@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
@@ -242,7 +242,7 @@ public class UsuarioLogicTest {
     public void updateUsuarioCorreoSinArroba() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia199965@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());
@@ -254,7 +254,7 @@ public class UsuarioLogicTest {
     public void updateUsuarioCorreoSinPunto() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia1999@gmail.com");
+        newUsuario.setCorreo("tobia1999765@gmail.com");
         usuarioLogic.createUsuario(newUsuario);
         UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
         usuarioForUpdate.setId(newUsuario.getId());

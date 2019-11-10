@@ -7,6 +7,57 @@
 	},
 	"item": [
 		{
+			"name": "crear usuario2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eeb87ac1-b9e3-484f-a57c-f3a3f3fedab0",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_aa3\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"tobiasarwegaweaa@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear una Mascota Adopcion",
 			"event": [
 				{
@@ -29,13 +80,18 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"especie\": 0,\n\t\"raza\": \"laraza\",\n\t\"descripcion\": \"ladescripcion\",\n\t\"lugar\": \"ellugar\",\n\t\"historia\": \"lahistoria\"\n}"
+					"raw": "{\n\t\"especie\": 0,\n\t\"raza\": \"laraza\",\n\t\"descripcion\": \"ladescripcion\",\n\t\"lugar\": \"ellugar\",\n\t\"historia\": \"lahistoria\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion",
@@ -129,7 +185,12 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"especie\": 0,\n\t\"raza\": \"laraza\",\n\t\"descripcion\": \"\",\n\t\"lugar\": \"ellugar\",\n\t\"historia\": \"lahistoria\"\n}"
+					"raw": "{\n\t\"especie\": 0,\n\t\"raza\": \"laraza\",\n\t\"descripcion\": \"\",\n\t\"lugar\": \"ellugar\",\n\t\"historia\": \"lahistoria\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion",
@@ -470,6 +531,40 @@
 						"api",
 						"mascotasadopcion",
 						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06c863e4-c52a-4b6e-8105-7fb42cd3ee45",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_aa3}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						"{{new_id_aa3}}"
 					]
 				}
 			},

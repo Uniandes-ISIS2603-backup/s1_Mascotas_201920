@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.MascotaEncontradaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
@@ -47,6 +48,8 @@ public class MascotaEncontradaLogicTest {
     
     @Inject
     private MascotaEncontradaLogic mel;
+    @Inject
+    private UsuarioLogic ul;
     
     @PersistenceContext
     private EntityManager em;
@@ -64,6 +67,9 @@ public class MascotaEncontradaLogicTest {
         Assert.assertEquals(entidadPrueba.getEspecie(), resultado.getEspecie());
         Assert.assertEquals(entidadPrueba.getDescripcion(), resultado.getDescripcion());
         Assert.assertEquals(entidadPrueba.getFechaEncontrada(), resultado.getFechaEncontrada());
+        Assert.assertEquals(entidadPrueba.getUsuario(), resultado.getUsuario());
+        Assert.assertEquals(resultado.getFotos(), entidadPrueba.getFotos());
+        Assert.assertEquals(resultado.getUsuario(), entidadPrueba.getUsuario());
         
         
     }
@@ -195,7 +201,7 @@ public class MascotaEncontradaLogicTest {
     public void deleteMascotaEncontradaTest() throws BusinessLogicException {
         
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
-
+        
         MascotaEncontradaEntity entity = mel.createMascotaEncontrada(entidad);
         
         mel.deleteMascotaEncontrada(entity.getId());

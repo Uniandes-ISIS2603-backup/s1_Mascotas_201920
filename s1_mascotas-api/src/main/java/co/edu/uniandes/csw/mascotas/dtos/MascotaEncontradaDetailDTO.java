@@ -16,8 +16,12 @@ import java.util.List;
  * @author ja.avelino
  */
 public class MascotaEncontradaDetailDTO  extends MascotaEncontradaDTO implements Serializable{
+    
        private List<MultimediaDTO> fotos;
-         public MascotaEncontradaDetailDTO() {
+       
+       private List<MultimediaDTO> videos;
+       
+       public MascotaEncontradaDetailDTO() {
         
     }
     
@@ -28,6 +32,12 @@ public class MascotaEncontradaDetailDTO  extends MascotaEncontradaDTO implements
                 fotos = new ArrayList<>();
                 for (MultimediaEntity fotoEntity : mascotaEntity.getFotos()) {
                    fotos.add(new MultimediaDTO(fotoEntity));
+                }
+            }
+            if (mascotaEntity.getVideos() != null) {
+                videos = new ArrayList<>();
+                for (MultimediaEntity videoEntity : mascotaEntity.getVideos()) {
+                   fotos.add(new MultimediaDTO(videoEntity));
                 }
             }
         }
@@ -42,12 +52,19 @@ public class MascotaEncontradaDetailDTO  extends MascotaEncontradaDTO implements
     public MascotaEncontradaEntity toEntity() {
         MascotaEncontradaEntity mascotaEntity = super.toEntity();
        
-         if (getFotos() != null) {
+        if (getFotos() != null) {
             List<MultimediaEntity> multimediaEntity = new ArrayList<>();
             for (MultimediaDTO dtoFoto : getFotos()) {
                 multimediaEntity.add(dtoFoto.toEntity());
             }
             mascotaEntity.setFotos(multimediaEntity);
+        }
+        if (getVideos() != null) {
+            List<MultimediaEntity> multimediaEntity = new ArrayList<>();
+            for (MultimediaDTO dtoVideos : getVideos()) {
+                multimediaEntity.add(dtoVideos.toEntity());
+            }
+            mascotaEntity.setVideos(multimediaEntity);
         }
         return mascotaEntity;
     }
@@ -63,5 +80,19 @@ public class MascotaEncontradaDetailDTO  extends MascotaEncontradaDTO implements
      */
     public void setFotos(List<MultimediaDTO> fotos) {
         this.fotos = fotos;
+    }
+
+    /**
+     * @return the videos
+     */
+    public List<MultimediaDTO> getVideos() {
+        return videos;
+    }
+
+    /**
+     * @param videos the videos to set
+     */
+    public void setVideos(List<MultimediaDTO> videos) {
+        this.videos = videos;
     }
 }
