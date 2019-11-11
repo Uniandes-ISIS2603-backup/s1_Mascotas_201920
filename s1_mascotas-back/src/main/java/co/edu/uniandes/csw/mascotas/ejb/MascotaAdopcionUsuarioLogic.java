@@ -75,9 +75,7 @@ public class MascotaAdopcionUsuarioLogic {
     public void removeUsuario(Long mascotaId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el usuario de la mascota con id = {0}", mascotaId);
         MascotaAdopcionEntity mascotaEntity = mascotaPersistence.find(mascotaId);
-        //UsuarioEntity usuarioEntity = usuarioPersistence.find(mascotaEntity.getUsuario().getId());
         mascotaEntity.setUsuario(null);
-        //usuarioEntity.getMascotasAdopcions().remove(mascotaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario de la mascota con id = {0}", mascotaEntity.getId());
     }
 }
