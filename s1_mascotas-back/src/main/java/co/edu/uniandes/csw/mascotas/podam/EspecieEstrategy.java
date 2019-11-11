@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.AttributeStrategy;
 public class EspecieEstrategy implements AttributeStrategy<Integer> {
     @Override
     public Integer getValue() {
-        
-        return new Integer((int)((Math.random()*10)%2));
+        Random r = new Random();
+        return r.nextInt(1);
     }
 }
