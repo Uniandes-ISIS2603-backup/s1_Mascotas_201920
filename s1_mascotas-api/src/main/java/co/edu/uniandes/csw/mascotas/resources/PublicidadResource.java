@@ -10,9 +10,7 @@ import co.edu.uniandes.csw.mascotas.ejb.PublicidadLogic;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -35,9 +33,10 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class PublicidadResource 
 {
-   private static final Logger LOGGER = Logger.getLogger(PublicidadResource.class.getName());
    private static final String PRIM= "El recurso /publicidad/";
-    private static final String NO=" no existe.";
+   
+   private static final String NO=" no existe.";
+   
    @Inject 
    private PublicidadLogic logic;
    
@@ -45,8 +44,7 @@ public class PublicidadResource
    public PublicidadDTO createPublicidad(PublicidadDTO publicidad) throws BusinessLogicException
    {
        
-        PublicidadDTO authorDTO = new PublicidadDTO(logic.createPublicidad(publicidad.toEntity()));
-        return authorDTO;
+        return new PublicidadDTO(logic.createPublicidad(publicidad.toEntity()));
    }
    
     @GET
@@ -57,8 +55,7 @@ public class PublicidadResource
         if (authorEntity == null) {
             throw new WebApplicationException(PRIM + publicidadId + NO, 404);
         }
-        PublicidadDTO detailDTO = new PublicidadDTO(authorEntity);
-        return detailDTO;
+        return new PublicidadDTO(authorEntity);
     }
    
     @GET
@@ -81,8 +78,7 @@ public class PublicidadResource
         if (logic.findPublicidad(publicidadId) == null) {
             throw new WebApplicationException(PRIM + publicidadId +NO, 404);
         }
-        PublicidadDTO detailDTO = new PublicidadDTO(logic.updatePublicidad(publicidad.toEntity()));
-        return detailDTO;
+        return new PublicidadDTO(logic.updatePublicidad(publicidad.toEntity()));
    }
    
    @DELETE
