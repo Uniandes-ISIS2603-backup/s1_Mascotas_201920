@@ -61,9 +61,8 @@ public class ProcesoAdopcionLogicTest {
     }
     
     @Test
-    public void createProcesoTest() throws BusinessLogicException{
+    public void createProcesoCanceladoTest() throws BusinessLogicException{
        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
-       newEntity.setCalificacion(3);
        newEntity.setEstado("Cancelado");
        ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
        assertNotNull(result);
@@ -115,12 +114,10 @@ public class ProcesoAdopcionLogicTest {
     @Test
     public void updateProcesoTest() throws BusinessLogicException{
        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
-       newEntity.setCalificacion(3);
        newEntity.setEstado("Cancelado");
        procesoLogic.createProcesoAdopcion(newEntity);
        ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
        entityToUpdate.setId(newEntity.getId());
-       entityToUpdate.setCalificacion(3);
        entityToUpdate.setEstado("Cancelado");
     
        procesoLogic.updateProcesoAdopcion(entityToUpdate);
@@ -129,11 +126,39 @@ public class ProcesoAdopcionLogicTest {
        assertNotNull(entity);
        assertEquals(entity.getComentario(), entityToUpdate.getComentario());
     }
+    @Test
+    public void updateProcesoTerminadoTest() throws BusinessLogicException{
+       ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setEstado("Cancelado");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setEstado("Terminado");
     
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
+       
+       ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, newEntity.getId());
+       assertNotNull(entity);
+       assertEquals(entity.getComentario(), entityToUpdate.getComentario());
+    }
+    @Test
+    public void updateProcesoEnProcesoTest() throws BusinessLogicException{
+       ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setEstado("Cancelado");
+       procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setEstado("En Proceso");
+    
+       procesoLogic.updateProcesoAdopcion(entityToUpdate);
+       
+       ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, newEntity.getId());
+       assertNotNull(entity);
+       assertEquals(entity.getComentario(), entityToUpdate.getComentario());
+    }
     @Test (expected = BusinessLogicException.class)
     public void updateProcesoEstadoNullTest() throws BusinessLogicException{
         ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
-       newEntity.setCalificacion(3);
        newEntity.setEstado("Cancelado");
        procesoLogic.createProcesoAdopcion(newEntity);
        ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
@@ -211,6 +236,32 @@ public class ProcesoAdopcionLogicTest {
         ProcesoAdopcionEntity deleted=em.find(ProcesoAdopcionEntity.class,entity.getId());
         assertNull(deleted);
     }
+    @Test
+    public void createProcesoEnProcesoTest() throws BusinessLogicException{
+       ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setEstado("En Proceso");
+       ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
+       assertNotNull(result);
+       
+       ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, result.getId());
+       assertEquals(entity.getEstado(), result.getEstado());
+       assertEquals(entity.getCalificacion(), result.getCalificacion());
+       assertEquals(entity.getComentario(), result.getComentario());
+       assertEquals(entity.getUsuario(), result.getUsuario());
+    }
     
+    @Test
+    public void createProcesoTerminadoTest() throws BusinessLogicException{
+       ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       newEntity.setEstado("Terminado");
+       ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
+       assertNotNull(result);
+       
+       ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, result.getId());
+       assertEquals(entity.getEstado(), result.getEstado());
+       assertEquals(entity.getCalificacion(), result.getCalificacion());
+       assertEquals(entity.getComentario(), result.getComentario());
+       assertEquals(entity.getUsuario(), result.getUsuario());
+    }
     
 }

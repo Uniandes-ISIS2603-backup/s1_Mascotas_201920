@@ -82,6 +82,14 @@ public class RecompensaLogicTest {
        RecompensaEntity result=recompensaLogic.createRecompensa(newEntity);
     }
     
+    @Test (expected = BusinessLogicException.class)
+    public void createRecompensaMontoCeroTest() throws BusinessLogicException{
+       RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
+       newEntity.setMonto(0);
+       newEntity.setPagado(false);
+       RecompensaEntity result=recompensaLogic.createRecompensa(newEntity);
+    }
+    
     @Test
     public void updateRecompensaTest() throws BusinessLogicException{
        RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
