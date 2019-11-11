@@ -54,6 +54,19 @@ public class ProcesoAdopcionPersistenceTest {
         ProcesoAdopcionEntity entity = em.find(ProcesoAdopcionEntity.class, proceso.getId());
         
         Assert.assertEquals(newProceso_AdopcionEntity, entity); 
+        Assert.assertEquals(newProceso_AdopcionEntity.getMascotaAdopcion(), entity.getMascotaAdopcion()); 
+        
+          Assert.assertEquals(newProceso_AdopcionEntity.getCalificacion(), entity.getCalificacion()); 
+          
+            Assert.assertEquals(newProceso_AdopcionEntity.getComentario(), entity.getComentario()); 
+            
+              Assert.assertEquals(newProceso_AdopcionEntity.getEstado(), entity.getEstado()); 
+              
+                Assert.assertEquals(newProceso_AdopcionEntity.getId(), entity.getId()); 
+                
+                  Assert.assertEquals(newProceso_AdopcionEntity.getMascotaAdopcion(), entity.getMascotaAdopcion()); 
+                  
+                    Assert.assertEquals(newProceso_AdopcionEntity.getUsuario(), entity.getUsuario()); 
         
         pp.delete(proceso.getId());
     }
@@ -68,6 +81,20 @@ public class ProcesoAdopcionPersistenceTest {
        Assert.assertNotNull(result);        
        
        Assert.assertEquals(pp.find(result.getId()),result);
+       
+       Assert.assertEquals(pp.find(result.getId()),result);
+       
+        Assert.assertEquals(pp.find(result.getId()).getCalificacion(),result.getCalificacion());
+        
+         Assert.assertEquals(pp.find(result.getId()).getComentario(),result.getComentario());
+         
+          Assert.assertEquals(pp.find(result.getId()).getEstado(),result.getEstado());
+          
+           Assert.assertEquals(pp.find(result.getId()).getId(),result.getId());
+           
+            Assert.assertEquals(pp.find(result.getId()).getMascotaAdopcion(),result.getMascotaAdopcion());
+            
+             Assert.assertEquals(pp.find(result.getId()).getUsuario(),result.getUsuario());
        
        pp.delete(result.getId());
        
