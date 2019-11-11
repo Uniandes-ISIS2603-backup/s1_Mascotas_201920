@@ -108,6 +108,14 @@ public class PublicidadLogicTest {
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
     
+    @Test(expected = BusinessLogicException.class)
+    public void createCostoNegativo() throws BusinessLogicException
+    {
+        PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
+        publicidad.setCosto(-1);
+        PublicidadEntity resultado = pl.createPublicidad(publicidad);
+    }
+    
     @Test
     public void updateTest() throws BusinessLogicException {
         
