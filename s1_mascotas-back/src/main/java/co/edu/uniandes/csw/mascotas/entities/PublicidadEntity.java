@@ -102,36 +102,27 @@ public class PublicidadEntity extends BaseEntity implements Serializable
         boolean resultado = true;
         
         if (this == obj) {
-            resultado = true;
+            return true;
         }
-        else if (obj == null) {
+        else if (obj == null || getClass() != obj.getClass()) {
             resultado = false;
         }
-        else if (getClass() != obj.getClass()) {
-            resultado = false;
-        }else{
+        else
+        {
+            final PublicidadEntity other = (PublicidadEntity) obj;
+            
+            if (Objects.equals(this.mensaje, other.mensaje) && 
+                    Objects.equals(this.diasPorSemana, other.diasPorSemana) &&
+                    Objects.equals(this.costo, other.costo) &&
+                    Objects.equals(this.fechaInicio, other.fechaInicio) &&
+                    Objects.equals(this.fecchaFin, other.fecchaFin) && 
+                    Objects.equals(this.multimedia, other.multimedia)
+                    ) {
+                return false;
+            }
+        }
         
-        final PublicidadEntity other = (PublicidadEntity) obj;
-        if (!Objects.equals(this.mensaje, other.mensaje)) {
-            resultado = false;
-        }
-        else if (!Objects.equals(this.diasPorSemana, other.diasPorSemana)) {
-            resultado = false;
-        }
-        else if (!Objects.equals(this.costo, other.costo)) {
-            resultado = false;
-        }
-        else if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
-            resultado = false;
-        }
-        else if (!Objects.equals(this.fecchaFin, other.fecchaFin)) {
-            resultado = false;
-        }
-        else if (!Objects.equals(this.multimedia, other.multimedia)) {
-            resultado = false;
-        }
-        }
-        return resultado;
+        return true;
     }
 
     @Override
