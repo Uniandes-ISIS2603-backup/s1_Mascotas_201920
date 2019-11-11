@@ -54,7 +54,6 @@ public class MultimediaPersistence {
      */
     public MultimediaEntity update(MultimediaEntity multimedia) {
 
-        MultimediaEntity nuevo = em.find(MultimediaEntity.class, multimedia.getId());
         
         em.merge(multimedia);
         
