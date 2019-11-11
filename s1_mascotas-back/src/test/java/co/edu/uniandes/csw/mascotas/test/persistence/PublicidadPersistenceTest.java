@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.test.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
+import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -101,15 +103,25 @@ public class PublicidadPersistenceTest {
     }
     
     @Test
-    public void createTest() {
+    public void createTest() 
+    {
         PodamFactory factory = new PodamFactoryImpl();
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
         PublicidadEntity resultado = pp.create(publicidad);
+        ArrayList<MultimediaEntity> al= new ArrayList<>();
+        al.add(new MultimediaEntity());
+        Assert.assertEquals(publicidad.getMultimedia().size(),
+                0);
+        publicidad.setMultimedia(al);
         Assert.assertNotNull(resultado);
 
         PublicidadEntity entity = em.find(PublicidadEntity.class, resultado.getId());
         Assert.assertEquals(publicidad.getMensaje(),
                 entity.getMensaje());
+        
+               
+        Assert.assertEquals(publicidad.getMultimedia().size(),
+                1);
 
     }
 
