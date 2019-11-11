@@ -39,7 +39,8 @@ public class MascotaPerdidaResource {
 
     @Inject
     private MascotaPerdidaLogic mascotaLogic;
-     private static final  String prim= "El recurso /mascotasperdidas/";
+    private static final String PRIM= "El recurso /mascotasperdidas/";
+    private static final String NO=" no existe.";
     
      //@Inject
     //private MascotaPerdidaUsuarioLogic meUsuarioLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
@@ -67,7 +68,7 @@ public class MascotaPerdidaResource {
         
         MascotaPerdidaEntity entidad = mascotaLogic.getMascotaPerdida(mascotasId);
         if (entidad == null) {
-            throw new WebApplicationException(prim + mascotasId + " no existe", 404);
+            throw new WebApplicationException(PRIM+ mascotasId + NO, 404);
         }
         return new MascotaPerdidaDetailDTO(entidad);
     }
@@ -86,7 +87,7 @@ public class MascotaPerdidaResource {
     public MascotaPerdidaDTO updateMascotaPerdida(@PathParam("mascotasid") Long mascotasId, MascotaPerdidaDTO mascota) throws BusinessLogicException {
         mascota.setId(mascotasId);
         if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
-            throw new WebApplicationException(prim + mascotasId + " no existe.", 404);
+            throw new WebApplicationException(PRIM+ mascotasId + NO, 404);
         }
         MascotaPerdidaDetailDTO detailDTO = new MascotaPerdidaDetailDTO(mascotaLogic.updateMascotaPerdida(mascota.toEntity()));
         return detailDTO;
@@ -97,7 +98,7 @@ public class MascotaPerdidaResource {
     @Path("{mascotasid: \\d+}")
     public void deleteMascotaPerdida(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
          if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
-            throw new WebApplicationException(prim+ mascotasId + " no existe.", 404);
+            throw new WebApplicationException(PRIM+ mascotasId + NO, 404);
         }
        //  meUsuarioLogic.removeUsuario(mascotasId);
         mascotaLogic.deleteMascotaPerdida(mascotasId);

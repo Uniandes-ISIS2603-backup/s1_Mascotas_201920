@@ -56,6 +56,8 @@ import javax.ws.rs.WebApplicationException;
 public class MultimediaResource {
 
     private static final Logger LOGGER = Logger.getLogger(MultimediaResource.class.getName());
+    private static final String PRIM= "El recurso /multimedia/";
+    private static final String NO=" no existe.";
 
     @Inject
     private MultimediaLogic multimediaLogic;
@@ -123,7 +125,7 @@ public class MultimediaResource {
         LOGGER.log(Level.INFO, "MultimediaResource getMultimedia: input: {0}", multimediaId);
         MultimediaEntity entity = multimediaLogic.getMultimedia(multimediaId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /multimedia/" + multimediaId + " no existe.", 404);
+            throw new WebApplicationException(PRIM + multimediaId + NO, 404);
         }
         MultimediaDTO multimediaDTO = new MultimediaDTO(entity);
         LOGGER.log(Level.INFO, "MultimediaResource getMultimedia: output: {0}", multimediaDTO);
@@ -151,7 +153,7 @@ public class MultimediaResource {
         }
         MultimediaEntity entity = multimediaLogic.getMultimedia(multimediaId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /multimedia/" + multimediaId + " no existe.", 404);
+            throw new WebApplicationException(PRIM+ multimediaId +NO, 404);
 
         }
         MultimediaDTO multimediaDTO = new MultimediaDTO(multimediaLogic.updateMultimedia(multimedia.toEntity()));
@@ -174,7 +176,7 @@ public class MultimediaResource {
     public void deleteMultimedia(@PathParam("multimediaId") Long multimediaId) throws BusinessLogicException {
         MultimediaEntity entity = multimediaLogic.getMultimedia(multimediaId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /multimedia/"+ multimediaId + " no existe.", 404);
+            throw new WebApplicationException(PRIM+ multimediaId + NO, 404);
         }
         multimediaLogic.deleteMultimedia(multimediaId);
     }
