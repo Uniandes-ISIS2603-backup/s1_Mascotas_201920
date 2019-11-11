@@ -57,7 +57,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class MascotaEncontradaResource {
-
+    private static final String prim= "El recurso /mascotasencontradas/";
     private static final Logger LOGGER = Logger.getLogger(MascotaEncontradaResource.class.getName());
 
     @Inject
@@ -117,7 +117,7 @@ public class MascotaEncontradaResource {
         LOGGER.log(Level.INFO, "MascotaEncontradaResource getMascota: input: {0}", mascotaId);
         MascotaEncontradaEntity mascotaEncontradaEntity = meLogic.findMascotaEncontrada(mascotaId);
         if (mascotaEncontradaEntity == null) {
-            throw new WebApplicationException("El recurso /mascotasencontradas/" + mascotaId + " no existe.", 404);
+            throw new WebApplicationException(prim + mascotaId + " no existe.", 404);
         }
         MascotaEncontradaDetailDTO mDetailDTO = new MascotaEncontradaDetailDTO(mascotaEncontradaEntity);
         LOGGER.log(Level.INFO, "MascotaEncontradaResource getMascota: output: {0}", mDetailDTO);
@@ -144,7 +144,7 @@ public class MascotaEncontradaResource {
         LOGGER.log(Level.INFO, "MascotaEncontradaResource updateMascota: input: id: {0} , mascota: {1}", new Object[]{mascotaId, mascota});
         mascota.setId(mascotaId);
         if (meLogic.findMascotaEncontrada(mascotaId) == null) {
-            throw new WebApplicationException("El recurso /mascotasencontradas/" + mascotaId + " no existe.", 404);
+            throw new WebApplicationException(prim + mascotaId + " no existe.", 404);
         }
         MascotaEncontradaDetailDTO detailDTO = new MascotaEncontradaDetailDTO(meLogic.updateMascotaEncontrada(mascota.toEntity()));
         LOGGER.log(Level.INFO, "MascotaEncontradaResource updateMascota: output: {0}", detailDTO);
@@ -167,7 +167,7 @@ public class MascotaEncontradaResource {
         LOGGER.log(Level.INFO, "MascotaEncontradaResource deleteMascota: input: {0}", mId);
         MascotaEncontradaEntity entity = meLogic.findMascotaEncontrada(mId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /mascotasencontradas/" + mId + " no existe.", 404);
+            throw new WebApplicationException(prim + mId + " no existe.", 404);
         }
         meUsuarioLogic.removeUsuario(mId);
         meLogic.deleteMascotaEncontrada(mId);

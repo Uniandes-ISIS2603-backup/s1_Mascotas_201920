@@ -57,7 +57,7 @@ public class MascotaAdopcionDTO implements Serializable {
         setLugar(entidad.getLugar());
 
         if (entidad.getUsuario() != null) {
-            this.usuario = new UsuarioDTO(entidad.getUsuario());
+            setUsuario (new UsuarioDTO(entidad.getUsuario()));
         }
         }
 

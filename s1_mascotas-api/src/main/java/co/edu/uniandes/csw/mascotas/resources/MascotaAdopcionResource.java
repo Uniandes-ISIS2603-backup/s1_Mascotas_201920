@@ -34,7 +34,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class MascotaAdopcionResource {
-
+    private static final String prim= "El recurso /mascotasadopcion/";
     @Inject
     private MascotaAdopcionLogic mascotaLogic;
     
@@ -58,7 +58,7 @@ public class MascotaAdopcionResource {
     public MascotaAdopcionDetailDTO getMascotaAdopcion(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
         MascotaAdopcionEntity entidad = mascotaLogic.getMascotaAdopcion(mascotasId);
         if (entidad == null) {
-            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe", 404);
+            throw new WebApplicationException(prim + mascotasId + " no existe", 404);
         }
          MascotaAdopcionDetailDTO detailDTO = new MascotaAdopcionDetailDTO(entidad);
         return detailDTO;
@@ -78,7 +78,7 @@ public class MascotaAdopcionResource {
     public MascotaAdopcionDTO updateMascotaAdopcion(@PathParam("mascotasid") Long mascotasId, MascotaAdopcionDTO mascota) throws BusinessLogicException {
         mascota.setId(mascotasId);
         if (mascotaLogic.getMascotaAdopcion(mascotasId) == null) {
-            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+            throw new WebApplicationException(prim + mascotasId + " no existe.", 404);
         }
         MascotaAdopcionDetailDTO detailDTO = new MascotaAdopcionDetailDTO(mascotaLogic.updateMascotaAdopcion(mascota.toEntity()));
         return detailDTO;
@@ -89,7 +89,7 @@ public class MascotaAdopcionResource {
     @Path("{mascotasid: \\d+}")
     public void deleteMascotaAdopcion(@PathParam("mascotasid") Long mascotasId) throws BusinessLogicException {
          if (mascotaLogic.getMascotaAdopcion(mascotasId) == null) {
-            throw new WebApplicationException("El recurso /mascotasadopcion/" + mascotasId + " no existe.", 404);
+            throw new WebApplicationException(prim + mascotasId + " no existe.", 404);
         }
          mascotaUsuarioLogic.removeUsuario(mascotasId);
         mascotaLogic.deleteMascotaAdopcion(mascotasId);

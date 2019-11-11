@@ -21,10 +21,12 @@ public class MascotaAdopcionLogic {
 
     @Inject
     private MascotaAdopcionPersistance persistence;
+
     /**
      * Método para revisar los parámetros necesarios
+     *
      * @param mascota
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException
      */
     public void check(MascotaAdopcionEntity mascota) throws BusinessLogicException {
 
@@ -50,19 +52,18 @@ public class MascotaAdopcionLogic {
             throw new BusinessLogicException("La mascota no tiene descripcion valida.");
         }
         boolean ck = false;
-        if (mascota.getEspecie() != 0) {
-            if (mascota.getEspecie() != 1) {
-               ck = true;
-            }
+        if (mascota.getEspecie() != 0 && mascota.getEspecie() != 1) {
+            ck = true;
         }
-        if(ck){
+
+        if (ck) {
             throw new BusinessLogicException("La mascota no es un gato, ni un perro.");
         }
 
     }
 
     /**
-     * 
+     *
      * @param mascota
      * @return La entidad revisada en el create
      * @throws BusinessLogicException cuando se incumple una regla de negocio.
@@ -74,8 +75,9 @@ public class MascotaAdopcionLogic {
         mascota = persistence.create(mascota);
         return mascota;
     }
-     /**
-     * 
+
+    /**
+     *
      * @param mascota
      * @return La entidad revisada en el update
      * @throws BusinessLogicException cuando se incumple una regla de negocio.
@@ -87,8 +89,9 @@ public class MascotaAdopcionLogic {
         return persistence.update(mascota);
 
     }
-     /**
-     * 
+
+    /**
+     *
      * @return Las entidades revisadas en el get all
      * @throws BusinessLogicException cuando se incumple una regla de negocio.
      */
@@ -102,8 +105,9 @@ public class MascotaAdopcionLogic {
 
         return mascotas;
     }
-     /**
-     * 
+
+    /**
+     *
      * @param mascotaID es el ID de la mascota a buscar
      * @return La entidad revisada en el get.
      * @throws BusinessLogicException cuando se incumple una regla de negocio.
@@ -115,8 +119,9 @@ public class MascotaAdopcionLogic {
 
         return mascota;
     }
-     /**
-     * 
+
+    /**
+     *
      * @param mascotaID es el ID de la mascota a borrar
      * @throws BusinessLogicException cuando se incumple una regla de negocio.
      */
