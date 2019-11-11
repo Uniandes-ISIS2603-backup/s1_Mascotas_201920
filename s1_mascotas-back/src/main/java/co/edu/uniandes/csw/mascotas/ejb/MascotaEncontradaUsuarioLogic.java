@@ -64,7 +64,7 @@ public class MascotaEncontradaUsuarioLogic {
         MascotaEncontradaEntity mascotaEncontradaEntity = mascotaPersistence.find(mascotaEncontradaId);
         if(mascotaEncontradaEntity != null)
             mascotaEncontradaEntity.setUsuario(usuarioEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaEntity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaId);
         return mascotaEncontradaEntity;
     }
 
@@ -73,6 +73,7 @@ public class MascotaEncontradaUsuarioLogic {
      * relacion de una mascota.
      *
      * @param mascotaId La mascota encontrada que se le borrarà el usuario.
+     * @throws BusinessLogicException
      */
     public void removeUsuario(Long mascotaId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el usuario de la mascota con id = {0}", mascotaId);
