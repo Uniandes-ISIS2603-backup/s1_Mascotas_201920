@@ -32,7 +32,7 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class PublicidadResource 
 {
-   private static final String PRIM= "El recurso /publicidad/";
+   private static final String PRIM= "El recurso /publicidades/";
    
    private static final String NO=" no existe.";
    
