@@ -54,6 +54,7 @@ public class RecompensaPersistenceTest {
         RecompensaEntity entity = em.find(RecompensaEntity.class, recompensa.getId());
         
         Assert.assertEquals(newRecompensaEntity, entity); 
+        Assert.assertEquals(newRecompensaEntity.getMascotaPerdida(), entity.getMascotaPerdida()); 
         
         pp.delete(recompensa.getId());
     }
