@@ -118,4 +118,5 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
     public void setMascota(MascotaAdopcionEntity mascota) {
         this.mascotaAdopcion = mascota;
     }
+    
 }
