@@ -120,7 +120,7 @@ public class MascotaPerdidaUsuarioLogicTest {
     }
 
     /**
-     * Prueba para remplazar las instancias de Books asociadas a una instancia
+     * Prueba para remplazar las instancias de Mascotas asociadas a una instancia
      * de Usuario.
      * @throws co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException
      */
@@ -133,12 +133,12 @@ public class MascotaPerdidaUsuarioLogicTest {
     }
 
     /**
-     * Prueba para desasociar un Book existente de un Usuario existente
+     * Prueba para desasociar un Mascota existente de un Usuario existente
      *
      * @throws co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException
      */
     @Test
-    public void removeBooksTest() throws BusinessLogicException {
+    public void removeUsuariosTest() throws BusinessLogicException {
         perdidaUsuarioLogic.removeUsuario(perdidasData.get(0).getId());
         MascotaPerdidaEntity response = perdidaLogic.getMascotaPerdida(perdidasData.get(0).getId());
         Assert.assertNull(response.getUsuario());
