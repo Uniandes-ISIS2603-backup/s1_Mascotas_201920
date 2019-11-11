@@ -47,9 +47,7 @@ public class ProcesoAdopcionLogicTest {
     @PersistenceContext
     private EntityManager em;
    
-    @Inject
-    private UserTransaction utx;
-    private List<ProcesoAdopcionEntity> data = new ArrayList<>();
+   
     
     @Deployment
     public static JavaArchive createDeployment(){
@@ -65,6 +63,10 @@ public class ProcesoAdopcionLogicTest {
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
                 
     }
+    
+     @Inject
+    private UserTransaction utx;
+    private List<ProcesoAdopcionEntity> data = new ArrayList<>();
      /**
      * Configuración inicial de la prueba.
      */
@@ -109,6 +111,11 @@ public class ProcesoAdopcionLogicTest {
         entity.getProcesos().add(e);
         em.persist(entity);
         e.setMascotaAdopcion(entity);
+        UsuarioEntity entityU = factory.manufacturePojo(UsuarioEntity.class);
+        entityU.setProcesosAdopcion(new ArrayList<>());
+        entityU.getProcesosAdopcion().add(e);
+        em.persist(entityU);
+        e.setUsuario(entityU);
         
     }
     
