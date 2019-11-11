@@ -35,7 +35,6 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class RecompensaResource {
     
-    private static final Logger LOGGER = Logger.getLogger(RecompensaResource.class.getName());
     private static final String PRIM= "El recurso /recompensas/";
     private static final String NO=" no existe.";
     @Inject
@@ -49,14 +48,14 @@ public class RecompensaResource {
     public RecompensaDTO createRecompensa(RecompensaDTO recompensaDTO) throws BusinessLogicException{
         RecompensaEntity recompensaEntity=recompensaDTO.toEntity();
         RecompensaEntity newRecompensaEntity=recompensaLogic.createRecompensa(recompensaEntity);
-        RecompensaDTO newRecompensaDTO=new RecompensaDTO(newRecompensaEntity);
-        return newRecompensaDTO;
+       
+        return new RecompensaDTO(newRecompensaEntity);
     }
     
     @GET
     public List<RecompensaDTO> getRecompensas(){
-        List<RecompensaDTO> listaRecompensas=listEntity2DTO(recompensaLogic.findAllRecompensas());
-        return listaRecompensas;  
+ 
+        return listEntity2DTO(recompensaLogic.findAllRecompensas());
     }
     
      @GET
@@ -66,8 +65,8 @@ public class RecompensaResource {
         if(recompensaEntity==null){
             throw new WebApplicationException(PRIM + recompensaID + NO, 404);
         }
-        RecompensaDTO recompensaDTO=new RecompensaDTO(recompensaEntity);
-        return recompensaDTO;
+       
+        return new RecompensaDTO(recompensaEntity);
     }
     
      @PUT
@@ -77,8 +76,8 @@ public class RecompensaResource {
         if(recompensaLogic.findRecompensa(recompensaID)==null){
             throw new WebApplicationException(PRIM + recompensaID +NO, 404);
         }
-        RecompensaDTO recompensaDTO=new RecompensaDTO(recompensaLogic.updateRecompensa(recompensa.toEntity()));
-        return recompensaDTO;
+       
+        return new RecompensaDTO(recompensaLogic.updateRecompensa(recompensa.toEntity()));
     }
     
      @DELETE
