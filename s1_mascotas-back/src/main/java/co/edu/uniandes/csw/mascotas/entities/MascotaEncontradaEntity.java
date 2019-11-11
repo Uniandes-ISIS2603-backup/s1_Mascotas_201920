@@ -158,28 +158,5 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
      */
     public void setMultimedia(List<MultimediaEntity> multimedia) {
         this.multimedia = multimedia;
-    }
-    
-    /**
-     * Retorna si es igual
-     * @param el objeto a comparar
-     */
-    @Override
-    public boolean equals(Object o)
-    {
-        boolean rest = false;
-        if(o != null)
-        {
-            MascotaEncontradaEntity mee = (MascotaEncontradaEntity) o;
-            if(mee.getDescripcion().equals(this.getDescripcion() )
-                    && mee.getEspecie().equals(this.getEspecie()) 
-                    && mee.getFechaEncontrada().equals(this.getFechaEncontrada())
-                    && mee.getId().equals(this.getId())
-                    && mee.getLugar().equals(this.lugar)
-                    && mee.getRaza().equals(this.raza))
-                rest = true;
-        }
-        return rest;
-    }
-    
+    }    
 }
