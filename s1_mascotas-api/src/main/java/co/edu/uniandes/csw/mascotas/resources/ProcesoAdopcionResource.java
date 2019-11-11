@@ -5,13 +5,11 @@
  */
 package co.edu.uniandes.csw.mascotas.resources;
 
-import co.edu.uniandes.csw.mascotas.dtos.MascotaAdopcionDTO;
 import co.edu.uniandes.csw.mascotas.dtos.ProcesoAdopcionDTO;
 import co.edu.uniandes.csw.mascotas.ejb.ProcesoAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -36,7 +34,8 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class ProcesoAdopcionResource {
-    
+    private static final String PRIM= "El recurso /procesos/";
+    private static final String NO=" no existe.";
     private static final Logger LOGGER = Logger.getLogger(ProcesoAdopcionResource.class.getName());
     
     @Inject
@@ -61,7 +60,7 @@ public class ProcesoAdopcionResource {
     public ProcesoAdopcionDTO getProcesoAdopcion(@PathParam("procesosId") Long procesoID)throws WebApplicationException{
         ProcesoAdopcionEntity procesoEntity=procesoLogic.findProcesoAdopcion(procesoID);
         if(procesoEntity==null){
-            throw new WebApplicationException("El recurso /procesos/" + procesoID + " no existe.", 404);
+            throw new WebApplicationException(PRIM + procesoID + NO, 404);
         }
         ProcesoAdopcionDTO procesoDTO=new ProcesoAdopcionDTO(procesoEntity);
         return procesoDTO;
@@ -72,7 +71,7 @@ public class ProcesoAdopcionResource {
     public ProcesoAdopcionDTO updateProcesoAdopcion(@PathParam("procesosId") Long procesoID,ProcesoAdopcionDTO proceso) throws WebApplicationException, BusinessLogicException{
         proceso.setId(procesoID);
         if(procesoLogic.findProcesoAdopcion(procesoID)==null){
-            throw new WebApplicationException("El recurso /procesos/" + procesoID + " no existe.", 404);
+            throw new WebApplicationException(PRIM + procesoID + NO, 404);
         }
         ProcesoAdopcionDTO procesoDTO=new ProcesoAdopcionDTO(procesoLogic.updateProcesoAdopcion(proceso.toEntity()));
         return procesoDTO;
@@ -82,7 +81,7 @@ public class ProcesoAdopcionResource {
      @Path("{procesosId: \\d+}")
     public void deleteProcesoAdopcion(@PathParam("procesosId") Long procesoID) throws BusinessLogicException{
         if(procesoLogic.findProcesoAdopcion(procesoID)==null){
-            throw new WebApplicationException("El recurso /procesos/" + procesoID + " no existe.", 404);
+            throw new WebApplicationException(PRIM+ procesoID + NO, 404);
         }
         procesoLogic.deleteProcesoAdopcion(procesoID);
     }

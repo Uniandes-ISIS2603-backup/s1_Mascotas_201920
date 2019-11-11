@@ -36,7 +36,8 @@ import javax.ws.rs.WebApplicationException;
 public class PublicidadResource 
 {
    private static final Logger LOGGER = Logger.getLogger(PublicidadResource.class.getName());
-   
+   private static final String PRIM= "El recurso /publicidad/";
+    private static final String NO=" no existe.";
    @Inject 
    private PublicidadLogic logic;
    
@@ -54,7 +55,7 @@ public class PublicidadResource
     {
         PublicidadEntity authorEntity = logic.findPublicidad(publicidadId);
         if (authorEntity == null) {
-            throw new WebApplicationException("El recurso /publicidades/" + publicidadId + " no existe.", 404);
+            throw new WebApplicationException(PRIM + publicidadId + NO, 404);
         }
         PublicidadDTO detailDTO = new PublicidadDTO(authorEntity);
         return detailDTO;
@@ -78,7 +79,7 @@ public class PublicidadResource
    {
        publicidad.setId(publicidadId);
         if (logic.findPublicidad(publicidadId) == null) {
-            throw new WebApplicationException("El recurso /publicidades/" + publicidadId + " no existe.", 404);
+            throw new WebApplicationException(PRIM + publicidadId +NO, 404);
         }
         PublicidadDTO detailDTO = new PublicidadDTO(logic.updatePublicidad(publicidad.toEntity()));
         return detailDTO;
@@ -89,7 +90,7 @@ public class PublicidadResource
    public void deletePublicidad(@PathParam("publicidadId") Long publicidadId) throws BusinessLogicException
    {
       if (logic.findPublicidad(publicidadId) == null) {
-            throw new WebApplicationException("El recurso /publicidades/" + publicidadId + " no existe.", 404);
+            throw new WebApplicationException(PRIM+ publicidadId + NO, 404);
         }
         logic.deletePublicidad(publicidadId);
    }

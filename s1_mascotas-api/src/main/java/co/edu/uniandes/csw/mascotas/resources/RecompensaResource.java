@@ -37,7 +37,8 @@ import javax.ws.rs.WebApplicationException;
 public class RecompensaResource {
     
     private static final Logger LOGGER = Logger.getLogger(RecompensaResource.class.getName());
-    
+    private static final String PRIM= "El recurso /recompensas/";
+    private static final String NO=" no existe.";
     @Inject
     private RecompensaLogic recompensaLogic;
     
@@ -64,7 +65,7 @@ public class RecompensaResource {
     public RecompensaDTO getRecompensa(@PathParam("recompensasId") Long recompensaID)throws WebApplicationException{
         RecompensaEntity recompensaEntity=recompensaLogic.findRecompensa(recompensaID);
         if(recompensaEntity==null){
-            throw new WebApplicationException("El recurso /recompensas/" + recompensaID + " no existe.", 404);
+            throw new WebApplicationException(PRIM + recompensaID + NO, 404);
         }
         RecompensaDTO recompensaDTO=new RecompensaDTO(recompensaEntity);
         return recompensaDTO;
@@ -75,7 +76,7 @@ public class RecompensaResource {
     public RecompensaDTO updateRecompensa(@PathParam("recompensasId") Long recompensaID,RecompensaDTO recompensa) throws WebApplicationException, BusinessLogicException{
         recompensa.setId(recompensaID);
         if(recompensaLogic.findRecompensa(recompensaID)==null){
-            throw new WebApplicationException("El recurso /recompensas/" + recompensaID + " no existe.", 404);
+            throw new WebApplicationException(PRIM + recompensaID +NO, 404);
         }
         RecompensaDTO recompensaDTO=new RecompensaDTO(recompensaLogic.updateRecompensa(recompensa.toEntity()));
         return recompensaDTO;
@@ -85,7 +86,7 @@ public class RecompensaResource {
      @Path("{recompensasId: \\d+}")
     public void deleteRecompensa(@PathParam("recompensasId") Long recompensaID) throws BusinessLogicException{
         if(recompensaLogic.findRecompensa(recompensaID)==null){
-            throw new WebApplicationException("El recurso /recompensas/" + recompensaID + " no existe.", 404);
+            throw new WebApplicationException(PRIM + recompensaID + NO, 404);
         }
         recompensaLogic.deleteRecompensa(recompensaID);
         mascotaRecompensaLogic.removeRecompensa(recompensaID); 
