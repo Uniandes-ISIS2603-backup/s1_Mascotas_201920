@@ -99,7 +99,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable
     @Override
     public boolean equals(Object obj) 
     {
-        boolean resultado = false;
+        boolean resultado = true;
         
         if (this == obj) {
             resultado = true;
@@ -130,7 +130,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable
         else if (!Objects.equals(this.multimedia, other.multimedia)) {
             resultado = false;
         }
-        return true;
+        return resultado;
     }
 
     @Override
