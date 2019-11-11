@@ -109,7 +109,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable
         }
         else if (getClass() != obj.getClass()) {
             resultado = false;
-        }
+        }else{
         
         final PublicidadEntity other = (PublicidadEntity) obj;
         if (!Objects.equals(this.mensaje, other.mensaje)) {
@@ -129,6 +129,7 @@ public class PublicidadEntity extends BaseEntity implements Serializable
         }
         else if (!Objects.equals(this.multimedia, other.multimedia)) {
             resultado = false;
+        }
         }
         return resultado;
     }
