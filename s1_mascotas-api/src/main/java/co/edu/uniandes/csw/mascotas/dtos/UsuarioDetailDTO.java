@@ -54,54 +54,60 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
         procesosAdopcion = new ArrayList<>();
         
         if (usuario != null) {
-            /**
-             * Mascotas en adopcion
-             */
-            if (usuario.getMascotasAdopcion()!= null) {
-                mascotasAdopcion = new ArrayList<>();
-                
-                for (MascotaAdopcionEntity mascotaAdopcionEntity : usuario.getMascotasAdopcion()) {
-                   mascotasAdopcion.add(new MascotaAdopcionDTO(mascotaAdopcionEntity));
-                }
-            }
+            //Mascotas en Adopcion
+            includeAdopcion(usuario.getMascotasAdopcion());
             
-            /**
-             * Mascotas encontradas
-             */
-            if (usuario.getMascotasEncontradas()!= null) {
-                mascotasEncontradas = new ArrayList<>();
-                
-                for (MascotaEncontradaEntity mascotaEncontradaEntity : usuario.getMascotasEncontradas()) {
-                   mascotasEncontradas.add(new MascotaEncontradaDTO(mascotaEncontradaEntity));
-                }
-            }
+            // Mascotas encontradas
+            includeEncontrada(usuario.getMascotasEncontradas());
             
-            /**
-             * Mascotas perdidas
-             */
-            if (usuario.getMascotasPerdidas()!= null) {
-                mascotasPerdidas = new ArrayList<>();
-                
-                for (MascotaPerdidaEntity mascotaPerdidaEntity : usuario.getMascotasPerdidas()) {
-                   mascotasPerdidas.add(new MascotaPerdidaDTO(mascotaPerdidaEntity));
-                }
-            }
+            //Mascotas perdidas
+            includePerdida(usuario.getMascotasPerdidas());
             
-            /**
-             * Procesos de adopcion
-             */
-            if (usuario.getProcesosAdopcion()!= null) {
-                procesosAdopcion = new ArrayList<>();
-                
-                for (ProcesoAdopcionEntity procesoAdopcionEntity : usuario.getProcesosAdopcion()) {
-                   procesosAdopcion.add(new ProcesoAdopcionDTO(procesoAdopcionEntity));
-                }
-            }
+            //Procesos de adopcion
+            includeProcesoAdopcion(usuario.getProcesosAdopcion());
         }
         
     }
     
+    public final void includeAdopcion(List<MascotaAdopcionEntity> mascotas)
+    {
+        if(mascotas != null)
+        {
+            for (MascotaAdopcionEntity mascotaAdopcionEntity : mascotas) {
+                   mascotasAdopcion.add(new MascotaAdopcionDTO(mascotaAdopcionEntity));
+                }
+        }
+    }
     
+    public final void includeEncontrada(List<MascotaEncontradaEntity> mascotas)
+    {
+        if(mascotas != null)
+        {
+            for (MascotaEncontradaEntity mascotaEncontradaEntity : mascotas) {
+                   mascotasEncontradas.add(new MascotaEncontradaDTO(mascotaEncontradaEntity));
+                }
+        }
+    }
+    
+    public final void includePerdida(List<MascotaPerdidaEntity> mascotas)
+    {
+        if(mascotas != null)
+        {
+            for (MascotaPerdidaEntity mascotaPerdidaEntity : mascotas) {
+                   mascotasPerdidas.add(new MascotaPerdidaDTO(mascotaPerdidaEntity));
+                }
+        }
+    }
+    
+    public final void includeProcesoAdopcion(List<ProcesoAdopcionEntity> mascotas)
+    {
+        if(mascotas != null)
+        {
+            for (ProcesoAdopcionEntity procesoEntity : mascotas) {
+                   procesosAdopcion.add(new ProcesoAdopcionDTO(procesoEntity));
+                }
+        }
+    }
 
     /**
      * @return the mascotasEncontradas
