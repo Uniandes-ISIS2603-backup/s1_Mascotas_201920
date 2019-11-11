@@ -5,9 +5,9 @@
  */
 package co.edu.uniandes.csw.mascotas.test.logic;
 
-import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
-import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionUsuarioLogic;
-import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaUsuarioLogic;
+import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
@@ -35,18 +35,18 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Tomas Langebaek
+ * @author Lily
  */
 @RunWith(Arquillian.class)
-public class MascotaAdopcionUsuarioLogicTest {
+public class MascotaPerdidaUsuarioLogicTest {
 
 
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private MascotaAdopcionLogic mascotaLogic;
+    private MascotaPerdidaLogic perdidaLogic;
     @Inject
-    private MascotaAdopcionUsuarioLogic mascotaUsuarioLogic;
+    private MascotaPerdidaUsuarioLogic perdidaUsuarioLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -56,7 +56,7 @@ public class MascotaAdopcionUsuarioLogicTest {
 
     private List<UsuarioEntity> data = new ArrayList<>();
 
-    private List<MascotaAdopcionEntity> mascotasData = new ArrayList();
+    private List<MascotaPerdidaEntity> perdidasData = new ArrayList();
 
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -67,7 +67,7 @@ public class MascotaAdopcionUsuarioLogicTest {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(UsuarioEntity.class.getPackage())
-                .addPackage(MascotaAdopcionLogic.class.getPackage())
+                .addPackage(MascotaPerdidaLogic.class.getPackage())
                 .addPackage(UsuarioPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
@@ -95,7 +95,7 @@ public class MascotaAdopcionUsuarioLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from MascotaAdopcionEntity").executeUpdate();
+        em.createQuery("delete from MascotaPerdidaEntity").executeUpdate();
         em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
 
@@ -105,42 +105,42 @@ public class MascotaAdopcionUsuarioLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            MascotaAdopcionEntity mascotas = factory.manufacturePojo(MascotaAdopcionEntity.class);
-            em.persist(mascotas);
-            mascotasData.add(mascotas);
+            MascotaPerdidaEntity perdidas = factory.manufacturePojo(MascotaPerdidaEntity.class);
+            em.persist(perdidas);
+            perdidasData.add(perdidas);
         }
         for (int i = 0; i < 3; i++) {
             UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-                mascotasData.get(i).setUsuario(entity);
+                perdidasData.get(i).setUsuario(entity);
             }
         }
     }
 
     /**
-     * Prueba para remplazar las instancias de Books asociadas a una instancia
+     * Prueba para remplazar las instancias de Mascotas asociadas a una instancia
      * de Usuario.
      * @throws co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException
      */
     @Test
     public void replaceUsuarioTest() throws BusinessLogicException {
-        MascotaAdopcionEntity entity = mascotasData.get(0);
-        mascotaUsuarioLogic.replaceUsuario(entity.getId(), data.get(1).getId());
-        entity = mascotaLogic.getMascotaAdopcion(entity.getId());
+        MascotaPerdidaEntity entity = perdidasData.get(0);
+        perdidaUsuarioLogic.replaceUsuario(entity.getId(), data.get(1).getId());
+        entity = perdidaLogic.getMascotaPerdida(entity.getId());
         Assert.assertEquals(entity.getUsuario(), data.get(1));
     }
 
     /**
-     * Prueba para desasociar un Book existente de un Usuario existente
+     * Prueba para desasociar un Mascota existente de un Usuario existente
      *
      * @throws co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException
      */
     @Test
-    public void removeBooksTest() throws BusinessLogicException {
-        mascotaUsuarioLogic.removeUsuario(mascotasData.get(0).getId());
-        MascotaAdopcionEntity response = mascotaLogic.getMascotaAdopcion(mascotasData.get(0).getId());
+    public void removeUsuariosTest() throws BusinessLogicException {
+        perdidaUsuarioLogic.removeUsuario(perdidasData.get(0).getId());
+        MascotaPerdidaEntity response = perdidaLogic.getMascotaPerdida(perdidasData.get(0).getId());
         Assert.assertNull(response.getUsuario());
     }
 }

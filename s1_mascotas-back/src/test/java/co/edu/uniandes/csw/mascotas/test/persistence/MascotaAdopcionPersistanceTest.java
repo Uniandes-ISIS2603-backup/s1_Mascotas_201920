@@ -29,6 +29,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class MascotaAdopcionPersistanceTest {
+
     /**
      * Arreglo datos a testear
      */
@@ -45,6 +46,7 @@ public class MascotaAdopcionPersistanceTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
+
     /**
      * Método para poblar los datos
      */
@@ -58,6 +60,7 @@ public class MascotaAdopcionPersistanceTest {
             data.add(newMascota_AdopcionEntity);
         }
     }
+
     /**
      * Test buscar todas la mascotas
      */
@@ -79,6 +82,7 @@ public class MascotaAdopcionPersistanceTest {
             Assert.assertTrue(found);
         }
     }
+
     /**
      * Test crear una nueva mascota
      */
@@ -95,18 +99,24 @@ public class MascotaAdopcionPersistanceTest {
         MascotaAdopcionEntity entity = em.find(MascotaAdopcionEntity.class, mascota.getId());
 
         Assert.assertEquals(newMascota_AdopcionEntity, entity);
-        
+
         Assert.assertEquals(newMascota_AdopcionEntity.getHistoria(), entity.getHistoria());
-        
+
         Assert.assertEquals(newMascota_AdopcionEntity.getLugar(), entity.getLugar());
-         
+
         Assert.assertEquals(newMascota_AdopcionEntity.getEspecie(), entity.getEspecie());
-        
+
         Assert.assertEquals(newMascota_AdopcionEntity.getDescripcion(), entity.getDescripcion());
-        
+
         Assert.assertEquals(newMascota_AdopcionEntity.getRaza(), entity.getRaza());
+
+        Assert.assertEquals(newMascota_AdopcionEntity.getMultimedia(), entity.getMultimedia());
+
+        Assert.assertEquals(newMascota_AdopcionEntity.getProcesos(), entity.getProcesos());
+
         //
     }
+
     /**
      * Test buscar una mascota específica
      */
@@ -119,10 +129,27 @@ public class MascotaAdopcionPersistanceTest {
 
         Assert.assertNotNull(newEntity);
 
+        Assert.assertEquals(entity, newEntity);
+
+        Assert.assertEquals(entity.getDescripcion(), newEntity.getDescripcion());
+
+        Assert.assertEquals(entity.getEspecie(), newEntity.getEspecie());
+
+        Assert.assertEquals(entity.getId(), newEntity.getId());
+
         Assert.assertEquals(entity.getLugar(), newEntity.getLugar());
+
+        Assert.assertEquals(entity.getMultimedia(), newEntity.getMultimedia());
+
+        Assert.assertEquals(entity.getProcesos(), newEntity.getProcesos());
+
+        Assert.assertEquals(entity.getRaza(), newEntity.getRaza());
+
+        Assert.assertEquals(entity.getUsuario(), newEntity.getUsuario());
     }
+
     /**
-     * Test borra una mascota 
+     * Test borra una mascota
      */
     @Test
     public void deleteMascotaTest() {
@@ -135,14 +162,15 @@ public class MascotaAdopcionPersistanceTest {
 
         Assert.assertNull(deleted);
     }
+
     /**
      * Test actualizar una mascota
      */
     @Test
     public void updateMascotaTest() {
-        
+
         MascotaAdopcionEntity entity = data.get(0);
-        
+
         PodamFactory factory = new PodamFactoryImpl();
         MascotaAdopcionEntity newEntity = factory.manufacturePojo(MascotaAdopcionEntity.class);
 
@@ -152,7 +180,23 @@ public class MascotaAdopcionPersistanceTest {
 
         MascotaAdopcionEntity resp = em.find(MascotaAdopcionEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity, resp);
+         Assert.assertEquals(entity, resp);
+
+        Assert.assertEquals(entity.getDescripcion(), resp.getDescripcion());
+
+        Assert.assertEquals(entity.getEspecie(), resp.getEspecie());
+
+        Assert.assertEquals(entity.getId(), resp.getId());
+
+        Assert.assertEquals(entity.getLugar(), resp.getLugar());
+
+        Assert.assertEquals(entity.getMultimedia(), resp.getMultimedia());
+
+        Assert.assertEquals(entity.getProcesos(), resp.getProcesos());
+
+        Assert.assertEquals(entity.getRaza(), resp.getRaza());
+
+        Assert.assertEquals(entity.getUsuario(), resp.getUsuario());
     }
 
 }
