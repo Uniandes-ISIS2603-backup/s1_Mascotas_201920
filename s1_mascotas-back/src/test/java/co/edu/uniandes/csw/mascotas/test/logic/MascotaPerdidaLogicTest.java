@@ -157,6 +157,22 @@ public class MascotaPerdidaLogicTest {
          Assert.assertEquals(newEntity, result);
         
     }
+    @Test 
+    public void updateMascotaPerdidaUsuario ( ) throws BusinessLogicException
+    {
+        MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        
+        mascotaLogic.createMascotaPerdida(entity);
+        newEntity.setId(entity.getId());
+        newEntity.setUsuario(null);
+         
+        MascotaPerdidaEntity result = mascotaLogic.updateMascotaPerdida(newEntity);
+        
+  
+         Assert.assertEquals(newEntity, result);
+        
+    }
     
     @Test (expected = BusinessLogicException.class)
     public void updateMascotaPerdidaRazaNull () throws BusinessLogicException
