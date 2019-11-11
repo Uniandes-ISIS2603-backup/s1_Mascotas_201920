@@ -13,14 +13,15 @@ package co.edu.uniandes.csw.mascotas.podam;
 import java.util.Random;
 import uk.co.jemos.podam.common.AttributeStrategy;
 
-public class calificacionEstrategy implements AttributeStrategy<Integer> {
+public class CalificacionEstrategy implements AttributeStrategy<Integer> {
     @Override
     public Integer getValue() {
-        int y=(int)((Math.random()*10)%6);
+        Random r = new Random();
+        int y=r.nextInt(5);
         while (0>=y || 5<y)
         {
-            y=(int)((Math.random()*50)%6);
+            y=r.nextInt(5);
         }
-        return new Integer(y);
+        return y;
     }
 }

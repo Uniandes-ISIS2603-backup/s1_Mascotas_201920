@@ -50,7 +50,7 @@ public class MascotaPerdidaResource {
     
     @POST
     public MascotaPerdidaDTO createMascotaPerdida (MascotaPerdidaDTO mascotaDto) throws BusinessLogicException{
-         LOGGER.log(Level.INFO, "MascotaPerdidaResource createMascotaPerdida: input(0)", mascotaDto);
+         LOGGER.log(Level.INFO, "MascotaPerdidaResource createMascotaPerdida: input{0}", mascotaDto);
         
         MascotaPerdidaEntity mascotaEntity = mascotaDto.toEntity();
         
@@ -58,7 +58,7 @@ public class MascotaPerdidaResource {
         
         MascotaPerdidaDTO nuevaMascota = new MascotaPerdidaDTO(mascotaEntity);
         
-        LOGGER.log(Level.INFO, "MascotaPerdidaResource createMascotaPerdida: output(0)", nuevaMascota);
+        LOGGER.log(Level.INFO, "MascotaPerdidaResource createMascotaPerdida: output{0}", nuevaMascota);
         return nuevaMascota;
     }
     
@@ -75,10 +75,7 @@ public class MascotaPerdidaResource {
 
     @GET
     public List<MascotaPerdidaDetailDTO> getMacotasPerdida() throws BusinessLogicException {
-       //crearMascota (); 
-       List<MascotaPerdidaDetailDTO> listaMascotas = listEntity2DTO(mascotaLogic.getMascotasPerdida());
-        
-        return listaMascotas;
+        return listEntity2DTO(mascotaLogic.getMascotasPerdida());
     }
     
  
@@ -89,8 +86,7 @@ public class MascotaPerdidaResource {
         if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
             throw new WebApplicationException(PRIM+ mascotasId + NO, 404);
         }
-        MascotaPerdidaDetailDTO detailDTO = new MascotaPerdidaDetailDTO(mascotaLogic.updateMascotaPerdida(mascota.toEntity()));
-        return detailDTO;
+        return new MascotaPerdidaDetailDTO(mascotaLogic.updateMascotaPerdida(mascota.toEntity()));
     }
     
 
@@ -100,7 +96,6 @@ public class MascotaPerdidaResource {
          if (mascotaLogic.getMascotaPerdida(mascotasId) == null) {
             throw new WebApplicationException(PRIM+ mascotasId + NO, 404);
         }
-       //  meUsuarioLogic.removeUsuario(mascotasId);
         mascotaLogic.deleteMascotaPerdida(mascotasId);
     }
     

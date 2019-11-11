@@ -24,7 +24,7 @@ public class MascotaPerdidaDetailDTO  extends MascotaPerdidaDTO implements Seria
      public MascotaPerdidaDetailDTO(MascotaPerdidaEntity mascotaEntity) {
         super(mascotaEntity);
        
-            if (mascotaEntity.getMultimedia() != null) {
+            if (mascotaEntity != null && mascotaEntity.getMultimedia() != null) {
                 multimedia = new ArrayList<>();
                 for (MultimediaEntity multimediaEntity : mascotaEntity.getMultimedia()) {
                    multimedia.add(new MultimediaDTO(multimediaEntity));
