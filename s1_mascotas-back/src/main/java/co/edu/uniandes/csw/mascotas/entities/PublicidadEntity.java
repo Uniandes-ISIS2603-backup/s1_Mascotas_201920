@@ -99,13 +99,13 @@ public class PublicidadEntity extends BaseEntity implements Serializable
     @Override
     public boolean equals(Object obj) 
     {
-        boolean resultado = true;
+      
         
         if (this == obj) {
             return true;
         }
         else if (obj == null || getClass() != obj.getClass()) {
-            resultado = false;
+            return false;
         }
         else
         {
