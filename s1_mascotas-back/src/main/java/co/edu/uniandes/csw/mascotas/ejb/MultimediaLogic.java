@@ -95,7 +95,7 @@ public class MultimediaLogic {
             encontrada = encontradaPersistence.find(encontradaId);
         else if(perdidaId != null)
             perdida = perdidaPersistence.find(perdidaId);
-        else if(publicidadId != null)
+        else 
             publicidad = publicidadPersistence.find(publicidadId);
         multimedia.setMascota(adopcion);
         multimedia.setMascotaEncontrada(encontrada);
@@ -141,7 +141,7 @@ public class MultimediaLogic {
         {
             lista = perdida.getMultimedia();
         }
-        else if(publicidad != null)
+        else
         {
             lista = publicidad.getMultimedia();
         }

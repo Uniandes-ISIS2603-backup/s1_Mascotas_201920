@@ -146,7 +146,7 @@ public class MultimediaLogicTest {
         Assert.assertNotNull(resultado);
 
         MultimediaEntity entidad2 = em.find(MultimediaEntity.class, resultado.getId());
-        Assert.assertEquals(entidad2.getPublicidad(), resultado.getPublicidad());
+        Assert.assertEquals(entidad2.getPublicidad().getId(), resultado.getPublicidad().getId());
         Assert.assertEquals(entidad2.getNombre(), resultado.getNombre());
         Assert.assertEquals(entidad2.getTipo(), resultado.getTipo());
         Assert.assertEquals(entidad2.getUrl(), resultado.getUrl());
