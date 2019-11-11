@@ -306,7 +306,7 @@ public class MultimediaLogicTest {
         int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
         for (int i = 0; i <= j; i++) {
             MultimediaEntity multi = factory.manufacturePojo(MultimediaEntity.class);
-            multimedaLogic.createMultimedia(mascota.getId(), null, null, null, multi);
+            multimedaLogic.createMultimedia(null, mascota.getId(), null, null, multi);
             Assert.assertNotNull(multi);
             resultados.add(multi);
         }
@@ -342,7 +342,7 @@ public class MultimediaLogicTest {
             resultados.add(multi);
         }
 
-        List<MultimediaEntity> r = multimedaLogic.getMultimedias(mascota.getId(), null, null, null);
+        List<MultimediaEntity> r = multimedaLogic.getMultimedias( null, null, mascota.getId(), null);
         Iterator iter = resultados.iterator();
 
         while (iter.hasNext()) {
@@ -373,7 +373,7 @@ public class MultimediaLogicTest {
             resultados.add(multi);
         }
 
-        List<MultimediaEntity> r = multimedaLogic.getMultimedias(mascota.getId(), null, null, null);
+        List<MultimediaEntity> r = multimedaLogic.getMultimedias(null, null, null, mascota.getId());
         Iterator iter = resultados.iterator();
 
         while (iter.hasNext()) {
