@@ -33,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"juan@bta.com\",\n\t\"celular\": 312123212\n}",
+					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"juanME@bta.com\",\n\t\"celular\": 312123212\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -692,20 +692,20 @@
 	],
 	"variable": [
 		{
-			"id": "ff69064a-71de-4206-9dee-64bc1aa55f70",
+			"id": "781d6198-231f-49cb-9d74-b3302b717b5f",
 			"key": "url",
 			"value": "http://{{ip}}:{{puerto}}/mascotas-api/api",
 			"type": "string"
 		},
 		{
-			"id": "336c0e95-e347-44b3-aa95-9bc69fae4038",
+			"id": "6ffc6f46-364a-43d2-9452-10380a68d92f",
 			"key": "new_id_ume",
 			"value": "0",
 			"type": "string",
 			"disabled": true
 		},
 		{
-			"id": "5736d2c6-d1e0-43d4-aecb-9ffb5c22b228",
+			"id": "17d945b2-20a9-4ff1-92b9-94195f488179",
 			"key": "new_id_me",
 			"value": "0",
 			"type": "string",
