@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.mascotas.tests.postman;
 
-import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.mascotas.resources.MascotaPerdidaResource;

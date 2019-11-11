@@ -6,6 +6,104 @@
 	},
 	"item": [
 		{
+			"name": "Crear un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e69bb94-fc90-4dd1-89b0-d0ab3e5293a7",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_ume\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"phhhhhpoohha@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81ce81ab-0b2d-416f-92cf-64933f460e2a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_a8\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"descripcion\": \"BUEAS\",\n        \"especie\": 0,\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\n        \"lugar\": \"BUENAS\",\n        \"raza\": \"BUENAS\",\n        \"celular\": 321458,\n        \"fotos\": [],\n        \"videos\": []\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas"
+					]
+				},
+				"description": "Crea una nueva mascota perdida. El recurso tiene descripcion, especie, fechaPerdida, lugar, raza, recompenza, monto y\r\nfotos . El Id es inicializado por la BD y se debe ver en la respuesta. \r\n\r\nPara la prueba, se guarda el id en una variable que ser� utilizada en otras peticiones de la colecci�n.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
 			"name": "create recompensa",
 			"event": [
 				{
@@ -33,7 +131,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\n        \"monto\": 1552556,\n        \"pagado\": false\n        \n}",
+					"raw": " {\n        \"monto\": 1552556,\n        \"pagado\": false,\n        \"descripcion\": \"BUEAS\"\n        \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -112,7 +210,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -121,7 +219,7 @@
 					"path": [
 						"s1_mascotas-api",
 						"api",
-						"mascotasperdidas"
+						"recompensas"
 					]
 				},
 				"description": "Consulta todas las mascotas perdidas de la aplicaci�n. \r\nLa petici�n no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de mascotas perdidas en la respuesta tenga mas de uno.\r\n\r\n**C�digo http esperado: 200**"
@@ -191,77 +289,8 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n        \"descripcion\": \"BCANAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": [],\r\n        \"recompensa\":{\r\n        \t\"id\": 123,\r\n        \t\"monto\": 75,\r\n        \t\"pagado\": false\r\n        \t\r\n        }\r\n    }"
+					"raw": " {\n        \"monto\": 500,\n        \"pagado\": true\n        \n}"
 				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_b}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"mascotasperdidas",
-						"{{new_id_b}}"
-					]
-				},
-				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
-			},
-			"response": []
-		},
-		{
-			"name": "Dar recompensas id no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
-						"exec": [
-							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/-1",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"recompensas",
-						"-1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar mascota perdida que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5d15af7e-7d0d-4864-bf10-5ea6188cc0a2",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}",
 					"protocol": "http",
@@ -276,7 +305,76 @@
 						"{{new_id_b}}"
 					]
 				},
-				"description": "Borra una mascota perdida que no existe en la aplicaci�n.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasperdidas/-1 no existe.\".\r\n\r\n**C�digo http esperado: 404**"
+				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "667e35a0-2cbd-4162-8469-8f2487bbab37",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_a8}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"{{new_id_a8}}"
+					]
+				},
+				"description": "Borra una mascota perdida. Se env�a el id del la mascota perdida creada anteriormente.\n\n**C�digo HTTP esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06c863e4-c52a-4b6e-8105-7fb42cd3ee45",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_ume}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						"{{new_id_ume}}"
+					]
+				}
 			},
 			"response": []
 		}
