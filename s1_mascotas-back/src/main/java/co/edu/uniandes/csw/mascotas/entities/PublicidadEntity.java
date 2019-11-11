@@ -128,6 +128,18 @@ public class PublicidadEntity extends BaseEntity implements Serializable
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.mensaje);
+        hash = 41 * hash + Objects.hashCode(this.diasPorSemana);
+        hash = 41 * hash + Objects.hashCode(this.costo);
+        hash = 41 * hash + Objects.hashCode(this.fechaInicio);
+        hash = 41 * hash + Objects.hashCode(this.fecchaFin);
+        hash = 41 * hash + Objects.hashCode(this.multimedia);
+        return hash;
+    }
     
     
     
