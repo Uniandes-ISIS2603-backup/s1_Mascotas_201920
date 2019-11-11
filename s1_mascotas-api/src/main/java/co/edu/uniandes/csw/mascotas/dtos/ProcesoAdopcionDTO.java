@@ -55,8 +55,8 @@ public class ProcesoAdopcionDTO implements Serializable{
         if(this.getMascotaAdopcion()!=null){
             procesoAdopcionEntity.setMascotaAdopcion(this.getMascotaAdopcion().toEntity());
         }
-        if(this.usuario!=null){
-            procesoAdopcionEntity.setUsuario(this.usuario.toEntity());
+        if(this.getUsuario()!=null){
+            procesoAdopcionEntity.setUsuario(this.getUsuario().toEntity());
         }
         return procesoAdopcionEntity;
     }
