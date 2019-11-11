@@ -50,9 +50,9 @@ public class MascotaAdopcionResource {
 
         mascotaEntity = mascotaLogic.createMascotaAdopcion(mascotaEntity);
         
-        MascotaAdopcionDTO nuevaMascota = new MascotaAdopcionDTO(mascotaEntity);
+        return  new MascotaAdopcionDTO(mascotaEntity);
 
-        return nuevaMascota;
+        
     }
 
     @GET
@@ -62,16 +62,15 @@ public class MascotaAdopcionResource {
         if (entidad == null) {
             throw new WebApplicationException(PRIM+ mascotasId +NO, 404);
         }
-         MascotaAdopcionDetailDTO detailDTO = new MascotaAdopcionDetailDTO(entidad);
-        return detailDTO;
+        return new MascotaAdopcionDetailDTO(entidad);
+        
     }
 
     @GET
     public List<MascotaAdopcionDetailDTO> getMacotasAdopcion() throws BusinessLogicException {
 
-        List<MascotaAdopcionDetailDTO> listaMascotas = listEntity2DTO(mascotaLogic.getMascotasAdopcion());
+        return listEntity2DTO(mascotaLogic.getMascotasAdopcion());
 
-        return listaMascotas;
     }
     
  
@@ -82,8 +81,8 @@ public class MascotaAdopcionResource {
         if (mascotaLogic.getMascotaAdopcion(mascotasId) == null) {
             throw new WebApplicationException(PRIM + mascotasId + NO, 404);
         }
-        MascotaAdopcionDetailDTO detailDTO = new MascotaAdopcionDetailDTO(mascotaLogic.updateMascotaAdopcion(mascota.toEntity()));
-        return detailDTO;
+        return new MascotaAdopcionDetailDTO(mascotaLogic.updateMascotaAdopcion(mascota.toEntity()));
+        
     }
     
 
