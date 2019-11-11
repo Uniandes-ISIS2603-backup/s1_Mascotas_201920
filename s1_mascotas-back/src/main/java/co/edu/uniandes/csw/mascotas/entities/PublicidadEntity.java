@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -92,6 +93,40 @@ public class PublicidadEntity extends BaseEntity implements Serializable
 
     public void setFecchaFin(Date fecchaFin) {
         this.fecchaFin = fecchaFin;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PublicidadEntity other = (PublicidadEntity) obj;
+        if (!Objects.equals(this.mensaje, other.mensaje)) {
+            return false;
+        }
+        if (!Objects.equals(this.diasPorSemana, other.diasPorSemana)) {
+            return false;
+        }
+        if (!Objects.equals(this.costo, other.costo)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
+            return false;
+        }
+        if (!Objects.equals(this.fecchaFin, other.fecchaFin)) {
+            return false;
+        }
+        if (!Objects.equals(this.multimedia, other.multimedia)) {
+            return false;
+        }
+        return true;
     }
     
     
