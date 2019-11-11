@@ -132,6 +132,16 @@ public class MascotaEncontradaUsuarioLogicTest {
         entity = bookLogic.findMascotaEncontrada(entity.getId());
         Assert.assertEquals(entity.getUsuario(), data.get(1));
     }
+    
+    /**
+     * Prueba para remplazar las instancias de Books asociadas a una instancia
+     * de Editorial.
+     * @throws co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void replaceUsuarioSinMascotaTest() throws BusinessLogicException {
+        bookEditorialLogic.replaceUsuario(new Long(0), new Long(0));
+    }
 
     /**
      * Prueba para desasociar un Book existente de un Editorial existente

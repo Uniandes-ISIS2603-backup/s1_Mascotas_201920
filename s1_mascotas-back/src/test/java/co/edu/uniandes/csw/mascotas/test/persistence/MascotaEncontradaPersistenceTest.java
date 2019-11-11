@@ -60,7 +60,8 @@ public class MascotaEncontradaPersistenceTest {
         Assert.assertEquals(mascota.getLugar(), entity.getLugar());
         Assert.assertEquals(mascota.getRaza(), entity.getRaza());
         Assert.assertEquals(mascota.getMultimedia(), entity.getMultimedia());
-     
+        
+        mascota.setMultimedia(null);
         
     }
     

@@ -29,6 +29,7 @@ import co.edu.uniandes.csw.mascotas.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaEncontradaLogic;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaEncontradaUsuarioLogic;
 import co.edu.uniandes.csw.mascotas.ejb.UsuarioLogic;
+import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -75,7 +76,7 @@ public class MascotaEncontradaUsuarioResource {
      * libro.
      */
     @PUT
-    public MascotaEncontradaDetailDTO replaceUsuario(@PathParam("mascotaEncontradaId") Long mascotaEncontradaId, UsuarioDTO usuario) {
+    public MascotaEncontradaDetailDTO replaceUsuario(@PathParam("mascotaEncontradaId") Long mascotaEncontradaId, UsuarioDTO usuario) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "MascotaEncontradaUsuarioResource replaceUsuario: input: mascotaEncontradaId{0} , Usuario:{1}", new Object[]{mascotaEncontradaId, usuario});
         if (mascotaEncontradaLogic.findMascotaEncontrada(mascotaEncontradaId) == null) {
             throw new WebApplicationException("El recurso /mascotasencontradas/" + mascotaEncontradaId + " no existe.", 404);

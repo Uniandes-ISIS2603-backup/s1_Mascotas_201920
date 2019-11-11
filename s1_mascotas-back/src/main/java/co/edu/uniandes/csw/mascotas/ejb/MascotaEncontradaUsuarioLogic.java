@@ -57,13 +57,17 @@ public class MascotaEncontradaUsuarioLogic {
      * @param mascotaEncontradaId id de las mascota que se quiere actualizar.
      * @param usuarioId El id del usuario que se será de la mascota.
      * @return la nueva mascota.
+     * @throws BusinessLogicException
      */
-    public MascotaEncontradaEntity replaceUsuario(Long mascotaEncontradaId, Long usuarioId) {
+    public MascotaEncontradaEntity replaceUsuario(Long mascotaEncontradaId, Long usuarioId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuarioId);
         MascotaEncontradaEntity mascotaEncontradaEntity = mascotaPersistence.find(mascotaEncontradaId);
-        if(mascotaEncontradaEntity != null)
+        if(mascotaEncontradaEntity != null){
             mascotaEncontradaEntity.setUsuario(usuarioEntity);
+        } else {
+            throw new BusinessLogicException("No exitse la mascota.");
+        }
         LOGGER.log(Level.INFO, "Termina proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaId);
         return mascotaEncontradaEntity;
     }
