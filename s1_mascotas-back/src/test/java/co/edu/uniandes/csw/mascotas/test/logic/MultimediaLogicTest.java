@@ -263,7 +263,7 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException si se incumple una regla de negocio
      */
    @Test
-    public void findAllTest() throws BusinessLogicException
+    public void findAllAdopcionTest() throws BusinessLogicException
     {
         PodamFactory factory = new PodamFactoryImpl();
 
@@ -288,6 +288,100 @@ public class MultimediaLogicTest {
             Assert.assertTrue(r.contains(next));
         }
     }
+    
+    /**
+     * Test en el que se verifican las reglas de la logia para el caso de traer todas las multimedias
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
+   @Test
+    public void findAllEncontradaTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        ArrayList< MultimediaEntity> resultados = new ArrayList();
+
+        MascotaEncontradaEntity mascota = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        mascota = mEncontradaLogic.createMascotaEncontrada(mascota);
+        
+        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
+        for (int i = 0; i <= j; i++) {
+            MultimediaEntity multi = factory.manufacturePojo(MultimediaEntity.class);
+            multimedaLogic.createMultimedia(mascota.getId(), null, null, null, multi);
+            Assert.assertNotNull(multi);
+            resultados.add(multi);
+        }
+
+        List<MultimediaEntity> r = multimedaLogic.getMultimedias( null, mascota.getId(), null, null);
+        Iterator iter = resultados.iterator();
+
+        while (iter.hasNext()) {
+            MultimediaEntity next = (MultimediaEntity) iter.next();
+            Assert.assertTrue(r.contains(next));
+        }
+    }
+    
+    /**
+     * Test en el que se verifican las reglas de la logia para el caso de traer todas las multimedias
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
+   @Test
+    public void findAllPerdidaTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        ArrayList< MultimediaEntity> resultados = new ArrayList();
+
+        MascotaPerdidaEntity mascota = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        mascota = mPerdidaLogic.createMascotaPerdida(mascota);
+        
+        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
+        for (int i = 0; i <= j; i++) {
+            MultimediaEntity multi = factory.manufacturePojo(MultimediaEntity.class);
+            multimedaLogic.createMultimedia(null, null, mascota.getId(), null, multi);
+            Assert.assertNotNull(multi);
+            resultados.add(multi);
+        }
+
+        List<MultimediaEntity> r = multimedaLogic.getMultimedias(mascota.getId(), null, null, null);
+        Iterator iter = resultados.iterator();
+
+        while (iter.hasNext()) {
+            MultimediaEntity next = (MultimediaEntity) iter.next();
+            Assert.assertTrue(r.contains(next));
+        }
+    }
+    
+    /**
+     * Test en el que se verifican las reglas de la logia para el caso de traer todas las multimedias
+     * @throws BusinessLogicException si se incumple una regla de negocio
+     */
+   @Test
+    public void findAllPublicidadTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        ArrayList< MultimediaEntity> resultados = new ArrayList();
+
+        PublicidadEntity mascota = factory.manufacturePojo(PublicidadEntity.class);
+        mascota = publicidadLogic.createPublicidad(mascota);
+        
+        int j = (int) (Math.random() * ((100 - 1) + 1)) + 1;
+        for (int i = 0; i <= j; i++) {
+            MultimediaEntity multi = factory.manufacturePojo(MultimediaEntity.class);
+            multimedaLogic.createMultimedia(null, null, null, mascota.getId(), multi);
+            Assert.assertNotNull(multi);
+            resultados.add(multi);
+        }
+
+        List<MultimediaEntity> r = multimedaLogic.getMultimedias(mascota.getId(), null, null, null);
+        Iterator iter = resultados.iterator();
+
+        while (iter.hasNext()) {
+            MultimediaEntity next = (MultimediaEntity) iter.next();
+            Assert.assertTrue(r.contains(next));
+        }
+    }
+    
      /**
      * Test en el que se verifican las reglas de la logia para el caso de busar una multimedia
      * @throws BusinessLogicException si se incumple una regla de negocio
