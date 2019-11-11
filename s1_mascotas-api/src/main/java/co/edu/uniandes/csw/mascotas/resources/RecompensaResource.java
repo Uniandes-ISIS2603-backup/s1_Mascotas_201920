@@ -12,7 +12,6 @@ import co.edu.uniandes.csw.mascotas.entities.RecompensaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -35,7 +34,6 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class RecompensaResource {
     
-    private static final Logger LOGGER = Logger.getLogger(RecompensaResource.class.getName());
     private static final String PRIM= "El recurso /recompensas/";
     private static final String NO=" no existe.";
     @Inject
@@ -49,36 +47,36 @@ public class RecompensaResource {
     public RecompensaDTO createRecompensa(RecompensaDTO recompensaDTO) throws BusinessLogicException{
         RecompensaEntity recompensaEntity=recompensaDTO.toEntity();
         RecompensaEntity newRecompensaEntity=recompensaLogic.createRecompensa(recompensaEntity);
-        RecompensaDTO newRecompensaDTO=new RecompensaDTO(newRecompensaEntity);
-        return newRecompensaDTO;
+       
+        return new RecompensaDTO(newRecompensaEntity);
     }
     
     @GET
     public List<RecompensaDTO> getRecompensas(){
-        List<RecompensaDTO> listaRecompensas=listEntity2DTO(recompensaLogic.findAllRecompensas());
-        return listaRecompensas;  
+ 
+        return listEntity2DTO(recompensaLogic.findAllRecompensas());
     }
     
      @GET
      @Path("{recompensasId: \\d+}")
-    public RecompensaDTO getRecompensa(@PathParam("recompensasId") Long recompensaID)throws WebApplicationException{
+    public RecompensaDTO getRecompensa(@PathParam("recompensasId") Long recompensaID){
         RecompensaEntity recompensaEntity=recompensaLogic.findRecompensa(recompensaID);
         if(recompensaEntity==null){
             throw new WebApplicationException(PRIM + recompensaID + NO, 404);
         }
-        RecompensaDTO recompensaDTO=new RecompensaDTO(recompensaEntity);
-        return recompensaDTO;
+       
+        return new RecompensaDTO(recompensaEntity);
     }
     
      @PUT
      @Path("{recompensasId: \\d+}")
-    public RecompensaDTO updateRecompensa(@PathParam("recompensasId") Long recompensaID,RecompensaDTO recompensa) throws WebApplicationException, BusinessLogicException{
+    public RecompensaDTO updateRecompensa(@PathParam("recompensasId") Long recompensaID,RecompensaDTO recompensa) throws  BusinessLogicException{
         recompensa.setId(recompensaID);
         if(recompensaLogic.findRecompensa(recompensaID)==null){
             throw new WebApplicationException(PRIM + recompensaID +NO, 404);
         }
-        RecompensaDTO recompensaDTO=new RecompensaDTO(recompensaLogic.updateRecompensa(recompensa.toEntity()));
-        return recompensaDTO;
+       
+        return new RecompensaDTO(recompensaLogic.updateRecompensa(recompensa.toEntity()));
     }
     
      @DELETE
