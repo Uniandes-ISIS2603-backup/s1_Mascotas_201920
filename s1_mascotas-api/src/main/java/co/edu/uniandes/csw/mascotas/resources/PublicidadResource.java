@@ -9,7 +9,9 @@ import co.edu.uniandes.csw.mascotas.dtos.PublicidadDTO;
 import co.edu.uniandes.csw.mascotas.ejb.PublicidadLogic;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -58,6 +60,18 @@ public class PublicidadResource
         return detailDTO;
     }
    
+    @GET
+    public List<PublicidadDTO> getPublicidad() throws BusinessLogicException
+    {
+        List<PublicidadEntity> ens = logic.findAllPublicidad();
+        List<PublicidadDTO> dtos = new ArrayList<>();
+        for (PublicidadEntity en : ens) 
+        {
+            dtos.add(new PublicidadDTO(en));
+        }
+        return dtos;
+    }
+    
    @PUT
    @Path("{publicidadId: \\d+}")
    public PublicidadDTO updatePublicidad(@PathParam("publicidadId") Long publicidadId, PublicidadDTO publicidad) throws BusinessLogicException
