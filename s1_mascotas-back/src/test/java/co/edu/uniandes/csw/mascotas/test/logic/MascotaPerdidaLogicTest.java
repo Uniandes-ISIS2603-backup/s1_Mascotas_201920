@@ -8,6 +8,9 @@ package co.edu.uniandes.csw.mascotas.test.logic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
+import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
+import co.edu.uniandes.csw.mascotas.entities.RecompensaEntity;
+import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.podam.TipoEspecies;
 import java.util.ArrayList;
@@ -16,11 +19,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -50,6 +55,69 @@ public class MascotaPerdidaLogicTest {
                 .addPackage(MascotaPerdidaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
+    }
+    @Inject
+    private UserTransaction utx;
+    private List<MascotaPerdidaEntity> data = new ArrayList<>();
+     /**
+     * Configuración inicial de la prueba.
+     */
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() {
+        em.createQuery("delete from MascotaPerdidaEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
+        em.createQuery("delete from MultimediaEntity").executeUpdate();
+        em.createQuery("delete from RecompensaEntity").executeUpdate();
+    }
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            MascotaPerdidaEntity entity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+            em.persist(entity);
+            
+            data.add(entity);
+        }
+        MascotaPerdidaEntity e = data.get(2);
+        MultimediaEntity entity = fac.manufacturePojo(MultimediaEntity.class);
+        entity.setMascotaPerdida(e);
+        em.persist(entity);
+        e.setMultimedia(new ArrayList<>());
+        e.getMultimedia().add(entity);
+        
+        UsuarioEntity entityU = fac.manufacturePojo(UsuarioEntity.class);
+        entityU.setMascotasPerdidas(new ArrayList<>());
+        entityU.getMascotasPerdidas().add(e);
+        em.persist(entityU);
+        e.setUsuario(entityU);
+        
+        
+        RecompensaEntity entityR = fac.manufacturePojo(RecompensaEntity.class);
+        entityR.setMascotaPerdida(e);
+        em.persist(entity);
+        e.setRecompensa(entityR);
+      
+        
     }
     @Test 
     public void createMascotaPerdida ( ) throws BusinessLogicException

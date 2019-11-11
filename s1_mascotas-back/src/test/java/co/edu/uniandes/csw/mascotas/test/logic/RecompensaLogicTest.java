@@ -7,14 +7,16 @@ package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.RecompensaLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
-import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.entities.RecompensaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
 import co.edu.uniandes.csw.mascotas.persistence.RecompensaPersistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -22,6 +24,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -54,7 +57,55 @@ public class RecompensaLogicTest {
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
                 
     }
-    
+     @Inject
+    private UserTransaction utx;
+    private List<RecompensaEntity> data = new ArrayList<>();
+     /**
+     * Configuración inicial de la prueba.
+     */
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() {
+        em.createQuery("delete from RecompensaEntity").executeUpdate();
+        em.createQuery("delete from MascotaPerdidaEntity").executeUpdate();
+    }
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            RecompensaEntity entity = factory.manufacturePojo(RecompensaEntity.class);
+            em.persist(entity);
+            
+            data.add(entity);
+        }
+        RecompensaEntity e = data.get(2);
+        MascotaPerdidaEntity entity = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        entity.setRecompensa(e);
+        
+        em.persist(entity);
+        e.setMascotaPerdida(entity);
+        
+        
+    }
     @Test
     public void createRecompensaTest() throws BusinessLogicException{
        RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
@@ -131,7 +182,7 @@ public class RecompensaLogicTest {
     }
     
     @Test
-    public void deleteProcesoAdopcionTest() throws BusinessLogicException{
+    public void deleteRecompensaTest() throws BusinessLogicException{
         RecompensaEntity entity=factory.manufacturePojo(RecompensaEntity.class);
         entity.setMonto(1000);
         entity.setPagado(false);
