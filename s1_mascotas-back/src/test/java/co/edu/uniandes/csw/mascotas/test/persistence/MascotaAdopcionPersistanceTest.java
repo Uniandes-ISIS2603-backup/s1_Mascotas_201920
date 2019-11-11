@@ -170,6 +170,7 @@ public class MascotaAdopcionPersistanceTest {
     public void updateMascotaTest() {
 
         MascotaAdopcionEntity entity = data.get(0);
+        mascotaPersistance.create(entity);
 
         PodamFactory factory = new PodamFactoryImpl();
         MascotaAdopcionEntity newEntity = factory.manufacturePojo(MascotaAdopcionEntity.class);
@@ -180,23 +181,23 @@ public class MascotaAdopcionPersistanceTest {
 
         MascotaAdopcionEntity resp = em.find(MascotaAdopcionEntity.class, entity.getId());
 
-         Assert.assertEquals(entity, resp);
+         Assert.assertEquals(newEntity, resp);
 
-        Assert.assertEquals(entity.getDescripcion(), resp.getDescripcion());
+        Assert.assertEquals(newEntity.getDescripcion(), resp.getDescripcion());
 
-        Assert.assertEquals(entity.getEspecie(), resp.getEspecie());
+        Assert.assertEquals(newEntity.getEspecie(), resp.getEspecie());
 
-        Assert.assertEquals(entity.getId(), resp.getId());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
 
-        Assert.assertEquals(entity.getLugar(), resp.getLugar());
+        Assert.assertEquals(newEntity.getLugar(), resp.getLugar());
 
-        Assert.assertEquals(entity.getMultimedia(), resp.getMultimedia());
+        Assert.assertEquals(newEntity.getMultimedia(), resp.getMultimedia());
 
-        Assert.assertEquals(entity.getProcesos(), resp.getProcesos());
+        Assert.assertEquals(newEntity.getProcesos(), resp.getProcesos());
 
-        Assert.assertEquals(entity.getRaza(), resp.getRaza());
+        Assert.assertEquals(newEntity.getRaza(), resp.getRaza());
 
-        Assert.assertEquals(entity.getUsuario(), resp.getUsuario());
+        Assert.assertEquals(newEntity.getUsuario(), resp.getUsuario());
     }
 
 }
