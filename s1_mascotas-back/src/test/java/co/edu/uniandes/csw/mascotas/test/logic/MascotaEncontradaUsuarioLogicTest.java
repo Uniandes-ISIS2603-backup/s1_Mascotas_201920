@@ -6,10 +6,8 @@
 package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
-import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionUsuarioLogic;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaEncontradaLogic;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaEncontradaUsuarioLogic;
-import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
@@ -44,7 +42,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class MascotaEncontradaUsuarioLogicTest {
 
 
-    private PodamFactory factory = new PodamFactoryImpl();
+    private final PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private MascotaEncontradaLogic bookLogic;
