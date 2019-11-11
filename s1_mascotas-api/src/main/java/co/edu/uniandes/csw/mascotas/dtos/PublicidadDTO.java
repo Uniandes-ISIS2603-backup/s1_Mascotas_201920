@@ -103,6 +103,8 @@ public class PublicidadDTO implements Serializable {
         return costo;
     }
 
+    
+    
     public void setCosto(Integer costo) {
         this.costo = costo;
     }

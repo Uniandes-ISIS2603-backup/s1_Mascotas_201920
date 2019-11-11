@@ -5,10 +5,12 @@
  */
 package co.edu.uniandes.csw.mascotas.entities;
 
+import co.edu.uniandes.csw.mascotas.podam.PositiveIntegerStrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -18,7 +20,9 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class RecompensaEntity extends BaseEntity implements Serializable {
     
+    @PodamStrategyValue(PositiveIntegerStrategy.class)
     private Integer monto;
+    
     private Boolean pagado;
     
     @PodamExclude
@@ -35,7 +39,7 @@ public class RecompensaEntity extends BaseEntity implements Serializable {
     /**
      * @param monto the monto to set
      */
-    public void setMonto(int monto) {
+    public void setMonto(Integer monto) {
         this.monto = monto;
     }
 

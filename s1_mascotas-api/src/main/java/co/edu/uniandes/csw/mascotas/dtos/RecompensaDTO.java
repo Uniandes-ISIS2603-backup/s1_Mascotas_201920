@@ -73,7 +73,7 @@ public class RecompensaDTO implements Serializable{
     /**
      * @param monto the monto to set
      */
-    public void setMonto(int monto) {
+    public void setMonto(Integer monto) {
         this.monto = monto;
     }
 

@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mascotas.entities;
+import co.edu.uniandes.csw.mascotas.podam.PositiveIntegerStrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -20,7 +22,8 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
     
     private String comentario;
     
-    private int calificacion;
+    @PodamStrategyValue(PositiveIntegerStrategy.class)
+    private Integer calificacion;
     
     @PodamExclude
     @ManyToOne
@@ -63,14 +66,14 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
     /**
      * @return the calificacion
      */
-    public int getCalificacion() {
+    public Integer getCalificacion() {
         return calificacion;
     }
 
     /**
      * @param calificacion the calificacion to set
      */
-    public void setCalificacion(int calificacion) {
+    public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
 

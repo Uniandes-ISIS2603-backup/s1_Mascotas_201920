@@ -58,7 +58,6 @@ public class RecompensaLogicTest {
     @Test
     public void createRecompensaTest() throws BusinessLogicException{
        RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
-       newEntity.setMonto(1000);
        newEntity.setPagado(false);
        RecompensaEntity result=recompensaLogic.createRecompensa(newEntity);
        assertNotNull(result);
@@ -71,7 +70,6 @@ public class RecompensaLogicTest {
     @Test (expected = BusinessLogicException.class)
     public void createRecompensaPagadoTrueTest() throws BusinessLogicException{
        RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
-       newEntity.setMonto(1000);
        newEntity.setPagado(true);
        RecompensaEntity result=recompensaLogic.createRecompensa(newEntity);
     }
@@ -87,30 +85,26 @@ public class RecompensaLogicTest {
     @Test
     public void updateRecompensaTest() throws BusinessLogicException{
        RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
-       newEntity.setMonto(1000);
        newEntity.setPagado(false);
        recompensaLogic.createRecompensa(newEntity);
        RecompensaEntity entityToUpdate=factory.manufacturePojo(RecompensaEntity.class);
        entityToUpdate.setId(newEntity.getId());
-       entityToUpdate.setMonto(2000);
-       entityToUpdate.setPagado(true);
        recompensaLogic.updateRecompensa(entityToUpdate);
        
        RecompensaEntity entity= em.find(RecompensaEntity.class, newEntity.getId());
        assertNotNull(entity);
-       assertEquals(entity.getMonto(), 2000);
-       assertEquals(entity.getPagado(), true);
+       assertEquals(entity.getMonto(), entityToUpdate.getMonto());
+       assertEquals(entity.getPagado(), entityToUpdate.getPagado());
     }
     
     @Test (expected = BusinessLogicException.class)
     public void updateRecompensaMontoNegativoTest() throws BusinessLogicException{
        RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
-       newEntity.setMonto(1000);
-       newEntity.setPagado(false);
+   
        recompensaLogic.createRecompensa(newEntity);
        RecompensaEntity entityToUpdate=factory.manufacturePojo(RecompensaEntity.class);
        entityToUpdate.setId(newEntity.getId());
-       entityToUpdate.setMonto(-1);
+       entityToUpdate.setMonto(new Integer(-1));
        entityToUpdate.setPagado(false);
        recompensaLogic.updateRecompensa(entityToUpdate);
     }

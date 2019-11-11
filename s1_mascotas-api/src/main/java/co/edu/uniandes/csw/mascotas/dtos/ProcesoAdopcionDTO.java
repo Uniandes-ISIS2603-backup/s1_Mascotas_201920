@@ -17,7 +17,7 @@ public class ProcesoAdopcionDTO implements Serializable{
     private Long id;
     private String estado;
     private String comentario;
-    private int calificacion;
+    private Integer calificacion;
     
     private UsuarioDTO usuario;
     private MascotaAdopcionDTO mascotaAdopcion;
@@ -106,14 +106,14 @@ public class ProcesoAdopcionDTO implements Serializable{
     /**
      * @return the calificacion
      */
-    public int getCalificacion() {
+    public Integer getCalificacion() {
         return calificacion;
     }
 
     /**
      * @param calificacion the calificacion to set
      */
-    public void setCalificacion(int calificacion) {
+    public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
 
@@ -131,18 +131,18 @@ public class ProcesoAdopcionDTO implements Serializable{
         this.mascotaAdopcion = mascotaAdopcion;
     }
     
-//    /**
-//     * @return the usuario
-//     */
-//    public UsuarioDTO getUsuario() {
-//        return usuario;
-//    }
-//
-//    /**
-//     * @param usuario the usuario to set
-//     */
-//    public void setUsuario(UsuarioDTO usuario) {
-//        this.usuario = usuario;
-//    }
+    /**
+     * @return the usuario
+     */
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
     
 }
