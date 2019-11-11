@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "ca5359a0-056a-4adb-84d5-489a1b9348ea",
+		"name": "recompensaTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create recompensa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af8fb1cf-8365-4ea0-9fb5-29852ee70a2e",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"monto\": 1552556,\n        \"pagado\": false\n        \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"recompensas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar recompensa id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"recompensas",
+						"{{new_id_b}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar recompensas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c46a1be0-3618-472b-9262-8f501e835823",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all \"+responseCode.code] = responseCode.code === 200;",
+							"tests[\"mascotas perdidas count\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas"
+					]
+				},
+				"description": "Consulta todas las mascotas perdidas de la aplicaci�n. \r\nLa petici�n no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de mascotas perdidas en la respuesta tenga mas de uno.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Dar recompensa id no existe ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
+						"exec": [
+							"",
+							"tests[\"La recompensa no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar recompensas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dde77c8-a1b8-4c70-99fe-8b3454fe688b",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"descripcion\": \"BCANAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": [],\r\n        \"recompensa\":{\r\n        \t\"id\": 123,\r\n        \t\"monto\": 75,\r\n        \t\"pagado\": false\r\n        \t\r\n        }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_b}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"{{new_id_b}}"
+					]
+				},
+				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Dar recompensas id no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"recompensas",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar mascota perdida que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d15af7e-7d0d-4864-bf10-5ea6188cc0a2",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"recompensas",
+						"{{new_id_b}}"
+					]
+				},
+				"description": "Borra una mascota perdida que no existe en la aplicaci�n.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasperdidas/-1 no existe.\".\r\n\r\n**C�digo http esperado: 404**"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

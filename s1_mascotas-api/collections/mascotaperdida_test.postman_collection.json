@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f50b1b52-8447-4586-a5ef-ec8ad1c5e959",
+		"_postman_id": "a71efbd8-1e0d-49c1-a044-42c4071aa7fd",
 		"name": "mascotaperdida_test",
 		"description": "Colecci�n de pruebas sobre el recurso MAscota perdida",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"pa@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
+					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"phhhhhhha@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -177,35 +177,22 @@
 			"response": []
 		},
 		{
-			"name": "Editar una mascota que no existe",
+			"name": "Dar mascota perdida id no existe Copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "d3ed6d26-4726-4068-b897-8137e07eb560",
+						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
 						"exec": [
-							"tests[\"No actualiza con id que no existe \"+responseCode.code] = responseCode.code === 404;",
-							"                                ",
-							"//tests[\"Mensaje correcto de error \"+responseBody] = responseBody.has(\"El recurso /mascotasperdidas/-1 no existe.\");"
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": " {\r\n        \"descripcion\": \"BCANAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": [],\r\n        \"recompensa\":{\r\n        \t\"id\": 123,\r\n        \t\"monto\": 75,\r\n        \t\"pagado\": false\r\n        \t\r\n        }\r\n    }"
-				},
+				"method": "GET",
+				"header": [],
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/-1",
 					"protocol": "http",
@@ -219,8 +206,7 @@
 						"mascotasperdidas",
 						"-1"
 					]
-				},
-				"description": "Actualiza un mascota perdida que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasperdidas/0 no existe.\".\r\n\r\n**C�digo HTTP esperado: 404**"
+				}
 			},
 			"response": []
 		},
@@ -269,6 +255,88 @@
 					]
 				},
 				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una mascota que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3ed6d26-4726-4068-b897-8137e07eb560",
+						"exec": [
+							"tests[\"No actualiza con id que no existe \"+responseCode.code] = responseCode.code === 404;",
+							"                                ",
+							"//tests[\"Mensaje correcto de error \"+responseBody] = responseBody.has(\"El recurso /mascotasperdidas/-1 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"descripcion\": \"BCANAS\",\r\n        \"especie\": 0,\r\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\r\n        \"lugar\": \"BUENAS\",\r\n        \"raza\": \"BUENAS\",\r\n        \"fotos\": [],\r\n        \"videos\": [],\r\n        \"recompensa\":{\r\n        \t\"id\": 123,\r\n        \t\"monto\": 75,\r\n        \t\"pagado\": false\r\n        \t\r\n        }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"-1"
+					]
+				},
+				"description": "Actualiza un mascota perdida que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasperdidas/0 no existe.\".\r\n\r\n**C�digo HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Dar mascota perdida id no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"-1"
+					]
+				}
 			},
 			"response": []
 		},
