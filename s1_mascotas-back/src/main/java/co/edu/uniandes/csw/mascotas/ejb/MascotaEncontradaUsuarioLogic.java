@@ -61,7 +61,8 @@ public class MascotaEncontradaUsuarioLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuarioId);
         MascotaEncontradaEntity mascotaEncontradaEntity = mascotaPersistence.find(mascotaEncontradaId);
-        mascotaEncontradaEntity.setUsuario(usuarioEntity);
+        if(mascotaEncontradaEntity != null)
+            mascotaEncontradaEntity.setUsuario(usuarioEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaEntity.getId());
         return mascotaEncontradaEntity;
     }
@@ -85,6 +86,6 @@ public class MascotaEncontradaUsuarioLogic {
             }
             mascotaEntity.setUsuario(null);
         }
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario de la mascota con id = {0}", mascotaEntity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario de la mascota con id = {0}", mascotaId);
     }
 }
