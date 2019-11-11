@@ -26,7 +26,7 @@ public class UsuarioLogic
     {  
         checkUsuario(usuario);
         //Correo unico
-        if(persistence.findByEmail(usuario.getCorreo()).size() > 0)
+        if(!persistence.findByEmail(usuario.getCorreo()).isEmpty())
             throw new BusinessLogicException("Ya existe un usuario con ese correo");
         
         usuario = persistence.create(usuario);
@@ -40,8 +40,8 @@ public class UsuarioLogic
         UsuarioEntity usuarioExistente = persistence.find(usuario.getId());
         if(usuarioExistente != null)
         {
-            if(!usuarioExistente.getCorreo().equals(usuario.getCorreo()))
-                if(persistence.findByEmail(usuario.getCorreo()).size() > 0)
+            if(!usuarioExistente.getCorreo().equals(usuario.getCorreo())
+                && !persistence.findByEmail(usuario.getCorreo()).isEmpty())
                     throw new BusinessLogicException("Ya existe un usuario con ese correo");
         }
         else
