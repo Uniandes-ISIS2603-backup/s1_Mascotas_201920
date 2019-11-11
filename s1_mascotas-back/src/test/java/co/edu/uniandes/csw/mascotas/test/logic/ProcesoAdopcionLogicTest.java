@@ -13,9 +13,12 @@ import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
 import co.edu.uniandes.csw.mascotas.persistence.ProcesoAdopcionPersistence;
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -27,6 +30,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+import org.junit.Before;
 
 /**
  *
@@ -43,6 +47,10 @@ public class ProcesoAdopcionLogicTest {
     @PersistenceContext
     private EntityManager em;
    
+    @Inject
+    private UserTransaction utx;
+    private List<ProcesoAdopcionEntity> data = new ArrayList<>();
+    
     @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
@@ -57,12 +65,58 @@ public class ProcesoAdopcionLogicTest {
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
                 
     }
+     /**
+     * Configuración inicial de la prueba.
+     */
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() {
+        em.createQuery("delete from ProcesoAdopcionEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
+        em.createQuery("delete from MascotaAdopcionEntity").executeUpdate();
+    }
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            ProcesoAdopcionEntity entity = factory.manufacturePojo(ProcesoAdopcionEntity.class);
+            em.persist(entity);
+            
+            data.add(entity);
+        }
+        ProcesoAdopcionEntity e = data.get(2);
+        MascotaAdopcionEntity entity = factory.manufacturePojo(MascotaAdopcionEntity.class);
+        entity.setProcesos(new ArrayList<>());
+        entity.getProcesos().add(e);
+        em.persist(entity);
+        e.setMascotaAdopcion(entity);
+        
+    }
     
     @Test
     public void createProcesoCanceladoTest() throws BusinessLogicException{
        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
        newEntity.setEstado("Cancelado");
-       newEntity.setMascotaAdopcion(factory.manufacturePojo(MascotaAdopcionEntity.class));
+    
        ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
        assertNotNull(result);
        
