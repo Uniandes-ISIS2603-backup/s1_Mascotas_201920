@@ -32,13 +32,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     
     public UsuarioDetailDTO()
     {
-        mascotasEncontradas = new ArrayList<>();
-    
-        mascotasPerdidas = new ArrayList<>();
-
-        mascotasAdopcion = new ArrayList<>();
-
-        procesosAdopcion = new ArrayList<>();
+        
     }
     
     public UsuarioDetailDTO(UsuarioEntity usuario)
