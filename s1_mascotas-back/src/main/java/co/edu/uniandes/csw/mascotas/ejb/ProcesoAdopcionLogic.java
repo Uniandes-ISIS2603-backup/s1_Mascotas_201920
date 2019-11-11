@@ -39,7 +39,7 @@ public class ProcesoAdopcionLogic {
 //            throw new BusinessLogicException("La mascota asociada al proceso se encuentra vacia");
 //        }
         if(proceso.getCalificacion()<1 || proceso.getCalificacion()>5){
-            throw new BusinessLogicException("La calificacion del proceso tiene un valor que no se encuentra entre 1 y 5");
+            throw new BusinessLogicException("La calificacion del proceso tiene un valor que no se encuentra entre 1 y 5 es "+proceso.getCalificacion());
         }
         Boolean validState=false;
         if(proceso.getEstado().equals("En Proceso") || proceso.getEstado().equals("Terminado") || proceso.getEstado().equals("Cancelado")){

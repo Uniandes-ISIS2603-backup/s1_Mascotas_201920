@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mascotas.tests.postman;
-
+import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.mascotas.resources.MascotaPerdidaResource;
@@ -20,14 +20,13 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 /**
  *
- * @author German Rozo
+ * @author Lily
  */
-@RunWith(Arquillian.class)
-public class PublicidadIT {
-     private static final String COLLECTION = "publicidadResourceTEst_test.postman_collection";
+public class ProcesoIT {
+    
+     private static final String COLLECTION = "ProcesoAdopcionResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
@@ -67,4 +66,5 @@ public class PublicidadIT {
         if( tp.getAssertions_failed() != null)
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
     }
+    
 }

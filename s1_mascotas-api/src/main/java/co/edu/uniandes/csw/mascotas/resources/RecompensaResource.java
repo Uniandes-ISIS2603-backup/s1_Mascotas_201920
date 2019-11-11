@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.mascotas.resources;
 
 import co.edu.uniandes.csw.mascotas.dtos.RecompensaDTO;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaRecompensaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaUsuarioLogic;
 import co.edu.uniandes.csw.mascotas.ejb.RecompensaLogic;
 import co.edu.uniandes.csw.mascotas.entities.RecompensaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
@@ -38,6 +40,10 @@ public class RecompensaResource {
     
     @Inject
     private RecompensaLogic recompensaLogic;
+    
+    @Inject 
+    private MascotaPerdidaRecompensaLogic mascotaRecompensaLogic; 
+ 
     
     @POST
     public RecompensaDTO createRecompensa(RecompensaDTO recompensaDTO) throws BusinessLogicException{
@@ -82,6 +88,7 @@ public class RecompensaResource {
             throw new WebApplicationException("El recurso /recompensas/" + recompensaID + " no existe.", 404);
         }
         recompensaLogic.deleteRecompensa(recompensaID);
+        mascotaRecompensaLogic.removeRecompensa(recompensaID); 
     }
 
     private List<RecompensaDTO> listEntity2DTO(List<RecompensaEntity> entityList) {

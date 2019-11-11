@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mascotas.entities;
 import co.edu.uniandes.csw.mascotas.podam.PositiveIntegerStrategy;
+import co.edu.uniandes.csw.mascotas.podam.calificacionEstrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -22,7 +23,7 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
     
     private String comentario;
     
-    @PodamStrategyValue(PositiveIntegerStrategy.class)
+    @PodamStrategyValue(calificacionEstrategy.class)
     private Integer calificacion;
     
     @PodamExclude

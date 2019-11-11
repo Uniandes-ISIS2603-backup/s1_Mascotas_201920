@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.entities;
 
 import co.edu.uniandes.csw.mascotas.podam.PositiveIntegerStrategy;
+import co.edu.uniandes.csw.mascotas.podam.calificacionEstrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;

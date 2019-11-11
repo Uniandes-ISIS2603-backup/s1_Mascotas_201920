@@ -13,21 +13,18 @@ import java.io.File;
 import java.io.IOException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  *
- * @author German Rozo
+ * @author Lily 
  */
-@RunWith(Arquillian.class)
-public class PublicidadIT {
-     private static final String COLLECTION = "publicidadResourceTEst_test.postman_collection";
+public class RecompensaIT {
+     private static final String COLLECTION = "recompensaTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
@@ -67,4 +64,5 @@ public class PublicidadIT {
         if( tp.getAssertions_failed() != null)
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
     }
+    
 }

@@ -105,7 +105,7 @@ public class MascotaPerdidaDTO implements Serializable{
      * @param entidad mascota 
      */
     public MascotaPerdidaDTO(MascotaPerdidaEntity entidad) {
-        
+        if( entidad != null){
         setDescripcion(entidad.getDescripcion());
         
         setEspecie((entidad.getEspecie()));
@@ -128,7 +128,7 @@ public class MascotaPerdidaDTO implements Serializable{
             setUsuario(null);
         }
         setId(entidad.getId());
-        
+        }
     }
     /**
      * MascotaPerdidaDTO a entity 
