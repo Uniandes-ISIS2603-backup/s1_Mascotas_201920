@@ -117,18 +117,17 @@ public class ProcesoAdopcionLogicTest {
        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
        newEntity.setCalificacion(3);
        newEntity.setEstado("Cancelado");
-       newEntity.setComentario("uno");
        procesoLogic.createProcesoAdopcion(newEntity);
        ProcesoAdopcionEntity entityToUpdate=factory.manufacturePojo(ProcesoAdopcionEntity.class);
        entityToUpdate.setId(newEntity.getId());
        entityToUpdate.setCalificacion(3);
        entityToUpdate.setEstado("Cancelado");
-       entityToUpdate.setComentario("dos");
+    
        procesoLogic.updateProcesoAdopcion(entityToUpdate);
        
        ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, newEntity.getId());
        assertNotNull(entity);
-       assertEquals(entity.getComentario(), "dos");
+       assertEquals(entity.getComentario(), entityToUpdate.getComentario());
     }
     
     @Test (expected = BusinessLogicException.class)
@@ -192,7 +191,7 @@ public class ProcesoAdopcionLogicTest {
     @Test
     public void findProcesoAdopcionTest() throws BusinessLogicException{
         ProcesoAdopcionEntity entity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
-        entity.setCalificacion(3);
+    
         entity.setEstado("Cancelado");
         procesoLogic.createProcesoAdopcion(entity);
         ProcesoAdopcionEntity resultEntity=procesoLogic.findProcesoAdopcion(entity.getId());

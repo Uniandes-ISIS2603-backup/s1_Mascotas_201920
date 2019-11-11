@@ -10,7 +10,7 @@ package co.edu.uniandes.csw.mascotas.podam;
  * @author Lily
  */
 public enum TipoEspecies {
-    Perro,
-    Gato
+    PERRO,
+    GATO
     
 }
