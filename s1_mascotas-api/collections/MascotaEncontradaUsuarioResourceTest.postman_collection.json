@@ -1,0 +1,428 @@
+{
+	"info": {
+		"_postman_id": "66f2992c-266f-46a4-a0aa-7db84f1cbb70",
+		"name": "MascotaEncontradaUsuarioTest",
+		"description": "Colección de pruebas sobre el recurso MascotaEncontradaUsuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "21004ff9-1fcb-42f6-be61-8d849bbf433c",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_umeu\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"juanMEU11@bta.com\",\n\t\"celular\": 312123212\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						""
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\n\r\nCrea un nuevo usuario. El recurso tiene todos los atributos. El Id es inicializado por la BD y se debe ver en la respuesta. \r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un usuario 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "951877f3-cba0-4c76-b6cf-2a006e89dfe3",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_umeu2\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Juan2\",\n\t\"ciudad\": \"Bogota2\",\n\t\"correo\": \"juanMEU10@bta.com\",\n\t\"celular\": 312123221\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						""
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\n\r\nCrea un nuevo usuario. El recurso tiene todos los atributos menos usuario. El Id es inicializado por la BD y se debe ver en la respuesta. \r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una mascota encontrada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "304084ed-d326-4e9b-b66a-8c2c95b18e0b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_meu\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"raza\": \"Criollo\",\n\t\"lugar\": \"Bogota\",\n\t\"descripcion\": \"juan@bta.com\",\n\t\"especie\": 0,\n\t\"usuario\": {\n\t\t\"id\": {{new_id_umeu}}\n\t},\n\t\"fechaEncontrada\": \"2019-09-10T00:00:00.000Z\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasencontradas"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\n\r\nCrea una nueva mascota encontrada. El recurso tiene todos los atributos. El Id es inicializado por la BD y se debe ver en la respuesta. \r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un usuario a una mascota encontrada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "315a513d-f8a4-47ed-ac11-2d9e9cdac1da",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{new_id_umeu}}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_meu}}/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasencontradas",
+						"{{new_id_meu}}",
+						"usuario"
+					]
+				},
+				"description": "**Release: Paso-5**\r\n\r\nActualiza el usuario de una mascota existente. Se envían los Ids de las entidades asociar en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un usuario que no existe a una mascota encontrada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8198634-c32a-4525-8312-c450839fb809",
+						"exec": [
+							"tests[\"No actualiza con usuario que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /usuarios/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 0\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_meu}}/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasencontradas",
+						"{{new_id_meu}}",
+						"usuario"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario que no existe a una mascota encontrada. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /usuarios/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un usuario a una mascota encontrada que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ece9142f-8d19-429e-bb83-0205a8143ca0",
+						"exec": [
+							"tests[\"No actualiza con una mascota que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mascotasencontradas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":{{new_id_umeu}}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/0/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasencontradas",
+						"0",
+						"usuario"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario a una mascota encontrada que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasencontradas/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una mascota encontrada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ec74fba-bc15-4973-99bd-0c1a86a28a2e",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_meu}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasencontradas",
+						"{{new_id_meu}}"
+					]
+				},
+				"description": "**Release: Ciclo-2**\n\nBorra una mascota encontrada. Se envía el id de la mascota encontrada creada anteriormente.\n\n**Código HTTP esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5fa2a525-53d4-480b-92cf-ae0821fd3197",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_umeu}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						"{{new_id_umeu}}"
+					]
+				},
+				"description": "**Release: Ciclo-2**\n\nBorra un usuario. Se envía el id del usuario creado en la primera petición.\n\n**Código HTTP esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un usuario 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c6cd048-672b-4b5a-b683-fa8f4f9606bf",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_umeu2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						"{{new_id_umeu2}}"
+					]
+				},
+				"description": "**Release: Ciclo-2**\n\nBorra un usuario. Se envía el id del usuario creado en la primera petición.\n\n**Código HTTP esperado: 204**"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dbc63782-6296-4287-9d4e-3a6f0ef073d7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8e627a68-5c9e-483b-846f-2da7ab6fab04",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
