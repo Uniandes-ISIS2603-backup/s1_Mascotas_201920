@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -68,7 +67,7 @@ public class ProcesoAdopcionResource {
     
      @PUT
      @Path("{procesosId: \\d+}")
-    public ProcesoAdopcionDTO updateProcesoAdopcion(@PathParam("procesosId") Long procesoID,ProcesoAdopcionDTO proceso) throws WebApplicationException, BusinessLogicException{
+    public ProcesoAdopcionDTO updateProcesoAdopcion(@PathParam("procesosId") Long procesoID,ProcesoAdopcionDTO proceso) throws  BusinessLogicException{
         proceso.setId(procesoID);
         if(procesoLogic.findProcesoAdopcion(procesoID)==null){
             throw new WebApplicationException(PRIM + procesoID + NO, 404);

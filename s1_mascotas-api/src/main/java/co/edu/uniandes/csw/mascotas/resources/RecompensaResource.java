@@ -12,7 +12,6 @@ import co.edu.uniandes.csw.mascotas.entities.RecompensaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -60,7 +59,7 @@ public class RecompensaResource {
     
      @GET
      @Path("{recompensasId: \\d+}")
-    public RecompensaDTO getRecompensa(@PathParam("recompensasId") Long recompensaID)throws WebApplicationException{
+    public RecompensaDTO getRecompensa(@PathParam("recompensasId") Long recompensaID){
         RecompensaEntity recompensaEntity=recompensaLogic.findRecompensa(recompensaID);
         if(recompensaEntity==null){
             throw new WebApplicationException(PRIM + recompensaID + NO, 404);
@@ -71,7 +70,7 @@ public class RecompensaResource {
     
      @PUT
      @Path("{recompensasId: \\d+}")
-    public RecompensaDTO updateRecompensa(@PathParam("recompensasId") Long recompensaID,RecompensaDTO recompensa) throws WebApplicationException, BusinessLogicException{
+    public RecompensaDTO updateRecompensa(@PathParam("recompensasId") Long recompensaID,RecompensaDTO recompensa) throws  BusinessLogicException{
         recompensa.setId(recompensaID);
         if(recompensaLogic.findRecompensa(recompensaID)==null){
             throw new WebApplicationException(PRIM + recompensaID +NO, 404);
