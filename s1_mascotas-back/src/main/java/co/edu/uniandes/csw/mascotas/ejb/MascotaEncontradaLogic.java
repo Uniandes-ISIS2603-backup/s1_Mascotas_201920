@@ -91,7 +91,7 @@ public class MascotaEncontradaLogic {
         return persistence.findAll();
     }
     
-    public void deleteMascotaEncontrada(Long id) throws BusinessLogicException
+    public void deleteMascotaEncontrada(Long id)
     {
         persistence.delete(id);
     }
