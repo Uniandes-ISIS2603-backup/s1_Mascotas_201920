@@ -62,7 +62,7 @@ public class ProcesoAdopcionLogicTest {
     public void createProcesoCanceladoTest() throws BusinessLogicException{
        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
        newEntity.setEstado("Cancelado");
-       newEntity.setMascotaAdopcion(factory.manufacturePojo(MascotaAdopcionEntity.class));
+    
        ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
        assertNotNull(result);
        
