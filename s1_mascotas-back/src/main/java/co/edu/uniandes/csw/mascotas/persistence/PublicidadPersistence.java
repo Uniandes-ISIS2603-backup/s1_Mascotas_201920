@@ -10,7 +10,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -37,7 +36,7 @@ public class PublicidadPersistence {
     public PublicidadEntity update(PublicidadEntity o)
     {
         
-        PublicidadEntity en= find(o.getId());
+        find(o.getId());
         em.merge(o);
         return find(o.getId());
     }
