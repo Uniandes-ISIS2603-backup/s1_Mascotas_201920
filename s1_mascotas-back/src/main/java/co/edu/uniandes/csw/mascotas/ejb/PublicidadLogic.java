@@ -38,17 +38,17 @@ public class PublicidadLogic
         return pe;
     }
     
-    public PublicidadEntity findPublicidad(Long id) throws BusinessLogicException
+    public PublicidadEntity findPublicidad(Long id)
     {
         return pp.find(id);
     }
     
-    public List<PublicidadEntity> findAllPublicidad() throws BusinessLogicException
+    public List<PublicidadEntity> findAllPublicidad()
     {
         return pp.findAll();
     }
     
-    public void deletePublicidad(Long id) throws BusinessLogicException
+    public void deletePublicidad(Long id)
     {
         pp.delete(id);
     }
