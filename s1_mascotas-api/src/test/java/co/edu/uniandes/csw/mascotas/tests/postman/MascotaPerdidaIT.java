@@ -4,11 +4,8 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mascotas.tests.postman;
-import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
-import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.mascotas.mappers.BusinessLogicExceptionMapper;
-import co.edu.uniandes.csw.mascotas.resources.MascotaPerdidaResource;
 import co.edu.uniandes.csw.mascotas.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;

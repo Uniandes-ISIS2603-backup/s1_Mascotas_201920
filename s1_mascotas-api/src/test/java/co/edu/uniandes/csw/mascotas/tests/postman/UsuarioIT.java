@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mascotas.tests.postman;
 
+
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.mascotas.resources.MascotaPerdidaResource;
@@ -23,11 +24,11 @@ import org.junit.runner.RunWith;
 
 /**
  *
- * @author Lily 
+ * @author Lily
  */
 @RunWith(Arquillian.class)
-public class RecompensaIT {
-     private static final String COLLECTION = "recompensaTest.postman_collection";
+public class UsuarioIT {
+     private static final String COLLECTION = "UsuarioResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
@@ -67,5 +68,4 @@ public class RecompensaIT {
         if( tp.getAssertions_failed() != null)
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
     }
-    
 }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mascotas.tests.postman;
-import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDTO;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaPerdidaDetailDTO;
 import co.edu.uniandes.csw.mascotas.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.mascotas.resources.MascotaPerdidaResource;
@@ -24,6 +23,7 @@ import org.junit.runner.RunWith;
  *
  * @author Lily
  */
+@RunWith(Arquillian.class)
 public class ProcesoIT {
     
      private static final String COLLECTION = "ProcesoAdopcionResourceTest.postman_collection";
