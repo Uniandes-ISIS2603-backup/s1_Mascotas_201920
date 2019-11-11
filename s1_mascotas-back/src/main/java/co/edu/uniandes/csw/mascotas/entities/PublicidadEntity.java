@@ -97,34 +97,38 @@ public class PublicidadEntity extends BaseEntity implements Serializable
 
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) 
+    {
+        boolean resultado = false;
+        
         if (this == obj) {
-            return true;
+            resultado = true;
         }
-        if (obj == null) {
-            return false;
+        else if (obj == null) {
+            resultado = false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
+        else if (getClass() != obj.getClass()) {
+            resultado = false;
         }
+        
         final PublicidadEntity other = (PublicidadEntity) obj;
         if (!Objects.equals(this.mensaje, other.mensaje)) {
-            return false;
+            resultado = false;
         }
-        if (!Objects.equals(this.diasPorSemana, other.diasPorSemana)) {
-            return false;
+        else if (!Objects.equals(this.diasPorSemana, other.diasPorSemana)) {
+            resultado = false;
         }
-        if (!Objects.equals(this.costo, other.costo)) {
-            return false;
+        else if (!Objects.equals(this.costo, other.costo)) {
+            resultado = false;
         }
-        if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
-            return false;
+        else if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
+            resultado = false;
         }
-        if (!Objects.equals(this.fecchaFin, other.fecchaFin)) {
-            return false;
+        else if (!Objects.equals(this.fecchaFin, other.fecchaFin)) {
+            resultado = false;
         }
-        if (!Objects.equals(this.multimedia, other.multimedia)) {
-            return false;
+        else if (!Objects.equals(this.multimedia, other.multimedia)) {
+            resultado = false;
         }
         return true;
     }
