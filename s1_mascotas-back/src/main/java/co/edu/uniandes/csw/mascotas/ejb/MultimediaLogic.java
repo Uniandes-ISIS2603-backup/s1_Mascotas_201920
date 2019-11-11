@@ -86,16 +86,16 @@ public class MultimediaLogic {
 
         LOGGER.log(Level.INFO, "Inicia proceso de crear multimedia");
         MascotaAdopcionEntity adopcion = null;
+        MascotaEncontradaEntity encontrada = null;
+        MascotaPerdidaEntity perdida = null;
+        PublicidadEntity publicidad = null;
         if(adopcionId != null)
             adopcion = adopcionPersistence.find(adopcionId);
-        MascotaEncontradaEntity encontrada = null;
-        if(encontradaId != null)
+        else if(encontradaId != null)
             encontrada = encontradaPersistence.find(encontradaId);
-        MascotaPerdidaEntity perdida = null;
-        if(perdidaId != null)
+        else if(perdidaId != null)
             perdida = perdidaPersistence.find(perdidaId);
-        PublicidadEntity publicidad = null;
-        if(publicidadId != null)
+        else if(publicidadId != null)
             publicidad = publicidadPersistence.find(publicidadId);
         multimedia.setMascota(adopcion);
         multimedia.setMascotaEncontrada(encontrada);
@@ -117,16 +117,16 @@ public class MultimediaLogic {
     public List<MultimediaEntity> getMultimedias(Long adopcionId, Long encontradaId, Long perdidaId, Long publicidadId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la multimedia asociada a los objetos con id = {0} {1} {2} {3}", new Object[]{adopcionId, encontradaId, perdidaId, publicidadId});
         MascotaAdopcionEntity adopcion = null;
+        MascotaEncontradaEntity encontrada = null;
+        MascotaPerdidaEntity perdida = null;
+        PublicidadEntity publicidad = null;
         if(adopcionId != null)
             adopcion = adopcionPersistence.find(adopcionId);
-        MascotaEncontradaEntity encontrada = null;
-        if(encontradaId != null)
+        else if(encontradaId != null)
             encontrada = encontradaPersistence.find(encontradaId);
-        MascotaPerdidaEntity perdida = null;
-        if(perdidaId != null)
+        else if(perdidaId != null)
             perdida = perdidaPersistence.find(perdidaId);
-        PublicidadEntity publicidad = null;
-        if(publicidadId != null)
+        else if(publicidadId != null)
             publicidad = publicidadPersistence.find(publicidadId);
         List<MultimediaEntity> lista = new ArrayList<>();
         if(adopcion != null)
