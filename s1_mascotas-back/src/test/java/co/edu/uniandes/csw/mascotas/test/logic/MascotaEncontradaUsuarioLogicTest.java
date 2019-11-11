@@ -144,4 +144,27 @@ public class MascotaEncontradaUsuarioLogicTest {
         MascotaEncontradaEntity response = bookLogic.findMascotaEncontrada(booksData.get(0).getId());
         Assert.assertNull(response.getUsuario());
     }
+    
+    /**
+     * Prueba para desasociar un Book existente de un Editorial existente
+     *
+     * @throws co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException
+     */
+    @Test
+    public void removeSinUsuarioTest() throws BusinessLogicException {
+        bookEditorialLogic.removeUsuario(booksData.get(0).getId());
+        bookEditorialLogic.removeUsuario(booksData.get(0).getId());
+        MascotaEncontradaEntity response = bookLogic.findMascotaEncontrada(booksData.get(0).getId());
+        Assert.assertNull(response.getUsuario());
+    }
+    
+    /**
+     * Prueba para desasociar un Book existente de un Editorial existente
+     *
+     * @throws co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void removeSinMascotaTest() throws BusinessLogicException {
+        bookEditorialLogic.removeUsuario(new Long(-1));
+    }
 }

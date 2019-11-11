@@ -26,6 +26,7 @@ package co.edu.uniandes.csw.mascotas.ejb;
 
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
+import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
 import java.util.logging.Level;
@@ -61,7 +62,8 @@ public class MascotaEncontradaUsuarioLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuarioId);
         MascotaEncontradaEntity mascotaEncontradaEntity = mascotaPersistence.find(mascotaEncontradaId);
-        mascotaEncontradaEntity.setUsuario(usuarioEntity);
+        if(mascotaEncontradaEntity != null)
+            mascotaEncontradaEntity.setUsuario(usuarioEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar mascota encontrada con id = {0}", mascotaEncontradaEntity.getId());
         return mascotaEncontradaEntity;
     }
@@ -72,17 +74,23 @@ public class MascotaEncontradaUsuarioLogic {
      *
      * @param mascotaId La mascota encontrada que se le borrarà el usuario.
      */
-    public void removeUsuario(Long mascotaId) {
+    public void removeUsuario(Long mascotaId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el usuario de la mascota con id = {0}", mascotaId);
         MascotaEncontradaEntity mascotaEntity = mascotaPersistence.find(mascotaId);
-        /**if(mascotaEntity != null)
+        if(mascotaEntity != null)
         {
             UsuarioEntity usuarioEntity;
             if(mascotaEntity.getUsuario() != null)
+            {
                 usuarioEntity = usuarioPersistence.find(mascotaEntity.getUsuario().getId());
+                usuarioEntity.getMascotasEncontradas().remove(mascotaEntity);
+            }
             mascotaEntity.setUsuario(null);
-        }**/
-        //usuarioEntity.getMascotasEncontradas().remove(mascotaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario de la mascota con id = {0}", mascotaEntity.getId());
+        }
+        else
+        {
+            throw new BusinessLogicException("No existe la mascota con ese id.");
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario de la mascota con id = {0}", mascotaId);
     }
 }

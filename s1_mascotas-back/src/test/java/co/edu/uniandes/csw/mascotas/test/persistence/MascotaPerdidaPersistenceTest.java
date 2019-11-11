@@ -83,6 +83,7 @@ public class MascotaPerdidaPersistenceTest
        Assert.assertEquals(other.getRaza(),result.getRaza());
        Assert.assertEquals(mascota.getUsuario(), entity.getUsuario());
        Assert.assertEquals(mascota.getRecompensa(), entity.getRecompensa());
+       Assert.assertEquals(mascota.getMultimedia(), entity.getMultimedia());
     }
     @Test
     public void testFindAll()

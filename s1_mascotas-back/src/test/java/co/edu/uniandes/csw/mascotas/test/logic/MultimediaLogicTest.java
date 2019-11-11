@@ -5,9 +5,15 @@
  */
 package co.edu.uniandes.csw.mascotas.test.logic;
 import co.edu.uniandes.csw.mascotas.ejb.MascotaAdopcionLogic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaEncontradaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.MascotaPerdidaLogic;
 import co.edu.uniandes.csw.mascotas.ejb.MultimediaLogic;
+import co.edu.uniandes.csw.mascotas.ejb.PublicidadLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
+import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
+import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
+import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MultimediaPersistence;
 import java.util.ArrayList;
@@ -40,6 +46,15 @@ public class MultimediaLogicTest {
     
     @Inject
     private MascotaAdopcionLogic mAdopcionLogic;
+    
+    @Inject
+    private MascotaEncontradaLogic mEncontradaLogic;
+    
+    @Inject
+    private MascotaPerdidaLogic mPerdidaLogic;
+    
+    @Inject
+    private PublicidadLogic publicidadLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -59,7 +74,7 @@ public class MultimediaLogicTest {
      * @throws BusinessLogicException 
      */
     @Test
-    public void createMultimediaTest() throws BusinessLogicException {
+    public void createMultimediaAdopcionTest() throws BusinessLogicException {
         MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
         MascotaAdopcionEntity mascota = factory.manufacturePojo(MascotaAdopcionEntity.class);
         mascota = mAdopcionLogic.createMascotaAdopcion(mascota);
@@ -67,12 +82,78 @@ public class MultimediaLogicTest {
         Assert.assertNotNull(resultado);
 
         MultimediaEntity entidad2 = em.find(MultimediaEntity.class, resultado.getId());
+        Assert.assertEquals(entidad2.getMascotaAdopcion(), resultado.getMascotaAdopcion());
+        Assert.assertEquals(entidad2.getMascota(), resultado.getMascota());
         Assert.assertEquals(entidad2.getNombre(), resultado.getNombre());
         Assert.assertEquals(entidad2.getTipo(), resultado.getTipo());
         Assert.assertEquals(entidad2.getUrl(), resultado.getUrl());
        
 
     }
+    
+    /**
+     * Test para revisar las reglas de negocio al crear una multimedia.
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void createMultimediaEncontradaTest() throws BusinessLogicException {
+        MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
+        MascotaEncontradaEntity mascota = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        mascota = mEncontradaLogic.createMascotaEncontrada(mascota);
+        MultimediaEntity resultado = multimedaLogic.createMultimedia(null, mascota.getId(), null, null, entidad);
+        Assert.assertNotNull(resultado);
+
+        MultimediaEntity entidad2 = em.find(MultimediaEntity.class, resultado.getId());
+        Assert.assertEquals(entidad2.getMascotaEncontrada(), resultado.getMascotaEncontrada());
+        Assert.assertEquals(entidad2.getNombre(), resultado.getNombre());
+        Assert.assertEquals(entidad2.getTipo(), resultado.getTipo());
+        Assert.assertEquals(entidad2.getUrl(), resultado.getUrl());
+       
+
+    }
+    
+    /**
+     * Test para revisar las reglas de negocio al crear una multimedia.
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void createMultimediaPerdidaTest() throws BusinessLogicException {
+        MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
+        MascotaPerdidaEntity mascota = factory.manufacturePojo(MascotaPerdidaEntity.class);
+        mascota = mPerdidaLogic.createMascotaPerdida(mascota);
+        MultimediaEntity resultado = multimedaLogic.createMultimedia(null, null, mascota.getId(), null, entidad);
+        Assert.assertNotNull(resultado);
+
+        MultimediaEntity entidad2 = em.find(MultimediaEntity.class, resultado.getId());
+        Assert.assertEquals(entidad2.getMascotaPerdida(), resultado.getMascotaPerdida());
+        Assert.assertEquals(entidad2.getNombre(), resultado.getNombre());
+        Assert.assertEquals(entidad2.getTipo(), resultado.getTipo());
+        Assert.assertEquals(entidad2.getUrl(), resultado.getUrl());
+       
+
+    }
+    
+    /**
+     * Test para revisar las reglas de negocio al crear una multimedia.
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void createMultimediaPublicidadTest() throws BusinessLogicException {
+        MultimediaEntity entidad = factory.manufacturePojo(MultimediaEntity.class);
+        PublicidadEntity mascota = factory.manufacturePojo(PublicidadEntity.class);
+        mascota = publicidadLogic.createPublicidad(mascota);
+        MultimediaEntity resultado = multimedaLogic.createMultimedia(null, null, null, mascota.getId(), entidad);
+        Assert.assertNotNull(resultado);
+
+        MultimediaEntity entidad2 = em.find(MultimediaEntity.class, resultado.getId());
+        Assert.assertEquals(entidad2.getPublicidad(), resultado.getPublicidad());
+        Assert.assertEquals(entidad2.getNombre(), resultado.getNombre());
+        Assert.assertEquals(entidad2.getTipo(), resultado.getTipo());
+        Assert.assertEquals(entidad2.getUrl(), resultado.getUrl());
+       
+
+    }
+    
     /**
      * Test en el que se espera una excepcion al crear una entidad con nombre nulo
      * @throws BusinessLogicException si el test sale bien
