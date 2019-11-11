@@ -54,6 +54,7 @@ public class ProcesoAdopcionPersistenceTest {
         ProcesoAdopcionEntity entity = em.find(ProcesoAdopcionEntity.class, proceso.getId());
         
         Assert.assertEquals(newProceso_AdopcionEntity, entity); 
+        Assert.assertEquals(newProceso_AdopcionEntity.getMascotaAdopcion(), entity.getMascotaAdopcion()); 
         
           Assert.assertEquals(newProceso_AdopcionEntity.getCalificacion(), entity.getCalificacion()); 
           

@@ -7,12 +7,10 @@ package co.edu.uniandes.csw.mascotas.test.logic;
 
 import co.edu.uniandes.csw.mascotas.ejb.ProcesoAdopcionLogic;
 import co.edu.uniandes.csw.mascotas.entities.MascotaAdopcionEntity;
-import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import co.edu.uniandes.csw.mascotas.entities.ProcesoAdopcionEntity;
 import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaAdopcionPersistance;
-import co.edu.uniandes.csw.mascotas.persistence.MascotaPerdidaPersistence;
 import co.edu.uniandes.csw.mascotas.persistence.ProcesoAdopcionPersistence;
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
 import javax.inject.Inject;
@@ -64,6 +62,7 @@ public class ProcesoAdopcionLogicTest {
     public void createProcesoCanceladoTest() throws BusinessLogicException{
        ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
        newEntity.setEstado("Cancelado");
+       newEntity.setMascotaAdopcion(factory.manufacturePojo(MascotaAdopcionEntity.class));
        ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
        assertNotNull(result);
        
