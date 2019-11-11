@@ -25,10 +25,8 @@ package co.edu.uniandes.csw.mascotas.tests.postman;
 
 import co.edu.uniandes.csw.mascotas.dtos.MascotaEncontradaDTO;
 import co.edu.uniandes.csw.mascotas.dtos.MascotaEncontradaDetailDTO;
-import co.edu.uniandes.csw.mascotas.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.mascotas.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.mascotas.resources.MascotaEncontradaResource;
-import co.edu.uniandes.csw.mascotas.resources.UsuarioResource;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +47,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class MascotaEncontradaIT {
 
-    private static final String COLLECTION = "MascotaEncontrada-Tests.postman_collection.json";
+    private static final String COLLECTION = "MascotaEncontradaResourceTest.postman_collection.json";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
