@@ -17,21 +17,54 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 public class MascotaEncontradaDTO implements Serializable{
     
+    /**
+     * ID de la mascota encontrada
+     */    
     private Long id;
+    
+    /**
+     * Especie de la mascota encontrada
+     */
     private Integer especie;
+    
+    /**
+     * Raza de la mascota encontrada
+     */
     private String raza;
+    
+    /**
+     * Lugar de la mascota encontrada
+     */
     private String lugar;
+    
+    /**
+     * Descripcion de la mascota encontrada
+     */
     private String descripcion;
+    
+    /**
+     * Fecha de encuentro de la mascota encontrada
+     */
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaEncontrada;
     
+    /**
+     * Usuario de la mascota encontrada
+     */
     private UsuarioDTO usuario;
     
+    /**
+     * Constructor vacio de la mascota encontrada
+     */
     public MascotaEncontradaDTO()
     {
         
     }
     
+    /**
+     * Constructor a partir de MascotaEncontradaEntity
+     * @param entity Entidad de donde se sacan los datos
+     */
     public MascotaEncontradaDTO(MascotaEncontradaEntity entity)
     {
         if(entity != null)
@@ -50,6 +83,10 @@ public class MascotaEncontradaDTO implements Serializable{
         }
     }
     
+    /**
+     * Devuelve la entidad relacionada con el DTO
+     * @return MascotaEncontradaEntity la entidad
+     */
     public MascotaEncontradaEntity toEntity()
     {
         MascotaEncontradaEntity mee = new MascotaEncontradaEntity();
