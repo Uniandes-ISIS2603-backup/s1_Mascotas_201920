@@ -120,7 +120,7 @@ public class MultimediaResource {
      * Error de lógica que se genera cuando no se encuentra la multimedia.
      */
     @GET
-    @Path("{mutlimediaId: \\d+}")
+    @Path("{multimediaId: \\d+}")
     public MultimediaDTO getMultimedia(@PathParam("multimediaId") Long multimediaId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "MultimediaResource getMultimedia: input: {0}", multimediaId);
         MultimediaEntity entity = multimediaLogic.getMultimedia(multimediaId);
@@ -156,6 +156,7 @@ public class MultimediaResource {
             throw new WebApplicationException(PRIM+ multimediaId +NO, 404);
 
         }
+        multimedia.setId(entity.getId());
         MultimediaDTO multimediaDTO = new MultimediaDTO(multimediaLogic.updateMultimedia(multimedia.toEntity()));
         LOGGER.log(Level.INFO, "MultimediaResource updateMultimedia: output:{0}", multimediaDTO);
         return multimediaDTO;
