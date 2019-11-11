@@ -120,7 +120,7 @@ public class PublicidadLogicTest {
     public void createDiasNegativos() throws BusinessLogicException
     {
         PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        publicidad.getDiasPorSemana(-1);
+        publicidad.setDiasPorSemana(-1);
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
     
