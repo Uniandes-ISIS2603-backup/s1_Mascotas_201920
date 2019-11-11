@@ -143,7 +143,8 @@ public class MultimediaLogic {
         }
         else
         {
-            lista = publicidad.getMultimedia();
+            if(publicidad != null)
+                lista = publicidad.getMultimedia();
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar la multimedia asociada a los objetos con id = {0} {1} {2} {3}", new Object[]{adopcionId, encontradaId, perdidaId, publicidadId});
         return lista;
