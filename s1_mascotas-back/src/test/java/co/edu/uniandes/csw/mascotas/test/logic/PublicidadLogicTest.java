@@ -116,6 +116,14 @@ public class PublicidadLogicTest {
         PublicidadEntity resultado = pl.createPublicidad(publicidad);
     }
     
+    @Test(expected = BusinessLogicException.class)
+    public void createDiasNegativos() throws BusinessLogicException
+    {
+        PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
+        publicidad.getDiasPorSemana(-1);
+        PublicidadEntity resultado = pl.createPublicidad(publicidad);
+    }
+    
     @Test
     public void updateTest() throws BusinessLogicException {
         
