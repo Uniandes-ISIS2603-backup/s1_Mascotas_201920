@@ -113,6 +113,14 @@ public class MascotaEncontradaLogicTest {
     }
     
      @Test (expected = BusinessLogicException.class)
+    public void createMascotaEncontradaFechaNull() throws BusinessLogicException{
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad.setFechaEncontrada(null);
+        MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
+ 
+    }
+    
+     @Test (expected = BusinessLogicException.class)
     public void createMascotaEncontradaDescripcionNull() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
         entidad.setDescripcion(null);
@@ -153,6 +161,112 @@ public class MascotaEncontradaLogicTest {
         Assert.assertEquals(entidad2.getRaza(), entidad3.getRaza());
         Assert.assertEquals(entidad2.getEspecie(), entidad3.getEspecie());
         Assert.assertEquals(entidad2.getDescripcion(), entidad3.getDescripcion());
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaDescripcionNull() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        
+        entidad2.setEspecie(entidad.getEspecie());
+        entidad2.setDescripcion(null);
+        
+        mel.updateMascotaEncontrada(entidad2);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaEspecieNull() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        entidad2.setEspecie(null);
+        
+        mel.updateMascotaEncontrada(entidad2);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaEspecieMistica() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        entidad2.setEspecie(-1);
+        
+        mel.updateMascotaEncontrada(entidad2);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaRazaNull() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        entidad2.setRaza(null);
+        
+        mel.updateMascotaEncontrada(entidad2);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaRazaVacia() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        entidad2.setRaza("");
+        
+        mel.updateMascotaEncontrada(entidad2);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaLugarNull() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        entidad2.setLugar(null);
+        
+        mel.updateMascotaEncontrada(entidad2);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaLugarVacia() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        entidad2.setLugar("");
+        
+        mel.updateMascotaEncontrada(entidad2);
+
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateMascotaEncontradaFechaNull() throws BusinessLogicException {
+        MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        
+        mel.createMascotaEncontrada(entidad);
+        MascotaEncontradaEntity entidad2 = factory.manufacturePojo(MascotaEncontradaEntity.class);
+        entidad2.setId(entidad.getId());
+        entidad2.setFechaEncontrada(null);
+        
+        mel.updateMascotaEncontrada(entidad2);
 
     }
     
