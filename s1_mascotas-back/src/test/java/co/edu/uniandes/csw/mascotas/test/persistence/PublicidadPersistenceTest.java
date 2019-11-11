@@ -110,8 +110,8 @@ public class PublicidadPersistenceTest {
         PublicidadEntity resultado = pp.create(publicidad);
         ArrayList<MultimediaEntity> al= new ArrayList<>();
         al.add(new MultimediaEntity());
-        Assert.assertEquals(publicidad.getMultimedia().size(),
-                0);
+        Assert.assertEquals(0, publicidad.getMultimedia().size()
+                );
         publicidad.setMultimedia(al);
         Assert.assertNotNull(resultado);
 
@@ -120,8 +120,7 @@ public class PublicidadPersistenceTest {
                 entity.getMensaje());
         
                
-        Assert.assertEquals(publicidad.getMultimedia().size(),
-                1);
+        Assert.assertEquals(1, publicidad.getMultimedia().size());
 
     }
 
