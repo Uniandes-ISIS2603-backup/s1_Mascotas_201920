@@ -14,7 +14,7 @@
 						"id": "2e69bb94-fc90-4dd1-89b0-d0ab3e5293a7",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_ume\",data.id);",
+							"postman.setGlobalVariable(\"new_id_a\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -66,8 +66,9 @@
 						"id": "8a38193d-110f-4254-9150-e32372266645",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_me\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+							"postman.setGlobalVariable(\"new_id_a\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -485,7 +486,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_me}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -495,7 +496,7 @@
 						"s1_mascotas-api",
 						"api",
 						"mascotasencontradas",
-						"{{new_id_me}}"
+						"{{new_id_a}}"
 					]
 				}
 			},
