@@ -67,6 +67,13 @@ public class UsuarioDTO implements Serializable{
         
         return entity;
     }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     
     /**
      * @return the nombre
@@ -76,12 +83,12 @@ public class UsuarioDTO implements Serializable{
     }
 
     /**
-     * @param nombre the nombre to set
+     * @param ciudad the ciudad to set
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
-
+    
     /**
      * @return the ciudad
      */
@@ -90,12 +97,12 @@ public class UsuarioDTO implements Serializable{
     }
 
     /**
-     * @param ciudad the ciudad to set
+     * @param correo the correo to set
      */
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
-
+    
     /**
      * @return the correo
      */
@@ -104,24 +111,17 @@ public class UsuarioDTO implements Serializable{
     }
 
     /**
-     * @param correo the correo to set
+     * @param celular the celular to set
      */
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCelular(Long celular) {
+        this.celular = celular;
     }
-
+    
     /**
      * @return the celular
      */
     public Long getCelular() {
         return celular;
-    }
-
-    /**
-     * @param celular the celular to set
-     */
-    public void setCelular(Long celular) {
-        this.celular = celular;
     }
     
     /**
