@@ -61,7 +61,7 @@ public class MascotaEncontradaPersistence {
      */
     public MascotaEncontradaEntity update(MascotaEncontradaEntity mascota)
     {
-        MascotaEncontradaEntity masc = em.find(MascotaEncontradaEntity.class, mascota.getId());
+        em.find(MascotaEncontradaEntity.class, mascota.getId());
         em.merge(mascota);
 
         return em.find(MascotaEncontradaEntity.class, mascota.getId());
