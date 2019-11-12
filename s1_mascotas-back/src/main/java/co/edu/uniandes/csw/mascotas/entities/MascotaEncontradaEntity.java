@@ -170,9 +170,12 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     public boolean equals(Object o)
     {
         if(o == null) return false;
-        if(!(o instanceof MascotaEncontradaEntity)) return false;
-        MascotaEncontradaEntity m = (MascotaEncontradaEntity) o;
-        return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        else if(!(o instanceof MascotaEncontradaEntity)) return false;
+        else 
+        {
+            MascotaEncontradaEntity m = (MascotaEncontradaEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        }
     }
 
     @Override
