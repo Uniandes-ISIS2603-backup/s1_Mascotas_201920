@@ -14,7 +14,7 @@
 						"id": "2e69bb94-fc90-4dd1-89b0-d0ab3e5293a7",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_a\",data.id);",
+							"postman.setGlobalVariable(\"new_id\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -33,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"juan@bta.com\",\n\t\"celular\": 3121232\n}",
+					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"juanju@bta.com\",\n\t\"celular\": 3121232\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,9 +66,10 @@
 						"id": "8a38193d-110f-4254-9150-e32372266645",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_a\",data.id);",
+							"pm.globals.set(\"new_id_a\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							"console.log(data.id);",
+							"console.log('globalvar: ' + pm.globals.get('new_id_a'));"
 						],
 						"type": "text/javascript"
 					}
@@ -118,7 +119,8 @@
 						"id": "00993573-a5bf-4502-a201-fd34dba6965b",
 						"exec": [
 							"tests[\"No crea la mascota invalida\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"no existe\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"no existe\");",
+							"console.log('globalvar: ' + pm.globals.get('new_id_a'));"
 						],
 						"type": "text/javascript"
 					}
@@ -169,7 +171,8 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_me2\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log('globalvar: ' + pm.globals.get('new_id_a'));"
 						],
 						"type": "text/javascript"
 					}
@@ -220,7 +223,8 @@
 						"exec": [
 							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;",
+							"console.log('globalvar: ' + pm.globals.get('new_id_a'));"
 						],
 						"type": "text/javascript"
 					}
@@ -230,7 +234,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_me}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -240,7 +244,7 @@
 						"s1_mascotas-api",
 						"api",
 						"mascotasencontradas",
-						"{{new_id_me}}"
+						"{{new_id_a}}"
 					]
 				}
 			},
@@ -400,7 +404,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_me}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -410,7 +414,7 @@
 						"s1_mascotas-api",
 						"api",
 						"mascotasencontradas",
-						"{{new_id_me}}"
+						"{{new_id_a}}"
 					]
 				}
 			},
@@ -452,7 +456,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_me}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasencontradas/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -462,7 +466,7 @@
 						"s1_mascotas-api",
 						"api",
 						"mascotasencontradas",
-						"{{new_id_me}}"
+						"{{new_id_a}}"
 					]
 				}
 			},
@@ -588,7 +592,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_ume}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -598,7 +602,7 @@
 						"s1_mascotas-api",
 						"api",
 						"usuarios",
-						"{{new_id_ume}}"
+						"{{new_id}}"
 					]
 				}
 			},
