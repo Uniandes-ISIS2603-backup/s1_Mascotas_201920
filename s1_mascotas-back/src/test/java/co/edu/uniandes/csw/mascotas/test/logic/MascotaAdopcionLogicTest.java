@@ -139,6 +139,25 @@ public class MascotaAdopcionLogicTest {
         Assert.assertEquals(entidad2.getDescripcion(), resultado.getDescripcion());
         Assert.assertEquals(entidad2.getUsuario(), resultado.getUsuario());
 
+        Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        MascotaAdopcionEntity met = new MascotaAdopcionEntity();
+        met.setId(entidad.getId()+1);
+        met.setDescripcion(entidad.getDescripcion());
+        met.setEspecie(entidad.getEspecie());
+        met.setLugar(entidad.getLugar());
+        met.setHistoria(entidad.getHistoria());
+        met.setRaza(entidad.getRaza());
+        met.setMultimedia(entidad.getMultimedia());
+        met.setProcesos(entidad.getProcesos());
+        met.setUsuario(entidad.getUsuario());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setDescripcion(met.getDescripcion()+"Chao");
+        Assert.assertFalse( entidad.equals(met) );
+        met.setDescripcion(entidad.getDescripcion());
+        Assert.assertTrue(entidad.equals(met));
     }
 
     /**

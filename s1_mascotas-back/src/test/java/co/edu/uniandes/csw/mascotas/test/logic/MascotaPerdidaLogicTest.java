@@ -122,13 +122,33 @@ public class MascotaPerdidaLogicTest {
     @Test 
     public void createMascotaPerdida ( ) throws BusinessLogicException
     {
-        MascotaPerdidaEntity newEntity = fac.manufacturePojo(MascotaPerdidaEntity.class);
+        MascotaPerdidaEntity entidad = fac.manufacturePojo(MascotaPerdidaEntity.class);
 
-        MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(newEntity);
+        MascotaPerdidaEntity result = mascotaLogic.createMascotaPerdida(entidad);
         
         MascotaPerdidaEntity entity = em.find(MascotaPerdidaEntity.class, result.getId());
   
         Assert.assertNotNull(result);
+        
+        Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        MascotaPerdidaEntity met = new MascotaPerdidaEntity();
+        met.setId(entidad.getId()+1);
+        met.setDescripcion(entidad.getDescripcion());
+        met.setEspecie(entidad.getEspecie());
+        met.setLugar(entidad.getLugar());
+        met.setFechaPerdida(entidad.getFechaPerdida());
+        met.setRaza(entidad.getRaza());
+        met.setMultimedia(entidad.getMultimedia());
+        met.setUsuario(entidad.getUsuario());
+        met.setRecompensa(entidad.getRecompensa());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setDescripcion(met.getDescripcion()+"Chao");
+        Assert.assertFalse( entidad.equals(met) );
+        met.setDescripcion(entidad.getDescripcion());
+        Assert.assertTrue(entidad.equals(met));
         
     }
     

@@ -24,6 +24,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -108,14 +109,29 @@ public class RecompensaLogicTest {
     }
     @Test
     public void createRecompensaTest() throws BusinessLogicException{
-       RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
-       newEntity.setPagado(false);
-       RecompensaEntity result=recompensaLogic.createRecompensa(newEntity);
+       RecompensaEntity entidad=factory.manufacturePojo(RecompensaEntity.class);
+       entidad.setPagado(false);
+       RecompensaEntity result=recompensaLogic.createRecompensa(entidad);
        assertNotNull(result);
        
        RecompensaEntity entity= em.find(RecompensaEntity.class, result.getId());
        assertEquals(entity.getMonto(), result.getMonto());
        assertEquals(entity.getPagado(), result.getPagado());
+       
+       Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        RecompensaEntity met = new RecompensaEntity();
+        met.setId(entidad.getId()+1);
+        met.setMonto(entidad.getMonto());
+        met.setPagado(entidad.getPagado());
+        met.setMascotaPerdida(entidad.getMascotaPerdida());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setPagado(!met.getPagado());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setPagado(entidad.getPagado());
+        Assert.assertTrue(entidad.equals(met));
     }
     
     @Test (expected = BusinessLogicException.class)

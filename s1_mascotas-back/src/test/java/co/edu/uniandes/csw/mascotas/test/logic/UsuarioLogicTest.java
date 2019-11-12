@@ -15,6 +15,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -48,9 +49,29 @@ public class UsuarioLogicTest {
     @Test
     public void createUsuarioTodoBien() throws BusinessLogicException
     {
-        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
-        newUsuario.setCorreo("tobia19991@gmail.com");
-        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity entidad = factory.manufacturePojo(UsuarioEntity.class);
+        entidad.setCorreo("tobia19991@gmail.com");
+        usuarioLogic.createUsuario(entidad);
+        
+        Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        UsuarioEntity met = new UsuarioEntity();
+        met.setId(entidad.getId()+1);
+        met.setNombre(entidad.getNombre());
+        met.setCelular(entidad.getCelular());
+        met.setCiudad(entidad.getCiudad());
+        met.setCorreo(entidad.getCorreo());
+        met.setMascotasAdopcion(entidad.getMascotasAdopcion());
+        met.setProcesosAdopcion(entidad.getProcesosAdopcion());
+        met.setMascotasEncontradas(entidad.getMascotasEncontradas());
+        met.setMascotasPerdidas(entidad.getMascotasPerdidas());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setNombre(met.getNombre()+"Chao");
+        Assert.assertFalse( entidad.equals(met) );
+        met.setNombre(entidad.getNombre());
+        Assert.assertTrue(entidad.equals(met));
     }
     
     @Test (expected = BusinessLogicException.class)

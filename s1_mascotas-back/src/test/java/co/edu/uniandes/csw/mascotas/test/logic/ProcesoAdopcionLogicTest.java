@@ -26,6 +26,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -121,10 +122,10 @@ public class ProcesoAdopcionLogicTest {
     
     @Test
     public void createProcesoCanceladoTest() throws BusinessLogicException{
-       ProcesoAdopcionEntity newEntity=factory.manufacturePojo(ProcesoAdopcionEntity.class);
-       newEntity.setEstado("Cancelado");
+       ProcesoAdopcionEntity entidad=factory.manufacturePojo(ProcesoAdopcionEntity.class);
+       entidad.setEstado("Cancelado");
     
-       ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(newEntity);
+       ProcesoAdopcionEntity result=procesoLogic.createProcesoAdopcion(entidad);
        assertNotNull(result);
        
        ProcesoAdopcionEntity entity= em.find(ProcesoAdopcionEntity.class, result.getId());
@@ -132,6 +133,23 @@ public class ProcesoAdopcionLogicTest {
        assertEquals(entity.getCalificacion(), result.getCalificacion());
        assertEquals(entity.getComentario(), result.getComentario());
        assertEquals(entity.getUsuario(), result.getUsuario());
+       
+        Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        ProcesoAdopcionEntity met = new ProcesoAdopcionEntity();
+        met.setId(entidad.getId()+1);
+        met.setEstado(entidad.getEstado());
+        met.setComentario(entidad.getComentario());
+        met.setCalificacion(entidad.getCalificacion());
+        met.setMascotaAdopcion(entidad.getMascotaAdopcion());
+        met.setUsuario(entidad.getUsuario());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setEstado(met.getEstado()+"Chao");
+        Assert.assertFalse( entidad.equals(met) );
+        met.setEstado(entidad.getEstado());
+        Assert.assertTrue(entidad.equals(met));
     }
     
     @Test (expected = BusinessLogicException.class)

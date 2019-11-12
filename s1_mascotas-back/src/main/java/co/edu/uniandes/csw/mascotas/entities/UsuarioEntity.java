@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mascotas.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -165,6 +166,33 @@ public class UsuarioEntity extends BaseEntity implements Serializable
      */
     public void setProcesosAdopcion(List<ProcesoAdopcionEntity> procesosAdopcion) {
         this.procesosAdopcion = procesosAdopcion;
+    }
+    
+    /**
+     * Compara dos objetos
+     * @param o El objeto a comparar
+     * @return true si son iguales, false si no
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o == null) return false;
+        else if(!(o instanceof UsuarioEntity)) return false;
+        else 
+        {
+            UsuarioEntity m = (UsuarioEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.nombre);
+        hash = 59 * hash + Objects.hashCode(this.ciudad);
+        hash = 59 * hash + Objects.hashCode(this.correo);
+        hash = 59 * hash + Objects.hashCode(this.celular);
+        return hash;
     }
     
 }

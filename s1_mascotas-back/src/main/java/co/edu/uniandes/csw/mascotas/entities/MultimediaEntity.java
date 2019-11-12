@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -133,4 +134,29 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
         this.mascotaAdopcion = mascotaAdopcion;
     }
     
+    /**
+     * Compara dos objetos
+     * @param o El objeto a comparar
+     * @return true si son iguales, false si no
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o == null) return false;
+        else if(!(o instanceof MultimediaEntity)) return false;
+        else 
+        {
+            MultimediaEntity m = (MultimediaEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.url);
+        hash = 29 * hash + Objects.hashCode(this.nombre);
+        hash = 29 * hash + Objects.hashCode(this.tipo);
+        return hash;
+    }
 }

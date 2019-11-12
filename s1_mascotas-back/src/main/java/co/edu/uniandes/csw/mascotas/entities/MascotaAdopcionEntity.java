@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.mascotas.podam.EspecieEstrategy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -173,5 +174,36 @@ public class MascotaAdopcionEntity extends BaseEntity implements Serializable {
      */
     public void setMultimedia(List<MultimediaEntity> multimedia) {
         this.multimedia = multimedia;
+    }
+    
+    /**
+     * Compara dos objetos
+     * @param o El objeto a comparar
+     * @return true si son iguales, false si no
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o == null) return false;
+        else if(!(o instanceof MascotaAdopcionEntity)) return false;
+        else 
+        {
+            MascotaAdopcionEntity m = (MascotaAdopcionEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.especie);
+        hash = 67 * hash + Objects.hashCode(this.raza);
+        hash = 67 * hash + Objects.hashCode(this.descripcion);
+        hash = 67 * hash + Objects.hashCode(this.lugar);
+        hash = 67 * hash + Objects.hashCode(this.historia);
+        hash = 67 * hash + Objects.hashCode(this.procesos);
+        hash = 67 * hash + Objects.hashCode(this.usuario);
+        hash = 67 * hash + Objects.hashCode(this.multimedia);
+        return hash;
     }
 }

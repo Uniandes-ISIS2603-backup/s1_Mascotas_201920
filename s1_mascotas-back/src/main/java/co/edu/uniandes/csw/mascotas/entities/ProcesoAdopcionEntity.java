@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.mascotas.entities;
 import co.edu.uniandes.csw.mascotas.podam.CalificacionEstrategy;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -103,6 +104,33 @@ public class ProcesoAdopcionEntity extends BaseEntity implements Serializable {
      */
     public void setMascotaAdopcion(MascotaAdopcionEntity mascotaAdopcion) {
         this.mascotaAdopcion = mascotaAdopcion;
+    }
+    
+    /**
+     * Compara dos objetos
+     * @param o El objeto a comparar
+     * @return true si son iguales, false si no
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o == null) return false;
+        else if(!(o instanceof ProcesoAdopcionEntity)) return false;
+        else 
+        {
+            ProcesoAdopcionEntity m = (ProcesoAdopcionEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.estado);
+        hash = 67 * hash + Objects.hashCode(this.comentario);
+        hash = 67 * hash + Objects.hashCode(this.calificacion);
+        hash = 67 * hash + Objects.hashCode(this.usuario);
+        return hash;
     }
     
 }

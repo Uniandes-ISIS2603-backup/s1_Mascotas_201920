@@ -151,6 +151,24 @@ public class MultimediaLogicTest {
         Assert.assertEquals(entidad2.getTipo(), resultado.getTipo());
         Assert.assertEquals(entidad2.getUrl(), resultado.getUrl());
        
+        Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        MultimediaEntity met = new MultimediaEntity();
+        met.setId(entidad.getId()+1);
+        met.setUrl(entidad.getUrl());
+        met.setNombre(entidad.getNombre());
+        met.setTipo(entidad.getTipo());
+        met.setMascotaEncontrada(entidad.getMascotaEncontrada());
+        met.setMascotaPerdida(entidad.getMascotaPerdida());
+        met.setMascotaAdopcion(entidad.getMascotaAdopcion());
+        met.setPublicidad(entidad.getPublicidad());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setNombre(met.getNombre()+"Chao");
+        Assert.assertFalse( entidad.equals(met) );
+        met.setNombre(entidad.getNombre());
+        Assert.assertTrue(entidad.equals(met));
 
     }
     

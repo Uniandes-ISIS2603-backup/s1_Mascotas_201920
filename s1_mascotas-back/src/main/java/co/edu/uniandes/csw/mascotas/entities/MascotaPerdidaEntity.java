@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -188,7 +189,34 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
         this.multimedia = multimedia;
     }
 
+    /**
+     * Compara dos objetos
+     * @param o El objeto a comparar
+     * @return true si son iguales, false si no
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o == null) return false;
+        else if(!(o instanceof MascotaPerdidaEntity)) return false;
+        else 
+        {
+            MascotaPerdidaEntity m = (MascotaPerdidaEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        }
+    }
 
-    
-    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.usuario);
+        hash = 79 * hash + Objects.hashCode(this.recompensa);
+        hash = 79 * hash + Objects.hashCode(this.raza);
+        hash = 79 * hash + Objects.hashCode(this.especie);
+        hash = 79 * hash + Objects.hashCode(this.descripcion);
+        hash = 79 * hash + Objects.hashCode(this.lugar);
+        hash = 79 * hash + Objects.hashCode(this.fechaPerdida);
+        hash = 79 * hash + Objects.hashCode(this.multimedia);
+        return hash;
+    }
 }

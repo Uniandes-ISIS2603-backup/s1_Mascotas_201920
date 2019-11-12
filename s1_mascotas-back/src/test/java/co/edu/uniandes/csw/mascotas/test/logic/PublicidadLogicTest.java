@@ -54,8 +54,8 @@ public class PublicidadLogicTest {
     @Test
     public void createTest() throws BusinessLogicException {
         
-        PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
-        PublicidadEntity resultado = pl.createPublicidad(publicidad);
+        PublicidadEntity entidad = factory.manufacturePojo(PublicidadEntity.class);
+        PublicidadEntity resultado = pl.createPublicidad(entidad);
         Assert.assertNotNull(resultado);
         
         PublicidadEntity entity = em.find(PublicidadEntity.class, resultado.getId());
@@ -66,6 +66,24 @@ public class PublicidadLogicTest {
         Assert.assertEquals(entity.getMensaje(), resultado.getMensaje());
         Assert.assertEquals(entity.getFechaInicio(), resultado.getFechaInicio());
         Assert.assertEquals(entity.getFecchaFin(), resultado.getFecchaFin());
+        
+        Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        PublicidadEntity met = new PublicidadEntity();
+        met.setId(entidad.getId()+1);
+        met.setMensaje(entidad.getMensaje());
+        met.setDiasPorSemana(entidad.getDiasPorSemana());
+        met.setCosto(entidad.getCosto());
+        met.setFechaInicio(entidad.getFechaInicio());
+        met.setFecchaFin(entidad.getFecchaFin());
+        met.setMultimedia(entidad.getMultimedia());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setMensaje(met.getMensaje()+"Chao");
+        Assert.assertFalse( entidad.equals(met) );
+        met.setMensaje(entidad.getMensaje());
+        Assert.assertTrue(entidad.equals(met));
     }
 
     @Test(expected = BusinessLogicException.class)

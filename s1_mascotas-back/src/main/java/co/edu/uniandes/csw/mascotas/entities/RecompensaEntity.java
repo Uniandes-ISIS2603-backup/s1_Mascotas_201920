@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mascotas.entities;
 
 import co.edu.uniandes.csw.mascotas.podam.PositiveIntegerStrategy;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -69,6 +70,31 @@ public class RecompensaEntity extends BaseEntity implements Serializable {
      */
     public void setMascotaPerdida(MascotaPerdidaEntity mascotaPerdida) {
         this.mascotaPerdida = mascotaPerdida;
+    }
+    
+    /**
+     * Compara dos objetos
+     * @param o El objeto a comparar
+     * @return true si son iguales, false si no
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o == null) return false;
+        else if(!(o instanceof RecompensaEntity)) return false;
+        else 
+        {
+            RecompensaEntity m = (RecompensaEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.monto);
+        hash = 23 * hash + Objects.hashCode(this.pagado);
+        return hash;
     }
     
 }

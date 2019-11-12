@@ -50,12 +50,12 @@ public class UsuarioMascotasEncontradasLogic {
         
         public List<MascotaEncontradaEntity> replaceMascotas(Long usuarioId, List<MascotaEncontradaEntity> mascotas) {
             UsuarioEntity usuarioEntity = usuarioPersistence.find(usuarioId);
-            List<MascotaEncontradaEntity> mascotaList = mascotaPersistence.findAll();
-            for (MascotaEncontradaEntity mascota : mascotaList) {
-                if (mascotas.contains(mascota)) {
-                    mascota.setUsuario(usuarioEntity);
-                } else if (mascota.getUsuario() != null && mascota.getUsuario().equals(usuarioEntity)) {
-                    mascota.setUsuario(null);
+            List<MascotaEncontradaEntity> mList = mascotaPersistence.findAll();
+            for (MascotaEncontradaEntity masc : mList) {
+                if (mascotas.contains(masc)) {
+                    masc.setUsuario(usuarioEntity);
+                } else if (masc.getUsuario() != null && masc.getUsuario().equals(usuarioEntity)) {
+                    masc.setUsuario(null);
                 }
             }
             return mascotas;

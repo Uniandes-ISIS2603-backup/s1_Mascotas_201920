@@ -96,33 +96,21 @@ public class PublicidadEntity extends BaseEntity implements Serializable
     }
 
 
+    /**
+     * Compara dos objetos
+     * @param o El objeto a comparar
+     * @return true si son iguales, false si no
+     */
     @Override
-    public boolean equals(Object obj) 
+    public boolean equals(Object o)
     {
-      
-        
-        if (this == obj) {
-            return true;
-        }
-        else if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        else
+        if(o == null) return false;
+        else if(!(o instanceof PublicidadEntity)) return false;
+        else 
         {
-            final PublicidadEntity other = (PublicidadEntity) obj;
-            
-            if (Objects.equals(this.mensaje, other.mensaje) && 
-                    Objects.equals(this.diasPorSemana, other.diasPorSemana) &&
-                    Objects.equals(this.costo, other.costo) &&
-                    Objects.equals(this.fechaInicio, other.fechaInicio) &&
-                    Objects.equals(this.fecchaFin, other.fecchaFin) && 
-                    Objects.equals(this.multimedia, other.multimedia)
-                    ) {
-                return false;
-            }
+            PublicidadEntity m = (PublicidadEntity) o;
+            return m.hashCode() == this.hashCode() && m.getId().equals(this.getId());
         }
-        
-        return true;
     }
 
     @Override

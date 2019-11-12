@@ -55,7 +55,7 @@ public class MascotaEncontradaLogicTest {
     private EntityManager em;
     
     @Test
-    public void createMascotaAdopcion() throws BusinessLogicException{
+    public void createMascotaEncontrada() throws BusinessLogicException{
         MascotaEncontradaEntity entidad = factory.manufacturePojo(MascotaEncontradaEntity.class);
          
         MascotaEncontradaEntity resultado = mel.createMascotaEncontrada(entidad);
@@ -70,7 +70,24 @@ public class MascotaEncontradaLogicTest {
         Assert.assertEquals(entidadPrueba.getUsuario(), resultado.getUsuario());
         Assert.assertEquals(resultado.getUsuario(), entidadPrueba.getUsuario());
         
-        
+        Assert.assertFalse(entidad.equals(null));
+        String test = "test";
+        Assert.assertFalse(entidad.equals(test));
+        MascotaEncontradaEntity met = new MascotaEncontradaEntity();
+        met.setId(entidad.getId()+1);
+        met.setDescripcion(entidad.getDescripcion());
+        met.setEspecie(entidad.getEspecie());
+        met.setLugar(entidad.getLugar());
+        met.setFechaEncontrada(entidad.getFechaEncontrada());
+        met.setRaza(entidad.getRaza());
+        met.setMultimedia(entidad.getMultimedia());
+        met.setUsuario(entidad.getUsuario());
+        Assert.assertFalse( entidad.equals(met) );
+        met.setId(entidad.getId());
+        met.setDescripcion(met.getDescripcion()+"Chao");
+        Assert.assertFalse( entidad.equals(met) );
+        met.setDescripcion(entidad.getDescripcion());
+        Assert.assertTrue(entidad.equals(met));
     }
     
     @Test (expected = BusinessLogicException.class)
