@@ -115,25 +115,18 @@ public class MascotaEncontradaDTO implements Serializable{
         this.id = id;
     }
 
-    /**Retorna la especie de la mascota DTO
-     * @return especie of DTO
-     */
-    public Integer getEspecie() {
-        return especie;
-    }
-
     /**Asigna la especie al DTO
      * @param especie Especie a asignar al DTO
      */
     public void setEspecie(Integer especie) {
         this.especie = especie;
     }
-
-    /**Retorna la raza de la mascota DTO
-     * @return raza of DTO
+    
+    /**Retorna la especie de la mascota DTO
+     * @return especie of DTO
      */
-    public String getRaza() {
-        return raza;
+    public Integer getEspecie() {
+        return especie;
     }
 
     /**Asigna la raza al DTO
@@ -142,12 +135,12 @@ public class MascotaEncontradaDTO implements Serializable{
     public void setRaza(String raza) {
         this.raza = raza;
     }
-
-    /**Retorna el lugar de la mascota DTO
-     * @return lugar of DTO
+    
+    /**Retorna la raza de la mascota DTO
+     * @return raza of DTO
      */
-    public String getLugar() {
-        return lugar;
+    public String getRaza() {
+        return raza;
     }
 
     /**Asigna el lugar al DTO
@@ -156,12 +149,12 @@ public class MascotaEncontradaDTO implements Serializable{
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
-
-    /**Retorna la descripcion de la mascota DTO
-     * @return raza of DTO
+    
+    /**Retorna el lugar de la mascota DTO
+     * @return lugar of DTO
      */
-    public String getDescripcion() {
-        return descripcion;
+    public String getLugar() {
+        return lugar;
     }
 
     /**Asigna la descripcion al DTO
@@ -170,12 +163,12 @@ public class MascotaEncontradaDTO implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    /**Retorna la fecha de la mascota DTO
-     * @return fechaEncontrada of DTO
+    
+    /**Retorna la descripcion de la mascota DTO
+     * @return raza of DTO
      */
-    public Date getFechaEncontrada() {
-        return fechaEncontrada;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**Asigna la fecha al DTO
@@ -184,12 +177,12 @@ public class MascotaEncontradaDTO implements Serializable{
     public void setFechaEncontrada(Date fechaEncontrada) {
         this.fechaEncontrada = fechaEncontrada;
     }
-
-    /**Retorna el usuario de la mascota DTO
-     * @return usuario of DTO
+    
+        /**Retorna la fecha de la mascota DTO
+     * @return fechaEncontrada of DTO
      */
-    public UsuarioDTO getUsuario() {
-        return usuario;
+    public Date getFechaEncontrada() {
+        return fechaEncontrada;
     }
 
     /**Asigna el usuario al DTO
@@ -197,5 +190,12 @@ public class MascotaEncontradaDTO implements Serializable{
      */
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
+    }
+    
+    /**Retorna el usuario de la mascota DTO
+     * @return usuario of DTO
+     */
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
 }
