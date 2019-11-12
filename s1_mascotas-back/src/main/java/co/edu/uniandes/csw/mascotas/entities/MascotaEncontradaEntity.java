@@ -62,6 +62,20 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue (DateStrategy.class)
     private Date fechaEncontrada;
+
+    /**
+     * @return the raza
+     */
+    public String getRaza() {
+        return raza;
+    }
+    
+    /**
+     * @param especie the especie to set
+     */
+    public void setEspecie(Integer especie) {
+        this.especie = especie;
+    }
     
     /**
      * @return the especie
@@ -71,24 +85,17 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     }
 
     /**
-     * @param especie the especie to set
-     */
-    public void setEspecie(Integer especie) {
-        this.especie = especie;
-    }
-
-    /**
-     * @return the raza
-     */
-    public String getRaza() {
-        return raza;
-    }
-
-    /**
      * @param raza the raza to set
      */
     public void setRaza(String raza) {
         this.raza = raza;
+    }
+    
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
@@ -103,13 +110,6 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
      */
     public void setLugar(String lugar) {
         this.lugar = lugar;
-    }
-
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
-        return descripcion;
     }
 
     /**
@@ -139,6 +139,13 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
     public UsuarioEntity getUsuario() {
         return usuario;
     }
+    
+    /**
+     * @param multimedia the multimedia to set
+     */
+    public void setMultimedia(List<MultimediaEntity> multimedia) {
+        this.multimedia = multimedia;
+    }
 
     /**
      * @param usuario the usuario to set
@@ -152,13 +159,6 @@ public class MascotaEncontradaEntity extends BaseEntity implements Serializable{
      */
     public List<MultimediaEntity> getMultimedia() {
         return multimedia;
-    }
-
-    /**
-     * @param multimedia the multimedia to set
-     */
-    public void setMultimedia(List<MultimediaEntity> multimedia) {
-        this.multimedia = multimedia;
     }
     
     /**
