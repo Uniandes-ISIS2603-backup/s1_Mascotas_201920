@@ -115,85 +115,85 @@ public class MascotaEncontradaDTO implements Serializable{
         this.id = id;
     }
 
-    /**
-     * @return the especie
+    /**Retorna la especie de la mascota DTO
+     * @return especie of DTO
      */
     public Integer getEspecie() {
         return especie;
     }
 
-    /**
-     * @param especie the especie to set
+    /**Asigna la especie al DTO
+     * @param especie Especie a asignar al DTO
      */
     public void setEspecie(Integer especie) {
         this.especie = especie;
     }
 
-    /**
-     * @return the raza
+    /**Retorna la raza de la mascota DTO
+     * @return raza of DTO
      */
     public String getRaza() {
         return raza;
     }
 
-    /**
-     * @param raza the raza to set
+    /**Asigna la raza al DTO
+     * @param raza Raza a asignar al DTO
      */
     public void setRaza(String raza) {
         this.raza = raza;
     }
 
-    /**
-     * @return the lugar
+    /**Retorna el lugar de la mascota DTO
+     * @return lugar of DTO
      */
     public String getLugar() {
         return lugar;
     }
 
-    /**
-     * @param lugar the lugar to set
+    /**Asigna el lugar al DTO
+     * @param lugar Lugar a asignar al DTO
      */
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
 
-    /**
-     * @return the descripcion
+    /**Retorna la descripcion de la mascota DTO
+     * @return raza of DTO
      */
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * @param descripcion the descripcion to set
+    /**Asigna la descripcion al DTO
+     * @param descripcion Descripcion a asignar al DTO
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * @return the fechaEncontrada
+    /**Retorna la fecha de la mascota DTO
+     * @return fechaEncontrada of DTO
      */
     public Date getFechaEncontrada() {
         return fechaEncontrada;
     }
 
-    /**
-     * @param fechaEncontrada the fechaEncontrada to set
+    /**Asigna la fecha al DTO
+     * @param fechaEncontrada Fecha a asignar al DTO
      */
     public void setFechaEncontrada(Date fechaEncontrada) {
         this.fechaEncontrada = fechaEncontrada;
     }
 
-    /**
-     * @return the usuario
+    /**Retorna el usuario de la mascota DTO
+     * @return usuario of DTO
      */
     public UsuarioDTO getUsuario() {
         return usuario;
     }
 
-    /**
-     * @param usuario the usuario to set
+    /**Asigna el usuario al DTO
+     * @param usuario Usuario a asignar al DTO
      */
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
