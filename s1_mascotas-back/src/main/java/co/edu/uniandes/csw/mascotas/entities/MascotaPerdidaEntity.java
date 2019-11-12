@@ -74,14 +74,6 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToMany(mappedBy = "mascotaPerdida", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<MultimediaEntity> multimedia = new ArrayList<>();
-    
-    /**
-     * 
-     * @return recompensa
-     */
-    public RecompensaEntity getRecompensa() {
-        return recompensa;
-    }
 
     /**
      * 
@@ -92,10 +84,11 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     }
     
     /**
-     * @return the raza
+     * 
+     * @return recompensa
      */
-    public String getRaza() {
-        return raza;
+    public RecompensaEntity getRecompensa() {
+        return recompensa;
     }
 
     /**
@@ -111,19 +104,21 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public Integer getEspecie() {
         return especie;
     }
+    
+    
+    
+    /**
+     * @return the raza
+     */
+    public String getRaza() {
+        return raza;
+    }
 
     /**
      * @param especie the especie to set
      */
     public void setEspecie(Integer especie) {
         this.especie = especie;
-    }
-
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
-        return descripcion;
     }
 
     /**
@@ -139,12 +134,12 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public Date getFechaPerdida() {
         return fechaPerdida;
     }
-
+    
     /**
-     * @param fechaPerdida the fechaPerdida to set
+     * @return the descripcion
      */
-    public void setFechaPerdida(Date fechaPerdida) {
-        this.fechaPerdida = fechaPerdida;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
@@ -152,6 +147,13 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     public String getLugar() {
         return lugar;
+    }
+    
+    /**
+     * @param fechaPerdida the fechaPerdida to set
+     */
+    public void setFechaPerdida(Date fechaPerdida) {
+        this.fechaPerdida = fechaPerdida;
     }
 
     /**
@@ -161,12 +163,6 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
         this.lugar = lugar;
     }
     
-    /**
-     * @return el usuario propietario de la mascota
-     */
-    public UsuarioEntity getUsuario() {
-        return usuario;
-    }
     /**
      * 
      * @param usuario Modifica el usuario dueño de la mascota
@@ -180,6 +176,14 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     public List<MultimediaEntity> getMultimedia() {
         return multimedia;
+    }
+    
+    
+    /**
+     * @return el usuario propietario de la mascota
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
     }
 
     /**
