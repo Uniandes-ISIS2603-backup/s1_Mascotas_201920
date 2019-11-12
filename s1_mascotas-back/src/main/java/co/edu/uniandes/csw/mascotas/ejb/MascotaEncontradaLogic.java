@@ -31,14 +31,16 @@ public class MascotaEncontradaLogic {
      */
     public MascotaEncontradaEntity createMascotaEncontrada(MascotaEncontradaEntity mEncontrada) throws BusinessLogicException
     {
-        if(mEncontrada.getDescripcion()==null || mEncontrada.getDescripcion().equals(""))
-        {
-            throw new BusinessLogicException("La descripcion de la mascota no existe.");
-        }
         if(mEncontrada.getEspecie()==null)
         {
             throw new BusinessLogicException ("La especie de la mascota no existe."); 
         }
+        
+        if(mEncontrada.getDescripcion()==null || mEncontrada.getDescripcion().equals(""))
+        {
+            throw new BusinessLogicException("La descripcion de la mascota no existe.");
+        }
+        
         boolean flag= false;
         for (TipoEspecies value : TipoEspecies.values()) {
             if (value.ordinal() == mEncontrada.getEspecie().intValue()) {
@@ -47,10 +49,13 @@ public class MascotaEncontradaLogic {
         }
         if (!flag)
             throw new BusinessLogicException ("La mascota no es una especie correcta.");
-        if (mEncontrada.getRaza()==null || mEncontrada.getRaza().equals(""))
-            throw new BusinessLogicException ("La raza de la mascota no existe.");
+        
         if (mEncontrada.getLugar()==null||mEncontrada.getLugar().equals(""))
             throw new BusinessLogicException ("El lugar de la mascota encontrada no existe.");
+        
+        if (mEncontrada.getRaza()==null || mEncontrada.getRaza().equals(""))
+            throw new BusinessLogicException ("La raza de la mascota no existe.");
+        
         if (mEncontrada.getFechaEncontrada()==null)
             throw new BusinessLogicException ("La fecha de encuentro de la mascota encontrada no existe.");
         
@@ -60,14 +65,13 @@ public class MascotaEncontradaLogic {
     
     public MascotaEncontradaEntity updateMascotaEncontrada(MascotaEncontradaEntity mEncontrada) throws BusinessLogicException
     {
-        if(mEncontrada.getDescripcion()==null)
-        {
-            throw new BusinessLogicException("La descripcion de la mascota no existe.");
-        }
-        if(mEncontrada.getEspecie()==null)
-        {
-            throw new BusinessLogicException ("La especie de la mascota no existe."); 
-        }
+        if (mEncontrada.getFechaEncontrada()==null)
+            throw new BusinessLogicException ("La fecha de encuentro de la mascota encontrada no existe.");
+        if (mEncontrada.getLugar()==null||mEncontrada.getLugar().equals(""))
+            throw new BusinessLogicException ("El lugar de la mascota encontrada no existe.");
+        if (mEncontrada.getRaza()==null || mEncontrada.getRaza().equals(""))
+            throw new BusinessLogicException ("La raza de la mascota no existe.");
+        
         boolean flag= false;
         for (TipoEspecies value : TipoEspecies.values()) {
             if (value.ordinal() == mEncontrada.getEspecie().intValue()) {
@@ -75,13 +79,16 @@ public class MascotaEncontradaLogic {
             }
         }
         if (!flag)
-            throw new BusinessLogicException ("La mascota no es un gato, ni un perro.");
-        if (mEncontrada.getRaza()==null || mEncontrada.getRaza().equals(""))
-            throw new BusinessLogicException ("La raza de la mascota no existe.");
-        if (mEncontrada.getLugar()==null||mEncontrada.getLugar().equals(""))
-            throw new BusinessLogicException ("El lugar de la mascota encontrada no existe.");
-        if (mEncontrada.getFechaEncontrada()==null)
-            throw new BusinessLogicException ("La fecha de encuentro de la mascota encontrada no existe.");
+            throw new BusinessLogicException ("La mascota no es un gato, ni un perro.");        
+        
+        if(mEncontrada.getEspecie()==null)
+        {
+            throw new BusinessLogicException ("La especie de la mascota no existe."); 
+        }
+        if(mEncontrada.getDescripcion()==null)
+        {
+            throw new BusinessLogicException("La descripcion de la mascota no existe.");
+        }
         
         mEncontrada = persistence.update(mEncontrada);
         return mEncontrada;
