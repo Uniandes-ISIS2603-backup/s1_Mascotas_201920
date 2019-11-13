@@ -34,7 +34,20 @@ public class MascotaEncontradaDetailDTO  extends MascotaEncontradaDTO implements
             }
         }
   
-
+     /**
+     * @param multimedia the multimedia to set
+     */
+    public void setMultimedia(List<MultimediaDTO> multimedia) {
+        this.multimedia = multimedia;
+    }
+    
+    /**
+     * @return the multimedia
+     */
+    public List<MultimediaDTO> getMultimedia() {
+        return multimedia;
+    }
+     
     /**
      * Transformar un DTO a un Entity
      *
@@ -52,19 +65,5 @@ public class MascotaEncontradaDetailDTO  extends MascotaEncontradaDTO implements
             mascotaEntity.setMultimedia(multimediaEntity);
         }
         return mascotaEntity;
-    }
-
-    /**
-     * @return the multimedia
-     */
-    public List<MultimediaDTO> getMultimedia() {
-        return multimedia;
-    }
-
-    /**
-     * @param multimedia the multimedia to set
-     */
-    public void setMultimedia(List<MultimediaDTO> multimedia) {
-        this.multimedia = multimedia;
     }
 }
