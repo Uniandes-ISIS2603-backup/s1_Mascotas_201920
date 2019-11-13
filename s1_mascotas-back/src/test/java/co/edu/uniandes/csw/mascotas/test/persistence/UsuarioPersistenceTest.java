@@ -109,7 +109,7 @@ public class UsuarioPersistenceTest
         UsuarioEntity usuarioLista = usuarios.get(0);
         Assert.assertNotNull(usuarioLista);
         
-        LinkedList<UsuarioEntity> usuariosEncontrado = usuarioPrueba.findByEmail(usuarioLista.getCorreo());
+        List<UsuarioEntity> usuariosEncontrado = usuarioPrueba.findByEmail(usuarioLista.getCorreo());
         Assert.assertNotNull(usuariosEncontrado);
         
         Assert.assertEquals(1, usuariosEncontrado.size());
