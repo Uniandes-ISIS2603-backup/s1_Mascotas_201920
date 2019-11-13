@@ -96,6 +96,28 @@ public class UsuarioResource {
         }
         usuarioLogic.deleteUsuario(usuariosid);
     }
+    
+    /**
+     * Conexión con el servicio de libros para una editorial.
+     * {@link EditorialBooksResource}
+     *
+     * Este método conecta la ruta de /editorials con las rutas de /books que
+     * dependen de la editorial, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los libros de una editorial.
+     *
+     * @param usuariosId El ID de la editorial con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de libros para esta editorial en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la editorial.
+     */
+    @Path("{usuariosId: \\d+}/mascotasencontradas")
+    public Class<UsuarioMascotasEncontradasResource> getUsuarioMascotasEncontradasResource(@PathParam("usuariosId") Long usuariosId) {
+        if (usuarioLogic.findUsuario(usuariosId) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+        }
+        return UsuarioMascotasEncontradasResource.class;
+    }
 
     private List<UsuarioDetailDTO> listEntity2DTO(Collection<UsuarioEntity> entityList) {
         List<UsuarioDetailDTO> list = new ArrayList<>();

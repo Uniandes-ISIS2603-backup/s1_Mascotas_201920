@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.MascotaEncontradaPersistence;
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 
 /**
@@ -30,7 +29,6 @@ public class UsuarioMascotasEncontradasLogic {
             UsuarioEntity usuarioEntity = usuarioPersistence.find(usuarioId);
             MascotaEncontradaEntity mascotaEntity = mascotaPersistence.find(mascotaId);
             mascotaEntity.setUsuario(usuarioEntity);
-            usuarioEntity.getMascotasEncontradas().add(mascotaEntity);
             return mascotaEntity;
         }
         

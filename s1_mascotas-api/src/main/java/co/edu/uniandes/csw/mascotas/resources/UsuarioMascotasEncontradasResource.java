@@ -30,7 +30,6 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Tobia Gasparoni
  */
-@Path("usuarios/{usuariosId: \\d+}/mascotasencontradas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 //@RequestScoped
