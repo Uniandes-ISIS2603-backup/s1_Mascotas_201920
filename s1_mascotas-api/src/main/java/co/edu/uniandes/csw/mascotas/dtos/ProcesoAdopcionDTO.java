@@ -76,24 +76,17 @@ public class ProcesoAdopcionDTO implements Serializable{
     }
 
     /**
-     * @return the estado
-     */
-    public String getEstado() {
-        return estado;
-    }
-
-    /**
      * @param estado the estado to set
      */
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
+    
     /**
-     * @return the comentario
+     * @return the estado
      */
-    public String getComentario() {
-        return comentario;
+    public String getEstado() {
+        return estado;
     }
 
     /**
@@ -102,12 +95,12 @@ public class ProcesoAdopcionDTO implements Serializable{
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
-
+    
     /**
-     * @return the calificacion
+     * @return the comentario
      */
-    public Integer getCalificacion() {
-        return calificacion;
+    public String getComentario() {
+        return comentario;
     }
 
     /**
@@ -116,12 +109,12 @@ public class ProcesoAdopcionDTO implements Serializable{
     public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
-
+    
     /**
-     * @return the mascotaAdopcion
+     * @return the calificacion
      */
-    public MascotaAdopcionDTO getMascotaAdopcion() {
-        return mascotaAdopcion;
+    public Integer getCalificacion() {
+        return calificacion;
     }
 
     /**
@@ -132,10 +125,10 @@ public class ProcesoAdopcionDTO implements Serializable{
     }
     
     /**
-     * @return the usuario
+     * @return the mascotaAdopcion
      */
-    public UsuarioDTO getUsuario() {
-        return usuario;
+    public MascotaAdopcionDTO getMascotaAdopcion() {
+        return mascotaAdopcion;
     }
 
     /**
@@ -143,6 +136,13 @@ public class ProcesoAdopcionDTO implements Serializable{
      */
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
+    }
+    
+    /**
+     * @return the usuario
+     */
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
     
 }
