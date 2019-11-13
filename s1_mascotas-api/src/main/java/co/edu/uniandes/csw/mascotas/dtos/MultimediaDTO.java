@@ -89,24 +89,24 @@ public class MultimediaDTO implements Serializable {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getNombre() {
         return nombre;
+    }
+    
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     public String getTipo() {
         return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     /**
