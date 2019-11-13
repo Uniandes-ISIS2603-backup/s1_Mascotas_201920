@@ -17,9 +17,9 @@ public class PositiveIntegerStrategy implements AttributeStrategy<Integer>
     Random random = new Random();
     @Override
     public Integer getValue() {
-       Integer i = new Integer(random.nextInt()); 
+       Integer i = random.nextInt(); 
        while(i.equals(0))
-           i = new Integer(random.nextInt());
+           i = random.nextInt();
        
        return (i>0)? i: -i;
     }

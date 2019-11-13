@@ -29,12 +29,6 @@ public class ProcesoAdopcionLogic {
         if (proceso.getComentario() == null) {
             throw new BusinessLogicException("El comentario del proceso se encuentra vacio");
         }
-        //        if(proceso.getUsuario()==null){
-//            throw new BusinessLogicException("El usuario del proceso se encuentra vacio");
-//        }
-//        if(proceso.getMascotaAdopcion()==null){
-//            throw new BusinessLogicException("La mascota asociada al proceso se encuentra vacia");
-//        }
         if (proceso.getCalificacion() < 1 || proceso.getCalificacion() > 5) {
             throw new BusinessLogicException("La calificacion del proceso tiene un valor que no se encuentra entre 1 y 5");
         }
@@ -45,9 +39,6 @@ public class ProcesoAdopcionLogic {
         if (!validState) {
             throw new BusinessLogicException("El estado del proceso no es un estado valido");
         }
-//        if(proceso.getMascotaAdopcion().getUsuario().equals(proceso.getUsuario())){
-//            throw new BusinessLogicException("Un usuario no puede adoptar una mascota que ellos mismos hallan registrado para adopcion");
-//        }
     }
 
     public ProcesoAdopcionEntity createProcesoAdopcion(ProcesoAdopcionEntity proceso) throws BusinessLogicException {

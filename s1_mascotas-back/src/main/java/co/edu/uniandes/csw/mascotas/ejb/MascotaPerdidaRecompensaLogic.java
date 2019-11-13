@@ -78,7 +78,6 @@ public class MascotaPerdidaRecompensaLogic {
         RecompensaEntity recompensaEntity = recompensa.find(mascotaId);
         MascotaPerdidaEntity mascotaEntity = mascotaPersistence.find(recompensaEntity.getMascotaPerdida().getId());
         mascotaEntity.setRecompensa(null);
-        //mascotaPerdidaEntity.getMascotasEncontradas().remove(mascotaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el mascotaPerdida de la mascota con id = {0}", mascotaEntity.getId());
     }
 }

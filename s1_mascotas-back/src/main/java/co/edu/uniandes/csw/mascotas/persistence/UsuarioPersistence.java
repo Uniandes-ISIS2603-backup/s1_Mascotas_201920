@@ -50,9 +50,9 @@ public class UsuarioPersistence
      * @param usuarioID
      * @return 
      */
-    public LinkedList<UsuarioEntity> findByEmail(String email)
+    public List<UsuarioEntity> findByEmail(String email)
     {
-        LinkedList<UsuarioEntity> listaFinal = new LinkedList<UsuarioEntity>();
+        LinkedList<UsuarioEntity> listaFinal = new LinkedList<>();
         List<UsuarioEntity> lista = findAll();
         
         Iterator<UsuarioEntity> it = lista.iterator();
@@ -93,9 +93,7 @@ public class UsuarioPersistence
      */
     public UsuarioEntity update(UsuarioEntity usuario)
     {
-        UsuarioEntity nueva = em.find(UsuarioEntity.class, usuario.getId());
         em.merge(usuario);
-
         return find(usuario.getId());
     }
     

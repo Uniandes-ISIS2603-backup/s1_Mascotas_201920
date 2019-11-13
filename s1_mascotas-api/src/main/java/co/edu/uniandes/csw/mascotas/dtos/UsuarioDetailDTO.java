@@ -28,8 +28,6 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     
     private List<ProcesoAdopcionDTO> procesosAdopcion;
     
-    //private UsuarioEntity usuario;
-    
     public UsuarioDetailDTO()
     {
         

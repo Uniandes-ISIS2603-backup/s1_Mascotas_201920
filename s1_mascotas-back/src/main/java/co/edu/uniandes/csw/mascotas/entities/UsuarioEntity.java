@@ -42,19 +42,19 @@ public class UsuarioEntity extends BaseEntity implements Serializable
 
     @PodamExclude
     @OneToMany(mappedBy = "usuario")
-    private List<MascotaEncontradaEntity> mascotasEncontradas = new ArrayList<MascotaEncontradaEntity>();
+    private List<MascotaEncontradaEntity> mascotasEncontradas = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "usuario")
-    private List<MascotaPerdidaEntity> mascotasPerdidas = new ArrayList<MascotaPerdidaEntity>();
+    private List<MascotaPerdidaEntity> mascotasPerdidas = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "usuario")
-    private List<MascotaAdopcionEntity> mascotasAdopcion = new ArrayList<MascotaAdopcionEntity>();
+    private List<MascotaAdopcionEntity> mascotasAdopcion = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "usuario")
-    private List<ProcesoAdopcionEntity> procesosAdopcion = new ArrayList<ProcesoAdopcionEntity>();
+    private List<ProcesoAdopcionEntity> procesosAdopcion = new ArrayList<>();
     
     /**
      * @return the nombre

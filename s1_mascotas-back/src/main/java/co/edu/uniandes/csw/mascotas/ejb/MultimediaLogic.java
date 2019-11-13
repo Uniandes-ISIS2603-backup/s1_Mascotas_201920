@@ -85,17 +85,17 @@ public class MultimediaLogic {
         check(multimedia);
 
         LOGGER.log(Level.INFO, "Inicia proceso de crear multimedia");
-        MascotaAdopcionEntity adopcion = null;
         MascotaEncontradaEntity encontrada = null;
-        MascotaPerdidaEntity perdida = null;
+        MascotaAdopcionEntity adopcion = null;
         PublicidadEntity publicidad = null;
+        MascotaPerdidaEntity perdida = null;
+        if(encontradaId != null)
+            encontrada = encontradaPersistence.find(encontradaId);
+        if(perdidaId != null)
+            perdida = perdidaPersistence.find(perdidaId);
         if(adopcionId != null)
             adopcion = adopcionPersistence.find(adopcionId);
-        else if(encontradaId != null)
-            encontrada = encontradaPersistence.find(encontradaId);
-        else if(perdidaId != null)
-            perdida = perdidaPersistence.find(perdidaId);
-        else 
+        if(publicidadId != null) 
             publicidad = publicidadPersistence.find(publicidadId);
         multimedia.setMascota(adopcion);
         multimedia.setMascotaEncontrada(encontrada);

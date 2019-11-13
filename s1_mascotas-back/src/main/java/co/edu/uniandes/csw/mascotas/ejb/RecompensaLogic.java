@@ -29,9 +29,6 @@ public class RecompensaLogic {
         if(recompensa.getPagado()){
           throw new BusinessLogicException("La recompensa no puede ser creada como ya pagada");  
         }
-//        if(recompensa.getMascotaPerdida()==null){
-//            throw new BusinessLogicException("La mascota perdida asociada a la recompensa se encuentra vacia");
-//        }
         recompensa=persistence.create(recompensa);
         return recompensa;
     }
@@ -40,9 +37,6 @@ public class RecompensaLogic {
         if(recompensa.getMonto()<=0){
             throw new BusinessLogicException("El monto de la recompensa debe ser mayor a 0");
         }
-//        if(recompensa.getMascotaPerdida()==null){
-//            throw new BusinessLogicException("La mascota perdida asociada a la recompensa se encuentra vacia");
-//        }
         recompensa=persistence.update(recompensa);
         return recompensa;
     }

@@ -193,7 +193,7 @@ public class MultimediaResource {
      * @return la lista de multimedia en forma DTO (json)
      */
     private List<MultimediaDTO> listEntity2DTO(List<MultimediaEntity> entityList) {
-        List<MultimediaDTO> list = new ArrayList<MultimediaDTO>();
+        List<MultimediaDTO> list = new ArrayList<>();
         for (MultimediaEntity entity : entityList) {
             list.add(new MultimediaDTO(entity));
         }

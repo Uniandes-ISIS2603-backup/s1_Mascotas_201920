@@ -41,9 +41,13 @@ public class UsuarioResource {
     @Inject
     private UsuarioLogic usuarioLogic;
     
+    private static final String RECURSO = "El recurso /usuarios/";
+    
+    private static final String NOEXISTE = " no existe.";
+    
     @POST
     public UsuarioDTO createUsuario(UsuarioDTO usuarioDto) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "UsuarioResource createUsuario: input(0)", usuarioDto);
+        LOGGER.log(Level.INFO, "UsuarioResource createUsuario: input{0}", usuarioDto);
         
         UsuarioEntity usuarioEntity = usuarioDto.toEntity();
 
@@ -51,7 +55,7 @@ public class UsuarioResource {
         
         UsuarioDTO nuevoUsuario = new UsuarioDTO(usuarioEntity);
 
-        LOGGER.log(Level.INFO, "UsuarioResource createUsuario: output(0)", nuevoUsuario);
+        LOGGER.log(Level.INFO, "UsuarioResource createUsuario: output{0}", nuevoUsuario);
         
         return nuevoUsuario;
     }
@@ -61,18 +65,15 @@ public class UsuarioResource {
     public UsuarioDetailDTO getUsuario(@PathParam("usuariosid") Long usuariosId) throws BusinessLogicException {
         UsuarioEntity entidad = usuarioLogic.findUsuario(usuariosId);
         if (entidad == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe", 404);
+            throw new WebApplicationException(RECURSO + usuariosId + " no existe", 404);
         }
-         UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(entidad);
-        return detailDTO;
+        return new UsuarioDetailDTO(entidad);
     }
     
     @GET
     public List<UsuarioDetailDTO> getUsuarios() throws BusinessLogicException {
 
-        List<UsuarioDetailDTO> listaUsuarios = listEntity2DTO(usuarioLogic.findAllUsuario());
-
-        return listaUsuarios;
+        return listEntity2DTO(usuarioLogic.findAllUsuario());
     }
     
  
@@ -81,10 +82,9 @@ public class UsuarioResource {
     public UsuarioDTO updateUsuario(@PathParam("usuariosid") Long usuariosId, UsuarioDTO usuario) throws BusinessLogicException {
         usuario.setId(usuariosId);
         if (usuarioLogic.findUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + usuariosId + NOEXISTE, 404);
         }
-        UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(usuarioLogic.updateUsuario(usuario.toEntity()));
-        return detailDTO;
+        return new UsuarioDetailDTO(usuarioLogic.updateUsuario(usuario.toEntity()));
     }
     
 
@@ -92,7 +92,7 @@ public class UsuarioResource {
     @Path("{usuariosid: \\d+}")
     public void deleteUsuario(@PathParam("usuariosid") Long usuariosid) throws BusinessLogicException {
          if (usuarioLogic.findUsuario(usuariosid) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosid + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + usuariosid + NOEXISTE, 404);
         }
         usuarioLogic.deleteUsuario(usuariosid);
     }
@@ -114,7 +114,7 @@ public class UsuarioResource {
     @Path("{usuariosId: \\d+}/mascotasencontradas")
     public Class<UsuarioMascotasEncontradasResource> getUsuarioMascotasEncontradasResource(@PathParam("usuariosId") Long usuariosId) {
         if (usuarioLogic.findUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + usuariosId + NOEXISTE, 404);
         }
         return UsuarioMascotasEncontradasResource.class;
     }

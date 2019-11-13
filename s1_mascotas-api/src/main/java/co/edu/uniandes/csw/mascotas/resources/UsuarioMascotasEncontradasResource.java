@@ -13,8 +13,6 @@ import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -41,41 +39,39 @@ public class UsuarioMascotasEncontradasResource {
     @Inject
     private MascotaEncontradaLogic mascotaLogic;
     
+    private static final String NOEXISTE = " no existe.";
+    
     @POST
     @Path("{mascotasEncontradasId: \\d+}")
     public MascotaEncontradaDTO addMascota(@PathParam("usuariosId") Long usuariosId, @PathParam("mascotasEncontradasId") Long mascotasEncontradasId) {
         if (mascotaLogic.findMascotaEncontrada(mascotasEncontradasId) == null) {
-            throw new WebApplicationException("El recurso /mascotasencontradas/" + mascotasEncontradasId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /mascotasencontradas/" + mascotasEncontradasId + NOEXISTE, 404);
         }
-        MascotaEncontradaDTO mascotaDTO = new MascotaEncontradaDTO(usuarioMascotasLogic.addMascota(mascotasEncontradasId, usuariosId));
-        return mascotaDTO;
+        return new MascotaEncontradaDTO(usuarioMascotasLogic.addMascota(mascotasEncontradasId, usuariosId));
     }
     
     @GET
     public List<MascotaEncontradaDetailDTO> getMascotas(@PathParam("usuariosId") Long usuariosId) {
-        List<MascotaEncontradaDetailDTO> listaDetailDTOs = mascotasListEntity2DTO(usuarioMascotasLogic.getMascotas(usuariosId));
-        return listaDetailDTOs;
+        return mascotasListEntity2DTO(usuarioMascotasLogic.getMascotas(usuariosId));
     }
     
     @GET
     @Path("{mascotasEncontradasId: \\d+}")
     public MascotaEncontradaDetailDTO getMascota(@PathParam("usuariosId") Long usuariosId, @PathParam("mascotasEncontradasId") Long mascotasEncontradasId) throws BusinessLogicException {
         if (mascotaLogic.findMascotaEncontrada(mascotasEncontradasId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + "/mascotasencontradas/" + mascotasEncontradasId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + "/mascotasencontradas/" + mascotasEncontradasId + NOEXISTE, 404);
         }
-        MascotaEncontradaDetailDTO mascotaDetailDTO = new MascotaEncontradaDetailDTO(usuarioMascotasLogic.getMascota(usuariosId, mascotasEncontradasId));
-        return mascotaDetailDTO;
+        return new MascotaEncontradaDetailDTO(usuarioMascotasLogic.getMascota(usuariosId, mascotasEncontradasId));
     }
     
     @PUT
     public List<MascotaEncontradaDetailDTO> replaceMascotas(@PathParam("usuariosId") Long usuariosId, List<MascotaEncontradaDetailDTO> mascotas) {
         for (MascotaEncontradaDetailDTO mascota : mascotas) {
             if (mascotaLogic.findMascotaEncontrada(mascota.getId()) == null) {
-                throw new WebApplicationException("El recurso /mascotasencontradas/" + mascota.getId() + " no existe.", 404);
+                throw new WebApplicationException("El recurso /mascotasencontradas/" + mascota.getId() + NOEXISTE, 404);
             }
         }
-        List<MascotaEncontradaDetailDTO> listaDetailDTOs = mascotasListEntity2DTO(usuarioMascotasLogic.replaceMascotas(usuariosId, mascotasListDTO2Entity(mascotas)));
-        return listaDetailDTOs;
+        return mascotasListEntity2DTO(usuarioMascotasLogic.replaceMascotas(usuariosId, mascotasListDTO2Entity(mascotas)));
     }
     
     private List<MascotaEncontradaEntity> mascotasListDTO2Entity(List<MascotaEncontradaDetailDTO> dtos) {
