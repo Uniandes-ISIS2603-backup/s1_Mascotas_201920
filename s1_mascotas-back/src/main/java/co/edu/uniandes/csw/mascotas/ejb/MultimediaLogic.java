@@ -53,17 +53,17 @@ public class MultimediaLogic {
         if (multimedia.getNombre() == null) {
             throw new BusinessLogicException("El el nombre de multimedia está vacío");
         }
-        if (multimedia.getNombre().equals("")) {
-            throw new BusinessLogicException("La multimedia no tiene nombre valido.");
-        }
         if (multimedia.getTipo() == null) {
             throw new BusinessLogicException("El tipo esta vacio");
         }
-        if (multimedia.getTipo().equals("")) {
-            throw new BusinessLogicException("La multimedia no tiene tipo valido.");
-        }
         if (multimedia.getUrl() == null) {
             throw new BusinessLogicException("La url no puede ser nula");
+        }
+        if (multimedia.getNombre().equals("")) {
+            throw new BusinessLogicException("La multimedia no tiene nombre valido.");
+        }
+        if (multimedia.getTipo().equals("")) {
+            throw new BusinessLogicException("La multimedia no tiene tipo valido.");
         }
         if (multimedia.getUrl().equals("")) {
             throw new BusinessLogicException("La url esta vacia");

@@ -67,46 +67,46 @@ public class PublicidadDTO implements Serializable {
     
     
         
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
+    
 
     public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
-
-    public Date getFechaFin() {
-        return fechaFin;
+    
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
     public void setFechaFin(Date fecchaFin) {
         this.fechaFin = fecchaFin;
     }
-
-    public String getMensaje() {
-        return mensaje;
+    
+    public Date getFechaFin() {
+        return fechaFin;
     }
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-
-    public Integer getDiasPorSemana() {
-        return diasPorSemana;
+    
+    public String getMensaje() {
+        return mensaje;
     }
 
     public void setDiasPorSemana(Integer diasPorSemana) {
         this.diasPorSemana = diasPorSemana;
     }
-
-    public Integer getCosto() {
-        return costo;
-    }
-
     
+    public Integer getDiasPorSemana() {
+        return diasPorSemana;
+    }   
     
     public void setCosto(Integer costo) {
         this.costo = costo;
+    }
+    
+    public Integer getCosto() {
+        return costo;
     }
 
 }
