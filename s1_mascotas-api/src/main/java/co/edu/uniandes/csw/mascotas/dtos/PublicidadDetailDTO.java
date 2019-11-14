@@ -36,6 +36,7 @@ public class PublicidadDetailDTO extends PublicidadDTO implements Serializable {
         }
     }
 
+    @Override
     public PublicidadEntity toEntity()
     {
         PublicidadEntity entity = super.toEntity();
