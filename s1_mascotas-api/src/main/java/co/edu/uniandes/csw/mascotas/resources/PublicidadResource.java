@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.mascotas.resources;
 
 import co.edu.uniandes.csw.mascotas.dtos.PublicidadDTO;
+import co.edu.uniandes.csw.mascotas.dtos.PublicidadDetailDTO;
+import co.edu.uniandes.csw.mascotas.ejb.MultimediaLogic;
 import co.edu.uniandes.csw.mascotas.ejb.PublicidadLogic;
+import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -39,22 +42,35 @@ public class PublicidadResource
    @Inject 
    private PublicidadLogic logic;
    
+   @Inject 
+   private MultimediaLogic ml;
+   
    @POST
-   public PublicidadDTO createPublicidad(PublicidadDTO publicidad) throws BusinessLogicException
+   public PublicidadDetailDTO createPublicidad(PublicidadDetailDTO publicidad) throws BusinessLogicException
    {
+       PublicidadEntity entity = publicidad.toEntity();
+       List<MultimediaEntity> multimedia = entity.getMultimedia();
+       entity.setMultimedia(new ArrayList<>());
+       entity = logic.createPublicidad(entity);
        
-        return new PublicidadDTO(logic.createPublicidad(publicidad.toEntity()));
+       for (MultimediaEntity multimediaEntity : multimedia) 
+       {
+           ml.createMultimedia(null, null, null, entity.getId(), multimediaEntity);
+       }
+       
+       entity.setMultimedia(multimedia);
+       return new PublicidadDetailDTO(entity);
    }
    
     @GET
     @Path("{publicidadId: \\d+}")
-    public PublicidadDTO getPublicidad(@PathParam("publicidadId") Long publicidadId) throws BusinessLogicException
+    public PublicidadDetailDTO getPublicidad(@PathParam("publicidadId") Long publicidadId) throws BusinessLogicException
     {
         PublicidadEntity authorEntity = logic.findPublicidad(publicidadId);
         if (authorEntity == null) {
             throw new WebApplicationException(PRIM + publicidadId + NO, 404);
         }
-        return new PublicidadDTO(authorEntity);
+        return new PublicidadDetailDTO(authorEntity);
     }
    
     @GET
