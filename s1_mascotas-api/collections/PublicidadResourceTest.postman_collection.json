@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "be54cbc7-058f-44b8-830a-39aaf4199e83",
+		"_postman_id": "af2a2ee8-f0a9-48c8-929e-288ca2e6705f",
 		"name": "PublicidadResourceTest",
 		"description": "Publicidad Resource Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"costo\": 123,\r\n    \"diasPorSemana\": 3,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\",\r\n    \"multimedia\": [\r\n    \t{\r\n\t\t\t\"url\":\"https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg\", \r\n\t\t\t\"nombre\":\"image\", \r\n\t\t\t\"tipo\": \"imagen\"\r\n\t\t}\t\r\n    ]\r\n}",
+					"raw": "{\r\n    \"costo\": 123,\r\n    \"diasPorSemana\": 3,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\",\r\n    \"multimedia\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,7 +85,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"costo\": 0,\r\n    \"diasPorSemana\": 7,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\"\r\n}",
+					"raw": "{\r\n    \"costo\": 0,\r\n    \"diasPorSemana\": 7,\r\n    \"fechaFin\": \"1966-08-21T05:00:00Z[UTC]\",\r\n    \"fechaInicio\": \"1966-07-21T05:00:00Z[UTC]\",\r\n    \"mensaje\": \"todos son malos dueños\",\r\n    \"multimedia\": [\r\n    \t{\r\n\t\t\t\"url\":\"https://www.alimentarium.org/en/system/files/thumbnails/image/AL027-01_pomme_de_terre_0.jpg\", \r\n\t\t\t\"nombre\":\"image\", \r\n\t\t\t\"tipo\": \"imagen\"\r\n\t\t}\t\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
