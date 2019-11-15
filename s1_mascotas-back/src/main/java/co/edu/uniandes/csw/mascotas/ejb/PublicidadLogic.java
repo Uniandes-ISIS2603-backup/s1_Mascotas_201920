@@ -5,9 +5,11 @@
  */
 package co.edu.uniandes.csw.mascotas.ejb;
 
+import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.PublicidadPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -82,4 +84,27 @@ public class PublicidadLogic
             throw new BusinessLogicException("Los dias por semana tienen que ser mayores a 0");
         
     }
+
+    public PublicidadEntity getPublicidad() 
+    {
+        List<PublicidadEntity> list = pp.getPublicidad();
+        
+        if(list.isEmpty())
+        {
+            PublicidadEntity entity = new PublicidadEntity();
+            List<MultimediaEntity> ml= new ArrayList<>();
+            MultimediaEntity multimedia = new MultimediaEntity();
+            multimedia.setUrl("https://i.ibb.co/9805J5y/2.png");
+            ml.add(multimedia);
+            multimedia = new MultimediaEntity();
+            multimedia.setUrl("https://i.ibb.co/k9PdT6S/1.png");
+            ml.add(multimedia);
+            entity.setMultimedia(ml);
+            return entity;
+        }
+        else
+            return list.get((int)(Math.random() * ((list.size()-1) + 1)));
+    }
+
+   
 }
