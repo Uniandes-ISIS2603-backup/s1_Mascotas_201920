@@ -6,10 +6,13 @@
 package co.edu.uniandes.csw.mascotas.persistence;
 
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
+import java.sql.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 /**
@@ -51,6 +54,16 @@ public class PublicidadPersistence {
     {
         PublicidadEntity en= find(id);
         em.remove(en);
+    }
+
+    public List<PublicidadEntity> getPublicidad() 
+    {
+        java.util.Date actual = new java.util.Date();
+        Date date = new Date(actual.getTime());     
+        
+        Query q = em.createQuery("select u from PublicidadEntity u where u.fechaInicio < :today and u.fecchaFin > :today");
+        q.setParameter("today",date,TemporalType.DATE);
+        return q.getResultList();
     }
    
 }
