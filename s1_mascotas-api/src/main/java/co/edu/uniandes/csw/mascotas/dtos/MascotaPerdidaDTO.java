@@ -8,6 +8,9 @@ package co.edu.uniandes.csw.mascotas.dtos;
 import co.edu.uniandes.csw.mascotas.entities.MascotaPerdidaEntity;
 import java.io.Serializable;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * MascotaPerdidaDTO. Los DTO contienen
@@ -53,6 +56,8 @@ import java.util.Date;
  * </pre>
  * @author lily 
  */
+@XmlRootElement(name = "encontrada")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MascotaPerdidaDTO implements Serializable{
     
     /**

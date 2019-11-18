@@ -7,11 +7,16 @@ package co.edu.uniandes.csw.mascotas.dtos;
 
 import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Lily Duque
  */
+@XmlRootElement(name = "encontrada")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MultimediaDTO implements Serializable {
     
     private Long id;

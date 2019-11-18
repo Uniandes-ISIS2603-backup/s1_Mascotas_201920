@@ -9,12 +9,17 @@ import co.edu.uniandes.csw.mascotas.adapters.DateAdapter;
 import co.edu.uniandes.csw.mascotas.entities.MascotaEncontradaEntity;
 import java.io.Serializable;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
  * @author ja.avelino
  */
+@XmlRootElement(name = "encontrada")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MascotaEncontradaDTO implements Serializable{
     
     /**
