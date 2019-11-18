@@ -27,6 +27,14 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class PublicidadEntity extends BaseEntity implements Serializable
 {
+    @Temporal(TemporalType.DATE)
+    //@PodamStrategyValue(DateStrategy.class)
+    @PodamExclude
+    private Date ultimaPublicacion;
+    
+    @PodamExclude
+    private Integer publicaciones;
+    
     private String mensaje;
     
     @PodamStrategyValue(PositiveIntegerStrategy.class)
@@ -47,6 +55,24 @@ public class PublicidadEntity extends BaseEntity implements Serializable
     @OneToMany(mappedBy = "publicidad")
     private List<co.edu.uniandes.csw.mascotas.entities.MultimediaEntity> multimedia = new ArrayList<>();
 
+    public Date getUltimaPublicacion() {
+        return ultimaPublicacion;
+    }
+
+    public void setUltimaPublicacion(Date ultimaPublicacion) {
+        this.ultimaPublicacion = ultimaPublicacion;
+    }
+
+    public Integer getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(Integer publicaciones) {
+        this.publicaciones = publicaciones;
+    }
+
+    
+    
     public List<co.edu.uniandes.csw.mascotas.entities.MultimediaEntity> getMultimedia() {
         return multimedia;
     }
