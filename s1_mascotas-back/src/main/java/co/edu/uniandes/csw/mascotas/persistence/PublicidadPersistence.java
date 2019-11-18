@@ -27,6 +27,8 @@ public class PublicidadPersistence {
 
     public PublicidadEntity create(PublicidadEntity publicidad) {
 
+        publicidad.setPublicaciones(0);
+        publicidad.setUltimaPublicacion(new java.util.Date(0));
         em.persist(publicidad);
         return publicidad;
 
