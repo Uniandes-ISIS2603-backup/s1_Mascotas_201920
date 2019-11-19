@@ -9,14 +9,11 @@ import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.PublicidadPersistence;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -103,8 +100,6 @@ public class PublicidadLogic {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String strDate = dateFormat.format(date);                
                 String strPublicacion = dateFormat.format(publicidadEntity.getUltimaPublicacion());
-                
-                //publicidadEntity.setMensaje(strDate+"-"+strPublicacion);
                 
                 if (strPublicacion.compareTo(strDate)==0)
                 {    
