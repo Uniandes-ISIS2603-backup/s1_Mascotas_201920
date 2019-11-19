@@ -56,7 +56,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * </pre>
  * @author lily 
  */
-@XmlRootElement(name = "encontrada")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MascotaPerdidaDTO implements Serializable{
     

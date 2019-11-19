@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author German Rozo
  */
-@XmlRootElement(name = "publicidad")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PublicidadDTO implements Serializable {
 

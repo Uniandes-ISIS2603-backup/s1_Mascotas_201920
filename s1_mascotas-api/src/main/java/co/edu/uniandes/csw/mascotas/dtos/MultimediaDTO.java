@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Lily Duque
  */
-@XmlRootElement(name = "encontrada")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MultimediaDTO implements Serializable {
     

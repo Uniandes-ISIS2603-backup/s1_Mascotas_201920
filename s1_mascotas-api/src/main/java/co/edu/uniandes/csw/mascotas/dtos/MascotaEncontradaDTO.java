@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author ja.avelino
  */
-@XmlRootElement(name = "encontrada")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MascotaEncontradaDTO implements Serializable{
     
