@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class MascotaEncontradaDTO implements Serializable{
     
     /**
-     * ID de la mascota encontrada
+     * ID de la mascota encontrada.
      */    
     private Long id;
     
