@@ -94,6 +94,8 @@ public class MascotaPerdidaDTO implements Serializable{
      */
     private Date fechaPerdida;
     
+    private Boolean encontrado;
+    
     /**
      * Usuario dueño de la mascota
      */
@@ -120,6 +122,8 @@ public class MascotaPerdidaDTO implements Serializable{
         setRaza(entidad.getRaza());
         
         setLugar(entidad.getLugar());
+        
+        setEncontrado(entidad.getEncontrado());
         
         if (entidad.getRecompensa() != null) {
             setRecompensa(new RecompensaDTO (entidad.getRecompensa()));
@@ -152,6 +156,8 @@ public class MascotaPerdidaDTO implements Serializable{
         entidad.setLugar(this.getLugar());
 
         entidad.setRaza(this.getRaza());
+        
+        entidad.setEncontrado(this.getEncontrado());
         
         if (this.recompensa != null)
             entidad.setRecompensa(this.getRecompensa().toEntity());
@@ -278,6 +284,20 @@ public class MascotaPerdidaDTO implements Serializable{
 
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return the encontrado
+     */
+    public Boolean getEncontrado() {
+        return encontrado;
+    }
+
+    /**
+     * @param encontrado the encontrado to set
+     */
+    public void setEncontrado(Boolean encontrado) {
+        this.encontrado = encontrado;
     }
     
     

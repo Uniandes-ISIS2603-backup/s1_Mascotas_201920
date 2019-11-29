@@ -63,6 +63,8 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     private String lugar;
     
+    private Boolean encontrado;
+    
     
     /**
      * La fecha en la que se perdió la mascota
@@ -192,6 +194,20 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public void setMultimedia(List<MultimediaEntity> multimedia) {
         this.multimedia = multimedia;
     }
+    
+    /**
+     * @return the encontrado
+     */
+    public Boolean getEncontrado() {
+        return encontrado;
+    }
+
+    /**
+     * @param encontrado the encontrado to set
+     */
+    public void setEncontrado(Boolean encontrado) {
+        this.encontrado = encontrado;
+    }
 
     /**
      * Compara dos objetos
@@ -221,6 +237,9 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
         hash = 79 * hash + Objects.hashCode(this.lugar);
         hash = 79 * hash + Objects.hashCode(this.fechaPerdida);
         hash = 79 * hash + Objects.hashCode(this.multimedia);
+        hash = 79 * hash + Objects.hashCode(this.encontrado);
         return hash;
     }
+
+    
 }
