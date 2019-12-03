@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -119,7 +120,8 @@ public class PublicidadLogic {
             if (aprobados.isEmpty()) {
                 return emply();
             } else {
-                return aprobados.get((int) (Math.random() * ((list.size() - 1) + 1)));
+                Random r = new Random();
+                return aprobados.get((int) (r.nextInt((list.size() - 1) + 1) ));
             }
         }
     }
