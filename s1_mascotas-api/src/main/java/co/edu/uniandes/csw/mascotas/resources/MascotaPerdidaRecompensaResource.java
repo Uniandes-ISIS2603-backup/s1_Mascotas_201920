@@ -79,10 +79,10 @@ public class MascotaPerdidaRecompensaResource {
     public RecompensaDTO replaceMascotaPerdida(@PathParam("recompensaId") Long recompensaId, MascotaPerdidaDTO mascotaPerdida) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "RecompensaMascotaPerdidaResource replaceMascotaPerdida: input: recompensaId{0} , MascotaPerdida:{1}", new Object[]{recompensaId, mascotaPerdida});
         if (recompensaLogic.findRecompensa(recompensaId) == null) {
-            throw new WebApplicationException("El recurso /mascotasencontradas/" + recompensaId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /recompensa/" + recompensaId + " no existe.", 404);
         }
         if (mascotaPerdidaLogic.getMascotaPerdida(mascotaPerdida.getId()) == null) {
-            throw new WebApplicationException("El recurso /mascotaPerdidas/" + mascotaPerdida.getId() + " no existe.", 404);
+            throw new WebApplicationException("El recurso /mascotaperdidas/" + mascotaPerdida.getId() + " no existe.", 404);
         }
         RecompensaDTO recompensaDetailDTO = new RecompensaDTO(recompensaMascotaPerdidaLogic.replaceMascotaPerdida(recompensaId, mascotaPerdida.getId()));
         LOGGER.log(Level.INFO, "RecompensaMascotaPerdidaResource replaceMascotaPerdida: output: {0}", recompensaDetailDTO);

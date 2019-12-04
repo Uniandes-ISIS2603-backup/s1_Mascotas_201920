@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e8e72d45-0038-4e8f-b36a-5c6c43efa72b",
+		"_postman_id": "8460823a-4068-4236-9d4b-4691c57d0c17",
 		"name": "MascotaAdopcionUsuarioTest Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -188,6 +188,98 @@
 					]
 				},
 				"description": "**Release: Paso-5**\r\n\r\nActualiza el usuario de una mascota existente. Se envían los Ids de las entidades asociar en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un usuario a una mascota perdida que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ece9142f-8d19-429e-bb83-0205a8143ca0",
+						"exec": [
+							"tests[\"No actualiza con una mascota que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mascotasencontradas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":{{new_id_umeu}}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/0/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"0",
+						"usuario"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario a una mascota encontrada que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasencontradas/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un usuario  que no existe a una mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ece9142f-8d19-429e-bb83-0205a8143ca0",
+						"exec": [
+							"tests[\"No actualiza con una mascota que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /usuarios/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":0\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion/{{new_id_meu}}/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasadopcion",
+						"{{new_id_meu}}",
+						"usuario"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario a una mascota encontrada que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasencontradas/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
 			},
 			"response": []
 		},

@@ -1,46 +1,10 @@
 {
 	"info": {
-		"_postman_id": "a4904fe0-a7b3-49b8-a575-a88522ed89c5",
+		"_postman_id": "5111f428-12fc-4050-96be-f091cf7cc875",
 		"name": "UsuarioResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Obtener todos los usuarios",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "a867984b-5552-42d5-a91e-631447b0aff9",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get all \"+responseCode.code] = responseCode.code === 200;",
-							"tests[\"usuarios count\"] = data.length >= 0;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"usuarios"
-					]
-				},
-				"description": "Se obtienen todos los usuarios."
-			},
-			"response": []
-		},
 		{
 			"name": "Crear un usuario",
 			"event": [
@@ -133,6 +97,42 @@
 			"response": []
 		},
 		{
+			"name": "Obtener todos los usuarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a867984b-5552-42d5-a91e-631447b0aff9",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all \"+responseCode.code] = responseCode.code === 200;",
+							"tests[\"usuarios count\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios"
+					]
+				},
+				"description": "Se obtienen todos los usuarios."
+			},
+			"response": []
+		},
+		{
 			"name": "Dar usuario id no existe",
 			"event": [
 				{
@@ -216,7 +216,88 @@
 			"response": []
 		},
 		{
+			"name": "Editar usuario no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dde77c8-a1b8-4c70-99fe-8b3454fe688b",
+						"exec": [
+							"tests[\"No actualiza con usuario que no existe\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Pa\",\n\t\"ciudad\": \"Bu\",\n\t\"correo\": \"tobiasartrkkka@gmail.com\",\n\t\"celular\": 3214858,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						"-1"
+					]
+				},
+				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
+			},
+			"response": []
+		},
+		{
 			"name": "Borrar un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06c863e4-c52a-4b6e-8105-7fb42cd3ee45",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_ume}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"usuarios",
+						"{{new_id_ume}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un usuario no existe",
 			"event": [
 				{
 					"listen": "test",

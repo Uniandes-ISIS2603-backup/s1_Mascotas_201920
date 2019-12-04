@@ -228,7 +228,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 0\n}"
+					"raw": "{\n    \"id\": {{new_id_a8}}\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/0/mascotaperdidas",

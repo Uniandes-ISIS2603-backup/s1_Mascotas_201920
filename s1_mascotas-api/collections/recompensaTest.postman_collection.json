@@ -361,54 +361,6 @@
 			"response": []
 		},
 		{
-			"name": "Borrar recompensas",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5dde77c8-a1b8-4c70-99fe-8b3454fe688b",
-						"exec": [
-							"console.log( responseCode.code);",
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas//{{new_id_b}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"recompensas",
-						"",
-						"{{new_id_b}}"
-					]
-				},
-				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
-			},
-			"response": []
-		},
-		{
 			"name": "Borrar mascota perdida",
 			"event": [
 				{
