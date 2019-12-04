@@ -304,7 +304,9 @@
 					"script": {
 						"id": "06c863e4-c52a-4b6e-8105-7fb42cd3ee45",
 						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+							"tests[\"No borra un usuario que no existe\"] = responseCode.code === 404;",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -314,7 +316,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_ume}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/-1",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -324,7 +326,7 @@
 						"s1_mascotas-api",
 						"api",
 						"usuarios",
-						"{{new_id_ume}}"
+						"-1"
 					]
 				}
 			},
