@@ -1,63 +1,11 @@
 {
 	"info": {
-		"_postman_id": "ee5e05db-f80b-48c7-b53d-a68b9225167d",
+		"_postman_id": "14bfd9e8-3b19-4ab4-aadc-31d0a251c669",
 		"name": "ProcesoAdopcionResourceTest",
 		"description": "Proceso Adopcion Resource Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Get Procesos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
-						"exec": [
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"procesos"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "Post Proceso",
 			"event": [
@@ -160,6 +108,111 @@
 						"api",
 						"procesos",
 						"{{new_id_p}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Proceso no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
+						"exec": [
+							"tests[\"El proceso no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Procesos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab133564-6724-47b7-ab3d-8b4bddb406ea",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos"
 					]
 				}
 			},
@@ -470,6 +523,57 @@
 			"response": []
 		},
 		{
+			"name": "Put Proceso no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9302491-a7f7-4630-b2f9-ccb2eb5eb72d",
+						"exec": [
+							"",
+							"tests[\"El proceso no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Cancelado\",\n\t\"comentario\": \"Chao gente\",\n\t\"calificacion\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete Proceso",
 			"event": [
 				{
@@ -514,6 +618,57 @@
 						"api",
 						"procesos",
 						"{{new_id_p}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Proceso no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4398c352-8d9d-4572-97c6-697e0346c43f",
+						"exec": [
+							"",
+							"tests[\"El proceso no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/procesos/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"procesos",
+						"-1"
 					]
 				}
 			},

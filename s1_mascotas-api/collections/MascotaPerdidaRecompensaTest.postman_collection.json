@@ -212,7 +212,53 @@
 						"id": "c8198634-c32a-4525-8312-c450839fb809",
 						"exec": [
 							"tests[\"No actualiza con usuario que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mascotaPerdidas/0 no existe.\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /recompensa/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 0\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/0/mascotaperdidas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"recompensas",
+						"0",
+						"mascotaperdidas"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario que no existe a una mascota encontrada. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /usuarios/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar una mascota que no existe a una  recompensa Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8198634-c32a-4525-8312-c450839fb809",
+						"exec": [
+							"tests[\"No actualiza con usuario que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mascotaperdidas/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
