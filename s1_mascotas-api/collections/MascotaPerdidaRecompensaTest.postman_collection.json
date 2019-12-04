@@ -185,7 +185,7 @@
 					"raw": "{\n    \"id\": {{new_id_a8}}\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}} /mascotaperdidas",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}/mascotaperdidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -195,7 +195,7 @@
 						"s1_mascotas-api",
 						"api",
 						"recompensas",
-						"{{new_id_b}} ",
+						"{{new_id_b}}",
 						"mascotaperdidas"
 					]
 				},
