@@ -264,4 +264,10 @@ public class PublicidadLogicTest {
         Assert.assertNotNull(r);
     }
     
+    @Test
+    public void createTestw() throws BusinessLogicException {
+        PublicidadEntity publicidad = pl.getPublicidad();
+        Assert.assertNotNull(publicidad);
+    }
+    
 }
