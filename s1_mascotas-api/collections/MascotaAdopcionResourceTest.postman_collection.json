@@ -483,7 +483,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion/{{new_id_aa}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -493,14 +493,14 @@
 						"s1_mascotas-api",
 						"api",
 						"mascotasadopcion",
-						"-1"
+						"{{new_id_aa}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Editar una Mascota Adopcion Copy",
+			"name": "Editar una Mascota Adopcion no existe",
 			"event": [
 				{
 					"listen": "test",
