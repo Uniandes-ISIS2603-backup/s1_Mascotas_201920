@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "e8e72d45-0038-4e8f-b36a-5c6c43efa72b",
-		"name": "MascotaAdopcionUsuarioTest Copy",
+		"_postman_id": "68b2e297-c937-4bcd-86bf-9d407010cc3d",
+		"name": "MascotaPerdidasUsuarioTest",
+		"description": "Colección de pruebas sobre el recurso MascotaEncontradaUsuario",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -31,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"juanMEjjjjjjjjjklkkkkjjjjjjU11@bta.com\",\n\t\"celular\": 312123212\n}"
+					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"ddddd@bta.com\",\n\t\"celular\": 312123212\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/",
@@ -79,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan2\",\n\t\"ciudad\": \"Bogota2\",\n\t\"correo\": \"juanMEhhhhkkkklllhhhU10@bta.com\",\n\t\"celular\": 312123221\n}"
+					"raw": "{\n\t\"nombre\": \"Juan2\",\n\t\"ciudad\": \"Bogota2\",\n\t\"correo\": \"juanMEJJUff10@bta.com\",\n\t\"celular\": 312123221\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/",
@@ -100,7 +101,7 @@
 			"response": []
 		},
 		{
-			"name": "Crear una mascota adopcion",
+			"name": "Crear una mascota  perdidas",
 			"event": [
 				{
 					"listen": "test",
@@ -125,10 +126,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"raza\": \"Criollo\",\n\t\"lugar\": \"Bogota\",\n\t\"descripcion\": \"juan@bta.com\",\n\t\"especie\": 0,\n\t\"usuario\": {\n\t\t\"id\": {{new_id_umeu}}\n\t},\n\t\"fechaEncontrada\": \"2019-09-10T00:00:00.000Z\"\n}"
+					"raw": "\n {\n        \"descripcion\": \"BUEAS\",\n        \"especie\": 0,\n        \"fechaPerdida\": \"2668-11-05T05:00:00Z[UTC]\",\n        \"lugar\": \"BUENAS\",\n        \"raza\": \"BUENAS\",\n        \"usuario\": {\n\t\t\"id\": {{new_id_umeu}}\n\t},\n        \"fotos\": [],\n        \"videos\": []\n  }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -137,7 +138,7 @@
 					"path": [
 						"s1_mascotas-api",
 						"api",
-						"mascotasadopcion"
+						"mascotasperdidas"
 					]
 				},
 				"description": "**Release: Ciclo-2**\r\n\r\nCrea una nueva mascota encontrada. El recurso tiene todos los atributos. El Id es inicializado por la BD y se debe ver en la respuesta. \r\n\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
@@ -145,7 +146,7 @@
 			"response": []
 		},
 		{
-			"name": "Asociar un usuario a una mascota adopcion",
+			"name": "Asociar un usuario a una mascotas perdidas",
 			"event": [
 				{
 					"listen": "test",
@@ -173,7 +174,7 @@
 					"raw": "{\n    \"id\": {{new_id_umeu}}\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion/{{new_id_meu}}/usuario",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_meu}}/usuario",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -182,7 +183,7 @@
 					"path": [
 						"s1_mascotas-api",
 						"api",
-						"mascotasadopcion",
+						"mascotasperdidas",
 						"{{new_id_meu}}",
 						"usuario"
 					]
@@ -192,7 +193,99 @@
 			"response": []
 		},
 		{
-			"name": "Borrar una mascota adopcion",
+			"name": "Asociar un usuario que no existe a una mascota perdida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8198634-c32a-4525-8312-c450839fb809",
+						"exec": [
+							"tests[\"No actualiza con usuario que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /usuarios/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 0\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_meu}}/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"{{new_id_meu}}",
+						"usuario"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario que no existe a una mascota encontrada. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /usuarios/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un usuario a una mascota perdida que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ece9142f-8d19-429e-bb83-0205a8143ca0",
+						"exec": [
+							"tests[\"No actualiza con una mascota que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mascotasencontradas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":{{new_id_umeu}}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/0/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasperdidas",
+						"0",
+						"usuario"
+					]
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario a una mascota encontrada que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /mascotasencontradas/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una mascota  perdida",
 			"event": [
 				{
 					"listen": "test",
@@ -213,7 +306,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion/{{new_id_meu}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_meu}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -222,7 +315,7 @@
 					"path": [
 						"s1_mascotas-api",
 						"api",
-						"mascotasadopcion",
+						"mascotasperdidas",
 						"{{new_id_meu}}"
 					]
 				},
@@ -307,6 +400,28 @@
 				"description": "**Release: Ciclo-2**\n\nBorra un usuario. Se envía el id del usuario creado en la primera petición.\n\n**Código HTTP esperado: 204**"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dbc63782-6296-4287-9d4e-3a6f0ef073d7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8e627a68-5c9e-483b-846f-2da7ab6fab04",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}
