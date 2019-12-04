@@ -138,12 +138,7 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
         this.recompensa = recompensa;
     }
 
-    /**
-     * @return the raza
-     */
-    public String getRaza() {
-        return raza;
-    }
+   
 
     /**
      * @param raza the raza to set
@@ -159,12 +154,7 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
         return especie;
     }
 
-    /**
-     * @param especie the especie to set
-     */
-    public void setEspecie(Integer especie) {
-        this.especie = especie;
-    }
+   
 
     /**
      * @return the descripcion
@@ -186,13 +176,13 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public String getLugar() {
         return lugar;
     }
-
-    /**
-     * @param lugar the lugar to set
+     /**
+     * @return the raza
      */
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
+    public String getRaza() {
+        return raza;
     }
+    
 
     /**
      * @return the encontrado
@@ -207,7 +197,13 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     public void setEncontrado(Boolean encontrado) {
         this.encontrado = encontrado;
     }
-
+    
+     /**
+     * @param especie the especie to set
+     */
+    public void setEspecie(Integer especie) {
+        this.especie = especie;
+    }
     /**
      * @return the fechaPerdida
      */
@@ -234,6 +230,13 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     public void setMultimedia(List<MultimediaEntity> multimedia) {
         this.multimedia = multimedia;
+    }
+    
+    /**
+     * @param lugar the lugar to set
+     */
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 
     

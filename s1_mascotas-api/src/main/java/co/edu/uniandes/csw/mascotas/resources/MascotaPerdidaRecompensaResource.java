@@ -47,7 +47,7 @@ import javax.ws.rs.core.MediaType;
  * @author Lily
  * @version 1.0
  */
-@Path("recompensas/{recompensaId: \\d+}/mascotaPerdida")
+@Path("recompensas/{recompensaId: \\d+}/mascotaperdidas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class MascotaPerdidaRecompensaResource {
