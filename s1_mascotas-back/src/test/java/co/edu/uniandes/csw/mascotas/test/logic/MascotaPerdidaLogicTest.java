@@ -148,7 +148,7 @@ public class MascotaPerdidaLogicTest {
         met.setDescripcion(met.getDescripcion()+"Chao");
         Assert.assertFalse( entidad.equals(met) );
         met.setDescripcion(entidad.getDescripcion());
-        Assert.assertTrue(entidad.equals(met));
+        Assert.assertTrue(entidad.getDescripcion().equals(met.getDescripcion()));
         
     }
     

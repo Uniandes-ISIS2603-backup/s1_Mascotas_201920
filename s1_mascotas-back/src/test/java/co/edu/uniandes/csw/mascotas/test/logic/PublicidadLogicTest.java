@@ -252,4 +252,22 @@ public class PublicidadLogicTest {
         PublicidadEntity r = pl.findPublicidad(publicidad.getId());
         Assert.assertNotNull(r);
     }
+    @Test
+    public void getTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+
+        PublicidadEntity publicidad = factory.manufacturePojo(PublicidadEntity.class);
+        pl.createPublicidad(publicidad);
+        Assert.assertNotNull(publicidad);
+        PublicidadEntity r = pl.getPublicidad();
+        Assert.assertNotNull(r);
+    }
+    
+    @Test
+    public void createTestw() throws BusinessLogicException {
+        PublicidadEntity publicidad = pl.getPublicidad();
+        Assert.assertNotNull(publicidad);
+    }
+    
 }

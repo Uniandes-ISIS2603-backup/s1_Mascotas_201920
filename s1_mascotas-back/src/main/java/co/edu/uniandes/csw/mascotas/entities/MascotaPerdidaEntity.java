@@ -63,6 +63,8 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
      */
     private String lugar;
     
+    private Boolean encontrado;
+    
     
     /**
      * La fecha en la que se perdió la mascota
@@ -75,123 +77,6 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     @OneToMany(mappedBy = "mascotaPerdida", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<MultimediaEntity> multimedia = new ArrayList<>();
 
-    /**
-     * 
-     * @param recompensa a cambiar 
-     */
-    public void setRecompensa(RecompensaEntity recompensa) {
-        this.recompensa = recompensa;
-    }
-    
-    /**
-     * 
-     * @return recompensa
-     */
-    public RecompensaEntity getRecompensa() {
-        return recompensa;
-    }
-
-    /**
-     * @param raza the raza to set
-     */
-    public void setRaza(String raza) {
-        this.raza = raza;
-    }
-
-    /**
-     * @return the especie
-     */
-    public Integer getEspecie() {
-        return especie;
-    }
-    
-    
-    
-    /**
-     * @return the raza
-     */
-    public String getRaza() {
-        return raza;
-    }
-
-    /**
-     * @param especie the especie to set
-     */
-    public void setEspecie(Integer especie) {
-        this.especie = especie;
-    }
-
-    /**
-     * @param descripcion the descripcion to set
-     */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    /**
-     * @return the fechaPerdida
-     */
-    public Date getFechaPerdida() {
-        return fechaPerdida;
-    }
-    
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * @return the lugar
-     */
-    public String getLugar() {
-        return lugar;
-    }
-    
-    /**
-     * @param fechaPerdida the fechaPerdida to set
-     */
-    public void setFechaPerdida(Date fechaPerdida) {
-        this.fechaPerdida = fechaPerdida;
-    }
-
-    /**
-     * @param lugar the lugar to set
-     */
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
-    }
-    
-    /**
-     * 
-     * @param usuario Modifica el usuario dueño de la mascota
-     */
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuario = usuario;
-    }
-
-    /**
-     * @return the multimedia
-     */
-    public List<MultimediaEntity> getMultimedia() {
-        return multimedia;
-    }
-    
-    
-    /**
-     * @return el usuario propietario de la mascota
-     */
-    public UsuarioEntity getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * @param multimedia the multimedia to set
-     */
-    public void setMultimedia(List<MultimediaEntity> multimedia) {
-        this.multimedia = multimedia;
-    }
 
     /**
      * Compara dos objetos
@@ -213,14 +98,146 @@ public class MascotaPerdidaEntity extends BaseEntity implements Serializable
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.usuario);
-        hash = 79 * hash + Objects.hashCode(this.recompensa);
-        hash = 79 * hash + Objects.hashCode(this.raza);
-        hash = 79 * hash + Objects.hashCode(this.especie);
-        hash = 79 * hash + Objects.hashCode(this.descripcion);
-        hash = 79 * hash + Objects.hashCode(this.lugar);
-        hash = 79 * hash + Objects.hashCode(this.fechaPerdida);
-        hash = 79 * hash + Objects.hashCode(this.multimedia);
+        hash = 79 * hash + Objects.hashCode(this.getUsuario());
+        hash = 79 * hash + Objects.hashCode(this.getRecompensa());
+        hash = 79 * hash + Objects.hashCode(this.getRaza());
+        hash = 79 * hash + Objects.hashCode(this.getEspecie());
+        hash = 79 * hash + Objects.hashCode(this.getDescripcion());
+        hash = 79 * hash + Objects.hashCode(this.getLugar());
+        hash = 79 * hash + Objects.hashCode(this.getFechaPerdida());
+        hash = 79 * hash + Objects.hashCode(this.getMultimedia());
+        hash = 79 * hash + Objects.hashCode(this.getEncontrado());
         return hash;
     }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * @return the recompensa
+     */
+    public RecompensaEntity getRecompensa() {
+        return recompensa;
+    }
+
+    /**
+     * @param recompensa the recompensa to set
+     */
+    public void setRecompensa(RecompensaEntity recompensa) {
+        this.recompensa = recompensa;
+    }
+
+   
+
+    /**
+     * @param raza the raza to set
+     */
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    /**
+     * @return the especie
+     */
+    public Integer getEspecie() {
+        return especie;
+    }
+
+   
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the lugar
+     */
+    public String getLugar() {
+        return lugar;
+    }
+     /**
+     * @return the raza
+     */
+    public String getRaza() {
+        return raza;
+    }
+    
+
+    /**
+     * @return the encontrado
+     */
+    public Boolean getEncontrado() {
+        return encontrado;
+    }
+
+    /**
+     * @param encontrado the encontrado to set
+     */
+    public void setEncontrado(Boolean encontrado) {
+        this.encontrado = encontrado;
+    }
+    
+     /**
+     * @param especie the especie to set
+     */
+    public void setEspecie(Integer especie) {
+        this.especie = especie;
+    }
+    /**
+     * @return the fechaPerdida
+     */
+    public Date getFechaPerdida() {
+        return fechaPerdida;
+    }
+
+    /**
+     * @param fechaPerdida the fechaPerdida to set
+     */
+    public void setFechaPerdida(Date fechaPerdida) {
+        this.fechaPerdida = fechaPerdida;
+    }
+
+    /**
+     * @return the multimedia
+     */
+    public List<MultimediaEntity> getMultimedia() {
+        return multimedia;
+    }
+
+    /**
+     * @param multimedia the multimedia to set
+     */
+    public void setMultimedia(List<MultimediaEntity> multimedia) {
+        this.multimedia = multimedia;
+    }
+    
+    /**
+     * @param lugar the lugar to set
+     */
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    
 }

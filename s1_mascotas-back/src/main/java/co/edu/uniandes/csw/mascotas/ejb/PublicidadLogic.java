@@ -9,14 +9,17 @@ import co.edu.uniandes.csw.mascotas.entities.MultimediaEntity;
 import co.edu.uniandes.csw.mascotas.entities.PublicidadEntity;
 import co.edu.uniandes.csw.mascotas.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.mascotas.persistence.PublicidadPersistence;
-import java.sql.Date;
+import co.edu.uniandes.csw.mascotas.podam.EspecieEstrategy;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -98,16 +101,12 @@ public class PublicidadLogic {
 
             List<PublicidadEntity> aprobados = new ArrayList<>();
 
-            for (PublicidadEntity publicidadEntity : list) 
-            {
+            for (PublicidadEntity publicidadEntity : list) {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String strDate = dateFormat.format(date);                
+                String strDate = dateFormat.format(date);
                 String strPublicacion = dateFormat.format(publicidadEntity.getUltimaPublicacion());
-                
-                //publicidadEntity.setMensaje(strDate+"-"+strPublicacion);
-                
-                if (strPublicacion.compareTo(strDate)==0)
-                {    
+
+                if (strPublicacion.compareTo(strDate) == 0) {
                     aprobados.add(publicidadEntity);
                 } else if (publicidadEntity.getUltimaPublicacion().before(end)) {
                     publicidadEntity.setUltimaPublicacion(date);
@@ -124,8 +123,16 @@ public class PublicidadLogic {
             if (aprobados.isEmpty()) {
                 return emply();
             } else {
-                return aprobados.get((int) (Math.random() * ((list.size() - 1) + 1)));
+                int y = 0;
+                try {
+                    Random r = SecureRandom.getInstanceStrong();
+                    y = r.nextInt(1);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(EspecieEstrategy.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return  aprobados.get(y);
             }
+
         }
     }
 

@@ -11,14 +11,12 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
  * @author German Rozo
  */
-@XmlRootElement(name = "publicidad")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PublicidadDTO implements Serializable {
 

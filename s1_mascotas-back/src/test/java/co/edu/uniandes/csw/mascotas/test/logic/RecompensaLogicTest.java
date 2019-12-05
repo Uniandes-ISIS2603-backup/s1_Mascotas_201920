@@ -171,6 +171,44 @@ public class RecompensaLogicTest {
        assertEquals(entity.getMonto(), entityToUpdate.getMonto());
        assertEquals(entity.getPagado(), entityToUpdate.getPagado());
     }
+     @Test (expected = BusinessLogicException.class)
+    public void updateRecompensaMontoMenorTest()  throws BusinessLogicException{
+       RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
+       newEntity.setPagado(false);
+       recompensaLogic.createRecompensa(newEntity);
+       RecompensaEntity entityToUpdate=factory.manufacturePojo(RecompensaEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setMonto(newEntity.getMonto()*-1);
+       recompensaLogic.updateRecompensa(entityToUpdate);
+       
+       RecompensaEntity entity= em.find(RecompensaEntity.class, newEntity.getId());
+       assertNotNull(entity);
+       assertEquals(entity.getMonto(), entityToUpdate.getMonto());
+       assertEquals(entity.getPagado(), entityToUpdate.getPagado());
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateRecompensaMontoCeroTest()  throws BusinessLogicException{
+       RecompensaEntity newEntity=factory.manufacturePojo(RecompensaEntity.class);
+       newEntity.setPagado(false);
+       recompensaLogic.createRecompensa(newEntity);
+       RecompensaEntity entityToUpdate=factory.manufacturePojo(RecompensaEntity.class);
+       entityToUpdate.setId(newEntity.getId());
+       entityToUpdate.setMonto(0);
+       recompensaLogic.updateRecompensa(entityToUpdate);
+       
+       RecompensaEntity entity= em.find(RecompensaEntity.class, newEntity.getId());
+       assertNotNull(entity);
+       assertEquals(entity.getMonto(), entityToUpdate.getMonto());
+       assertEquals(entity.getPagado(), entityToUpdate.getPagado());
+    }
+    
+     @Test
+    public void findAllRecompensasTest() throws BusinessLogicException{
+      
+       assertNotNull(recompensaLogic.findAllRecompensas());
+       
+    }
     
     @Test (expected = BusinessLogicException.class)
     public void updateRecompensaMontoNegativoTest() throws BusinessLogicException{

@@ -304,4 +304,23 @@ public class UsuarioLogicTest {
         usuarioForUpdate.setCorreo("tobia1999@gmailcom");
         usuarioLogic.updateUsuario(usuarioForUpdate);
     }
+    
+     @Test
+    public void testDelete()  throws BusinessLogicException
+    {
+         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+         newUsuario.setCorreo("tobia19997555565@gmail.com");
+         usuarioLogic.createUsuario(newUsuario);
+         
+        usuarioLogic.deleteUsuario(newUsuario.getId());
+        UsuarioEntity usuarioQueDeberiaSerNull = usuarioLogic.findUsuario(newUsuario.getId());
+        Assert.assertNull(usuarioQueDeberiaSerNull);
+    }
+    
+     @Test
+    public void testFindAllUsuario()  throws BusinessLogicException
+    {
+         
+        Assert.assertNotNull(usuarioLogic.findAllUsuario());
+    }
 }

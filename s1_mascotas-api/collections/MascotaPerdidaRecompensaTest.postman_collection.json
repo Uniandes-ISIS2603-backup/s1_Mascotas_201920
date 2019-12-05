@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "3f62bb97-7fcc-4a60-8570-ab2918b16f11",
-		"name": "recompensaTest",
+		"_postman_id": "a0082228-7046-42f8-9285-0a4d12f69c30",
+		"name": "MascotaPerdidaRecompensaTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -155,114 +155,7 @@
 			"response": []
 		},
 		{
-			"name": "Dar recompensa id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
-						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"recompensas",
-						"{{new_id_b}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Dar recompensas",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "c46a1be0-3618-472b-9262-8f501e835823",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get all \"+responseCode.code] = responseCode.code === 200;",
-							"tests[\"mascotas perdidas count\"] = data.length >= 0;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"recompensas"
-					]
-				},
-				"description": "Consulta todas las mascotas perdidas de la aplicaci�n. \r\nLa petici�n no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de mascotas perdidas en la respuesta tenga mas de uno.\r\n\r\n**C�digo http esperado: 200**"
-			},
-			"response": []
-		},
-		{
-			"name": "Dar recompensa id no existe ",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
-						"exec": [
-							"",
-							"tests[\"La recompensa no existe\"] = responseCode.code === 404;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/-1",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"recompensas",
-						"-1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar recompensas Copy",
+			"name": "asociar una mascota a una recompensa",
 			"event": [
 				{
 					"listen": "test",
@@ -289,10 +182,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\n        \"monto\": 500,\n        \"pagado\": true\n        \n}"
+					"raw": "{\n    \"id\": {{new_id_a8}}\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}/mascotaperdidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -302,7 +195,8 @@
 						"s1_mascotas-api",
 						"api",
 						"recompensas",
-						"{{new_id_b}}"
+						"{{new_id_b}}",
+						"mascotaperdidas"
 					]
 				},
 				"description": "Actualiza una mascota perdida existente. \r\nse env�a el Id en la URL de la petici�n.\r\n\r\n**C�digo http esperado: 200**"
@@ -310,15 +204,15 @@
 			"response": []
 		},
 		{
-			"name": "Editar recompensa id no existe",
+			"name": "Asociar una mascota que no existe a una  recompensa",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "330744b0-f803-4729-8d1e-2c3290d33117",
+						"id": "c8198634-c32a-4525-8312-c450839fb809",
 						"exec": [
-							"",
-							"tests[\"La recompensa no existe\"] = responseCode.code === 404;"
+							"tests[\"No actualiza con usuario que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /recompensa/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -329,22 +223,15 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\n        \"monto\": 500,\n        \"pagado\": true\n        \n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n    \"id\": {{new_id_a8}}\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/0/mascotaperdidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -354,66 +241,43 @@
 						"s1_mascotas-api",
 						"api",
 						"recompensas",
-						"-1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar mascota perdida",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "667e35a0-2cbd-4162-8469-8f2487bbab37",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasperdidas/{{new_id_a8}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_mascotas-api",
-						"api",
-						"mascotasperdidas",
-						"{{new_id_a8}}"
+						"0",
+						"mascotaperdidas"
 					]
 				},
-				"description": "Borra una mascota perdida. Se env�a el id del la mascota perdida creada anteriormente.\n\n**C�digo HTTP esperado: 204**"
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario que no existe a una mascota encontrada. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /usuarios/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar un usuario",
+			"name": "Asociar una mascota que no existe a una  recompensa Copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "06c863e4-c52a-4b6e-8105-7fb42cd3ee45",
+						"id": "c8198634-c32a-4525-8312-c450839fb809",
 						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+							"tests[\"No actualiza con usuario que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mascotaperdidas/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "DELETE",
-				"header": [],
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 0\n}"
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/{{new_id_ume}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/recompensas/{{new_id_b}}/mascotaperdidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -422,10 +286,12 @@
 					"path": [
 						"s1_mascotas-api",
 						"api",
-						"usuarios",
-						"{{new_id_ume}}"
+						"recompensas",
+						"{{new_id_b}}",
+						"mascotaperdidas"
 					]
-				}
+				},
+				"description": "**Release: Ciclo-2**\r\nAsocia un usuario que no existe a una mascota encontrada. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /usuarios/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
 			},
 			"response": []
 		}

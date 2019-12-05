@@ -82,11 +82,17 @@ public class PublicidadResource {
     @Path("all")
     public List<PublicidadDTO> getAll() throws BusinessLogicException {
         List<PublicidadEntity> ens = logic.findAllPublicidad();
-        List<PublicidadDTO> dtos = new ArrayList<>();
-        for (PublicidadEntity en : ens) {
-            dtos.add(new PublicidadDTO(en));
+        
+        if(ens==null)
+            throw new WebApplicationException(PRIM + NO, 404);
+        else
+        {
+            List<PublicidadDTO> dtos = new ArrayList<>();
+            for (PublicidadEntity en : ens) {
+                dtos.add(new PublicidadDTO(en));
+            }
+            return dtos;
         }
-        return dtos;
     }
 
     @PUT

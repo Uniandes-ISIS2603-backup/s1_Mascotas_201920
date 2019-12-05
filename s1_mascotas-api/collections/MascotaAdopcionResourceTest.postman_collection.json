@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fc2e22ac-0af0-4862-8f59-ced0c68f9033",
+		"_postman_id": "f6310d94-3381-4022-bd6c-7402ceab571a",
 		"name": "MascotaAdopcionResourceTest",
 		"description": "Test of MascotasAdopcion",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -413,6 +413,40 @@
 			"response": []
 		},
 		{
+			"name": "Obtener una Mascota Adopcion  no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbea4c50-b63d-4649-a2cb-c48544567d3b",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasadopcion",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Editar una Mascota Adopcion",
 			"event": [
 				{
@@ -460,6 +494,56 @@
 						"api",
 						"mascotasadopcion",
 						"{{new_id_aa}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una Mascota Adopcion no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d0ff1e3-4b7d-4d72-8e0c-39f367b604ac",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{new_id_aa}},\n   \t\"especie\": 1,\n\t\"raza\": \"larazanueva\",\n\t\"descripcion\": \"ladescripcionnueva\",\n\t\"lugar\": \"ellugarnuevo\",\n\t\"historia\": \"lahistorianueva\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/mascotasadopcion/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_mascotas-api",
+						"api",
+						"mascotasadopcion",
+						"-1"
 					]
 				}
 			},
@@ -570,5 +654,6 @@
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
