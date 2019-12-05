@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "172479a5-1994-4711-9a23-8361d83a589e",
+		"_postman_id": "7487e28f-6703-4c74-8410-1a2b2a212da5",
 		"name": "MascotaEncontradaTests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -33,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"juanju@bta.com\",\n\t\"celular\": 3121232\n}",
+					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"password\": \"password\",\n\t\"correo\": \"juanju@bta.com\",\n\t\"celular\": 3121232\n}",
 					"options": {
 						"raw": {
 							"language": "json"
