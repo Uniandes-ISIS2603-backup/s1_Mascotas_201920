@@ -96,10 +96,10 @@ public class UsuarioLogic
         }
         
         //Password
-        if(usuario.getPassword() == null)
+        /*if(usuario.getPassword() == null)
         {
             throw new BusinessLogicException("La contraseña del usuario esta vacía");
-        }
+        }*/
     }
     
     public void deleteUsuario(Long usuarioID)
