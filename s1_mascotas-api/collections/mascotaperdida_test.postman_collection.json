@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a71efbd8-1e0d-49c1-a044-42c4071aa7fd",
+		"_postman_id": "1c4ad206-d395-454f-b982-f8d97fb4267d",
 		"name": "mascotaperdida_test",
 		"description": "Colecci�n de pruebas sobre el recurso MAscota perdida",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"phhhhhhha@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
+					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"phhhhhhha@gmail.com\",\n\t\"celular\": 321458,\n\t\"password\": \"password\",\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"

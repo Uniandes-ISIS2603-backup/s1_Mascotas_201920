@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3f62bb97-7fcc-4a60-8570-ab2918b16f11",
+		"_postman_id": "471d0163-76cf-46b1-a3d0-8292524b4c41",
 		"name": "recompensaTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -33,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"phhhhhpoohha@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
+					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"phhhhhpoohha@gmail.com\",\n\t\"password\": \"password\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"

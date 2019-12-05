@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5111f428-12fc-4050-96be-f091cf7cc875",
+		"_postman_id": "18af215b-2804-443a-b148-b5a8b1618579",
 		"name": "UsuarioResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -36,7 +36,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"tobiasartrkkka@gmail.com\",\n\t\"celular\": 321458,\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
+					"raw": "{\n\t\"nombre\": \"Sara\",\n\t\"ciudad\": \"Buca\",\n\t\"correo\": \"tobiasartrkkka@gmail.com\",\n\t\"celular\": 321458,\n\t\"password\": \"password\",\n\t\"mascotasEncontradas\": [],\n\t\"mascotasPerdidas\": [],\n\t\"mascotasAdopcion\": [],\n\t\"procesosAdpcion\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"

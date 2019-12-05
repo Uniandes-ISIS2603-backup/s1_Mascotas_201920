@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "68b2e297-c937-4bcd-86bf-9d407010cc3d",
+		"_postman_id": "0e5b7805-0e59-4e4a-9909-eb03d5bff5ed",
 		"name": "MascotaPerdidasUsuarioTest",
 		"description": "Colección de pruebas sobre el recurso MascotaEncontradaUsuario",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -32,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"correo\": \"ddddd@bta.com\",\n\t\"celular\": 312123212\n}"
+					"raw": "{\n\t\"nombre\": \"Juan\",\n\t\"ciudad\": \"Bogota\",\n\t\"password\": \"password\",\n\t\"correo\": \"ddddd@bta.com\",\n\t\"celular\": 312123212\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/",
@@ -80,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"Juan2\",\n\t\"ciudad\": \"Bogota2\",\n\t\"correo\": \"juanMEJJUff10@bta.com\",\n\t\"celular\": 312123221\n}"
+					"raw": "{\n\t\"nombre\": \"Juan2\",\n\t\"ciudad\": \"Bogota2\",\n\t\"password\": \"password\",\n\t\"correo\": \"juanMEJJUff10@bta.com\",\n\t\"celular\": 312123221\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_mascotas-api/api/usuarios/",
