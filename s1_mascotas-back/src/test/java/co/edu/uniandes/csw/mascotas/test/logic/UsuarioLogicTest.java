@@ -84,6 +84,15 @@ public class UsuarioLogicTest {
     }
     
     @Test (expected = BusinessLogicException.class)
+    public void createUsuarioPasswordNull() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setPassword(null);
+        newUsuario.setCorreo("tobia21999@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
     public void createUsuarioCiudadNull() throws BusinessLogicException
     {
         UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
@@ -196,6 +205,19 @@ public class UsuarioLogicTest {
         usuarioForUpdate.setId(newUsuario.getId());
         usuarioForUpdate.setCorreo("tobia1999123@gmail.com");
         usuarioForUpdate.setCiudad(null);
+        usuarioLogic.updateUsuario(usuarioForUpdate);
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void updateUsuarioPasswordNull() throws BusinessLogicException
+    {
+        UsuarioEntity newUsuario = factory.manufacturePojo(UsuarioEntity.class);
+        newUsuario.setCorreo("tobia1999123@gmail.com");
+        usuarioLogic.createUsuario(newUsuario);
+        UsuarioEntity usuarioForUpdate = factory.manufacturePojo(UsuarioEntity.class);
+        usuarioForUpdate.setId(newUsuario.getId());
+        usuarioForUpdate.setCorreo("tobia1999123@gmail.com");
+        usuarioForUpdate.setPassword(null);
         usuarioLogic.updateUsuario(usuarioForUpdate);
     }
     

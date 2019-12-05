@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.mascotas.entities.UsuarioEntity;
 import co.edu.uniandes.csw.mascotas.persistence.UsuarioPersistence;
 import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -134,6 +133,7 @@ public class UsuarioPersistenceTest
         usuarioLista.setCorreo("tr.gasparoni@uniandes.edu.co");
         usuarioLista.setCelular(57438999L);
         usuarioLista.setCiudad("Barranquilla");
+        usuarioLista.setPassword("123456789");
         
         usuarioPrueba.update(usuarioLista);
         
@@ -141,6 +141,7 @@ public class UsuarioPersistenceTest
         Assert.assertEquals(usuarioLista.getCorreo(), usuarioActualizado.getCorreo());
         Assert.assertEquals(usuarioLista.getCelular(), usuarioActualizado.getCelular());
         Assert.assertEquals(usuarioLista.getCiudad(), usuarioActualizado.getCiudad());
-        
+        Assert.assertEquals(usuarioLista.getPassword(), usuarioActualizado.getPassword());
+
     }
 }

@@ -94,6 +94,12 @@ public class UsuarioLogic
         {
             throw new BusinessLogicException("El celular del usuario esta vacio");
         }
+        
+        //Password
+        if(usuario.getPassword() == null)
+        {
+            throw new BusinessLogicException("La contraseña del usuario esta vacía");
+        }
     }
     
     public void deleteUsuario(Long usuarioID)

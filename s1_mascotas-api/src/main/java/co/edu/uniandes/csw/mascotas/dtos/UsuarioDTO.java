@@ -35,6 +35,11 @@ public class UsuarioDTO implements Serializable{
     private Long celular;
     
     /**
+     * Password del usuario
+     */
+    private String password;
+    
+    /**
      * ID del usuario
      */
     private Long id;
@@ -52,6 +57,7 @@ public class UsuarioDTO implements Serializable{
             this.ciudad = usuario.getCiudad();
             this.correo = usuario.getCorreo();
             this.nombre = usuario.getNombre();
+            this.password = usuario.getPassword();
         }
     }
     
@@ -64,6 +70,7 @@ public class UsuarioDTO implements Serializable{
         entity.setCelular(celular);
         entity.setCiudad(ciudad);
         entity.setNombre(nombre);
+        entity.setPassword(password);
         
         return entity;
     }
@@ -80,6 +87,20 @@ public class UsuarioDTO implements Serializable{
      */
     public String getNombre() {
         return nombre;
+    }
+    
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    /**
+     * @return the password
+     */
+    public String getpassword() {
+        return password;
     }
 
     /**

@@ -39,6 +39,11 @@ public class UsuarioEntity extends BaseEntity implements Serializable
      * Celular del usuario
      */
     private Long celular;
+    
+    /**
+     * Password del usuario
+     */
+    private String password;
 
     @PodamExclude
     @OneToMany(mappedBy = "usuario")
@@ -110,6 +115,20 @@ public class UsuarioEntity extends BaseEntity implements Serializable
      */
     public void setCelular(Long celular) {
         this.celular = celular;
+    }
+    
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
