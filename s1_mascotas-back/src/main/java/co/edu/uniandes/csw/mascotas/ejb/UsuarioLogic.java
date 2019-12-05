@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -95,11 +95,7 @@ public class UsuarioLogic
             throw new BusinessLogicException("El celular del usuario esta vacio");
         }
         
-        //Password
-        /*if(usuario.getPassword() == null)
-        {
-            throw new BusinessLogicException("La contraseña del usuario esta vacía");
-        }*/
+        //Password - falta hacer la logica
     }
     
     public void deleteUsuario(Long usuarioID)
